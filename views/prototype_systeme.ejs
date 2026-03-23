@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype 04 — Le système des trois — CAP 2032</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="progress-bar" id="progress"></div>
+  <nav>
+    <a href="/" class="nav-logo">CAP 2032</a>
+    <ul class="nav-links">
+      <li><a href="/pilier1">Archéologie</a></li>
+      <li><a href="/pilier2">Philosophie</a></li>
+      <li><a href="/pilier3" class="active">Action</a></li>
+      <li><a href="/ressources">Ressources</a></li>
+      <li><a href="/notes">Notes sur commande</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="breadcrumb">
+    <a href="index.html">Accueil</a><span class="sep">·</span>
+    <a href="pilier3_intro.html">Pilier III — Action</a><span class="sep">·</span>
+    <span>Prototype 04 — Le système des trois</span>
+  </div>
+
+  <header class="article-hero">
+    <div class="article-type">Prototype 04 · Pilier III · Architecture systémique · Synthèse</div>
+    <h1>Le système<br><em>des trois</em></h1>
+    <p class="article-standfirst">Les trois prototypes précédents ont une valeur propre. Mais leur vraie puissance est dans leur articulation. Ce quatrième prototype décrit ce qui se passe entre les structures — les flux humains, économiques et institutionnels qui les relient — et ce que leur combinaison produit qu'aucune d'elles ne pourrait produire seule.</p>
+    <div class="article-meta">
+      <div class="meta-item"><span class="meta-label">Budget consolidé</span><span class="meta-value">6,6 M€ — 0 emprunt bancaire</span></div>
+      <div class="meta-sep"></div>
+      <div class="meta-item"><span class="meta-label">Horizon</span><span class="meta-value">Régime de croisière année 4–5</span></div>
+      <div class="meta-sep"></div>
+      <div class="meta-item"><span class="meta-label">Lecture</span><span class="meta-value">~12 minutes</span></div>
+    </div>
+  </header>
+
+  <div class="article-body">
+
+    <p>Il est tentant de lire les trois prototypes précédents comme trois projets indépendants qu'on pourrait lancer séparément, dans n'importe quel ordre, selon les opportunités locales. Un territoire qui aurait des agriculteurs motivés commencerait par l'exploitation. Un autre qui aurait des locaux disponibles commencerait par le village SCIC. Un troisième avec des enseignants engagés commencerait par l'école.</p>
+
+    <p>Ce serait une erreur de lecture — et une erreur stratégique. <strong>La valeur du modèle est précisément dans ce qui se passe entre les trois structures.</strong> Les flux humains qui circulent de l'une à l'autre. Les flux économiques qui créent des débouchés réciproques. Les flux institutionnels qui construisent une gouvernance partagée. C'est cette circulation qui produit la résilience, l'autonomie progressive et la capacité de reproduction que chaque structure seule ne peut pas atteindre.</p>
+
+    <div class="pullquote"><p>Ce n'est pas trois projets qu'on additionne. C'est un organisme — où chaque structure est un organe dont la fonction n'a de sens que par rapport aux deux autres, et où c'est leur interaction qui génère la vie du système.</p></div>
+
+    <h2 class="section-title">L'architecture d'ensemble</h2>
+
+    <div class="schema-systeme reveal">
+      <span class="schema-label">Les trois structures et leur rôle dans le système</span>
+      <div class="schema-triangle">
+        <div class="schema-noeud">
+          <span class="schema-noeud-num">Structure 01</span>
+          <p class="schema-noeud-nom">Village SCIC</p>
+          <p class="schema-noeud-role">Plateforme productive — transformation, maintenance, logistique, ressourcerie. Emploi non délocalisable. Débouchés pour l'exploitation.</p>
+        </div>
+        <div class="schema-centre">
+          <p>Territoire</p>
+          <p>20–40K hab.</p>
+          <p>Gouvernance partagée</p>
+          <p>Indicateurs communs</p>
+        </div>
+        <div class="schema-noeud">
+          <span class="schema-noeud-num">Structure 02</span>
+          <p class="schema-noeud-nom">Exploitation agricole</p>
+          <p class="schema-noeud-role">Socle nourricier — production, transformation légère, distribution. Terrain formateur pour les apprenants. Fournisseur du village.</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr;gap:1px;background:rgba(181,130,42,.1);margin-top:1px">
+        <div class="schema-noeud" style="background:rgba(181,130,42,.04)">
+          <span class="schema-noeud-num">Structure 03</span>
+          <p class="schema-noeud-nom">École multi-niveaux</p>
+          <p class="schema-noeud-role">Interface savoirs-réel — formation académique et pratique pour tous les âges. Oriente vers le village et l'exploitation. Mobilise les seniors transmetteurs.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Les flux humains — circulation des personnes</h2>
+
+    <p>La première catégorie d'interactions est la plus visible : les personnes qui circulent d'une structure à l'autre, à différents moments de leur parcours. Ce n'est pas une circulation chaotique — c'est une architecture de trajectoires pensée dès la conception.</p>
+
+    <div class="flux-section reveal">
+      <div class="flux-item">
+        <span class="flux-type">École → Système</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">L'école comme point d'entrée et d'orientation</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Les adolescents passent des demi-journées hebdomadaires à l'exploitation et aux ateliers du village — orientation par l'expérience, pas par défaut</span><span class="flux-vers">→ Village + Exploitation</span></div>
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Les jeunes adultes en décrochage réorientés vers des contrats d'apprentissage dans le village ou l'exploitation, avec maintien des modules académiques à l'école</span><span class="flux-vers">→ Village + Exploitation</span></div>
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Les adultes en reconversion acquièrent les compétences pratiques à l'école et les mettent en œuvre immédiatement dans les deux autres structures</span><span class="flux-vers">→ Village + Exploitation</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="flux-item">
+        <span class="flux-type">Village → Système</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">Le village comme espace d'insertion et de montée en compétences</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">Village</span><span>Les apprenants-compagnons qui ont acquis les fondamentaux à l'école accèdent progressivement au sociétariat — de salarié en formation à associé propriétaire</span><span class="flux-vers">→ Sociétariat</span></div>
+            <div class="flux-ligne"><span class="flux-de">Village</span><span>Les salariés-associés du village interviennent comme praticiens-formateurs à l'école — leurs compétences pratiques deviennent ressource pédagogique</span><span class="flux-vers">→ École</span></div>
+            <div class="flux-ligne"><span class="flux-de">Village</span><span>Les compétences acquises en logistique, maintenance et transformation ouvrent des passerelles vers des responsabilités dans l'exploitation agricole</span><span class="flux-vers">→ Exploitation</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="flux-item">
+        <span class="flux-type">Exploitation → Système</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">L'exploitation comme terrain formateur et vecteur de transmission</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">Exploitation</span><span>Les apprenants-compagnons agricoles reçoivent leurs modules théoriques à l'école — agronomie, comptabilité, droit rural, gestion d'exploitation</span><span class="flux-vers">→ École</span></div>
+            <div class="flux-ligne"><span class="flux-de">Exploitation</span><span>Les exploitants-associés expérimentés deviennent transmetteurs à l'école pour les savoir-faire agricoles en voie de disparition</span><span class="flux-vers">→ École</span></div>
+            <div class="flux-ligne"><span class="flux-de">Exploitation</span><span>Les apprenants agricoles progressifs peuvent devenir co-exploitants associés — résoudant la crise de transmission sans endettement foncier</span><span class="flux-vers">→ Sociétariat agricole</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="flux-item">
+        <span class="flux-type">Seniors → Système</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">Les seniors — la ressource la plus gaspillée, réintégrée</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">Seniors</span><span>Retraités artisans et anciens exploitants transmettent leurs savoir-faire manuels à l'école et sur les chantiers du village — en échange d'une aide numérique et administrative</span><span class="flux-vers">→ École + Village</span></div>
+            <div class="flux-ligne"><span class="flux-de">Seniors</span><span>Anciens agriculteurs maintiennent une présence active dans l'exploitation en transmission — garantissant la continuité des pratiques agronomiques locales</span><span class="flux-vers">→ Exploitation</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Les flux économiques — circuits courts internes</h2>
+
+    <p>La deuxième catégorie d'interactions est économique. Les trois structures se créent mutuellement des débouchés — réduisant la dépendance à des marchés externes volatils et construisant une base de revenu partiellement protégée des fluctuations extérieures.</p>
+
+    <div class="flux-section reveal">
+      <div class="flux-item">
+        <span class="flux-type">Flux alimentaires</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">De l'exploitation vers le village et les collectivités</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">Exploitation</span><span>Légumes, viandes, céréales livrés au village SCIC pour transformation (conserves, plats cuisinés, produits de 4e gamme) — la valeur ajoutée reste dans le système</span><span class="flux-vers">→ Village SCIC</span></div>
+            <div class="flux-ligne"><span class="flux-de">Exploitation + Village</span><span>Produits transformés livrés en circuit court aux cantines scolaires, EHPAD, collectivités — contrats pluriannuels comme socle de revenu stable</span><span class="flux-vers">→ Restauration collective</span></div>
+            <div class="flux-ligne"><span class="flux-de">Exploitation</span><span>Approvisionnement de la cantine de l'école multi-niveaux — créant un débouché garanti et un outil pédagogique (les élèves voient ce qu'ils mangent produit)</span><span class="flux-vers">→ École</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="flux-item">
+        <span class="flux-type">Flux de services</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">Du village vers l'exploitation et l'école</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">Village SCIC</span><span>Maintenance des bâtiments de l'exploitation et de l'école — réparations, entretien, petits travaux — facturés en interne à tarif coopératif</span><span class="flux-vers">→ Exploitation + École</span></div>
+            <div class="flux-ligne"><span class="flux-de">Village SCIC</span><span>Logistique des livraisons entre l'exploitation, l'école et les débouchés externes — mutualisation des coûts de transport</span><span class="flux-vers">→ Exploitation + Collectivités</span></div>
+            <div class="flux-ligne"><span class="flux-de">Village SCIC</span><span>Réparation du matériel agricole de l'exploitation dans les ateliers du village — expertise technique mutualisée</span><span class="flux-vers">→ Exploitation</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="flux-item">
+        <span class="flux-type">Flux pédagogiques</span>
+        <div class="flux-contenu">
+          <p class="flux-titre">De l'école vers le village et l'exploitation</p>
+          <div class="flux-lignes">
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Main-d'œuvre en formation (apprenants-compagnons) mise à disposition du village et de l'exploitation — rémunérée, productive, encadrée</span><span class="flux-vers">→ Village + Exploitation</span></div>
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Formation continue des salariés-associés du village et des exploitants — agronomie, gestion, numérique, réglementation — dans les locaux de l'école</span><span class="flux-vers">→ Village + Exploitation</span></div>
+            <div class="flux-ligne"><span class="flux-de">École</span><span>Projets collectifs des apprenants réalisés en situation réelle dans les deux autres structures — les chantiers-école produisent de la valeur réelle</span><span class="flux-vers">→ Village + Exploitation</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Budget consolidé — 6,6 M€ sans dette</h2>
+
+    <p>Les trois investissements initiaux s'additionnent pour former un investissement total de 6,6 millions d'euros. C'est le coût de lancement d'un système complet sur un territoire — un chiffre qui peut paraître élevé vu isolément, mais qui doit être rapporté à ce qu'il produit : un écosystème productif, formateur et social qui fonctionne sur vingt ans sans charge de dette, sans loyer et avec une capacité d'autofinancement croissante.</p>
+
+    <div class="budget-consolide reveal">
+      <div class="budget-header">
+        <span class="budget-header-titre">Budget consolidé — Trois structures, un territoire</span>
+        <span class="budget-header-total">6,6 M€</span>
+      </div>
+      <div class="budget-lignes">
+        <div class="budget-ligne">
+          <span class="budget-ligne-num">Structure 01</span>
+          <span class="budget-ligne-nom">Village SCIC territorial — foncier, bâtiments, équipements, outillage</span>
+          <span class="budget-ligne-val">3,0 M€</span>
+          <div class="budget-ligne-barre"><div class="budget-ligne-fill" data-width="45"></div></div>
+        </div>
+        <div class="budget-ligne">
+          <span class="budget-ligne-num">Structure 02</span>
+          <span class="budget-ligne-nom">Exploitation polyculture-élevage — foncier, bâtiments d'élevage, matériel, atelier de transformation</span>
+          <span class="budget-ligne-val">2,1 M€</span>
+          <div class="budget-ligne-barre"><div class="budget-ligne-fill" data-width="32"></div></div>
+        </div>
+        <div class="budget-ligne">
+          <span class="budget-ligne-num">Structure 03</span>
+          <span class="budget-ligne-nom">École multi-niveaux — bâtiments pédagogiques, ateliers, équipements</span>
+          <span class="budget-ligne-val">1,5 M€</span>
+          <div class="budget-ligne-barre"><div class="budget-ligne-fill" data-width="23"></div></div>
+        </div>
+      </div>
+      <div class="budget-total-ligne">
+        <span class="budget-total-label">Investissement total consolidé — 0 emprunt bancaire</span>
+        <div class="budget-total-montant">
+          <span class="zero-dette">Zéro dette</span>
+          <span class="budget-total-val">6,6 M€</span>
+        </div>
+      </div>
+    </div>
+
+    <p>L'absence totale d'emprunt bancaire n'est pas un détail technique. C'est un choix architectural fondamental qui change la nature du modèle. Sans annuités à rembourser, le point mort économique de chaque structure est structurellement plus bas. Sans contrainte bancaire, la gouvernance reste entièrement entre les mains des membres. Sans dépendance aux marchés financiers, le modèle résiste aux crises bancaires et aux hausses de taux. <em>C'est ce qu'on appelle un modèle anti-fragile au sens strict — il ne résiste pas aux chocs, il s'en nourrit.</em></p>
+
+    <div class="financement-consolide reveal">
+      <span class="financement-label">Répartition du financement consolidé — 6,6 M€</span>
+      <div class="financement-grille">
+        <div class="financement-source-bloc">
+          <div class="financement-source-header">
+            <span class="financement-source-nom">État & Collectivités territoriales — 40 %</span>
+            <span class="financement-source-montant">2,64 M€</span>
+          </div>
+          <div class="barre-track"><div class="barre-fill" data-width="40"></div></div>
+          <p class="financement-source-note">DETR, DSIL, fonds de cohésion territoriale, dotations régionales, cofinancements des intercommunalités. Enveloppes existantes — pas de loi spéciale nécessaire.</p>
+        </div>
+        <div class="financement-source-bloc">
+          <div class="financement-source-header">
+            <span class="financement-source-nom">Fonds européens & Fondations — 40 %</span>
+            <span class="financement-source-montant">2,64 M€</span>
+          </div>
+          <div class="barre-track"><div class="barre-fill" data-width="40"></div></div>
+          <p class="financement-source-note">FEADER (agriculture), FEDER (développement régional), FSE (formation), Leader (territoires ruraux). Fondations privées d'intérêt général. Financement sans contrepartie en capital.</p>
+        </div>
+        <div class="financement-source-bloc">
+          <div class="financement-source-header">
+            <span class="financement-source-nom">Épargne citoyenne locale — 20 %</span>
+            <span class="financement-source-montant">1,32 M€</span>
+          </div>
+          <div class="barre-track"><div class="barre-fill" data-width="20"></div></div>
+          <p class="financement-source-note">Parts sociales de la SCIC souscrites par les habitants, titres participatifs, obligations citoyennes à taux modeste. Double rôle : financement et ancrage démocratique local.</p>
+        </div>
+        <div class="financement-source-bloc">
+          <div class="financement-source-header">
+            <span class="financement-source-nom">Emprunt bancaire — 0 %</span>
+            <span class="financement-source-montant">0 €</span>
+          </div>
+          <div class="barre-track"><div class="barre-fill" data-width="0"></div></div>
+          <p class="financement-source-note">Choix structurant délibéré. Aucune annuité, aucune dépendance aux marchés financiers, aucun risque de saisie. La contrainte financière de court terme est compensée par la résilience de long terme.</p>
+        </div>
+      </div>
+      <div class="financement-total-ligne">
+        <span class="financement-total-label">Total consolidé — zéro dette — propriété collective</span>
+        <span class="financement-total-val">6,6 M€</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">Calendrier — cinq ans vers le régime de croisière</h2>
+
+    <p>Le déploiement du système des trois obéit à une logique de séquencement précise. On ne lance pas les trois structures simultanément — on construit dans un ordre qui permet à chaque structure naissante de bénéficier de ce que la précédente a déjà établi.</p>
+
+    <div class="calendrier reveal">
+      <div class="cal-annee">
+        <span class="cal-periode">A0–1</span>
+        <div class="cal-contenu">
+          <span class="cal-titre">Fondations — montage et ancrage</span>
+          <div class="cal-actions">
+            <div class="cal-action"><strong>Choix du territoire</strong> et diagnostic approfondi des besoins réels, des compétences disponibles, des partenaires institutionnels mobilisables</div>
+            <div class="cal-action"><strong>Montage juridique</strong> des trois structures — SCIC, GAEC/SCOP agricole, statut de l'établissement scolaire. Identification du statut optimal selon le territoire</div>
+            <div class="cal-action"><strong>Concertation locale</strong> — présentation aux élus, aux agriculteurs, aux associations, aux parents d'élèves. Construction de l'adhésion avant l'action</div>
+            <div class="cal-action"><strong>Sécurisation foncière</strong> — acquisition ou bail emphytéotique du foncier pour les trois structures. Point critique à traiter en priorité</div>
+            <div class="cal-action"><strong>Premiers financements</strong> — dépôt des dossiers européens et collectivités, lancement de la souscription citoyenne</div>
+          </div>
+        </div>
+      </div>
+      <div class="cal-annee active">
+        <span class="cal-periode">A1–2</span>
+        <div class="cal-contenu">
+          <span class="cal-titre">Lancement — les trois structures démarrent</span>
+          <div class="cal-actions">
+            <div class="cal-action"><strong>Chantier-école de construction</strong> — les futurs salariés-associés et les premiers apprenants construisent ou rénovent les bâtiments sous maîtrise d'œuvre. Formation et production simultanées</div>
+            <div class="cal-action"><strong>Lancement de l'exploitation agricole</strong> — premières cultures, installation de l'élevage, premiers contrats avec les cantines scolaires de la commune</div>
+            <div class="cal-action"><strong>Démarrage des premières activités du village</strong> — maintenance des bâtiments publics, ressourcerie, premiers ateliers. CA limité mais réel</div>
+            <div class="cal-action"><strong>Ouverture de l'école</strong> avec une première cohorte pilote — quelques dizaines d'apprenants multi-âges, pédagogie hybride à l'essai</div>
+          </div>
+        </div>
+      </div>
+      <div class="cal-annee active">
+        <span class="cal-periode">A2–3</span>
+        <div class="cal-contenu">
+          <span class="cal-titre">Montée en charge — les flux s'installent</span>
+          <div class="cal-actions">
+            <div class="cal-action"><strong>Premiers apprenants-compagnons</strong> terminent leur première phase de formation et accèdent au sociétariat — le modèle de transmission commence à fonctionner</div>
+            <div class="cal-action"><strong>Premiers contrats pluriannuels</strong> avec les collectivités pour l'exploitation et le village — stabilisation d'une base de CA prévisible</div>
+            <div class="cal-action"><strong>Interconnexions actives</strong> — les flux entre structures deviennent routiniers : logistique croisée, praticiens-formateurs, chantiers pédagogiques partagés</div>
+            <div class="cal-action"><strong>Bilan d'étape</strong> et ajustements — le modèle réel diffère du modèle prévu sur certains points. Documentation des apprentissages pour les territoires suivants</div>
+          </div>
+        </div>
+      </div>
+      <div class="cal-annee active">
+        <span class="cal-periode">A3–5</span>
+        <div class="cal-contenu">
+          <span class="cal-titre">Régime de croisière — autonomie et preuve</span>
+          <div class="cal-actions">
+            <div class="cal-action"><strong>Autofinancement progressif</strong> — le CA des trois structures couvre leurs charges de fonctionnement. Les subventions de fonctionnement deviennent optionnelles</div>
+            <div class="cal-action"><strong>Évaluation complète</strong> — emplois créés, revenus générés, décrochage réduit, souveraineté alimentaire locale, coûts sociaux évités. Chiffres publiés</div>
+            <div class="cal-action"><strong>Documentation du modèle</strong> — un kit de réplication détaillé est produit à partir de l'expérience réelle du premier territoire. Erreurs comprises, pas seulement succès</div>
+            <div class="cal-action"><strong>Lancement d'un deuxième territoire</strong> — avec les leçons du premier. La réplication commence. L'expérimentation devient modèle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Ce que le système démontre — six indicateurs consolidés</h2>
+
+    <div class="indicateurs reveal">
+      <div class="indicateur-item">
+        <span class="indicateur-val">80–120</span>
+        <span class="indicateur-label">Emplois directs créés en régime de croisière</span>
+        <p class="indicateur-note">Village (30–50) + exploitation (15–25) + école (10–20 ETP) + apprenants rémunérés. Emplois non délocalisables, ancrés sur le territoire.</p>
+      </div>
+      <div class="indicateur-item">
+        <span class="indicateur-val">~1,3M€</span>
+        <span class="indicateur-label">CA consolidé annuel régime de croisière</span>
+        <p class="indicateur-note">Village (~800K€) + exploitation (~450K€) + contributions pédagogiques école. Hors dotations institutionnelles EN et formation pro.</p>
+      </div>
+      <div class="indicateur-item">
+        <span class="indicateur-val">0€</span>
+        <span class="indicateur-label">Charge de dette annuelle</span>
+        <p class="indicateur-note">Contre 300 à 500K€/an avec un financement bancaire classique sur 6,6M€. Ce différentiel finance à lui seul 5 à 8 postes supplémentaires.</p>
+      </div>
+      <div class="indicateur-item">
+        <span class="indicateur-val">15–20</span>
+        <span class="indicateur-label">Apprenants-compagnons formés par an</span>
+        <p class="indicateur-note">Sur les trois structures. Futurs associés, futurs paysans, futurs artisans — la transmission n'est plus un problème à résoudre après coup.</p>
+      </div>
+      <div class="indicateur-item">
+        <span class="indicateur-val">100%</span>
+        <span class="indicateur-label">Foncier en propriété collective inaliénable</span>
+        <p class="indicateur-note">Ni loyer, ni spéculation, ni risque de cession. Le patrimoine construit collectivement reste au service du collectif sur plusieurs générations.</p>
+      </div>
+      <div class="indicateur-item">
+        <span class="indicateur-val">×N</span>
+        <span class="indicateur-label">Modèle duplicable sur n'importe quel territoire</span>
+        <p class="indicateur-note">Le kit de réplication produit à partir du premier territoire permet l'adaptation rapide. 50 territoires = 4 000 à 6 000 emplois directs supplémentaires.</p>
+      </div>
+    </div>
+
+    <div class="antifragile reveal">
+      <span class="antifragile-label">Propriété fondamentale du modèle</span>
+      <h3>Un modèle anti-fragile — il se renforce sous pression</h3>
+      <p>Un modèle fragile casse sous la pression — crise économique, hausse des taux, baisse de la demande, départ d'un membre clé. Un modèle robuste résiste à la pression. Un modèle <em>anti-fragile</em> se renforce quand la pression augmente — parce que ses conditions d'existence deviennent plus favorables quand le contexte se dégrade.</p>
+      <p>Le système des trois est anti-fragile pour une raison précise : <strong>il répond exactement aux besoins qui émergent dans les crises.</strong> Quand les marchés financiers vacillent, un modèle sans dette bancaire devient plus attractif. Quand les chaînes d'approvisionnement se fragilisent, une production alimentaire locale contractualisée devient stratégique. Quand le chômage monte, un système d'insertion par la production réelle devient indispensable. Quand la cohésion sociale se défait, une structure qui crée des interdépendances productives locales devient urgente.</p>
+      <p>Ce n'est pas une opportunisme — c'est la conséquence logique d'une architecture conçue pour répondre aux besoins réels du territoire plutôt qu'aux fluctuations des marchés.</p>
+    </div>
+
+    <div class="synthese-finale reveal">
+      <span class="synthese-label">Synthèse du Pilier III — Action contemporaine</span>
+      <h3>Ce que CAP 2032 a réellement construit</h3>
+      <p style="font-size:1rem;line-height:1.8;color:var(--gris-clair);margin-bottom:2rem">Pas une utopie. Pas une liste de promesses. Pas un programme électoral. Une architecture — praticable, dans le cadre juridique existant, sans dette, sans idéologie, avec un calendrier réaliste et des indicateurs mesurables.</p>
+      <div class="synthese-grille">
+        <div class="synthese-item">
+          <span class="synthese-item-label">Ce que le Pilier I a établi</span>
+          <p>La coopération précède la domination — 40 000 ans de preuves archéologiques. La violence institutionnalisée est une invention liée à des conditions historiques précises, pas une constante humaine.</p>
+        </div>
+        <div class="synthese-item">
+          <span class="synthese-item-label">Ce que le Pilier II a montré</span>
+          <p>L'intérêt général conditionne les libertés. La pensée systémique conditionne l'intérêt général. Et la réforme institutionnelle est la question préalable à toutes les autres politiques.</p>
+        </div>
+        <div class="synthese-item">
+          <span class="synthese-item-label">Ce que le Pilier III démontre</span>
+          <p>Une architecture concrète, chiffrée, séquencée, duplicable — qui traduit les deux premiers piliers en trois structures articulées. La preuve que la théorie peut devenir architecture, et l'architecture peut devenir réalité.</p>
+        </div>
+        <div class="synthese-item">
+          <span class="synthese-item-label">Ce qui reste à faire</span>
+          <p>Trouver le premier territoire. Construire les partenariats institutionnels. Lever les verrous réglementaires identifiés. Mobiliser l'épargne citoyenne locale. Et commencer — pas parfaitement, mais réellement.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="separator"><span>* * *</span></div>
+    <div class="note-auteur reveal">
+      <span class="note-auteur-label">Note — Fin du Pilier III</span>
+      <p>Ce prototype de synthèse clôt le Pilier III de CAP 2032. Les chiffres consolidés sont des ordres de grandeur cohérents, pas des projections financières auditées. Ils ont vocation à être affinés territoire par territoire, selon les coûts locaux du foncier, les activités retenues, les partenaires disponibles et les dotations institutionnelles mobilisables. Ce qui ne varie pas selon les territoires : la logique, l'architecture, le séquencement, et le principe fondateur — innover dans le cadre existant, sans dette, avec une gouvernance collective réelle. Les quinze piliers de CAP 2032 dans leur ensemble — dont les trois présentés ici en détail — font l'objet de l'ebook "CAP 2032 — Sauvons la France", disponible sur demande. Christophe Louverture — 2025.</p>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="/prototype3" class="nav-lien prev"><span class="nav-lien-dir">← Prototype précédent</span><span class="nav-lien-nom">L'école multi-niveaux</span></a>
+    <a href="/pilier3" class="nav-lien next"><span class="nav-lien-dir">↑ Retour</span><span class="nav-lien-nom">Pilier III — Vue d'ensemble</span></a>
+  </div>
+  <footer>
+    <a href="index.html" class="footer-logo">CAP 2032</a>
+    <span class="footer-credit">Christophe Louverture — 2025</span>
+  </footer>
+  <script>
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      progress.style.width = pct + '%';
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          e.target.querySelectorAll('.barre-fill, .budget-ligne-fill').forEach(b => {
+            b.style.width = (b.dataset.width || '0') + '%';
+          });
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

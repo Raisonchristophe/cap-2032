@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ressources — CAP 2032</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">CAP 2032</a>
+  <ul class="nav-links">
+    <li><a href="/pilier1">Archéologie</a></li>
+    <li><a href="/pilier2">Philosophie</a></li>
+    <li><a href="/pilier3">Action</a></li>
+    <li><a href="/ressources" class="active">Ressources</a></li>
+    <li><a href="/notes">Notes stratégiques</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <span class="hero-tag">Sources & références</span>
+  <h1>Ressources<br><em>mobilisées</em></h1>
+  <p>Sources académiques, rapports officiels, textes de loi et références encyclopédiques utilisés dans les trois piliers de CAP 2032. Classées par pilier, filtrables et interrogeables.</p>
+</section>
+
+<div class="controls">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Rechercher une ressource, un auteur, un sujet…">
+  </div>
+  <div class="filters">
+    <button onclick="filter('all', this)" class="active">Tout (<span class="total-count"></span>)</button>
+    <button onclick="filter('pilier1', this)">Archéologie</button>
+    <button onclick="filter('pilier2', this)">Philosophie</button>
+    <button onclick="filter('pilier3', this)">Action &amp; prototypes</button>
+  </div>
+</div>
+
+<p class="count" id="count-label"></p>
+
+<section class="section" id="list">
+
+  <div class="note-correction">
+    <strong>Note de précision — Mondragon Corporation.</strong> Les articles CAP 2032 mentionnent 80 000 salariés-associés. Le chiffre exact en 2023–2024 est de <strong>70 000 à 70 500 emplois</strong> (dont une partie sont des salariés non-associés dans les filiales internationales). Le chiffre de 80 000 correspond au pic historique avant les restructurations de 2022. Cette correction sera intégrée dans l'article concerné.
+  </div>
+
+  <p class="vide" id="vide">Aucune ressource trouvée pour cette recherche.</p>
+
+  <!-- ============================================================ -->
+  <!-- PILIER I — ARCHÉOLOGIE -->
+  <!-- ============================================================ -->
+  <div class="group" id="group-pilier1">
+    <div class="group-title">Pilier I — Archéologie &amp; anthropologie <span class="group-badge" id="badge-pilier1"></span></div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo nobel génétique neanderthal hybridation">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.nobelprize.org/prizes/medicine/2022/press-release/" target="_blank">Prix Nobel de médecine 2022 — Communiqué officiel (Institut Karolinska)</a>
+        <p>Annonce officielle du Nobel décerné à Svante Pääbo pour la découverte du génome des hominidés disparus et l'évolution humaine.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">Nobel</span><span class="resource-tag">Génétique</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo neanderthal génome profil académique">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10078171/" target="_blank">Profil académique de Svante Pääbo — Acta Physiologica (PMC)</a>
+        <p>Biographie académique et synthèse des contributions scientifiques de Pääbo à la paléogénomique.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">Paléogénomique</span></div>
+      </div>
+      <span class="resource-type">Article scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo biographie Nobel PMC">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9910432/" target="_blank">Profil biographique complet de Svante Pääbo — PMC</a>
+        <p>Biographie détaillée publiée à l'occasion du prix Nobel 2022.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">Biographie</span></div>
+      </div>
+      <span class="resource-type">Article scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo nature neanderthal interview">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.nature.com/articles/d41586-022-03191-9" target="_blank">Interview Nobel — Nature (2022)</a>
+        <p>Entretien avec Pääbo après l'annonce du Nobel — sur ses découvertes et leurs implications pour la compréhension de l'humain.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">Nature</span><span class="resource-tag">Interview</span></div>
+      </div>
+      <span class="resource-type">Presse scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo scientific american neanderthal gènes">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.scientificamerican.com/article/nobel-winner-svante-paeaebo-discovered-the-neandertal-in-our-genes/" target="_blank">Svante Pääbo a découvert le Néandertal dans nos gènes — Scientific American</a>
+        <p>Synthèse accessible des découvertes de Pääbo sur l'hybridation Homo sapiens / Néandertal et ses conséquences évolutives.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">Hybridation</span><span class="resource-tag">Vulgarisation</span></div>
+      </div>
+      <span class="resource-type">Presse scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="pääbo MNHN muséum histoire naturelle france">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.mnhn.fr/fr/actualites/prix-nobel-de-medecine-svante-paabo-a-revolutionne-notre-vision-de-neandertal" target="_blank">Pääbo a révolutionné notre vision de Néandertal — MNHN</a>
+        <p>Analyse du Muséum National d'Histoire Naturelle sur l'impact des travaux de Pääbo pour la compréhension de l'évolution humaine.</p>
+        <div class="resource-tags"><span class="resource-tag">Pääbo</span><span class="resource-tag">MNHN</span><span class="resource-tag">Français</span></div>
+      </div>
+      <span class="resource-type">Institutionnel FR</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="göbekli tepe neolithique schmidt turquie coopération">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.researchgate.net/publication/270030960_Gobekli_Tepe_-_the_Stone_Age_Sanctuaries_New_results_of_ongoing_excavations_with_a_special_focus_on_sculptures_and_high_reliefs" target="_blank">Göbekli Tepe — the Stone Age Sanctuaries (Klaus Schmidt) — ResearchGate</a>
+        <p>Article fondateur de Klaus Schmidt sur les résultats des fouilles, avec focus sur les sculptures et hauts-reliefs. Référence scientifique centrale.</p>
+        <div class="resource-tags"><span class="resource-tag">Göbekli Tepe</span><span class="resource-tag">Schmidt</span><span class="resource-tag">Néolithique</span></div>
+      </div>
+      <span class="resource-type">Article scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="göbekli tepe schmidt premier temple cnrs éditions">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.cnrseditions.fr/catalogue/histoire/le-premier-temple/" target="_blank">Le premier temple — Klaus Schmidt (CNRS Éditions)</a>
+        <p>Ouvrage de référence de Klaus Schmidt traduit en français. La mise en récit complète des fouilles de Göbekli Tepe et de leurs implications pour l'histoire de la coopération humaine.</p>
+        <div class="resource-tags"><span class="resource-tag">Göbekli Tepe</span><span class="resource-tag">Schmidt</span><span class="resource-tag">CNRS</span></div>
+      </div>
+      <span class="resource-type">Ouvrage</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="göbekli tepe universalis encyclopédie">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.universalis.fr/encyclopedie/gobekli-tepe-site-archeologique/" target="_blank">Göbekli Tepe — Encyclopædia Universalis</a>
+        <p>Article encyclopédique de référence (accès abonnement). Synthèse des connaissances scientifiques actuelles sur le site.</p>
+        <div class="resource-tags"><span class="resource-tag">Göbekli Tepe</span><span class="resource-tag">Universalis</span><span class="resource-tag">Encyclopédie</span></div>
+      </div>
+      <span class="resource-type">Encyclopédie</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="göbekli tepe world history premier temple monde">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.worldhistory.org/trans/fr/2-234/gobekli-tepe--le-premier-temple-au-monde/" target="_blank">Göbekli Tepe — Le premier temple au monde (World History Encyclopedia, fr)</a>
+        <p>Synthèse en français accessible et rigoureuse du site et de sa signification pour l'histoire de la civilisation.</p>
+        <div class="resource-tags"><span class="resource-tag">Göbekli Tepe</span><span class="resource-tag">Vulgarisation</span><span class="resource-tag">Français</span></div>
+      </div>
+      <span class="resource-type">Encyclopédie</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="indus harappa kenoyer civilisation absence guerre paix">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.anthropology.wisc.edu/staff/kenoyer-j-mark/" target="_blank">J. Mark Kenoyer — Profil académique (University of Wisconsin)</a>
+        <p>Profil officiel du principal chercheur mondial sur la civilisation de l'Indus. Accès à sa bibliographie complète.</p>
+        <div class="resource-tags"><span class="resource-tag">Indus</span><span class="resource-tag">Kenoyer</span><span class="resource-tag">Harappa</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="indus kenoyer publications researchgate">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.researchgate.net/profile/Jonathan-Kenoyer" target="_blank">J. Mark Kenoyer — Publications complètes (ResearchGate)</a>
+        <p>Ensemble des publications académiques de Kenoyer sur la civilisation harappéenne, l'urbanisme de l'Indus et l'absence de violence institutionnalisée.</p>
+        <div class="resource-tags"><span class="resource-tag">Indus</span><span class="resource-tag">Kenoyer</span><span class="resource-tag">Publications</span></div>
+      </div>
+      <span class="resource-type">Article scientifique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="indus harappa world history urbanisme">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.worldhistory.org/trans/fr/2-695/harappa-apercu-de-larchitecture-et-de-lurbanisme-h/" target="_blank">Harappa — Architecture et urbanisme (World History Encyclopedia, fr)</a>
+        <p>Analyse de l'architecture et de l'urbanisme harappéen — la planification collective sans hiérarchie militaire visible.</p>
+        <div class="resource-tags"><span class="resource-tag">Indus</span><span class="resource-tag">Harappa</span><span class="resource-tag">Urbanisme</span></div>
+      </div>
+      <span class="resource-type">Encyclopédie</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="caral pérou civilisation ancienne ruth shady amerique sans armes">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://www.histoire-pour-tous.fr/civilisations/112-caral-ou-la-civilisation-sans-la-guerre.html" target="_blank">Caral — La civilisation sans la guerre (Histoire pour tous)</a>
+        <p>Synthèse en français sur la civilisation de Caral et ses caractéristiques — absence d'armement, organisation coopérative, ancienneté exceptionnelle.</p>
+        <div class="resource-tags"><span class="resource-tag">Caral</span><span class="resource-tag">Ruth Shady</span><span class="resource-tag">Sans guerre</span></div>
+      </div>
+      <span class="resource-type">Vulgarisation FR</span>
+    </div>
+
+    <div class="resource" data-cat="pilier1" data-tags="caral pérou sécheresse ruth shady survie archéologie">
+      <div class="resource-cat-dot pilier1"></div>
+      <div class="resource-body">
+        <a href="https://laboussoleinfos.com/2025/11/07/perou-les-archeologues-decouvrent-comment-la-plus-ancienne-civilisation-damerique-a-survecu-a-une-terrible-secheresse/" target="_blank">Comment Caral a survécu à une terrible sécheresse — La Boussole Infos (2025)</a>
+        <p>Article récent avec citation directe de Ruth Shady sur les mécanismes de résilience collective de la civilisation de Caral face aux chocs climatiques.</p>
+        <div class="resource-tags"><span class="resource-tag">Caral</span><span class="resource-tag">Ruth Shady</span><span class="resource-tag">Résilience</span></div>
+      </div>
+      <span class="resource-type">Presse</span>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PILIER II — PHILOSOPHIE -->
+  <!-- ============================================================ -->
+  <div class="group" id="group-pilier2">
+    <div class="group-title">Pilier II — Philosophie &amp; gouvernance <span class="group-badge" id="badge-pilier2"></span></div>
+
+    <div class="resource" data-cat="pilier2" data-tags="rousseau intérêt général bien commun contrat social philosophie">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://journals.openedition.org/asterion/3022" target="_blank">Intérêt commun ou intérêt général chez Rousseau — Astérion / OpenEdition</a>
+        <p>Pénigaud de Mourgues T. — Analyse philosophique de la distinction entre intérêt commun et intérêt général dans la pensée de Rousseau.</p>
+        <div class="resource-tags"><span class="resource-tag">Rousseau</span><span class="resource-tag">Intérêt général</span><span class="resource-tag">Philosophie politique</span></div>
+      </div>
+      <span class="resource-type">Article académique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="intérêt général bien commun commun politique philosophie">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://journals.openedition.org/asterion/3031" target="_blank">L'intérêt général au crible de l'intérêt commun — Astérion / OpenEdition</a>
+        <p>Crétois P. — Confrontation des deux notions et leurs implications pour la philosophie politique contemporaine.</p>
+        <div class="resource-tags"><span class="resource-tag">Intérêt général</span><span class="resource-tag">Bien commun</span><span class="resource-tag">Philosophie</span></div>
+      </div>
+      <span class="resource-type">Article académique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="bien commun sauver académie sciences morales politiques">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://academiesciencesmoralesetpolitiques.fr/wp-content/uploads/2022/03/Tardivel-Schick-Sauverlebiencommun.pdf" target="_blank">Sauver le bien commun — Académie des sciences morales et politiques (PDF)</a>
+        <p>Tardivel-Schick — Communication à l'Académie sur les conditions de reconstruction du bien commun dans les sociétés contemporaines.</p>
+        <div class="resource-tags"><span class="resource-tag">Bien commun</span><span class="resource-tag">Philosophie politique</span></div>
+      </div>
+      <span class="resource-type">Rapport académique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette publique france cour des comptes finances 2023">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.ccomptes.fr/fr/publications/la-situation-et-les-perspectives-des-finances-publiques-15" target="_blank">La situation et les perspectives des finances publiques 2023 — Cour des comptes</a>
+        <p>Rapport annuel de la Cour des comptes sur l'état des finances publiques françaises. Source de référence pour l'article sur la dette.</p>
+        <div class="resource-tags"><span class="resource-tag">Dette</span><span class="resource-tag">Finances publiques</span><span class="resource-tag">Cour des comptes</span></div>
+      </div>
+      <span class="resource-type">Rapport officiel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette publique france cour des comptes finances 2025">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.ccomptes.fr/fr/publications/la-situation-des-finances-publiques-debut-2025" target="_blank">La situation des finances publiques début 2025 — Cour des comptes</a>
+        <p>Rapport récent sur la dérive des finances publiques françaises.</p>
+        <div class="resource-tags"><span class="resource-tag">Dette</span><span class="resource-tag">Finances publiques</span><span class="resource-tag">2025</span></div>
+      </div>
+      <span class="resource-type">Rapport officiel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette publique rapport annuel cour des comptes 2024">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.ccomptes.fr/fr/publications/le-rapport-public-annuel-2024" target="_blank">Rapport public annuel 2024 — Cour des comptes</a>
+        <p>Rapport public annuel incluant les grandes tendances des finances publiques et les recommandations structurelles.</p>
+        <div class="resource-tags"><span class="resource-tag">Cour des comptes</span><span class="resource-tag">Rapport annuel</span><span class="resource-tag">2024</span></div>
+      </div>
+      <span class="resource-type">Rapport officiel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette publique france dérive vie publique 2024">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.vie-publique.fr/en-bref/297351-finances-publiques-2024-une-derive-inedite-dit-la-cour-des-comptes" target="_blank">Finances publiques 2024 — une dérive inédite (Vie publique)</a>
+        <p>Synthèse accessible de la Cour des comptes sur la dégradation des finances publiques françaises en 2024.</p>
+        <div class="resource-tags"><span class="resource-tag">Dette</span><span class="resource-tag">Vie publique</span><span class="resource-tag">2024</span></div>
+      </div>
+      <span class="resource-type">Synthèse officielle</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette france europe comparaison 2025 vie publique">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.vie-publique.fr/questions-reponses/299995-dette-et-depenses-publiques-en-2025-ou-est-la-france-par-rapport-ses" target="_blank">Dette et dépenses publiques 2025 — où est la France par rapport à ses voisins ? (Vie publique)</a>
+        <p>Comparaison européenne des niveaux de dette et de dépenses publiques en 2025.</p>
+        <div class="resource-tags"><span class="resource-tag">Dette</span><span class="resource-tag">Comparaison européenne</span><span class="resource-tag">2025</span></div>
+      </div>
+      <span class="resource-type">Synthèse officielle</span>
+    </div>
+
+    <div class="resource" data-cat="pilier2" data-tags="dette publique france ministère économie définition">
+      <div class="resource-cat-dot pilier2"></div>
+      <div class="resource-body">
+        <a href="https://www.economie.gouv.fr/cedef/dette-publique" target="_blank">La dette publique — Ministère de l'Économie (définition officielle)</a>
+        <p>Page officielle du ministère définissant la dette publique, ses composantes et son mode de calcul.</p>
+        <div class="resource-tags"><span class="resource-tag">Dette</span><span class="resource-tag">Définition officielle</span><span class="resource-tag">Ministère</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PILIER III — ACTION -->
+  <!-- ============================================================ -->
+  <div class="group" id="group-pilier3">
+    <div class="group-title">Pilier III — Action &amp; prototypes <span class="group-badge" id="badge-pilier3"></span></div>
+
+    <div class="resource" data-cat="pilier3" data-tags="SCIC société coopérative intérêt collectif loi legifrance statut juridique">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000684004" target="_blank">Loi n° 47-1775 du 10 septembre 1947 — Statut de la coopération (Légifrance)</a>
+        <p>Texte fondateur du droit coopératif français. Base légale de toutes les formes de SCIC et SCOP.</p>
+        <div class="resource-tags"><span class="resource-tag">SCIC</span><span class="resource-tag">SCOP</span><span class="resource-tag">Droit coopératif</span><span class="resource-tag">Légifrance</span></div>
+      </div>
+      <span class="resource-type">Texte de loi</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="loi ESS économie sociale solidaire 2014 hamon légifrance">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.legifrance.gouv.fr/dossierlegislatif/JORFDOLE000027750379/?detailType=EXPOSE_MOTIFS" target="_blank">Loi n° 2014-856 du 31 juillet 2014 relative à l'ESS — exposé des motifs (Légifrance)</a>
+        <p>Loi Hamon sur l'économie sociale et solidaire — cadre légal actuel des SCIC et coopératives. Exposé des motifs.</p>
+        <div class="resource-tags"><span class="resource-tag">ESS</span><span class="resource-tag">Loi 2014</span><span class="resource-tag">SCIC</span><span class="resource-tag">Légifrance</span></div>
+      </div>
+      <span class="resource-type">Texte de loi</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="SCIC législation les-scic.coop officiel">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.les-scic.coop/legislation" target="_blank">SCIC — Législation officielle (les-scic.coop)</a>
+        <p>Page de référence du portail officiel des SCIC sur le cadre législatif complet applicable.</p>
+        <div class="resource-tags"><span class="resource-tag">SCIC</span><span class="resource-tag">Législation</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="SCIC FAQ technique gouvernance collèges">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.les-scic.coop/foire-aux-questions" target="_blank">SCIC — FAQ technique (les-scic.coop)</a>
+        <p>Questions fréquentes sur la constitution d'une SCIC, la gouvernance multi-collèges, les statuts et le capital.</p>
+        <div class="resource-tags"><span class="resource-tag">SCIC</span><span class="resource-tag">Gouvernance</span><span class="resource-tag">Collèges</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="SCOP législation les-scop.coop officiel">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.les-scop.coop/legislation" target="_blank">SCOP — Législation officielle (les-scop.coop)</a>
+        <p>Page de référence du portail officiel des SCOP sur le cadre légal applicable aux sociétés coopératives et participatives.</p>
+        <div class="resource-tags"><span class="resource-tag">SCOP</span><span class="resource-tag">Législation</span></div>
+      </div>
+      <span class="resource-type">Institutionnel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="SCIC bpifrance création fiche pratique statut">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://bpifrance-creation.fr/encyclopedie/structures-juridiques/structures-less/scic-societe-cooperative-dinteret-collectif" target="_blank">Fiche SCIC — Bpifrance Création</a>
+        <p>Fiche pratique complète sur la SCIC — statut, capital, gouvernance, fiscalité, conditions de création.</p>
+        <div class="resource-tags"><span class="resource-tag">SCIC</span><span class="resource-tag">Bpifrance</span><span class="resource-tag">Pratique</span></div>
+      </div>
+      <span class="resource-type">Guide pratique</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="mondragon corporation rapport annuel 2023 coopérative basque">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.mondragon-corporation.com/people/site/assets/files/103207/annual-report-2023.pdf" target="_blank">Mondragon Corporation — Rapport annuel 2023 (PDF officiel)</a>
+        <p>Rapport annuel officiel de Mondragon Corporation. Chiffres de référence : 70 000 emplois, 11 Md€ de CA, présence dans 150 pays.</p>
+        <div class="resource-tags"><span class="resource-tag">Mondragon</span><span class="resource-tag">Rapport annuel</span><span class="resource-tag">2023</span></div>
+      </div>
+      <span class="resource-type">Rapport officiel</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="mondragon corporation résultats 2023 coopérative news">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.thenews.coop/mondragon-sales-passed-the-e11bn-mark-in-2023/" target="_blank">Mondragon dépasse les 11 Md€ de ventes en 2023 — The Co-operative News</a>
+        <p>Analyse des résultats 2023 de Mondragon Corporation par le principal organe de presse du secteur coopératif.</p>
+        <div class="resource-tags"><span class="resource-tag">Mondragon</span><span class="resource-tag">Résultats</span><span class="resource-tag">2023</span></div>
+      </div>
+      <span class="resource-type">Presse spécialisée</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="mondragon corporation résultats 2024 coopérative news">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.thenews.coop/mondragon-worker-co-op-federation-reports-sales-of-e11-213bn/" target="_blank">Mondragon — Ventes de 11,213 Md€ (The Co-operative News, 2024)</a>
+        <p>Résultats 2024 de la fédération Mondragon — chiffres les plus récents disponibles.</p>
+        <div class="resource-tags"><span class="resource-tag">Mondragon</span><span class="resource-tag">Résultats</span><span class="resource-tag">2024</span></div>
+      </div>
+      <span class="resource-type">Presse spécialisée</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="mondragon coopérative basque tulankide résultats ventes">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.tulankide.com/en/mondragon-surpassed-the-11-billion-sales-barrier-in-2023" target="_blank">Mondragon dépasse le cap des 11 Md€ — Tulankide (journal interne)</a>
+        <p>Journal interne de Mondragon Corporation — source primaire sur les résultats et la vie de la coopérative.</p>
+        <div class="resource-tags"><span class="resource-tag">Mondragon</span><span class="resource-tag">Source primaire</span></div>
+      </div>
+      <span class="resource-type">Source primaire</span>
+    </div>
+
+    <div class="resource" data-cat="pilier3" data-tags="code éducation article L401-1 établissement expérimental légifrance">
+      <div class="resource-cat-dot pilier3"></div>
+      <div class="resource-body">
+        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043990247" target="_blank">Article L401-1 du Code de l'éducation — Établissements expérimentaux (Légifrance)</a>
+        <p>Base légale permettant la création d'établissements scolaires publics dérogatoires — cadre juridique du Prototype 03 (école multi-niveaux).</p>
+        <div class="resource-tags"><span class="resource-tag">Code éducation</span><span class="resource-tag">Établissement expérimental</span><span class="resource-tag">Légifrance</span></div>
+      </div>
+      <span class="resource-type">Texte de loi</span>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  <a href="/" class="footer-logo">CAP 2032</a>
+  <span class="footer-credit">Christophe Louverture — 2025</span>
+</footer>
+
+<script>
+const allResources = document.querySelectorAll('.resource');
+const searchInput = document.getElementById('search');
+const countLabel = document.getElementById('count-label');
+const videMsg = document.getElementById('vide');
+
+// Compter par catégorie
+function updateBadges(){
+  const cats = ['pilier1','pilier2','pilier3'];
+  cats.forEach(cat => {
+    const visible = [...allResources].filter(r => r.dataset.cat === cat && r.style.display !== 'none').length;
+    const badge = document.getElementById('badge-' + cat);
+    if(badge) badge.textContent = visible + ' source' + (visible > 1 ? 's' : '');
+    const group = document.getElementById('group-' + cat);
+    if(group) group.style.display = visible === 0 ? 'none' : 'block';
+  });
+  // Total
+  const totalVisible = [...allResources].filter(r => r.style.display !== 'none').length;
+  const totalCount = document.querySelector('.total-count');
+  if(totalCount) totalCount.textContent = allResources.length;
+  countLabel.textContent = totalVisible + ' ressource' + (totalVisible > 1 ? 's' : '') + ' affichée' + (totalVisible > 1 ? 's' : '');
+  videMsg.style.display = totalVisible === 0 ? 'block' : 'none';
+}
+
+let currentCat = 'all';
+
+function filter(category, btn){
+  currentCat = category;
+  document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters(){
+  const search = searchInput.value.toLowerCase();
+  allResources.forEach(r => {
+    const catOk = currentCat === 'all' || r.dataset.cat === currentCat;
+    const searchOk = !search || r.innerText.toLowerCase().includes(search) || (r.dataset.tags || '').includes(search);
+    r.style.display = (catOk && searchOk) ? 'grid' : 'none';
+  });
+  updateBadges();
+}
+
+searchInput.addEventListener('input', applyFilters);
+
+// Init
+updateBadges();
+</script>
+
+</body>
+</html>

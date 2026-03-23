@@ -1,0 +1,20 @@
+{
+  "name": "cap-2032",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Christophe Louverture",
+  "type": "commonjs",
+  "main": "capServer2032",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.2",
+    "nodemon": "^3.1.14",
+    "uuid": "^13.0.0"
+  }
+}
