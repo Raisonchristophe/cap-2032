@@ -4446,3 +4446,70 @@ footer{
   border-top:1px solid rgba(181,130,42,.2);
   margin-top:3rem;
 }
+
+.page-index .hero {
+  background: none;
+  padding: 4rem 1.5rem;
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-index .hero h1 {
+  font-size: 2.2rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.page-index .hero p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.page-index .section {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.page-index p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.page-index .piliers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.page-index .pilier-card {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.page-index .pilier-card h3 {
+  font-size: 1.3rem;
+}
+
+.page-index .pilier-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.page-index .pilier-card a:hover {
+  text-decoration: underline;
+}
+
+.section-break {
+  text-align: center;
+  margin: 3rem 0;
+  color: #888;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+
