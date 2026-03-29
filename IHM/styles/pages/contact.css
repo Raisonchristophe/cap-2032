@@ -1,0 +1,50 @@
+/* HERO */
+.page-contact .hero{
+  min-height: 30vh;
+  padding:6rem 4rem;
+  text-align:center
+}
+
+.page-contact .hero h1{
+  font-family:'Playfair Display';
+  font-size:3rem;
+  margin-bottom:1rem
+}
+
+.page-contact .hero p{
+  color:var(--gris-clair);
+  max-width:600px;
+  margin:auto
+}
+
+.page-contact .contact{
+  padding:4rem;
+  max-width:600px;
+  margin:auto
+}
+
+/* FORMULAIRE */
+.page-contact form{
+  display:flex;
+  flex-direction:column;
+  gap:1rem
+}
+
+.page-contact input, textarea{
+  padding:12px;
+  background:#111;
+  border:1px solid rgba(181,130,42,.3);
+  color:white;
+}
+
+.page-contact button{
+  background:var(--ocre);
+  border:none;
+  padding:12px;
+  cursor:pointer;
+  font-family:'DM Mono';
+}
+
+.page-contact button:hover{
+  background:var(--ocre-clair);
+}

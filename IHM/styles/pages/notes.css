@@ -1,0 +1,591 @@
+  /* BREADCRUMB */
+    .page-notes .breadcrumb{
+      padding:1.2rem 4rem;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      gap:.8rem
+    }
+
+    .page-notes .breadcrumb a,.breadcrumb span{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gris);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .page-notes .breadcrumb a:hover{
+      color:var(--ocre-clair)
+    }
+
+    .page-notes .breadcrumb .sep{
+      color:rgba(181,130,42,.4)
+    }
+
+    .page-notes .breadcrumb span:last-child{
+      color:var(--ocre)
+    }
+
+ /* HERO */
+    .page-notes .hero{
+      min-height: 30vh;
+      padding:8rem 4rem 6rem;
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6rem;
+      align-items:end
+    }
+
+    .page-notes .hero-tag{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .1s
+    }
+
+    .page-notes .hero-tag::before{
+      content:'·';
+      display:block;
+      font-size:1rem;
+      color:rgba(181,130,42,.5)
+    }
+
+    .page-notes .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.8rem,6vw,6rem);
+      font-weight:900;
+      line-height:1.0;
+      letter-spacing:-.02em;
+      margin-bottom:2rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .25s
+    }
+
+    .page-notes .hero h1 em{
+      font-style:italic;
+      color:var(--ocre-clair)
+    }
+
+    .page-notes .hero-desc{
+      font-size:1.05rem;
+      line-height:1.8;
+      color:var(--gris-clair);
+      opacity:0;
+      animation:fadeUp .7s ease forwards .4s
+    }
+
+    .page-notes .hero-droite{
+      opacity:0;
+      animation:fadeUp .7s ease forwards .5s
+    }
+
+    .hero-citation{
+      border-left:3px solid rgba(181,130,42,.4);
+      padding:2rem 0 2rem 2rem
+    }
+
+    .page-notes .hero-citation p{
+      font-family:'Playfair Display',serif;
+      font-size:1.15rem;
+      font-style:italic;
+      line-height:1.6;
+      color:var(--blanc);
+      margin-bottom:1rem
+    }
+
+    .page-notes .hero-citation-auteur{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    /* OFFRE */
+    .page-notes .offre{
+      padding:0 4rem 5rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .page-notes .offre-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .page-notes .offre h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3.5vw,3rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:1rem
+    }
+
+    .page-notes .offre-intro{
+      font-size:1.05rem;
+      line-height:1.75;
+      color:var(--gris-clair);
+      max-width:640px;
+      margin-bottom:3.5rem
+    }
+
+    .page-notes .offre-grille{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .page-notes .offre-item{
+      background:var(--noir);
+      padding:2.5rem 2rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      transition:background .3s
+    }
+
+    .page-notes .offre-item:hover{
+      background:rgba(181,130,42,.04)
+    }
+
+    .page-notes .offre-num{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.4rem
+    }
+
+    .page-notes .offre-titre{
+      font-family:'Playfair Display',serif;
+      font-size:1.15rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.3;
+      margin-bottom:.5rem
+    }
+
+    .page-notes .offre-desc{
+      font-size:.88rem;
+      line-height:1.65;
+      color:var(--gris-clair);
+      flex-grow:1
+    }
+
+    .page-notes .offre-exemples{
+      margin-top:auto;
+      padding-top:1rem;
+      border-top:1px solid rgba(181,130,42,.1)
+    }
+
+    .page-notes .offre-exemple-label{
+      font-family:'DM Mono',monospace;
+      font-size:.52rem;
+      letter-spacing:.18em;
+      color:var(--gris);
+      text-transform:uppercase;
+      margin-bottom:.5rem;
+      display:block
+    }
+
+    .page-notes .offre-exemple{
+      font-size:.78rem;
+      line-height:1.5;
+      color:var(--gris);
+      display:flex;
+      gap:.5rem;
+      margin-bottom:.25rem
+    }
+
+    .page-notes .offre-exemple::before{
+      content:'—';
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      color:rgba(181,130,42,.4);
+      flex-shrink:0
+    }
+
+    /* POUR QUI */
+    .page-notes .pourqui{
+      padding:4rem 4rem 5rem;
+      background:rgba(181,130,42,.03);
+      border-top:1px solid rgba(181,130,42,.15);
+      border-bottom:1px solid rgba(181,130,42,.15)
+    }
+
+    .page-notes .pourqui-inner{
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .page-notes .pourqui-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .page-notes .pourqui h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.5rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:2.5rem
+    }
+
+    .page-notes .pourqui-grille{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .page-notes .pourqui-item{
+      background:var(--noir);
+      padding:2rem 1.8rem;
+      display:flex;
+      flex-direction:column;
+      gap:.8rem
+    }
+
+    .page-notes .pourqui-icone{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      border:1px solid rgba(181,130,42,.2);
+      padding:.3rem .6rem;
+      align-self:start
+    }
+
+    .page-notes .pourqui-titre{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.3
+    }
+
+    .page-notes .pourqui-desc{
+      font-size:.85rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    /* MÉTHODE */
+    .page-notes .methode{
+      padding:5rem 4rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .page-notes .methode-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .page-notes .methode h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.5rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:2.5rem
+    }
+
+    .page-notes .methode-grille{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:3rem;
+      align-items:start
+    }
+
+    .page-notes .methode-texte p{
+      font-size:1rem;
+      line-height:1.85;
+      color:var(--gris-clair);
+      margin-bottom:1.5rem
+    }
+
+    .page-notes .methode-texte p strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .page-notes .methode-etapes{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .page-notes .methode-etape{
+      background:var(--noir);
+      padding:1.5rem 2rem;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:1.5rem;
+      align-items:start
+    }
+
+    .page-notes .methode-etape-num{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;
+      font-weight:900;
+      color:rgba(181,130,42,.2);
+      line-height:1
+    }
+
+    .page-notes .methode-etape-contenu h4{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.18em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.4rem
+    }
+
+    .page-notes .methode-etape-contenu p{
+      font-size:.85rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    /* CONTACT PRINCIPAL */
+    .page-notes .contact-section{
+      padding:0 4rem 5rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .page-notes .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:start
+    }
+
+    .page-notes .contact-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .page-notes .contact-gauche h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.8rem);
+      font-weight:700;
+      line-height:1.15;
+      margin-bottom:1.5rem
+    }
+
+    .page-notes .contact-gauche p{
+      font-size:1rem;
+      line-height:1.8;
+      color:var(--gris-clair);
+      margin-bottom:1.2rem
+    }
+
+    .page-notes .contact-gauche p:last-child{
+      margin-bottom:0
+    }
+
+    .page-notes .contact-gauche p strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .page-notes .contact-bloc{
+      background:rgba(181,130,42,.05);
+      border:1px solid rgba(181,130,42,.2);
+      padding:2.5rem;
+      margin-bottom:2px
+    }
+
+    .page-notes .contact-bloc-label{
+      font-family:'DM Mono',monospace;
+      font-size:.58rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+      display:block
+    }
+
+    .page-notes .contact-email{
+      font-family:'Playfair Display',serif;
+      font-size:1.3rem;
+      font-weight:700;
+      color:var(--blanc);
+      text-decoration:none;
+      display:block;
+      margin-bottom:.5rem;
+      transition:color .3s
+    }
+
+    .page-notes .contact-email:hover{
+      color:var(--ocre-clair)
+    }
+
+    .page-notes .contact-email-note{
+      font-size:.82rem;
+      line-height:1.5;
+      color:var(--gris)
+    }
+
+    .page-notes .contact-delai{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.15em;
+      color:var(--gris);
+      margin-top:1rem;
+      display:block
+    }
+
+    .page-notes .contact-infos{
+      background:rgba(181,130,42,.03);
+      border:1px solid rgba(181,130,42,.12);
+      padding:2rem
+    }
+
+    .page-notes .contact-info-item{
+      display:flex;
+      gap:1.5rem;
+      align-items:start;
+      padding:.8rem 0;
+      border-bottom:1px solid rgba(181,130,42,.08)
+    }
+
+    .page-notes .contact-info-item:last-child{
+      border-bottom:none;
+      padding-bottom:0
+    }
+
+    .page-notes .contact-info-label{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.18em;
+      color:var(--gris);
+      text-transform:uppercase;
+      min-width:80px;
+      padding-top:.1rem
+    }
+
+    .page-notes .contact-info-val{
+      font-size:.88rem;
+      line-height:1.5;
+      color:var(--gris-clair)
+    }
+
+    .page-notes .contact-info-val strong{
+      color:var(--blanc)
+    }
+
+    /* ENGAGEMENT */
+    .page-notes .engagement{
+      padding:4rem;
+      background:linear-gradient(135deg,rgba(181,130,42,.08),rgba(181,130,42,.03));
+      border-top:2px solid var(--ocre);
+      border-bottom:1px solid rgba(181,130,42,.2)
+    }
+
+    .page-notes .engagement-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center
+    }
+
+    .page-notes .engagement-label{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+      display:block
+    }
+
+    .page-notes .engagement h3{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.5rem,2.5vw,2.2rem);
+      font-weight:900;
+      line-height:1.2;
+      margin-bottom:1.2rem
+    }
+
+    .page-notes .engagement p{
+      font-size:1rem;
+      line-height:1.8;
+      color:var(--gris-clair)
+    }
+
+    .page-notes .engagement p strong{
+      color:var(--blanc)
+    }
+
+    .page-notes .engagement-valeurs{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .page-notes .engagement-valeur{
+      background:var(--noir);
+      padding:1.4rem 2rem;
+      display:flex;
+      gap:1.2rem;
+      align-items:start
+    }
+
+    .page-notes .engagement-valeur-marque{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      color:var(--ocre);
+      flex-shrink:0;
+      padding-top:.15rem
+    }
+
+    .page-notes .engagement-valeur-texte{
+      font-size:.88rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    .page-notes .engagement-valeur-texte strong{
+      color:var(--blanc)
+    }

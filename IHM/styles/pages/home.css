@@ -1,5 +1,5 @@
  /* URGENCE BAND */
-    .urgence-band {
+    .page-index .urgence-band {
       background: var(--rouge);
       padding: 1.2rem 4rem;
       display: flex;
@@ -8,7 +8,7 @@
       overflow: hidden;
     }
 
-    .urgence-label {
+    .page-index .urgence-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.3em;
@@ -18,28 +18,28 @@
       flex-shrink: 0;
     }
 
-    .urgence-ticker {
+    .page-index .urgence-ticker {
       display: flex;
       gap: 3rem;
       animation: ticker 30s linear infinite;
       white-space: nowrap;
     }
 
-    .urgence-ticker span {
+    .page-index .urgence-ticker span {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       color: rgba(255,255,255,0.9);
     }
 
-    .urgence-ticker .sep {
+    .page-index .urgence-ticker .sep {
       color: rgba(255,255,255,0.4);
     }
 
 
 
     /* INTRO SECTION */
-    .intro {
+    .page-index .intro {
       padding: 8rem 4rem;
       max-width: 1200px;
       margin: 0 auto;
@@ -49,7 +49,7 @@
       align-items: start;
     }
 
-    .intro-label {
+    .page-index .intro-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.3em;
@@ -60,30 +60,30 @@
       top: 4rem;
     }
 
-    .intro-text p {
+    .page-index .intro-text p {
       font-size: clamp(1.1rem, 1.8vw, 1.3rem);
       line-height: 1.8;
       color: var(--gris-clair);
       margin-bottom: 1.8rem;
     }
 
-    .intro-text p strong {
+    .page-index .intro-text p strong {
       color: var(--blanc);
       font-weight: 600;
     }
 
-    .intro-text p em {
+    .page-index .intro-text p em {
       color: var(--ocre-clair);
       font-style: italic;
     }
 
-    .intro-pullquote {
+    .page-index .intro-pullquote {
       border-left: 3px solid var(--ocre);
       padding: 1.5rem 0 1.5rem 2rem;
       margin: 2.5rem 0;
     }
 
-    .intro-pullquote p {
+    .page-index .intro-pullquote p {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.2rem, 2vw, 1.5rem) !important;
       font-style: italic;
@@ -92,19 +92,19 @@
     }
 
     /* TROIS PILIERS */
-    .piliers {
+    .page-index .piliers {
       padding: 6rem 4rem;
       background: rgba(255,255,255,0.02);
       border-top: 1px solid rgba(181,130,42,0.15);
       border-bottom: 1px solid rgba(181,130,42,0.15);
     }
 
-    .piliers-header {
+    .page-index .piliers-header {
       max-width: 1200px;
       margin: 0 auto 5rem;
     }
 
-    .piliers-eyebrow {
+    .page-index .piliers-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 2rem;
       letter-spacing: 0.3em;
@@ -113,7 +113,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .piliers-title {
+    .page-index .piliers-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 700;
@@ -121,7 +121,7 @@
       max-width: 600px;
     }
 
-    .piliers-grid {
+    .page-index .piliers-grid {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
@@ -129,7 +129,7 @@
       gap: 0;
     }
 
-    .pilier-card {
+    .page-index .pilier-card {
       padding: 3rem 2.5rem;
       border-right: 1px solid rgba(181,130,42,0.15);
       position: relative;
@@ -140,11 +140,11 @@
       cursor: pointer;
     }
 
-    .pilier-card:last-child {
+    .page-index .pilier-card:last-child {
       border-right: none;
     }
 
-    .pilier-card::before {
+    .page-index .pilier-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -157,15 +157,15 @@
       transition: transform 0.4s ease;
     }
 
-    .pilier-card:hover {
+    .page-index .pilier-card:hover {
       background: rgba(181,130,42,0.04);
     }
 
-    .pilier-card:hover::before {
+    .page-index .pilier-card:hover::before {
       transform: scaleX(1);
     }
 
-    .pilier-num {
+    .page-index .pilier-num {
       font-family: 'Playfair Display', serif;
       font-size: 4rem;
       font-weight: 900;
@@ -175,7 +175,7 @@
       display: block;
     }
 
-    .pilier-tag {
+    .page-index .pilier-tag {
       font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.25em;
@@ -185,7 +185,7 @@
       display: block;
     }
 
-    .pilier-name {
+    .page-index .pilier-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.6rem;
       font-weight: 700;
@@ -193,20 +193,20 @@
       margin-bottom: 1.2rem;
     }
 
-    .pilier-desc {
+    .page-index .pilier-desc {
       font-size: 0.95rem;
       line-height: 1.7;
       color: var(--gris-clair);
       margin-bottom: 2rem;
     }
 
-    .pilier-themes {
+    .page-index .pilier-themes {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
-    .pilier-theme {
+    .page-index .pilier-theme {
       font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.1em;
@@ -216,7 +216,7 @@
       text-transform: uppercase;
     }
 
-    .pilier-arrow {
+    .page-index .pilier-arrow {
       position: absolute;
       bottom: 2.5rem;
       right: 2.5rem;
@@ -227,31 +227,31 @@
       transition: opacity 0.3s, transform 0.3s;
     }
 
-    .pilier-card:hover .pilier-arrow {
+    .page-index .pilier-card:hover .pilier-arrow {
       opacity: 1;
       transform: translateX(0);
     }
 
     /* CHIFFRES CLÉS */
-    .chiffres {
+    .page-index .chiffres {
       padding: 7rem 4rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .chiffres-grid {
+    .page-index .chiffres-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 3rem;
       margin-top: 4rem;
     }
 
-    .chiffre-item {
+    .page-index .chiffre-item {
       border-top: 1px solid rgba(181,130,42,0.3);
       padding-top: 2rem;
     }
 
-    .chiffre-num {
+    .page-index .chiffre-num {
       font-family: 'Playfair Display', serif;
       font-size: 3.5rem;
       font-weight: 900;
@@ -260,7 +260,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .chiffre-label {
+    .page-index .chiffre-label {
       font-size: 0.9rem;
       line-height: 1.5;
       color: var(--gris-clair);
@@ -268,20 +268,20 @@
 
     /* Piliers secondaires*/
 
-    .piliers-secondaires {
+    .page-index .piliers-secondaires {
   padding: 6rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
     /* DÉMARCHE */
-    .demarche {
+    .page-index .demarche {
       padding: 7rem 4rem;
       background: rgba(181,130,42,0.04);
       border-top: 1px solid rgba(181,130,42,0.15);
     }
 
-    .demarche-inner {
+    .page-index .demarche-inner {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
@@ -290,7 +290,7 @@
       align-items: center;
     }
 
-    .demarche-text h2 {
+    .page-index .demarche-text h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 700;
@@ -298,21 +298,23 @@
       margin-bottom: 2rem;
     }
 
-    .demarche-text p {
+    .page-index .demarche-text p {
       font-size: 1.05rem;
       line-height: 1.8;
       color: var(--gris-clair);
       margin-bottom: 1.5rem;
     }
 
-    .demarche-text p strong { color: var(--blanc); }
+    .page-index .demarche-text p strong {
+      color: var(--blanc);
+    }
 
-    .demarche-aside {
+    .page-index .demarche-aside {
       border-left: 1px solid rgba(181,130,42,0.3);
       padding-left: 3rem;
     }
 
-    .demarche-aside-label {
+    .page-index .demarche-aside-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.25em;
@@ -322,11 +324,11 @@
       display: block;
     }
 
-    .demarche-list {
+    .page-index .demarche-list {
       list-style: none;
     }
 
-    .demarche-list li {
+    .page-index .demarche-list li {
       font-size: 0.9rem;
       line-height: 1.6;
       color: var(--gris-clair);
@@ -337,7 +339,7 @@
       gap: 0.8rem;
     }
 
-    .demarche-list li::before {
+    .page-index .demarche-list li::before {
       content: '→';
       color: var(--ocre);
       flex-shrink: 0;
@@ -349,19 +351,19 @@
 /* PARCOURS UTILISATEUR */
 /* ========================= */
 
-.parcours {
+.page-index .parcours {
   padding: 6rem 4rem;
   border-top: 1px solid rgba(181,130,42,.15);
 }
 
-.parcours-steps {
+.page-index .parcours-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 3rem;
 }
 
-.step span {
+.page-index .step span {
   font-size: 2rem;
   color: var(--ocre);
 }
@@ -370,32 +372,32 @@
 /* PROGRESSION */
 /* ========================= */
 
-.progress-bar {
+.page-index .progress-bar {
   height: 4px;
   background: rgba(255,255,255,0.1);
   margin: 1rem 0 2rem;
 }
 
-.progress-bar div {
+.page-index .progress-bar div {
   height: 100%;
   background: var(--ocre);
 }
 
-a:not(.btn-primary):not(.btn-secondary) {
+.page-index a:not(.btn-primary):not(.btn-secondary) {
   color: var(--ocre-clair);
 }
 
-a:not(.btn-primary):not(.btn-secondary):hover {
+.page-index a:not(.btn-primary):not(.btn-secondary):hover {
   color: var(--blanc);
 }
 
-.constat-inner {
+.page-index .constat-inner {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }
 
-.constat-list {
+.page-index .constat-list {
   margin-bottom: 1rem;
   letter-spacing: 0.15em;
   font-size: 1.25rem;

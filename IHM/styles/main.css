@@ -1,9 +1,18 @@
-@import "./layout/header.css";
+/* LAYOUT */
 @import "./layout/footer.css";
-@import "./components/hero.css";
+@import "./layout/header.css";
+
+/* COMPONENTS */
 @import "./components/button.css";
-@import "./pages/home.css";
 @import "./components/animations.css";
+@import "./components/hero.css";
+
+/* PAGES */
+@import "./pages/home.css";
+@import "./pages/pilier.css";
+@import "./pages/ressouces.css";
+@import "./pages/notes.css";
+@import "./pages/contact.css";
 
 
 /* VARIABLES */
@@ -14,7 +23,9 @@
       --ocre-clair: #d4a85a;
       --gris: #6b6459;
       --gris-clair: #c8c0b0;
-      --rouge: #8b2020;
+      /* nouvelles couleur */
+       --terre: #3d2b1a;
+       --ardoise: #1a1f2e;
     }
 
 /* RESET */
