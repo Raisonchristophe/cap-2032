@@ -1,29 +1,744 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Notes sur commande — CAP 2032</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+
+  <%- include('partial/head', { title: "— Notes sur commande — CAP 2032"}) %>
+
+   <style>
+    :root{
+      --noir:#0d0d0d;
+      --blanc:#f5f2eb;
+      --ocre:#b5822a;
+      --ocre-clair:#d4a85a;
+      --gris:#6b6459;
+      --gris-clair:#c8c0b0
+    }
+
+    *,*::before,*::after{
+      margin:0;
+      padding:0;
+      box-sizing:border-box
+    }
+
+    html{
+      scroll-behavior:smooth
+    }
+
+    body{
+      background:var(--noir);
+      color:var(--blanc);
+      font-family:'Source Serif 4',Georgia,serif;
+      font-weight:300;
+      overflow-x:hidden
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:999;
+      opacity:.6}
+
+    /* NAV */
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:2rem 4rem;
+      border-bottom:1px solid rgba(181,130,42,.2);
+      position:sticky;
+      top:0;
+      background:rgba(13,13,13,.95);
+      backdrop-filter:blur(8px);
+      z-index:100
+    }
+
+    .nav-logo{
+      font-family:'DM Mono',monospace;
+      font-size:.75rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      text-decoration:none
+    }
+
+    .nav-links{
+      display:flex;
+      gap:2.5rem;
+      list-style:none
+    }
+
+    .nav-links a{
+      font-family:'DM Mono',monospace;
+      font-size:.7rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--gris-clair);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .nav-links a:hover,.nav-links a.active{
+      color:var(--ocre-clair)
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb{
+      padding:1.2rem 4rem;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      gap:.8rem
+    }
+
+    .breadcrumb a,.breadcrumb span{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gris);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .breadcrumb a:hover{
+      color:var(--ocre-clair)
+    }
+
+    .breadcrumb .sep{
+      color:rgba(181,130,42,.4)
+    }
+
+    .breadcrumb span:last-child{
+      color:var(--ocre)
+    }
+
+    /* HERO */
+    .hero{
+      padding:8rem 4rem 6rem;
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6rem;
+      align-items:end
+    }
+
+    .hero-tag{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .1s
+    }
+
+    .hero-tag::before{
+      content:'·';
+      display:block;
+      font-size:1rem;
+      color:rgba(181,130,42,.5)
+    }
+
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.8rem,6vw,6rem);
+      font-weight:900;
+      line-height:1.0;
+      letter-spacing:-.02em;
+      margin-bottom:2rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .25s
+    }
+
+    .hero h1 em{
+      font-style:italic;
+      color:var(--ocre-clair)
+    }
+
+    .hero-desc{
+      font-size:1.05rem;
+      line-height:1.8;
+      color:var(--gris-clair);
+      opacity:0;
+      animation:fadeUp .7s ease forwards .4s
+    }
+
+    .hero-droite{
+      opacity:0;
+      animation:fadeUp .7s ease forwards .5s
+    }
+
+    .hero-citation{
+      border-left:3px solid rgba(181,130,42,.4);
+      padding:2rem 0 2rem 2rem
+    }
+
+    .hero-citation p{
+      font-family:'Playfair Display',serif;
+      font-size:1.15rem;
+      font-style:italic;
+      line-height:1.6;
+      color:var(--blanc);
+      margin-bottom:1rem
+    }
+
+    .hero-citation-auteur{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    /* OFFRE */
+    .offre{
+      padding:0 4rem 5rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .offre-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .offre h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3.5vw,3rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:1rem
+    }
+
+    .offre-intro{
+      font-size:1.05rem;
+      line-height:1.75;
+      color:var(--gris-clair);
+      max-width:640px;
+      margin-bottom:3.5rem
+    }
+
+    .offre-grille{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .offre-item{
+      background:var(--noir);
+      padding:2.5rem 2rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      transition:background .3s
+    }
+
+    .offre-item:hover{
+      background:rgba(181,130,42,.04)
+    }
+
+    .offre-num{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.4rem
+    }
+
+    .offre-titre{
+      font-family:'Playfair Display',serif;
+      font-size:1.15rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.3;
+      margin-bottom:.5rem
+    }
+
+    .offre-desc{
+      font-size:.88rem;
+      line-height:1.65;
+      color:var(--gris-clair);
+      flex-grow:1
+    }
+
+    .offre-exemples{
+      margin-top:auto;
+      padding-top:1rem;
+      border-top:1px solid rgba(181,130,42,.1)
+    }
+
+    .offre-exemple-label{
+      font-family:'DM Mono',monospace;
+      font-size:.52rem;
+      letter-spacing:.18em;
+      color:var(--gris);
+      text-transform:uppercase;
+      margin-bottom:.5rem;
+      display:block
+    }
+
+    .offre-exemple{
+      font-size:.78rem;
+      line-height:1.5;
+      color:var(--gris);
+      display:flex;
+      gap:.5rem;
+      margin-bottom:.25rem
+    }
+
+    .offre-exemple::before{
+      content:'—';
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      color:rgba(181,130,42,.4);
+      flex-shrink:0
+    }
+
+    /* POUR QUI */
+    .pourqui{
+      padding:4rem 4rem 5rem;
+      background:rgba(181,130,42,.03);
+      border-top:1px solid rgba(181,130,42,.15);
+      border-bottom:1px solid rgba(181,130,42,.15)
+    }
+
+    .pourqui-inner{
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .pourqui-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .pourqui h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.5rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:2.5rem
+    }
+
+    .pourqui-grille{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .pourqui-item{
+      background:var(--noir);
+      padding:2rem 1.8rem;
+      display:flex;
+      flex-direction:column;
+      gap:.8rem
+    }
+
+    .pourqui-icone{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      border:1px solid rgba(181,130,42,.2);
+      padding:.3rem .6rem;
+      align-self:start
+    }
+
+    .pourqui-titre{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.3
+    }
+
+    .pourqui-desc{
+      font-size:.85rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    /* MÉTHODE */
+    .methode{
+      padding:5rem 4rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .methode-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .methode h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.5rem);
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:2.5rem
+    }
+
+    .methode-grille{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:3rem;
+      align-items:start
+    }
+
+    .methode-texte p{
+      font-size:1rem;
+      line-height:1.85;
+      color:var(--gris-clair);
+      margin-bottom:1.5rem
+    }
+
+    .methode-texte p strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .methode-etapes{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .methode-etape{
+      background:var(--noir);
+      padding:1.5rem 2rem;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:1.5rem;
+      align-items:start
+    }
+
+    .methode-etape-num{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;
+      font-weight:900;
+      color:rgba(181,130,42,.2);
+      line-height:1
+    }
+
+    .methode-etape-contenu h4{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.18em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.4rem
+    }
+
+    .methode-etape-contenu p{
+      font-size:.85rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    /* CONTACT PRINCIPAL */
+    .contact-section{
+      padding:0 4rem 5rem;
+      max-width:1100px;
+      margin:0 auto
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:start
+    }
+
+    .contact-eyebrow{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .contact-gauche h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.8rem);
+      font-weight:700;
+      line-height:1.15;
+      margin-bottom:1.5rem
+    }
+
+    .contact-gauche p{
+      font-size:1rem;
+      line-height:1.8;
+      color:var(--gris-clair);
+      margin-bottom:1.2rem
+    }
+
+    .contact-gauche p:last-child{
+      margin-bottom:0
+    }
+
+    .contact-gauche p strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .contact-bloc{
+      background:rgba(181,130,42,.05);
+      border:1px solid rgba(181,130,42,.2);
+      padding:2.5rem;
+      margin-bottom:2px
+    }
+
+    .contact-bloc-label{
+      font-family:'DM Mono',monospace;
+      font-size:.58rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+      display:block
+    }
+
+    .contact-email{
+      font-family:'Playfair Display',serif;
+      font-size:1.3rem;
+      font-weight:700;
+      color:var(--blanc);
+      text-decoration:none;
+      display:block;
+      margin-bottom:.5rem;
+      transition:color .3s
+    }
+
+    .contact-email:hover{
+      color:var(--ocre-clair)
+    }
+
+    .contact-email-note{
+      font-size:.82rem;
+      line-height:1.5;
+      color:var(--gris)
+    }
+
+    .contact-delai{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.15em;
+      color:var(--gris);
+      margin-top:1rem;
+      display:block
+    }
+
+    .contact-infos{
+      background:rgba(181,130,42,.03);
+      border:1px solid rgba(181,130,42,.12);
+      padding:2rem
+    }
+
+    .contact-info-item{
+      display:flex;
+      gap:1.5rem;
+      align-items:start;
+      padding:.8rem 0;
+      border-bottom:1px solid rgba(181,130,42,.08)
+    }
+
+    .contact-info-item:last-child{
+      border-bottom:none;
+      padding-bottom:0
+    }
+
+    .contact-info-label{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.18em;
+      color:var(--gris);
+      text-transform:uppercase;
+      min-width:80px;
+      padding-top:.1rem
+    }
+
+    .contact-info-val{
+      font-size:.88rem;
+      line-height:1.5;
+      color:var(--gris-clair)
+    }
+
+    .contact-info-val strong{
+      color:var(--blanc)
+    }
+
+    /* ENGAGEMENT */
+    .engagement{
+      padding:4rem;
+      background:linear-gradient(135deg,rgba(181,130,42,.08),rgba(181,130,42,.03));
+      border-top:2px solid var(--ocre);
+      border-bottom:1px solid rgba(181,130,42,.2)
+    }
+
+    .engagement-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center
+    }
+
+    .engagement-label{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+      display:block
+    }
+
+    .engagement h3{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.5rem,2.5vw,2.2rem);
+      font-weight:900;
+      line-height:1.2;
+      margin-bottom:1.2rem
+    }
+
+    .engagement p{
+      font-size:1rem;
+      line-height:1.8;
+      color:var(--gris-clair)
+    }
+
+    .engagement p strong{
+      color:var(--blanc)
+    }
+
+    .engagement-valeurs{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .engagement-valeur{
+      background:var(--noir);
+      padding:1.4rem 2rem;
+      display:flex;
+      gap:1.2rem;
+      align-items:start
+    }
+
+    .engagement-valeur-marque{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      color:var(--ocre);
+      flex-shrink:0;
+      padding-top:.15rem
+    }
+
+    .engagement-valeur-texte{
+      font-size:.88rem;
+      line-height:1.6;
+      color:var(--gris-clair)
+    }
+
+    .engagement-valeur-texte strong{
+      color:var(--blanc)
+    }
+
+    /* FOOTER */
+    footer{
+      padding:3rem 4rem;
+      border-top:1px solid rgba(181,130,42,.2);
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
+    .footer-logo{
+      font-family:'DM Mono',monospace;
+      font-size:.7rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      text-decoration:none
+    }
+
+    .footer-credit{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.15em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(24px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s ease,transform .7s ease
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0)
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1000px){
+      nav,.breadcrumb{padding:1.5rem 2rem}
+      .nav-links{display:none}
+      .hero{padding:4rem 2rem 3rem;grid-template-columns:1fr;gap:3rem}
+      .offre,.methode,.contact-section,.engagement{padding-left:2rem;padding-right:2rem}
+      .pourqui{padding:3rem 2rem}
+      .offre-grille,.pourqui-grille{grid-template-columns:1fr}
+      .methode-grille,.contact-grid,.engagement-inner{grid-template-columns:1fr}
+      footer{flex-direction:column;gap:1rem;padding:2rem}
+    }
+  </style>
+
 </head>
 <body class="page-notes">
 
-  <nav>
-    <a href="/" class="nav-logo">CAP 2032</a>
-    <ul class="nav-links">
-      <li><a href="/pilier1">Archéologie</a></li>
-      <li><a href="/pilier2">Philosophie</a></li>
-      <li><a href="/pilier3">Action</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="#" class="active">Notes stratégique</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+<%- include('partial/nav', { currentPage: 'notes' }) %>
 
   <div class="breadcrumb">
     <a href="/index">Accueil</a><span class="sep">·</span>
-    <span>Contact — Notes sur commande</span>
+    <span> Notes stratégique</span>
   </div>
 
   <!-- HERO -->
@@ -224,10 +939,7 @@
     </div>
   </div>
 
-  <footer>
-    <a href="/" class="footer-logo">CAP 2032</a>
-    <span class="footer-credit">Christophe Louverture — 2025</span>
-  </footer>
+<%- include ('partial/footer') %>
 
   <script>
     const reveals = document.querySelectorAll('.reveal');

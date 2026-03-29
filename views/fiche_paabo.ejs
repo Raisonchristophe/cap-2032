@@ -1,25 +1,717 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>L'hybridation interspécifique — Pilier I — CAP 2032</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+
+  <%- include('partial/head', { title: "L'hybridation interspécifique — Pilier I — CAP 2032"}) %>
+
+  <style>
+    :root {
+      --noir: #0d0d0d;
+      --blanc: #f5f2eb;
+      --ocre: #b5822a;
+      --ocre-clair: #d4a85a;
+      --gris: #6b6459;
+      --gris-clair: #c8c0b0;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--noir);
+      color: var(--blanc);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-clair);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--ocre-clair);
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .breadcrumb a, .breadcrumb span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--ocre-clair);
+    }
+
+    .breadcrumb .sep {
+      color: rgba(181,130,42,0.4);
+    }
+
+    .breadcrumb span:last-child {
+      color: var(--ocre);
+    }
+
+    /* HERO */
+    .fiche-hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #080d12 0%, #0d0d0d 50%, #0a0808 100%);
+    }
+
+    /* Motif ADN abstrait */
+    .fiche-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(181,130,42,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(181,130,42,0.03) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .fiche-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ocre), transparent);
+    }
+
+    /* Hélice décorative */
+    .hero-helix {
+      position: absolute;
+      right: 6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .helix-svg {
+      width: 120px;
+      height: 320px;
+    }
+
+    .fiche-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .fiche-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .fiche-cas-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      border: 1px solid rgba(181,130,42,0.4);
+      padding: 0.4rem 0.8rem;
+    }
+
+    .fiche-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gris-clair);
+      text-transform: uppercase;
+    }
+
+    .fiche-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--noir);
+      background: var(--ocre);
+      padding: 0.3rem 0.7rem;
+    }
+
+    .fiche-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .fiche-hero h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .fiche-hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--gris-clair);
+      max-width: 680px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    .fiche-hero-sub strong { color: var(--blanc); }
+
+    /* STATS */
+    .fiche-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(181,130,42,0.2);
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+    }
+
+    .stat-item {
+      padding: 2.5rem;
+      border-right: 1px solid rgba(181,130,42,0.15);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .stat-item:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .stat-item:nth-child(2) {
+      animation-delay: 0.65s;
+    }
+
+    .stat-item:nth-child(3) {
+      animation-delay: 0.8s;
+    }
+
+    .stat-item:nth-child(4) {
+      animation-delay: 0.95s;
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: var(--gris-clair);
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* CORPS */
+    .fiche-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+    }
+
+    .fiche-body p {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.9;
+      color: var(--gris-clair);
+      margin-bottom: 1.8rem;
+    }
+
+    .fiche-body p strong {
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+    .fiche-body p em {
+      color: var(--ocre-clair);
+      font-style: italic;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--blanc);
+      margin: 4rem 0 1.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(181,130,42,0.2);
+    }
+
+    .pullquote {
+      border-left: 3px solid var(--ocre);
+      padding: 1.5rem 0 1.5rem 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .pullquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 2vw, 1.45rem) !important;
+      font-style: italic;
+      color: var(--blanc) !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* SCHÉMA MÉTISSAGE */
+    .metissage-schema {
+      margin: 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+    }
+
+    .schema-groupe {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .schema-nom {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blanc);
+      margin-bottom: 0.5rem;
+    }
+
+    .schema-periode {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .schema-adn {
+      font-size: 0.85rem;
+      color: var(--gris-clair);
+      line-height: 1.5;
+    }
+
+    .schema-fleche {
+      padding: 1rem;
+      text-align: center;
+      border-left: 1px solid rgba(181,130,42,0.15);
+      border-right: 1px solid rgba(181,130,42,0.15);
+    }
+
+    .schema-fleche-sym {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--ocre-clair);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .schema-fleche-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    /* HERITAGE ADN */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin: 3rem 0;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .heritage-item {
+      background: var(--noir);
+      padding: 2rem;
+    }
+
+    .heritage-population {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .heritage-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .heritage-desc {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--gris-clair);
+    }
+
+    /* BARRE ADN VISUELLE */
+    .adn-bar-container {
+      margin: 0.6rem 0 0;
+    }
+
+    .adn-bar {
+      height: 4px;
+      background: rgba(181,130,42,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0.3rem;
+    }
+
+    .adn-bar-fill {
+      height: 100%;
+      background: var(--ocre);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ENCADRÉ */
+    .encadre {
+      background: rgba(181,130,42,0.05);
+      border: 1px solid rgba(181,130,42,0.2);
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .encadre-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .encadre p {
+      font-size: 0.95rem !important;
+      line-height: 1.7 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0.8rem !important;
+    }
+
+    .encadre p:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    /* NOBEL */
+    .nobel-encart {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .nobel-annee {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .nobel-texte h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .nobel-texte p {
+      font-size: 0.92rem !important;
+      line-height: 1.6 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* IMPLICATION */
+    .implication {
+      background: linear-gradient(135deg, rgba(181,130,42,0.08), rgba(181,130,42,0.03));
+      border-top: 2px solid var(--ocre);
+      padding: 3rem;
+      margin: 4rem 0;
+    }
+
+    .implication-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .implication h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .implication p {
+      font-size: 1rem !important;
+      line-height: 1.8 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0.8rem !important;
+    }
+
+    .implication p:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .implication p strong {
+      color: var(--blanc) !important;
+    }
+
+    /* SOURCES */
+    .sources {
+      padding: 4rem;
+      border-top: 1px solid rgba(181,130,42,0.15);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .sources h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .source-list li {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--gris-clair);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .source-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--ocre);
+      font-size: 0.75rem;
+    }
+
+    .source-list a {
+      color: var(--ocre-clair);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,90,0.3);
+      transition: border-color 0.3s;
+    }
+
+    .source-list a:hover {
+      border-bottom-color: var(--ocre-clair);
+    }
+
+    /* NAVIGATION */
+    .nav-fiches {
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(181,130,42,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .nav-fiche-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: opacity 0.3s;
+      max-width: 280px;
+    }
+
+    .nav-fiche-link:hover {
+      opacity: 0.7;
+    }
+
+    .nav-fiche-dir {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    .nav-fiche-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blanc);
+      line-height: 1.3;
+    }
+
+    .nav-fiche-link.next {
+      text-align: right;
+    }
+
+    footer {
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(181,130,42,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .footer-credit {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav, .breadcrumb { padding: 1.5rem 2rem; }
+      .nav-links { display: none; }
+      .fiche-hero { padding: 3rem 2rem 4rem; min-height: 50vh; }
+      .hero-helix { display: none; }
+      .fiche-stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(181,130,42,0.15); }
+      .fiche-body { padding: 4rem 2rem; }
+      .metissage-schema { grid-template-columns: 1fr; }
+      .schema-fleche { border: none; border-top: 1px solid rgba(181,130,42,0.15); border-bottom: 1px solid rgba(181,130,42,0.15); padding: 1.5rem; }
+      .heritage-grid { grid-template-columns: 1fr; }
+      .sources { padding: 3rem 2rem; }
+      .nav-fiches { padding: 2rem; flex-direction: column; gap: 2rem; }
+      .nav-fiche-link.next { text-align: left; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+    }
+  </style>
+
 </head>
 <body class="page-archeo">
 
-  <nav>
-    <a href="/" class="nav-logo">CAP 2032</a>
-    <ul class="nav-links">
-      <li><a href="/pilier1" class="active">Archéologie</a></li>
-      <li><a href="/pilier2">Philosophie</a></li>
-      <li><a href="/pilier3">Action</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="/notes">Notes sur commande</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+
+  <%- include('partial/nav', { currentPage: 'pilier1' }) %>
 
   <div class="breadcrumb">
     <a href="/">Accueil</a>
@@ -199,10 +891,7 @@
     </a>
   </div>
 
-  <footer>
-    <a href="/" class="footer-logo">CAP 2032</a>
-    <span class="footer-credit">Christophe Louverture — 2025</span>
-  </footer>
+<%- include ('partial/footer') %>
 
   <script>
     const reveals = document.querySelectorAll('.reveal');

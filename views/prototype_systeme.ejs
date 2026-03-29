@@ -1,11 +1,1013 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype 04 — Le système des trois — CAP 2032</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+
+  <%- include('partial/head', { title: "Prototype 04 — Le système des trois — CAP 2032"}) %>
+
+  <style>
+    :root{
+      --noir:#0d0d0d;
+      --blanc:#f5f2eb;
+      --ocre:#b5822a;
+      --ocre-clair:#d4a85a;
+      --gris:#6b6459;
+      --gris-clair:#c8c0b0
+    }
+
+    *,*::before,*::after{
+      margin:0;
+      padding:0;
+      box-sizing:border-box
+    }
+
+    html{
+      scroll-behavior:smooth
+    }
+
+    body{
+      background:var(--noir);
+      color:var(--blanc);
+      font-family:'Source Serif 4',Georgia,serif;
+      font-weight:300;
+      overflow-x:hidden
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:999;
+      opacity:.6
+    }
+
+    .progress-bar{
+      position:fixed;
+      top:0;
+      left:0;
+      height:2px;
+      background:var(--ocre);
+      z-index:200;
+      width:0%
+    }
+
+    /* NAV */
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:2rem 4rem;
+      border-bottom:1px solid rgba(181,130,42,.2);
+      position:sticky;
+      top:0;
+      background:rgba(13,13,13,.95);
+      backdrop-filter:blur(8px);
+      z-index:100
+    }
+
+    .nav-logo{
+      font-family:'DM Mono',monospace;
+      font-size:.75rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      text-decoration:none
+    }
+
+    .nav-links{
+      display:flex;
+      gap:2.5rem;
+      list-style:none
+    }
+
+    .nav-links a{
+      font-family:'DM Mono',monospace;
+      font-size:.7rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--gris-clair);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .nav-links a:hover,.nav-links a.active{
+      color:var(--ocre-clair)
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb{
+      padding:1.2rem 4rem;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      gap:.8rem
+    }
+
+    .breadcrumb a,.breadcrumb span{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gris);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .breadcrumb a:hover{
+      color:var(--ocre-clair)
+    }
+
+    .breadcrumb .sep{
+      color:rgba(181,130,42,.4)
+    }
+
+    .breadcrumb span:last-child{
+      color:var(--ocre)
+    }
+
+    /* ARTICLE */
+    .article-hero{
+      padding:7rem 4rem 5rem;
+      max-width:900px;
+      margin:0 auto
+    }
+
+    .article-type{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .1s
+    }
+
+    .article-type::before{
+      content:'04';
+      display:block;
+      font-size:.55rem;
+      border:1px solid rgba(181,130,42,.4);
+      padding:.3rem .6rem
+    }
+
+    .article-hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.5rem,5.5vw,5rem);
+      font-weight:900;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      margin-bottom:2rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .25s
+    }
+
+    .article-hero h1 em{
+      font-style:italic;
+      color:var(--ocre-clair)
+    }
+
+    .article-standfirst{
+      font-size:clamp(1.05rem,1.8vw,1.25rem);
+      line-height:1.7;
+      color:var(--gris-clair);
+      font-style:italic;
+      max-width:720px;
+      margin-bottom:3rem;
+      opacity:0;
+      animation:fadeUp .7s ease forwards .4s;
+      border-left:3px solid rgba(181,130,42,.4);
+      padding-left:2rem
+    }
+
+    .article-meta{
+      display:flex;
+      align-items:center;
+      gap:2rem;
+      flex-wrap:wrap;
+      padding-bottom:3rem;
+      border-bottom:1px solid rgba(181,130,42,.2);
+      opacity:0;
+      animation:fadeUp .7s ease forwards .55s
+    }
+
+    .meta-item{
+      display:flex;
+      flex-direction:column;
+      gap:.2rem
+    }
+
+    .meta-label{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    .meta-value{
+      font-family:'DM Mono',monospace;
+      font-size:.72rem;
+      color:var(--gris-clair)
+    }
+
+    .meta-sep{
+      width:1px;
+      height:2rem;
+      background:rgba(181,130,42,.2)
+    }
+
+    .article-body{
+      max-width:720px;
+      margin:0 auto;
+      padding:0 4rem 8rem
+    }
+
+    .article-body p{
+      font-size:clamp(1rem,1.6vw,1.18rem);
+      line-height:1.95;
+      color:var(--gris-clair);
+      margin-bottom:1.8rem
+    }
+
+    .article-body p strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .article-body p em{
+      color:var(--ocre-clair);
+      font-style:italic
+    }
+
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.4rem,2.5vw,2rem);
+      font-weight:700;
+      color:var(--blanc);
+      margin:5rem 0 1.5rem;
+      padding-top:3.5rem;
+      border-top:1px solid rgba(181,130,42,.2);
+      scroll-margin-top:5rem;
+      line-height:1.2
+    }
+
+    .pullquote{
+      border-left:3px solid var(--ocre);
+      padding:1.5rem 0 1.5rem 2.5rem;
+      margin:3rem 0
+    }
+
+    .pullquote p{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.15rem,2vw,1.5rem)!important;
+      font-style:italic;
+      color:var(--blanc)!important;
+      line-height:1.45!important;
+      margin-bottom:0!important
+    }
+
+    /* SEPARATOR */
+    .separator{
+      display:flex;
+      align-items:center;
+      gap:1.5rem;
+      margin:4rem 0
+    }
+
+    .separator::before,.separator::after{
+      content:'';
+      flex:1;
+      height:1px;
+      background:rgba(181,130,42,.2)
+    }
+
+    .separator span{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.3em;
+      color:rgba(181,130,42,.5)
+    }
+
+    /* SCHÉMA SYSTÈME — triangle de flux */
+    .schema-systeme{
+      margin:3rem 0;
+      background:rgba(181,130,42,.03);
+      border:1px solid rgba(181,130,42,.15);
+      padding:3rem 2rem
+    }
+
+    .schema-label{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2.5rem;
+      display:block;
+      text-align:center
+    }
+
+    .schema-triangle{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:2px;
+      background:rgba(181,130,42,.1);
+      margin-bottom:2px
+    }
+
+    .schema-noeud{
+      background:var(--noir);
+      padding:2rem 1.5rem;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:.8rem
+    }
+
+    .schema-noeud-num{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase
+    }
+
+    .schema-noeud-nom{
+      font-family:'Playfair Display',serif;
+      font-size:1.1rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.2
+    }
+
+    .schema-noeud-role{
+      font-size:.8rem;
+      line-height:1.5;
+      color:var(--gris-clair);
+      font-style:italic
+    }
+
+    .schema-centre{
+      background:rgba(181,130,42,.06);
+      padding:1.8rem 1.5rem;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem
+    }
+
+    .schema-centre p{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.15em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      line-height:1.5
+    }
+
+    /* FLUX */
+    .flux-section{
+      margin:3rem 0;
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .flux-item{
+      background:var(--noir);
+      padding:2rem 2.5rem;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:2rem;
+      align-items:start
+    }
+
+    .flux-type{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      white-space:nowrap;
+      padding:.5rem 0
+    }
+
+    .flux-titre{
+      font-family:'Playfair Display',serif;
+      font-size:1.05rem;
+      font-weight:700;
+      color:var(--blanc);
+      margin-bottom:.8rem;
+      line-height:1.3
+    }
+
+    .flux-lignes{
+      display:flex;
+      flex-direction:column;
+      gap:.5rem
+    }
+
+    .flux-ligne{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:1rem;
+      align-items:center;
+      font-size:.85rem;
+      color:var(--gris-clair);
+      line-height:1.4
+    }
+
+    .flux-de{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.1em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      white-space:nowrap;
+      border:1px solid rgba(181,130,42,.2);
+      padding:.15rem .4rem
+    }
+
+    .flux-vers{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.1em;
+      color:var(--gris);
+      text-transform:uppercase;
+      white-space:nowrap;
+      text-align:right
+    }
+
+    .flux-arrow{
+      font-family:'DM Mono',monospace;
+      font-size:.7rem;
+      color:rgba(181,130,42,.4);
+      flex-shrink:0
+    }
+
+    /* BUDGET CONSOLIDÉ */
+    .budget-consolide{
+      margin:3rem 0;
+      background:rgba(181,130,42,.04);
+      border:1px solid rgba(181,130,42,.2)
+    }
+
+    .budget-header{
+      padding:1.5rem 2.5rem;
+      border-bottom:1px solid rgba(181,130,42,.15);
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
+    .budget-header-titre{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase
+    }
+
+    .budget-header-total{
+      font-family:'Playfair Display',serif;
+      font-size:1.8rem;
+      font-weight:900;
+      color:var(--blanc)
+    }
+
+    .budget-lignes{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .budget-ligne{
+      background:var(--noir);
+      padding:1.5rem 2.5rem;
+      display:grid;
+      grid-template-columns:auto 1fr auto auto;
+      gap:1.5rem;
+      align-items:center
+    }
+
+    .budget-ligne-num{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.15em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      white-space:nowrap
+    }
+
+    .budget-ligne-nom{
+      font-size:.9rem;
+      color:var(--gris-clair)
+    }
+
+    .budget-ligne-val{
+      font-family:'DM Mono',monospace;
+      font-size:.82rem;
+      color:var(--blanc);
+      text-align:right;
+      white-space:nowrap
+    }
+
+    .budget-ligne-barre{
+      width:80px;
+      height:3px;
+      background:rgba(181,130,42,.1);
+      border-radius:2px;
+      overflow:hidden
+    }
+
+    .budget-ligne-fill{
+      height:100%;
+      background:var(--ocre);
+      border-radius:2px;
+      transition:width 1.2s ease;
+      width:0%
+    }
+
+    .budget-total-ligne{
+      background:rgba(181,130,42,.06);
+      padding:1.5rem 2.5rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-top:2px solid rgba(181,130,42,.2)
+    }
+
+    .budget-total-label{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    .budget-total-montant{
+      display:flex;
+      align-items:center;
+      gap:1.5rem
+    }
+
+    .zero-dette{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      border:1px solid rgba(181,130,42,.3);
+      padding:.25rem .7rem
+    }
+
+    .budget-total-val{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;
+      font-weight:900;
+      color:var(--blanc)
+    }
+
+    /* FINANCEMENT CONSOLIDÉ */
+    .financement-consolide{
+      margin:3rem 0;
+      background:rgba(181,130,42,.04);
+      border:1px solid rgba(181,130,42,.2);
+      padding:2.5rem
+    }
+
+    .financement-label{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+      display:block
+    }
+
+    .financement-grille{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:2rem
+    }
+
+    .financement-source-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      margin-bottom:.6rem
+    }
+
+    .financement-source-nom{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.12em;
+      color:var(--gris-clair);
+      text-transform:uppercase
+    }
+
+    .financement-source-montant{
+      font-family:'DM Mono',monospace;
+      font-size:.72rem;
+      color:var(--ocre)
+    }
+
+    .barre-track{
+      height:4px;
+      background:rgba(181,130,42,.1);
+      border-radius:2px;
+      overflow:hidden
+    }
+
+    .barre-fill{
+      height:100%;
+      background:var(--ocre);
+      border-radius:2px;
+      transition:width 1.2s ease;
+      width:0%
+    }
+
+    .financement-source-note{
+      font-size:.75rem;
+      line-height:1.4;
+      color:var(--gris);
+      margin-top:.4rem
+    }
+
+    .financement-total-ligne{
+      margin-top:2rem;
+      padding-top:1.5rem;
+      border-top:1px solid rgba(181,130,42,.15);
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
+    .financement-total-label{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    .financement-total-val{
+      font-family:'Playfair Display',serif;
+      font-size:1.8rem;
+      font-weight:900;
+      color:var(--blanc)
+    }
+
+    /* CALENDRIER */
+    .calendrier{
+      margin:3rem 0;
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      background:rgba(181,130,42,.1)
+    }
+
+    .cal-annee{
+      background:var(--noir);
+      padding:2rem 2.5rem;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:2rem;
+      align-items:start
+    }
+
+    .cal-periode{
+      font-family:'Playfair Display',serif;
+      font-size:2.5rem;
+      font-weight:900;
+      color:rgba(181,130,42,.2);
+      line-height:1;
+      white-space:nowrap
+    }
+
+    .cal-titre{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.8rem;
+      display:block
+    }
+
+    .cal-actions{
+      display:flex;
+      flex-direction:column;
+      gap:.4rem
+    }
+
+    .cal-action{
+      font-size:.88rem;
+      line-height:1.5;
+      color:var(--gris-clair);
+      display:flex;
+      gap:.8rem;
+      align-items:baseline
+    }
+
+    .cal-action::before{
+      content:'→';
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      color:var(--ocre);
+      flex-shrink:0
+    }
+
+    .cal-action strong{
+      color:var(--blanc);
+      font-weight:600
+    }
+
+    .cal-annee.active{
+      background:rgba(181,130,42,.04)
+    }
+
+    .cal-annee.active .cal-periode{
+      color:rgba(181,130,42,.5)
+    }
+
+    /* INDICATEURS CONSOLIDÉS */
+    .indicateurs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1px;
+      background:rgba(181,130,42,.1);
+      margin:3rem 0
+    }
+
+    .indicateur-item{
+      background:var(--noir);
+      padding:2rem 1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:.6rem
+    }
+
+    .indicateur-val{
+      font-family:'Playfair Display',serif;
+      font-size:2.2rem;
+      font-weight:900;
+      color:var(--ocre);
+      line-height:1
+    }
+
+    .indicateur-label{
+      font-family:'DM Mono',monospace;
+      font-size:.55rem;
+      letter-spacing:.15em;
+      color:var(--gris);
+      text-transform:uppercase;
+      line-height:1.4
+    }
+
+    .indicateur-note{
+      font-size:.78rem;
+      line-height:1.4;
+      color:var(--gris)}
+
+    /* ANTI-FRAGILE */
+    .antifragile{
+      background:linear-gradient(135deg,rgba(181,130,42,.1),rgba(181,130,42,.04));
+      border:1px solid rgba(181,130,42,.25);
+      padding:3rem;
+      margin:3rem 0
+    }
+
+    .antifragile-label{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+      display:block}
+
+    .antifragile h3{
+      font-family:'Playfair Display',serif;
+      font-size:1.4rem;
+      font-weight:700;
+      margin-bottom:1.2rem;
+      line-height:1.3
+    }
+
+    .antifragile p{
+      font-size:1rem!important;
+      line-height:1.8!important;
+      color:var(--gris-clair)!important;
+      margin-bottom:.8rem!important
+    }
+
+    .antifragile p:last-child{
+      margin-bottom:0!important
+    }
+
+    .antifragile p strong{
+      color:var(--blanc)!important
+    }
+
+    /* SYNTHÈSE FINALE */
+    .synthese-finale{
+      background:linear-gradient(135deg,rgba(181,130,42,.08),rgba(181,130,42,.03));
+      border-top:2px solid var(--ocre);
+      padding:3.5rem;
+      margin:4rem 0
+    }
+
+    .synthese-label{
+      font-family:'DM Mono',monospace;
+      font-size:.65rem;
+      letter-spacing:.3em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+      display:block
+    }
+
+    .synthese-finale h3{
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem;
+      font-weight:900;
+      margin-bottom:1.5rem;
+      line-height:1.2
+    }
+
+    .synthese-grille{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.5rem;
+      margin-top:2rem
+    }
+
+    .synthese-item{
+      border-left:2px solid rgba(181,130,42,.3);
+      padding-left:1.2rem
+    }
+
+    .synthese-item-label{
+      font-family:'DM Mono',monospace;
+      font-size:.58rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:.4rem;
+      display:block
+    }
+
+    .synthese-item p{
+      font-size:.88rem!important;
+      line-height:1.6!important;
+      color:var(--gris-clair)!important;
+      margin-bottom:0!important
+    }
+
+    /* NOTE */
+    .note-auteur{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(181,130,42,.12);
+      padding:2rem 2.5rem;
+      margin:4rem 0 3rem
+    }
+
+    .note-auteur-label{
+      font-family:'DM Mono',monospace;
+      font-size:.58rem;
+      letter-spacing:.25em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      display:block
+    }
+
+    .note-auteur p{
+      font-size:.88rem!important;
+      line-height:1.7!important;
+      color:var(--gris)!important;
+      font-style:italic!important;
+      margin-bottom:0!important
+    }
+
+    /* NAVIGATION */
+    .article-nav{
+      padding:3rem 4rem;
+      border-top:1px solid rgba(181,130,42,.15);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      max-width:720px;
+      margin:0 auto
+    }
+
+    .nav-lien{
+      text-decoration:none;
+      color:inherit;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+      transition:opacity .3s
+    }
+
+    .nav-lien:hover{
+      opacity:.7
+    }
+
+    .nav-lien-dir{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.2em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    .nav-lien-nom{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;
+      font-weight:700;
+      color:var(--blanc);
+      line-height:1.3
+    }
+
+    .nav-lien.next{
+      text-align:right
+    }
+
+    /* FOOTER */
+    footer{
+      padding:3rem 4rem;
+      border-top:1px solid rgba(181,130,42,.2);
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
+    .footer-logo{
+      font-family:'DM Mono',monospace;
+      font-size:.7rem;
+      letter-spacing:.2em;
+      color:var(--ocre);
+      text-transform:uppercase;
+      text-decoration:none
+    }
+
+    .footer-credit{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;
+      letter-spacing:.15em;
+      color:var(--gris);
+      text-transform:uppercase
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(24px)}
+      to{opacity:1;transform:translateY(0)}}
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s ease,transform .7s ease
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0)
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      nav,.breadcrumb{padding:1.5rem 2rem}
+      .nav-links{display:none}
+      .article-hero{padding:4rem 2rem 3rem}
+      .article-body{padding:0 2rem 5rem}
+      .schema-triangle{grid-template-columns:1fr}
+      .flux-item{grid-template-columns:1fr}
+      .flux-type{writing-mode:horizontal-tb;transform:none}
+      .budget-ligne{grid-template-columns:1fr auto}
+      .budget-ligne-barre{display:none}
+      .financement-grille{grid-template-columns:1fr}
+      .indicateurs{grid-template-columns:1fr}
+      .synthese-grille{grid-template-columns:1fr}
+      .article-nav{padding:2rem;flex-direction:column;gap:2rem}
+      .nav-lien.next{text-align:left}footer{flex-direction:column;gap:1rem;padding:2rem}}
+  </style>
+
 </head>
 <body class="page-prototype">
   <div class="progress-bar" id="progress"></div>
@@ -384,10 +1386,9 @@
     <a href="/prototype3" class="nav-lien prev"><span class="nav-lien-dir">← Prototype précédent</span><span class="nav-lien-nom">L'école multi-niveaux</span></a>
     <a href="/pilier3" class="nav-lien next"><span class="nav-lien-dir">↑ Retour</span><span class="nav-lien-nom">Pilier III — Vue d'ensemble</span></a>
   </div>
-  <footer>
-    <a href="/index" class="footer-logo">CAP 2032</a>
-    <span class="footer-credit">Christophe Louverture — 2025</span>
-  </footer>
+
+  <%- include ('partial/footer') %>
+
   <script>
     const progress = document.getElementById('progress');
     window.addEventListener('scroll', () => {

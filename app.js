@@ -20,15 +20,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pilier1", (req, res) => {
-  res.render("pilier1_intro");
+  res.render("pilier1_intro", {
+    currentPage: "pilier1",
+  });
 });
 
 app.get("/pilier2", (req, res) => {
-  res.render("pilier2_intro");
+  res.render("pilier2_intro", {
+    currentPage: "pilier2",
+  });
 });
 
 app.get("/pilier3", (req, res) => {
-  res.render("pilier3_intro");
+  res.render("pilier3_intro", {
+    currentPage: "pilier3",
+  });
 });
 
 app.get("/paabo", (req, res) => {
@@ -144,15 +150,21 @@ app.get("/fiche15", (req, res) => {
 });
 
 app.get("/ressources", (req, res) => {
-  res.render("ressources");
+  res.render("ressources", {
+    currentPage: "ressources",
+  });
 });
 
 app.get("/notes", (req, res) => {
-  res.render("notes_stratégiques");
+  res.render("notes_stratégiques", {
+    currentPage: "notes",
+  });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", {
+    currentPage: "contact",
+  });
 });
 
 app.get("/test", (req, res) => {
