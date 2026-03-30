@@ -1,0 +1,1355 @@
+ /* BREADCRUMB */
+    .page-archeo .breadcrumb {
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .page-archeo .breadcrumb a, .breadcrumb span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .page-archeo .breadcrumb a:hover {
+      color: var(--ocre-clair);
+    }
+
+    .page-archeo .breadcrumb .sep {
+      color: rgba(181,130,42,0.4);
+    }
+
+    .page-archeo .breadcrumb span:last-child {
+      color: var(--ocre);
+    }
+
+    /* HERO */
+    .page-archeo .fiche-hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #080d12 0%, #0d0d0d 50%, #0a0808 100%);
+    }
+
+    /* Motif ADN abstrait */
+    .page-archeo .fiche-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(181,130,42,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(181,130,42,0.03) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .page-archeo .fiche-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ocre), transparent);
+    }
+
+    /* Hélice décorative */
+    .page-archeo .hero-helix {
+      position: absolute;
+      right: 6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .page-archeo .helix-svg {
+      width: 120px;
+      height: 320px;
+    }
+
+    .page-archeo .fiche-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .page-archeo .fiche-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .page-archeo .fiche-cas-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      border: 1px solid rgba(181,130,42,0.4);
+      padding: 0.4rem 0.8rem;
+    }
+
+    .page-archeo .fiche-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gris-clair);
+      text-transform: uppercase;
+    }
+
+    .page-archeo .fiche-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--noir);
+      background: var(--ocre);
+      padding: 0.3rem 0.7rem;
+    }
+
+    .page-archeo .fiche-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .page-archeo .fiche-hero h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .page-archeo .fiche-hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--gris-clair);
+      max-width: 680px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    .page-archeo .fiche-hero-sub strong { color: var(--blanc); }
+
+    /* STATS */
+    .page-archeo .fiche-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(181,130,42,0.2);
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+    }
+
+    .page-archeo .stat-item {
+      padding: 2.5rem;
+      border-right: 1px solid rgba(181,130,42,0.15);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .page-archeo .stat-item:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .page-archeo .stat-item:nth-child(2) {
+      animation-delay: 0.65s;
+    }
+
+    .page-archeo .stat-item:nth-child(3) {
+      animation-delay: 0.8s;
+    }
+
+    .page-archeo .stat-item:nth-child(4) {
+      animation-delay: 0.95s;
+      border-right: none;
+    }
+
+    .page-archeo .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-archeo .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: var(--gris-clair);
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* CORPS */
+    .page-archeo .fiche-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+    }
+
+    .page-archeo .fiche-body p {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.9;
+      color: var(--gris-clair);
+      margin-bottom: 1.8rem;
+    }
+
+    .page-archeo .fiche-body p strong {
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+    .page-archeo .fiche-body p em {
+      color: var(--ocre-clair);
+      font-style: italic;
+    }
+
+    .page-archeo .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--blanc);
+      margin: 4rem 0 1.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(181,130,42,0.2);
+    }
+
+    .page-archeo .pullquote {
+      border-left: 3px solid var(--ocre);
+      padding: 1.5rem 0 1.5rem 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .page-archeo .pullquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 2vw, 1.45rem) !important;
+      font-style: italic;
+      color: var(--blanc) !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* SCHÉMA MÉTISSAGE */
+    .page-archeo .metissage-schema {
+      margin: 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+    }
+
+    .page-archeo .schema-groupe {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .page-archeo .schema-nom {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blanc);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-archeo .schema-periode {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .page-archeo .schema-adn {
+      font-size: 0.85rem;
+      color: var(--gris-clair);
+      line-height: 1.5;
+    }
+
+    .page-archeo .schema-fleche {
+      padding: 1rem;
+      text-align: center;
+      border-left: 1px solid rgba(181,130,42,0.15);
+      border-right: 1px solid rgba(181,130,42,0.15);
+    }
+
+    .page-archeo .schema-fleche-sym {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--ocre-clair);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-archeo .schema-fleche-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    /* HERITAGE ADN */
+    .page-archeo .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin: 3rem 0;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .page-archeo .heritage-item {
+      background: var(--noir);
+      padding: 2rem;
+    }
+
+    .page-archeo .heritage-population {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .page-archeo .heritage-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-archeo .heritage-desc {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--gris-clair);
+    }
+
+    /* BARRE ADN VISUELLE */
+    .page-archeo .adn-bar-container {
+      margin: 0.6rem 0 0;
+    }
+
+    .page-archeo .adn-bar {
+      height: 4px;
+      background: rgba(181,130,42,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0.3rem;
+    }
+
+    .page-archeo .adn-bar-fill {
+      height: 100%;
+      background: var(--ocre);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ENCADRÉ */
+    .page-archeo .encadre {
+      background: rgba(181,130,42,0.05);
+      border: 1px solid rgba(181,130,42,0.2);
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .page-archeo .encadre-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .page-archeo .encadre p {
+      font-size: 0.95rem !important;
+      line-height: 1.7 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0.8rem !important;
+    }
+
+    .page-archeo .encadre p:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    /* NOBEL */
+    .page-archeo .nobel-encart {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .page-archeo .nobel-annee {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .page-archeo .nobel-texte h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-archeo .nobel-texte p {
+      font-size: 0.92rem !important;
+      line-height: 1.6 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* IMPLICATION */
+    .page-archeo .implication {
+      background: linear-gradient(135deg, rgba(181,130,42,0.08), rgba(181,130,42,0.03));
+      border-top: 2px solid var(--ocre);
+      padding: 3rem;
+      margin: 4rem 0;
+    }
+
+    .page-archeo .implication-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .page-archeo .implication h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .page-archeo .implication p {
+      font-size: 1rem !important;
+      line-height: 1.8 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0.8rem !important;
+    }
+
+    .page-archeo .implication p:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .page-archeo .implication p strong {
+      color: var(--blanc) !important;
+    }
+
+    /* SOURCES */
+    .page-archeo .sources {
+      padding: 4rem;
+      border-top: 1px solid rgba(181,130,42,0.15);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .page-archeo .sources h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .page-archeo .source-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .page-archeo .source-list li {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--gris-clair);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .page-archeo .source-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--ocre);
+      font-size: 0.75rem;
+    }
+
+    .page-archeo .source-list a {
+      color: var(--ocre-clair);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,90,0.3);
+      transition: border-color 0.3s;
+    }
+
+    .page-archeo .source-list a:hover {
+      border-bottom-color: var(--ocre-clair);
+    }
+
+    /* NAVIGATION */
+    .page-archeo .nav-fiches {
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(181,130,42,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .page-archeo .nav-fiche-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: opacity 0.3s;
+      max-width: 280px;
+    }
+
+    .page-archeo .nav-fiche-link:hover {
+      opacity: 0.7;
+    }
+
+    .page-archeo .nav-fiche-dir {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    .page-archeo .nav-fiche-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blanc);
+      line-height: 1.3;
+    }
+
+    .page-archeo .nav-fiche-link.next {
+      text-align: right;
+    }
+
+    /* Piliers décoratifs en arrière-plan */
+    .archeo2 .hero-pillars {
+      position: absolute;
+      right: 6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 3rem;
+      align-items: flex-end;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .archeo2 .hero-pillar {
+      background: var(--ocre);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .archeo2 .hero-pillar:nth-child(1) {
+      width: 40px;
+      height: 280px;
+    }
+
+    .archeo2 .hero-pillar:nth-child(2) {
+      width: 40px;
+      height: 340px;
+    }
+
+    .archeo2 .hero-pillar:nth-child(3) {
+      width: 40px;
+      height: 300px;
+    }
+
+    .archeo2 .hero-pillar:nth-child(4) {
+      width: 40px;
+      height: 260px;
+    }
+
+    .archeo2 .fiche-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .archeo2 .fiche-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .archeo2 .fiche-cas-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      border: 1px solid rgba(181,130,42,0.4);
+      padding: 0.4rem 0.8rem;
+    }
+
+    .archeo2 .fiche-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gris-clair);
+      text-transform: uppercase;
+    }
+
+    .archeo2 .fiche-featured {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--noir);
+      background: var(--ocre);
+      padding: 0.3rem 0.7rem;
+    }
+
+    .archeo2 .fiche-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .archeo2 .fiche-hero h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .archeo2 .fiche-hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--gris-clair);
+      max-width: 680px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    .archeo2 .fiche-hero-sub strong {
+      color: var(--blanc);
+    }
+
+    /* CARTE LOCALISATION */
+    .archeo2 .localisation {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .archeo2 .localisation-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .archeo2 .localisation-text h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .archeo2 .localisation-text p {
+      font-size: 0.9rem !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0 !important;
+      line-height: 1.5 !important;
+    }
+
+     /* Plan urbain décoratif */
+    .archeo3 .hero-city {
+      position: absolute;
+      right: 5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 8px;
+      opacity: 0.07;
+      pointer-events: none;
+      width: 280px;
+      height: 220px;
+    }
+
+    .archeo3 .city-block {
+      background: var(--ocre);
+      border-radius: 1px;
+    }
+
+    .archeo3 .city-block:nth-child(3n) {
+      opacity: 0.6;
+    }
+
+    .archeo3 .city-block:nth-child(5n) {
+      opacity: 0.4;
+    }
+
+    .archeo3 .city-block.street {
+      background: transparent;
+    }
+
+     /* TROIS ABSENCES */
+    .archeo3 .absences {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 3rem 0;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .archeo3 .absence-item {
+      background: var(--noir);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .archeo3 .absence-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+      display: block;
+      text-decoration: line-through;
+      text-decoration-color: var(--ocre);
+    }
+
+    .archeo3 .absence-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .archeo3 .absence-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--gris-clair);
+    }
+
+    /* PRÉSENCES */
+    .archeo3 .presences {
+      margin: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .archeo3 .presence-item {
+      background: rgba(181,130,42,0.04);
+      padding: 1.5rem 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .archeo3 .presence-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--ocre-clair);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 3rem;
+    }
+
+    .archeo3 .presence-content h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .archeo3 .presence-content p {
+      font-size: 0.92rem !important;
+      line-height: 1.6 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0 !important;
+    }
+
+     /* Pyramides décoratives */
+    .archeo4 .hero-pyramids {
+      position: absolute;
+      right: 5rem;
+      bottom: 4rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 2rem;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    .archeo4 .pyramid {
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .archeo4 .pyramid-1 {
+      border-width: 0 50px 120px 50px;
+      border-color: transparent transparent var(--ocre) transparent;
+    }
+
+    .archeo4 .pyramid-2 {
+      border-width: 0 70px 160px 70px;
+      border-color: transparent transparent var(--ocre) transparent;
+    }
+
+    .archeo4 .pyramid-3 {
+      border-width: 0 40px 90px 40px;
+      border-color: transparent transparent var(--ocre) transparent;
+    }
+
+     /* COMPARAISON CONTEMPORAINE */
+    .archeo4 .comparaison-band {
+      background: rgba(181,130,42,0.06);
+      border-top: 1px solid rgba(181,130,42,0.2);
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+      padding: 2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+    }
+
+    .archeo4 .comp-item {
+      text-align: center;
+    }
+
+    .archeo4 .comp-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .archeo4 .comp-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blanc);
+    }
+
+    .archeo4 .comp-sep {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.2rem;
+      color: rgba(181,130,42,0.4);
+    }
+
+     /* TIMELINE CRISE CLIMATIQUE */
+    .archeo4 .crise-timeline {
+      margin: 3rem 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .archeo4 .crise-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(180deg, var(--ocre), rgba(181,130,42,0.2));
+    }
+
+    .archeo4 .crise-event {
+      padding: 0 0 2.5rem 2rem;
+      position: relative;
+    }
+
+    .archeo4 .crise-event::before {
+      content: '';
+      position: absolute;
+      left: -0.35rem;
+      top: 0.5rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      background: var(--ocre);
+      border-radius: 50%;
+    }
+
+    .archeo4 .crise-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .archeo4 .crise-event h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--blanc);
+    }
+
+    .archeo4 .crise-event p {
+      font-size: 0.92rem !important;
+      line-height: 1.6 !important;
+      color: var(--gris-clair) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* TROIS LEÇONS */
+    .archeo4 .lecons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 3rem 0;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .archeo4 .lecon-item {
+      background: var(--noir);
+      padding: 2rem;
+    }
+
+    .archeo4 .lecon-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: rgba(181,130,42,0.2);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .archeo4 .lecon-titre {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .archeo4 .lecon-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gris-clair);
+    }
+
+       /* HERO ARTICLE */
+    .archeo-synthèse .article-hero {
+      padding: 7rem 4rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .archeo-synthèse .article-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .archeo-synthèse .article-type::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--ocre);
+    }
+
+    .archeo-synthèse .article-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .archeo-synthèse .article-hero h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .archeo-synthèse .article-standfirst {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      line-height: 1.7;
+      color: var(--gris-clair);
+      font-style: italic;
+      max-width: 720px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+      border-left: 3px solid rgba(181,130,42,0.4);
+      padding-left: 2rem;
+    }
+
+    .archeo-synthèse .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.55s;
+    }
+
+    .archeo-synthèse .article-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .archeo-synthèse .meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    .archeo-synthèse .meta-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gris-clair);
+    }
+
+    .archeo-synthèse .meta-sep {
+      width: 1px;
+      height: 2rem;
+      background: rgba(181,130,42,0.2);
+    }
+
+    /* PROGRESS BAR */
+    .archeo-synthèse .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--ocre);
+      z-index: 200;
+      transition: width 0.1s;
+      width: 0%;
+    }
+
+    /* SOMMAIRE */
+    .archeo-synthèse .sommaire {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .archeo-synthèse .sommaire-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .archeo-synthèse .sommaire-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .archeo-synthèse .sommaire-list li a {
+      font-size: 0.92rem;
+      color: var(--gris-clair);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .archeo-synthèse .sommaire-list li a:hover {
+      color: var(--ocre-clair);
+    }
+
+    .archeo-synthèse .sommaire-list li a::before {
+      content: '';
+      display: block;
+      width: 1.2rem;
+      height: 1px;
+      background: rgba(181,130,42,0.4);
+      flex-shrink: 0;
+    }
+
+    /* CORPS ARTICLE */
+    .archeo-synthèse .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 4rem 8rem;
+    }
+
+    .archeo-synthèse .article-body p {
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.95;
+      color: var(--gris-clair);
+      margin-bottom: 1.8rem;
+    }
+
+    .archeo-synthèse .article-body p strong {
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+    .archeo-synthèse .article-body p em {
+      color: var(--ocre-clair);
+      font-style: italic;
+    }
+
+    .archeo-synthèse .article-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-weight: 700;
+      color: var(--blanc);
+      margin: 5rem 0 1.5rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid rgba(181,130,42,0.2);
+      scroll-margin-top: 5rem;
+    }
+
+    .archeo-synthèse .pullquote {
+      border-left: 3px solid var(--ocre);
+      padding: 1.5rem 0 1.5rem 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .archeo-synthèse .pullquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem) !important;
+      font-style: italic;
+      color: var(--blanc) !important;
+      line-height: 1.45 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .archeo-synthèse .separator {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 4rem 0;
+    }
+
+    .archeo-synthèse .separator::before, .separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(181,130,42,0.2);
+    }
+
+    .archeo-synthèse .separator span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: rgba(181,130,42,0.5);
+    }
+
+    /* NOTE AUTEUR */
+    .archeo-synthèse .note-auteur {
+      background: rgba(181,130,42,0.04);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem 2.5rem;
+      margin: 5rem 0 3rem;
+    }
+
+    .archeo-synthèse .note-auteur-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .archeo-synthèse .note-auteur p {
+      font-size: 0.88rem !important;
+      line-height: 1.7 !important;
+      color: var(--gris) !important;
+      font-style: italic !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* FICHES LIÉES */
+    .archeo-synthèse .fiches-liees {
+      margin: 4rem 0;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(181,130,42,0.2);
+    }
+
+    .archeo-synthèse .fiches-liees-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .archeo-synthèse .fiches-liees-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(181,130,42,0.1);
+    }
+
+    .archeo-synthèse .fiche-liee {
+      background: var(--noir);
+      padding: 1.5rem 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: background 0.3s;
+    }
+
+    .archeo-synthèse .fiche-liee:hover {
+      background: rgba(181,130,42,0.05);
+    }
+
+    .archeo-synthèse .fiche-liee-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--ocre);
+      text-transform: uppercase;
+    }
+
+    .archeo-synthèse .fiche-liee-titre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blanc);
+      line-height: 1.3;
+    }
+
+    .archeo-synthèse .fiche-liee-arrow {
+      font-size: 0.9rem;
+      color: var(--ocre);
+      margin-top: 0.3rem;
+      transition: transform 0.3s;
+    }
+
+    .archeo-synthèse .fiche-liee:hover .fiche-liee-arrow {
+      transform: translateX(4px);
+    }
+
+    /* NAVIGATION SUIVANT */
+    .archeo-synthèse .nav-suivant {
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(181,130,42,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .archeo-synthèse .nav-lien {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: opacity 0.3s;
+    }
+
+    .archeo-synthèse .nav-lien:hover { opacity: 0.7; }
+
+    .archeo-synthèse .nav-lien-dir {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+   .archeo-synthèse .nav-lien-nom {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blanc);
+    }
+
+    .archeo-synthèse .nav-lien.next { text-align: right; }

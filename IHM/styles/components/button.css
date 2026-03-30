@@ -33,3 +33,21 @@
       color: var(--blanc);
       border-color: var(--blanc);
     }
+
+     .btn-read {
+      display: inline-block;
+      background: var(--ocre);
+      color: var(--noir);
+      padding: 0.9rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-read:hover {
+      background: var(--ocre-clair);
+      transform: translateY(-2px);
+    }
