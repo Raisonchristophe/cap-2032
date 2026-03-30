@@ -5,513 +5,11 @@
   <%- include('partial/head', { title: "La dette française — un symptôme, pas une cause — CAP 2032"}) %>
 
    <style>
-    :root {
-      --noir: #0d0d0d;
-      --blanc: #f5f2eb;
-      --ocre: #b5822a;
-      --ocre-clair: #d4a85a;
-      --gris: #6b6459;
-      --gris-clair: #c8c0b0;
-    }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--noir);
-      color: var(--blanc);
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.6;
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      background: var(--ocre);
-      z-index: 200;
-      width: 0%;
-      transition: width 0.1s;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 4rem;
-      border-bottom: 1px solid rgba(181,130,42,0.2);
-      position: sticky;
-      top: 0;
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-    }
-
-    .nav-logo {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: var(--ocre);
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gris-clair);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--ocre-clair);
-    }
-
-    .breadcrumb {
-      padding: 1.2rem 4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .breadcrumb a, .breadcrumb span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--ocre-clair);
-    }
-
-    .breadcrumb .sep {
-      color: rgba(181,130,42,0.4);
-    }
-
-    .breadcrumb span:last-child {
-      color: var(--ocre);
-    }
-
-    .article-hero {
-      padding: 7rem 4rem 5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .article-type {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      color: var(--ocre);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.1s;
-    }
-
-    .article-type::before {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--ocre);
-    }
-
-    .article-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5.5vw, 5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.25s;
-    }
-
-    .article-hero h1 em {
-      font-style: italic;
-      color: var(--ocre-clair);
-    }
-
-    .article-standfirst {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.7;
-      color: var(--gris-clair);
-      font-style: italic;
-      max-width: 720px;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.4s;
-      border-left: 3px solid rgba(181,130,42,0.4);
-      padding-left: 2rem;
-    }
-
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(181,130,42,0.2);
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.55s;
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .meta-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--gris);
-      text-transform: uppercase;
-    }
-
-    .meta-value {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--gris-clair);
-    }
-
-    .meta-sep {
-      width: 1px;
-      height: 2rem;
-      background: rgba(181,130,42,0.2);
-    }
-
-    .article-body {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 4rem 8rem;
-    }
-
-    .article-body p {
-      font-size: clamp(1rem, 1.6vw, 1.18rem);
-      line-height: 1.95;
-      color: var(--gris-clair);
-      margin-bottom: 1.8rem;
-    }
-
-    .article-body p strong {
-      color: var(--blanc);
-      font-weight: 600;
-    }
-
-    .article-body p em {
-      color: var(--ocre-clair);
-      font-style: italic; }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 700;
-      color: var(--blanc);
-      margin: 5rem 0 1.5rem;
-      padding-top: 3.5rem;
-      border-top: 1px solid rgba(181,130,42,0.2);
-      scroll-margin-top: 5rem;
-      line-height: 1.2;
-    }
-
-    .pullquote {
-      border-left: 3px solid var(--ocre);
-      padding: 1.5rem 0 1.5rem 2.5rem;
-      margin: 3rem 0;
-    }
-
-    .pullquote p {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.15rem, 2vw, 1.5rem) !important;
-      font-style: italic;
-      color: var(--blanc) !important;
-      line-height: 1.45 !important;
-      margin-bottom: 0 !important;
-    }
-
-    .separator {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin: 4rem 0;
-    }
-
-    .separator::before, .separator::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(181,130,42,0.2);
-    }
-
-    .separator span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      color: rgba(181,130,42,0.5);
-    }
-
-    /* CYCLE STÉRILE */
-    .cycle {
-      margin: 3rem 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(181,130,42,0.1);
-    }
-
-    .cycle-item {
-      background: var(--noir);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .cycle-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      color: var(--gris);
-      text-transform: uppercase;
-    }
-
-    .cycle-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--blanc);
-      line-height: 1.3;
-    }
-
-    .cycle-effet {
-      font-size: 0.85rem;
-      line-height: 1.55;
-      color: var(--gris-clair);
-      font-style: italic;
-    }
-
-    .cycle-item.fausse-piste .cycle-label {
-      color: rgba(181,130,42,0.5);
-    }
-
-    .cycle-item.fausse-piste .cycle-titre {
-      color: var(--gris-clair); }
-
-    /* CONDITIONS SOUTENABILITÉ */
-    .conditions {
-      margin: 3rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: rgba(181,130,42,0.1);
-    }
-
-    .condition-item {
-      background: var(--noir);
-      padding: 1.8rem 2.5rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .condition-check {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--ocre);
-      padding-top: 0.3rem;
-    }
-
-    .condition-texte {
-      font-size: 0.95rem;
-      line-height: 1.65;
-      color: var(--gris-clair);
-    }
-
-    .condition-texte strong {
-      color: var(--blanc);
-      font-weight: 600;
-    }
-
-    .encadre {
-      background: rgba(181,130,42,0.05);
-      border: 1px solid rgba(181,130,42,0.2);
-      padding: 2.5rem; margin: 3rem 0;
-    }
-
-    .encadre-label {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.25em; color: var(--ocre);
-      text-transform: uppercase; margin-bottom: 1.2rem; display: block;
-    }
-
-    .encadre p {
-      font-size: 0.95rem !important; line-height: 1.7 !important;
-      color: var(--gris-clair) !important; margin-bottom: 0.8rem !important;
-    }
-
-    .encadre p:last-child {
-      margin-bottom: 0 !important;
-    }
-
-    .implication {
-      background: linear-gradient(135deg, rgba(181,130,42,0.08), rgba(181,130,42,0.03));
-      border-top: 2px solid var(--ocre); padding: 3rem; margin: 4rem 0;
-    }
-
-    .implication-label {
-      font-family: 'DM Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.25em; color: var(--ocre);
-      text-transform: uppercase; margin-bottom: 1.5rem; display: block;
-    }
-
-    .implication h3 {
-      font-family: 'Playfair Display', serif; font-size: 1.4rem;
-      font-weight: 700; margin-bottom: 1.2rem; line-height: 1.3;
-    }
-
-    .implication p {
-      font-size: 1rem !important; line-height: 1.8 !important;
-      color: var(--gris-clair) !important; margin-bottom: 0.8rem !important;
-    }
-
-    .implication p:last-child {
-      margin-bottom: 0 !important;
-    }
-
-    .implication p strong {
-      color: var(--blanc) !important;
-    }
-
-    .note-auteur {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(181,130,42,0.12);
-      padding: 2rem 2.5rem; margin: 4rem 0 3rem;
-    }
-
-    .note-auteur-label {
-      font-family: 'DM Mono', monospace; font-size: 0.58rem;
-      letter-spacing: 0.25em; color: var(--ocre);
-      text-transform: uppercase; margin-bottom: 1rem; display: block;
-    }
-
-    .note-auteur p {
-      font-size: 0.88rem !important;
-      line-height: 1.7 !important;
-      color: var(--gris) !important;
-      font-style: italic !important;
-      margin-bottom: 0 !important;
-    }
-
-    .article-nav {
-      padding: 3rem 4rem;
-      border-top: 1px solid rgba(181,130,42,0.15);
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 720px; margin: 0 auto;
-    }
-
-    .nav-lien {
-      text-decoration: none; color: inherit;
-      display: flex; flex-direction: column; gap: 0.4rem; transition: opacity 0.3s;
-    }
-
-    .nav-lien:hover {
-      opacity: 0.7;
-    }
-
-    .nav-lien-dir {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.2em; color: var(--gris); text-transform: uppercase;
-    }
-
-    .nav-lien-nom {
-      font-family: 'Playfair Display', serif; font-size: 1rem;
-      font-weight: 700; color: var(--blanc); line-height: 1.3;
-    }
-
-    .nav-lien.next {
-      text-align: right;
-    }
-
-    footer {
-      padding: 3rem 4rem;
-      border-top: 1px solid rgba(181,130,42,0.2);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-
-    .footer-logo {
-      font-family: 'DM Mono', monospace; font-size: 0.7rem;
-      letter-spacing: 0.2em; color: var(--ocre);
-      text-transform: uppercase; text-decoration: none;
-    }
-
-    .footer-credit {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.15em; color: var(--gris); text-transform: uppercase;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 900px) {
-      nav, .breadcrumb { padding: 1.5rem 2rem; }
-      .nav-links { display: none; }
-      .article-hero { padding: 4rem 2rem 3rem; }
-      .article-body { padding: 0 2rem 5rem; }
-      .cycle { grid-template-columns: 1fr; }
-      .article-nav { padding: 2rem; flex-direction: column; gap: 2rem; }
-      .nav-lien.next { text-align: left; }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem; }
-    }
   </style>
 
 </head>
-<body class="page-article">
+<body class="page-article article3">
 
   <div class="progress-bar" id="progress"></div>
 
@@ -551,6 +49,17 @@
 
   <div class="article-body">
 
+     <div class="sommaire reveal">
+      <span class="sommaire-label">Sommaire</span>
+      <ul class="sommaire-list">
+        <li><a href="#fausses-pistes">Les trois fausses pistes qui reviennent toujours</a></li>
+        <li><a href="#dette">Ce que la dette révèle vraiment</a></li>
+        <li><a href="#soutenable">Qu'est-ce qu'une dette soutenable ?</a></li>
+        <li><a href="#transformation">La transformation plutôt que la contraction</a></li>
+        <li><a href="#cap2032">Pour CAP 2032</a></li>
+      </ul>
+    </div>
+
     <p>La dette publique française dépasse aujourd'hui 110% du PIB. C'est un fait réel, documenté, qui a des conséquences concrètes — sur la capacité d'investissement de l'État, sur la crédibilité budgétaire, sur les marges de manœuvre en cas de crise. Personne de sérieux ne peut l'ignorer.</p>
 
     <p>Mais ce fait réel est systématiquement analysé à travers un cadre qui le rend insoluble. On traite la dette comme une cause première — un mal à extirper par la rigueur, la coupe ou la taxation. Et ce cadre produit, depuis trente ans, un débat qui recommence à chaque alternance sans jamais progresser.</p>
@@ -559,7 +68,7 @@
       <p>La dette n'est pas une cause. C'est un symptôme. Et traiter un symptôme sans chercher ce qui le produit, c'est soigner la fièvre sans chercher l'infection.</p>
     </div>
 
-    <h2 class="section-title">Les trois fausses pistes qui reviennent toujours</h2>
+    <h2 class="section-title" id="fausses-pistes">Les trois fausses pistes qui reviennent toujours</h2>
 
     <p>Le débat budgétaire français oscille depuis des décennies entre trois réponses. Elles ont chacune leur logique propre. Elles ont aussi chacune un défaut structurel qui les rend insuffisantes — non pas marginalement, mais fondamentalement.</p>
 
@@ -583,7 +92,7 @@
 
     <p>Ces trois réponses ont un point commun décisif : elles agissent sur les flux — les recettes et les dépenses d'une année donnée — <strong>sans jamais toucher à l'architecture qui produit ces flux.</strong> C'est exactement ce que les deux articles précédents de ce pilier décrivaient sous un autre angle : traiter le symptôme sans identifier le verrou structurel.</p>
 
-    <h2 class="section-title">Ce que la dette révèle vraiment</h2>
+    <h2 class="section-title" id="dette">Ce que la dette révèle vraiment</h2>
 
     <p>Si la dette est un symptôme, il faut se demander de quoi. La réponse est plurielle — et c'est précisément pour ça qu'elle est difficile à porter politiquement. Elle n'a pas la simplicité d'un slogan ni la clarté d'une cible unique.</p>
 
@@ -599,7 +108,7 @@
       <p>Le résultat : chaque gouvernement a une incitation structurelle à sous-investir dans la prévention et à payer ensuite le coût de cette décision — qui sera imputé à son successeur. Ce n'est pas de la mauvaise volonté. C'est une conséquence mécanique du cadre temporel dans lequel opère la décision publique.</p>
     </div>
 
-    <h2 class="section-title">Qu'est-ce qu'une dette soutenable ?</h2>
+    <h2 class="section-title" id="soutenable">Qu'est-ce qu'une dette soutenable ?</h2>
 
     <p>La question n'est pas "comment réduire la dette". La question est "dans quelles conditions une dette devient-elle soutenable" — c'est-à-dire gérable, non explosive, compatible avec une capacité d'investissement et d'action publique.</p>
 
@@ -626,7 +135,7 @@
 
     <p>Aucune de ces quatre conditions ne se produit par décret budgétaire. Elles résultent d'une architecture économique, sociale et institutionnelle cohérente — construite dans la durée, maintenue malgré les alternances. <em>Ce qui renvoie précisément à la thèse de cet article : la dette est un symptôme de l'état de cette architecture. Et c'est l'architecture qu'il faut reconstruire, pas seulement les chiffres qu'il faut ajuster.</em></p>
 
-    <h2 class="section-title">La transformation plutôt que la contraction</h2>
+    <h2 class="section-title" id="transformation">La transformation plutôt que la contraction</h2>
 
     <p>La contraction permanente — réduire, couper, comprimer — a une logique défensive qui se comprend. Elle répond à l'urgence, elle est communicable, elle semble responsable. Mais elle a un défaut rédhibitoire dans la durée : elle n'améliore pas la capacité productive du système. Elle gère la décroissance d'un modèle sans en construire un autre.</p>
 
@@ -649,7 +158,7 @@
     </div>
 
     <div class="implication reveal">
-      <span class="implication-label">Pour CAP 2032</span>
+      <span class="implication-label" id="cap2032">Pour CAP 2032</span>
       <h3>Déplacer le débat — du "combien couper" au "comment reconstruire"</h3>
       <p>Le Pilier I de CAP 2032 — la soutenabilité budgétaire — n'est pas un pilier d'austérité. C'est un pilier de recomposition. Il part du constat que la contrainte budgétaire est réelle et qu'on ne peut pas l'ignorer. Mais il refuse de la traiter comme une fin en soi.</p>
       <p><strong>L'objectif n'est pas d'avoir un budget équilibré.</strong> L'objectif est d'avoir un pays qui fonctionne — qui produit, qui forme, qui soigne, qui innove. Un budget équilibré dans un pays qui se contracte n'est pas un succès. Un budget légèrement déficitaire dans un pays qui investit, produit et croît peut être tout à fait soutenable.</p>

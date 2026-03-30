@@ -5,7 +5,7 @@
   <%- include('partial/head', { title: "Ce que nos institutions ne savent plus faire — CAP 2032"}) %>
 
    <style>
-    :root {
+    /*:root {
       --noir: #0d0d0d;
       --blanc: #f5f2eb;
       --ocre: #b5822a;
@@ -115,7 +115,7 @@
       color: var(--ocre);
     }
 
-    /* HERO */
+    /* HERO
     .article-hero {
       padding: 7rem 4rem 5rem;
       max-width: 900px;
@@ -210,7 +210,7 @@
       background: rgba(181,130,42,0.2);
     }
 
-    /* CORPS */
+    /* CORPS
     .article-body {
       max-width: 720px;
       margin: 0 auto;
@@ -282,7 +282,7 @@
       color: rgba(181,130,42,0.5);
     }
 
-    /* VERROUS */
+    /* VERROUS
     .verrous {
       display: flex;
       flex-direction: column;
@@ -325,7 +325,7 @@
       margin-bottom: 0 !important;
     }
 
-    /* SCHÉMA SILOS */
+    /* SCHÉMA SILOS
     .silos {
       margin: 3rem 0;
       display: grid;
@@ -375,7 +375,7 @@
       font-style: italic;
     }
 
-    /* INTERCONNEXIONS */
+    /* INTERCONNEXIONS
     .interconnexions {
       margin: 3rem 0;
       background: rgba(181,130,42,0.04);
@@ -415,7 +415,7 @@
       flex-shrink: 0;
     }
 
-    /* MÉTHODE */
+    /* MÉTHODE
     .methode {
       margin: 3rem 0;
       display: grid;
@@ -471,7 +471,7 @@
       color: var(--gris-clair);
     }
 
-    /* ENCADRÉ */
+    /* ENCADRÉ
     .encadre {
       background: rgba(181,130,42,0.05);
       border: 1px solid rgba(181,130,42,0.2);
@@ -500,7 +500,7 @@
       margin-bottom: 0 !important;
     }
 
-    /* IMPLICATION */
+    /* IMPLICATION
     .implication {
       background: linear-gradient(135deg, rgba(181,130,42,0.08), rgba(181,130,42,0.03));
       border-top: 2px solid var(--ocre);
@@ -541,7 +541,7 @@
       color: var(--blanc) !important;
     }
 
-    /* NOTE AUTEUR */
+    /* NOTE AUTEUR
     .note-auteur {
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(181,130,42,0.12);
@@ -567,7 +567,7 @@
       margin-bottom: 0 !important;
     }
 
-    /* NAV */
+    /* NAV
     .article-nav {
       padding: 3rem 4rem;
       border-top: 1px solid rgba(181,130,42,0.15);
@@ -661,11 +661,11 @@
       .article-nav { padding: 2rem; flex-direction: column; gap: 2rem; }
       .nav-lien.next { text-align: left; }
       footer { flex-direction: column; gap: 1rem; padding: 2rem; }
-    }
+    }*/
   </style>
 
 </head>
-<body class="page-article">
+<body class="page-article article2">
 
   <div class="progress-bar" id="progress"></div>
 
@@ -709,6 +709,18 @@
 
   <!-- CORPS -->
   <div class="article-body">
+
+    <div class="sommaire reveal">
+      <span class="sommaire-label">Sommaire</span>
+      <ul class="sommaire-list">
+        <li><a href="#specialisation">La spécialisation — force en régime stable, limite en régime complexe</a></li>
+        <li><a href="#interconnexions">Un monde devenu profondément interconnecté</a></li>
+        <li><a href="#verrous">Les cinq verrous qui perpétuent la pensée en silos</a></li>
+        <li><a href="#grandes-ecoles">Ce que les grandes écoles n'enseignent pas</a></li>
+        <li><a href="#methode">Une méthode simple — avant l'action, l'architecture</a></li>
+        <li><a href="#cap2032">Ce que ça change pour CAP 2032</a></li>
+      </ul>
+    </div>
 
     <p>Il y a un constat qui revient avec une régularité décourageante quand on observe les politiques publiques dans la durée. Des gens compétents, bien intentionnés, souvent brillants, prennent des décisions qui produisent des résultats médiocres. Pas toujours. Pas partout. Mais suffisamment souvent pour que la question se pose sérieusement : <strong>le problème n'est pas dans les personnes — il est dans le cadre dans lequel elles opèrent.</strong></p>
 

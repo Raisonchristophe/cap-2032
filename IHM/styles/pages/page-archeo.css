@@ -1335,7 +1335,9 @@
       transition: opacity 0.3s;
     }
 
-    .archeo-synthèse .nav-lien:hover { opacity: 0.7; }
+    .archeo-synthèse .nav-lien:hover {
+      opacity: 0.7;
+    }
 
     .archeo-synthèse .nav-lien-dir {
       font-family: 'DM Mono', monospace;
@@ -1352,4 +1354,6 @@
       color: var(--blanc);
     }
 
-    .archeo-synthèse .nav-lien.next { text-align: right; }
+    .archeo-synthèse .nav-lien.next {
+      text-align: right;
+    }
