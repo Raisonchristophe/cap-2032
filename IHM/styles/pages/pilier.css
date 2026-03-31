@@ -518,48 +518,7 @@
       border-bottom-color: var(--ocre-clair);
     }
 
-    /* NAV PILIERS */
-    .page-pilier .nav-piliers {
-      padding: 3rem 4rem;
-      border-top: 1px solid rgba(181,130,42,0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
 
-    .page-pilier .nav-pilier-link {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      transition: opacity 0.3s;
-    }
-
-    .page-pilier .nav-pilier-link:hover {
-      opacity: 0.7;
-    }
-
-    .page-pilier .nav-pilier-dir {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--gris);
-      text-transform: uppercase;
-    }
-
-    .page-pilier .nav-pilier-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--blanc);
-    }
-
-    .page-pilier .nav-pilier-link.next {
-      text-align: right;
-    }
 
         /* PONT ENTRE PILIERS */
      .page-pilier .pont {

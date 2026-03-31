@@ -6,6 +6,7 @@
 @import "./components/button.css";
 @import "./components/animations.css";
 @import "./components/hero.css";
+@import "./components/content-nav.css";
 
 /* PAGES */
 @import "./pages/home.css";
@@ -17,6 +18,7 @@
 @import "./pages/page-archeo.css";
 @import "./pages/articles.css";
 @import "./pages/prototypes.css";
+
 
 
 /* VARIABLES */

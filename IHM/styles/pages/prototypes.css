@@ -698,50 +698,6 @@
       margin-bottom:0!important
     }
 
-    /* NAVIGATION */
-    .page-prototype .article-nav{
-      padding:3rem 4rem;
-      border-top:1px solid rgba(181,130,42,.15);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      max-width:720px;
-      margin:0 auto
-    }
-
-    .page-prototype .nav-lien{
-      text-decoration:none;
-      color:inherit;
-      display:flex;
-      flex-direction:column;
-      gap:.4rem;
-      transition:opacity .3s
-    }
-
-    .page-prototype .nav-lien:hover{
-      opacity:.7
-    }
-
-    .page-prototype .nav-lien-dir{
-      font-family:'DM Mono',monospace;
-      font-size:.6rem;
-      letter-spacing:.2em;
-      color:var(--gris);
-      text-transform:uppercase
-    }
-
-    .page-prototype .nav-lien-nom{
-      font-family:'Playfair Display',serif;
-      font-size:1rem;
-      font-weight:700;
-      color:var(--blanc);
-      line-height:1.3
-    }
-
-    .page-prototype .nav-lien.next{
-      text-align:right
-    }
-
        /* FILIÈRE */
     .prototype1 .filiere{
       display:grid;

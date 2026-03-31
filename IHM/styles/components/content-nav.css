@@ -1,0 +1,76 @@
+/*========================*/
+/* BASES (COMMUNE A TOUTES LES PAGES)
+/*========================*/
+
+/* CONTAINER */
+.content-nav {
+  padding: 3rem 4rem;
+  border-top: 1px solid rgba(181,130,42,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/*===========================*/
+/* VARIANTE SIMPLE (FICHES) */
+/*===========================*/
+
+.content-nav.simple a {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #c8c0b0;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.content-nav.simple a:hover {
+  color: #d4a85a;
+}
+
+/*===========================*/
+/* VARIANTES RICHE (PILIERS / FICHES ARCHEO / ARTICLES /  */
+/*===========================*/
+
+/* LINKS */
+.content-nav.rich .content-nav-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: opacity 0.3s;
+}
+
+.content-nav.rich .content-nav-link:hover {
+  opacity: 0.7;
+}
+
+/* LABEL (ex: précédent / suivant) */
+.content-nav.rich .content-nav-dir {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gris);
+  text-transform: uppercase;
+}
+
+/* TITLE */
+.content-nav.rich .content-nav-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--blanc);
+}
+
+/* ALIGNEMENT */
+.content-nav.rich .content-nav-link.next {
+  text-align: right;
+}
+
+
+
+
