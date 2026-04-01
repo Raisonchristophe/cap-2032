@@ -11,11 +11,22 @@
 </head>
 <body class="page-ressources">
 
+  <!-- NAV -->
+
 <%- include('partial/nav', { currentPage: 'ressources' }) %>
+
+<!-- BREADCRUMB -->
+
+  <%- include('partial/breadcrumb', {
+  items: [
+  { label: "Accueil", url: "/"},
+  { label: "Ressources" }
+  ]
+}) %>
 
   <div class="breadcrumb">
     <a href="/">Accueil</a><span class="sep">·</span>
-    <span> Ressources</span>
+    <span> </span>
   </div>
 
 <section class="hero">

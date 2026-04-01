@@ -10,37 +10,6 @@
       transition: width 0.1s;
     }
 
-      /* BREADCRUMB */
-     .page-article .breadcrumb {
-      padding: 1.2rem 4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .page-article .breadcrumb a, .breadcrumb span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .page-article .breadcrumb a:hover {
-      color: var(--ocre-clair);
-    }
-
-    .page-article .breadcrumb .sep {
-      color: rgba(181,130,42,0.4);
-    }
-
-    .page-article .breadcrumb span:last-child {
-      color: var(--ocre);
-    }
-
     /* HERO */
     .page-article .article-hero {
       padding: 7rem 4rem 5rem;

@@ -13,15 +13,19 @@
 
   <div class="progress-bar" id="progress"></div>
 
+  <!-- NAV -->
+
 <%- include('partial/nav', { currentPage: 'pilier2' }) %>
 
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <a href="/pilier2">Pilier II — Philosophie</a>
-    <span class="sep">·</span>
-    <span>Ce que nos institutions ne savent plus faire</span>
-  </div>
+ <!-- BREADCRUMB -->
+
+      <%- include('partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "Pilier II — Philosophie", url: "/pilier2" },
+    { label: "Ce que nos institutions ne savent plus faire" }
+  ]
+}) %>
 
   <!-- HERO -->
   <header class="article-hero">

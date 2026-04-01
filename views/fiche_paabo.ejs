@@ -13,15 +13,20 @@
 
   <div class="progress-bar" id="progress" ></div>
 
+  <!-- NAV -->
+
   <%- include('partial/nav', { currentPage: 'pilier1' }) %>
 
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <a href="/pilier1">Pilier I — Archéologie</a>
-    <span class="sep">·</span>
-    <span>L'hybridation interspécifique</span>
-  </div>
+  <!-- BREADCRUMB -->
+
+  <%- include('partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "Pilier I — Archéologie", url: "/pilier1" },
+    { label: "L'hybridation interspécifique" }
+  ]
+}) %>
+
 
   <!-- HERO -->
   <section class="fiche-hero">

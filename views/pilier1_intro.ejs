@@ -15,13 +15,14 @@
 
   <%- include('partial/nav', { currentPage: 'pilier1' }) %>
 
+ <!-- BREADCRUMB -->
 
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <span>Pilier I — Archéologie & Anthropologie</span>
-  </div>
+  <%- include('partial/breadcrumb', {
+  items: [
+  { label: "Accueil", url: "/"},
+  { label: "Archéologie" }
+  ]
+}) %>
 
   <!-- HERO -->
   <section class="pilier-hero">

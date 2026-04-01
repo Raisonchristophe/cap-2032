@@ -1,0 +1,18 @@
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <% if (items && items.length) { %>
+    <% items.forEach((item, index) => { %>
+
+      <% if (index > 0) { %>
+        <span class="sep">·</span>
+      <% } %>
+
+      <% if (item.url) { %>
+        <a href="<%= item.url %>"><%= item.label %></a>
+      <% } else { %>
+        <span><%= item.label %></span>
+      <% } %>
+
+    <% }) %>
+  <% } %>
+      </div>

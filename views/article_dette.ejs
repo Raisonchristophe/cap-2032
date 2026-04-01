@@ -13,15 +13,19 @@
 
   <div class="progress-bar" id="progress"></div>
 
+  <!-- NAV -->
+
 <%- include('partial/nav', { currentPage: 'pilier2' }) %>
 
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <a href="/pilier2">Pilier II — Philosophie</a>
-    <span class="sep">·</span>
-    <span>La dette — un symptôme, pas une cause</span>
-  </div>
+ <!-- BREADCRUMB -->
+
+      <%- include('partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "Pilier II — Philosophie", url: "/pilier2" },
+    { label: "La dette — un symptôme, pas une cause" }
+  ]
+}) %>
 
   <header class="article-hero">
     <div class="article-type">Article · Pilier II · Économie politique · Méthode</div>

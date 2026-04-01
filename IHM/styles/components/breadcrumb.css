@@ -1,0 +1,30 @@
+ /* BREADCRUMB */
+     .breadcrumb {
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .breadcrumb a, .breadcrumb span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--ocre-clair);
+    }
+
+    .breadcrumb .sep {
+      color: rgba(181,130,42,0.4);
+    }
+
+    .breadcrumb span:last-child {
+      color: var(--ocre);
+    }

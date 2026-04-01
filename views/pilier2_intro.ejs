@@ -12,11 +12,15 @@
 
 <%- include('partial/nav', { currentPage: 'pilier2' }) %>
 
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <span>Pilier II — Philosophie & Gouvernance</span>
-  </div>
+ <!-- BREADCRUMB -->
+
+  <%- include('partial/breadcrumb', {
+  items: [
+  { label: "Accueil", url: "/"},
+  { label: "Philosophie" }
+  ]
+}) %>
+
 
   <!-- HERO -->
   <section class="pilier-hero">

@@ -7,6 +7,7 @@
 @import "./components/animations.css";
 @import "./components/hero.css";
 @import "./components/content-nav.css";
+@import "./components/breadcrumb.css";
 
 /* PAGES */
 @import "./pages/home.css";

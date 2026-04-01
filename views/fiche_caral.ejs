@@ -14,15 +14,19 @@
 
   <div class="progress-bar" id="progress"></div>
 
+   <!-- NAV -->
+
 <%- include('partial/nav', { currentPage: 'pilier1' }) %>
 
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <a href="/pilier1">Pilier I — Archéologie</a>
-    <span class="sep">·</span>
-    <span>Caral</span>
-  </div>
+ <!-- BREADCRUMB -->
+
+      <%- include('partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "Pilier I — Archéologie", url: "/pilier1" },
+    { label: "Caral" }
+  ]
+}) %>
 
   <!-- HERO -->
   <section class="fiche-hero">

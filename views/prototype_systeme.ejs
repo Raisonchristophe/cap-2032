@@ -11,22 +11,20 @@
 </head>
 <body class="page-prototype prototype3">
   <div class="progress-bar" id="progress"></div>
-  <nav>
-    <a href="/" class="nav-logo">CAP 2032</a>
-    <ul class="nav-links">
-      <li><a href="/pilier1">Archéologie</a></li>
-      <li><a href="/pilier2">Philosophie</a></li>
-      <li><a href="/pilier3" class="active">Action</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="/notes">Notes sur commande</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
-  <div class="breadcrumb">
-    <a href="/index">Accueil</a><span class="sep">·</span>
-    <a href="/pilier3">Pilier III — Action</a><span class="sep">·</span>
-    <span>Prototype 04 — Le système des trois</span>
-  </div>
+
+        <!-- NAV -->
+
+<%- include('partial/nav', { currentPage: 'pilier3' }) %>
+
+<!-- BREADCRUMB -->
+
+      <%- include('partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "Pilier III — Action", url: "/pilier3" },
+    { label: "Prototype 04 — Le système des trois" }
+  ]
+}) %>
 
   <header class="article-hero">
     <div class="article-type">Prototype 04 · Pilier III · Architecture systémique · Synthèse</div>

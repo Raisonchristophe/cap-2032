@@ -10,36 +10,6 @@
       width: 0%;
     }
 
-  /* BREADCRUMB */
-    .page-prototype .breadcrumb{
-      padding:1.2rem 4rem;
-      border-bottom:1px solid rgba(255,255,255,.05);
-      display:flex;
-      align-items:center;
-      gap:.8rem
-    }
-
-    .page-prototype .breadcrumb a,.breadcrumb span{
-      font-family:'DM Mono',monospace;
-      font-size:.62rem;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      color:var(--gris);
-      text-decoration:none;
-      transition:color .3s
-    }
-
-    .page-prototype .breadcrumb a:hover{color:var(--ocre-clair)
-    }
-
-    .page-prototype .breadcrumb .sep{
-      color:rgba(181,130,42,.4)
-    }
-
-    .page-prototype .breadcrumb span:last-child{
-      color:var(--ocre)
-    }
-
     /* ARTICLE */
     .page-prototype .article-hero{
       padding:7rem 4rem 5rem;

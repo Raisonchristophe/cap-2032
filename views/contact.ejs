@@ -11,11 +11,22 @@
 
 <body class="page-contact">
 
+  <!-- NAV -->
+
 <%- include('partial/nav', { currentPage: 'contact' }) %>
+
+<!-- BREADCRUMB -->
+
+  <%- include('partial/breadcrumb', {
+  items: [
+  { label: "Accueil", url: "/"},
+  { label: "Contact" }
+  ]
+}) %>
 
   <div class="breadcrumb">
     <a href="/">Accueil</a><span class="sep">·</span>
-    <span> Contact</span>
+    <span> </span>
   </div>
 
 <section class="hero">
