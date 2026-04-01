@@ -1,6 +1,34 @@
-.page-ressources .nav-links a:hover,.nav-links a.active{
-  color:var(--ocre-clair)
-}
+
+/* BREADCRUMB */
+    .page-ressources .breadcrumb{
+      padding:1.2rem 4rem;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      gap:.8rem
+    }
+
+    .page-ressources .breadcrumb a,.breadcrumb span{
+      font-family:'DM Mono',monospace;
+      font-size:.62rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gris);
+      text-decoration:none;
+      transition:color .3s
+    }
+
+    .page-ressources .breadcrumb a:hover{
+      color:var(--ocre-clair)
+    }
+
+    .page-ressources .breadcrumb .sep{
+      color:rgba(181,130,42,.4)
+    }
+
+    .page-ressources .breadcrumb span:last-child{
+      color:var(--ocre)
+    }
 
 /* HERO */
 .page-ressources .hero{

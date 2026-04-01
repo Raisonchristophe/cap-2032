@@ -1,3 +1,15 @@
+     /* PROGRESS BAR */
+    .page-archeo .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--ocre);
+      z-index: 200;
+      transition: width 0.1s;
+      width: 0%;
+    }
+
  /* BREADCRUMB */
     .page-archeo .breadcrumb {
       padding: 1.2rem 4rem;
@@ -1049,17 +1061,7 @@
       background: rgba(181,130,42,0.2);
     }
 
-    /* PROGRESS BAR */
-    .archeo-synthèse .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      background: var(--ocre);
-      z-index: 200;
-      transition: width 0.1s;
-      width: 0%;
-    }
+
 
     /* SOMMAIRE */
     .archeo-synthèse .sommaire {

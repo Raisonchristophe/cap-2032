@@ -11,6 +11,8 @@
 </head>
 <body class="page-archeo archeo3">
 
+  <div class="progress-bar" id="progress"></div>
+
   <!-- NAV -->
 
   <%- include('partial/nav', { currentPage: 'pilier1' }) %>
@@ -199,6 +201,17 @@
   <%- include ('partial/footer') %>
 
   <script>
+
+       // Barre de progression lecture
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.width = pct + '%';
+    });
+
+    // Scroll revea
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

@@ -66,6 +66,8 @@ body::before {
       opacity: 0.6;
     }
 
+
+
   /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1.5rem 2rem; }
