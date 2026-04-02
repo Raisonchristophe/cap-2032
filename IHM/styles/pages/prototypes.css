@@ -499,32 +499,6 @@
       color:var(--blanc)!important
     }
 
-    /* NOTE */
-    .page-prototype .note-auteur{
-      background:rgba(255,255,255,.02);
-      border:1px solid rgba(181,130,42,.12);
-      padding:2rem 2.5rem;
-      margin:4rem 0 3rem
-    }
-
-    .page-prototype .note-auteur-label{
-      font-family:'DM Mono',monospace;
-      font-size:.58rem;
-      letter-spacing:.25em;
-      color:var(--ocre);
-      text-transform:uppercase;
-      margin-bottom:1rem;
-      display:block
-    }
-
-    .page-prototype .note-auteur p{
-      font-size:.88rem!important;
-      line-height:1.7!important;
-      color:var(--gris)!important;
-      font-style:italic!important;
-      margin-bottom:0!important
-    }
-
        /* FILIÈRE */
     .prototype1 .filiere{
       display:grid;

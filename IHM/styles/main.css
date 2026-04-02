@@ -17,6 +17,7 @@
 @import "./components/toc.css";
 @import "./components/content.css";
 @import "./components/main.css";
+@import "./components/note-auteur.css";
 
 /* PAGES */
 @import "./pages/home.css";
