@@ -16,6 +16,7 @@
 @import "./components/progress-barre.css";
 @import "./components/toc.css";
 @import "./components/content.css";
+@import "./components/main.css";
 
 /* PAGES */
 @import "./pages/home.css";
