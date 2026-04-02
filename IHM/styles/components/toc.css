@@ -1,0 +1,47 @@
+ /* SOMMAIRE */
+    .sommaire {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(181,130,42,0.15);
+      padding: 2rem 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .sommaire-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .sommaire-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .sommaire-list li a {
+      font-size: 0.92rem;
+      color: var(--gris-clair);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .sommaire-list li a:hover {
+      color: var(--ocre-clair);
+    }
+
+    .sommaire-list li a::before {
+      content: '';
+      display: block;
+      width: 1.2rem;
+      height: 1px;
+      background: rgba(181,130,42,0.4);
+      flex-shrink: 0;
+    }

@@ -9,6 +9,7 @@
 @import "./components/content-nav.css";
 @import "./components/breadcrumb.css";
 @import "./components/progress-barre.css";
+@import "./components/toc.css";
 
 /* PAGES */
 @import "./pages/home.css";
