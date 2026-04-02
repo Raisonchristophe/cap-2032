@@ -1,0 +1,161 @@
+/*========================*/
+/* BASES (COMMUNE A TOUTES LES PAGES)
+/*========================*/
+
+/* CONTAINER */
+    .content {
+      padding: 7rem 4rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .content-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .content-tag::before {
+      content: 'I';
+      display: inline-flex;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--ocre);
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+        .content-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .content-hero h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .content-intro-text {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.8;
+      color: var(--gris-clair);
+      max-width: 780px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    .content-intro-text strong {
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+        .content-intro-text em {
+      color: var(--ocre-clair);
+      font-style: italic;
+    }
+
+       .content-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--ocre);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    .content-type::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--ocre);
+    }
+
+    .content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.25s;
+    }
+
+    .content h1 em {
+      font-style: italic;
+      color: var(--ocre-clair);
+    }
+
+    .content-standfirst {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      line-height: 1.7;
+      color: var(--gris-clair);
+      font-style: italic;
+      max-width: 720px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+      border-left: 3px solid rgba(181,130,42,0.4);
+      padding-left: 2rem;
+    }
+
+    .content-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(181,130,42,0.2);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.55s;
+    }
+
+    .content-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+     .meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+     .meta-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gris-clair);
+    }
+
+     .meta-sep {
+      width: 1px;
+      height: 2rem;
+      background: rgba(181,130,42,0.2);
+    }
+

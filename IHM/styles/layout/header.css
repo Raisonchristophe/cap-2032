@@ -40,4 +40,8 @@
       color: var(--ocre-clair);
     }
 
+            .nav-links a:hover, .nav-links a.active {
+      color: var(--ocre-clair);
+    }
+
 
