@@ -499,6 +499,19 @@
       color:var(--blanc)!important
     }
 
+     /* RESPONSIVE */
+         @media(max-width:900px){
+      .page-prototype .fiche-grille,.page-prototype .activites,.page-prototype .budget-blocs,.page-prototype .chantier-grille,.page-prototype .statut-item{
+        grid-template-columns:1fr
+      }
+      .college-item{
+        grid-template-columns:auto 1fr
+      }
+      .college-poids{
+        display:none
+      }
+    }
+
        /* FILIÈRE */
     .prototype1 .filiere{
       display:grid;
@@ -679,6 +692,19 @@
       color:var(--blanc)!important
     }
 
+     /* RESPONSIVE */
+
+        @media(max-width:900px){
+      .prototype1 .fiche-grille,.prototype1 .productions,.prototype1 .budget-blocs,.prototype1 .indicateurs,.prototype1 .statut-item{
+        grid-template-columns:1fr
+      }
+      .prototype1 .filiere{
+        grid-template-columns:1fr
+      }
+      .prototype1 .filiere-fleche{display:none
+      }
+    }
+
      /* PUBLICS */
     .prototype2 .publics{
       display:grid;
@@ -835,6 +861,13 @@
 
     .prototype2 .jour-bloc.pratique .jour-bloc-type{
       color:var(--ocre)
+    }
+
+     /* RESPONSIVE */
+       @media(max-width:900px){
+      .prototype2 .fiche-grille,.prototype2 .publics,.prototype2 .pedagogie,.prototype2 .semaine,.prototype2 .budget-blocs,.prototype2 .statut-item{
+        grid-template-columns:1fr
+      }
     }
 
      /* SCHÉMA SYSTÈME — triangle de flux */
@@ -1420,4 +1453,33 @@
       line-height:1.6!important;
       color:var(--gris-clair)!important;
       margin-bottom:0!important
+    }
+
+     /* RESPONSIVE */
+        @media(max-width:900px){
+      .prototype3 .schema-triangle{
+        grid-template-columns:1fr
+      }
+      .prototype3 .flux-item{
+        grid-template-columns:1fr
+      }
+      .prototype3 .flux-type{
+        writing-mode:horizontal-tb;
+        transform:none
+      }
+      .prototype3 .budget-ligne{
+        grid-template-columns:1fr auto
+      }
+      .prototype3 .budget-ligne-barre{
+        display:none
+      }
+      .prototype3 .financement-grille{
+        grid-template-columns:1fr
+      }
+      .prototype3 .indicateurs{
+        grid-template-columns:1fr
+      }
+      .prototype3 .synthese-grille{
+        grid-template-columns:1fr
+      }
     }

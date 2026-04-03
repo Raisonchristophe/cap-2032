@@ -402,3 +402,59 @@
   letter-spacing: 0.15em;
   font-size: 1.25rem;
 }
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 900px) {
+
+      .hero-number {
+        display: none;
+      }
+
+      .urgence-band {
+        padding: 1rem 2rem;
+      }
+      .intro {
+        grid-template-columns: 1fr;
+        padding: 4rem 2rem; gap: 2rem;
+      }
+      .intro-label {
+        position: static;
+      }
+      .piliers {
+        padding: 4rem 2rem;
+      }
+      .piliers-grid {
+        grid-template-columns: 1fr;
+      }
+      .pilier-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(181,130,42,0.15);
+      }
+      .chiffres {
+        padding: 4rem 2rem;
+      }
+      .chiffres-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .demarche {
+        padding: 4rem 2rem;
+      }
+      .demarche-inner {
+        grid-template-columns: 1fr; gap: 3rem;
+      }
+      .demarche-aside {
+        border-left: none;
+        border-top: 1px solid rgba(181,130,42,0.3);
+        padding-left: 0; padding-top: 2rem;
+      }
+            footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        padding: 3rem 2rem;
+      }
+}

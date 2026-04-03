@@ -273,3 +273,13 @@
 .page-ressources .note-correction strong{
   color:var(--blanc)
 }
+
+  /* ========================
+     RESPONSIVE
+  ======================== */
+
+  @media(max-width:900px){
+    .hero,.controls,.section,.count{padding-left:2rem;padding-right:2rem}
+    .resource{grid-template-columns:auto 1fr}
+    .resource-type{display:none}
+  }

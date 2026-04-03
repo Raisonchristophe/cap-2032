@@ -559,3 +559,15 @@
     .page-notes .engagement-valeur-texte strong{
       color:var(--blanc)
     }
+
+  /* ========================
+     RESPONSIVE
+  ======================== */
+
+     @media(max-width:900px){
+      .hero{padding:4rem 2rem 3rem;grid-template-columns:1fr;gap:3rem}
+      .offre,.methode,.contact-section,.engagement{padding-left:2rem;padding-right:2rem}
+      .pourqui{padding:3rem 2rem}
+      .offre-grille,.pourqui-grille{grid-template-columns:1fr}
+      .methode-grille,.contact-grid,.engagement-inner{grid-template-columns:1fr}
+    }

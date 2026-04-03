@@ -208,6 +208,13 @@
       color: var(--blanc) !important;
     }
 
+ /* RESPONSIVE */
+     @media (max-width: 900px) {
+      .page-article .exemples { grid-template-columns: 1fr; }
+      .page-article .opposition { grid-template-columns: 1fr; }
+      .page-article .opp-sep { writing-mode: horizontal-tb; border: none; border-top: 1px solid rgba(181,130,42,0.15); border-bottom: 1px solid rgba(181,130,42,0.15); padding: 1rem; }
+}
+
     /* VERROUS */
     .article2 .verrous {
       display: flex;
@@ -397,6 +404,20 @@
       color: var(--gris-clair);
     }
 
+     /* RESPONSIVE */
+         @media (max-width: 900px) {
+      .article2 .silos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .article2 .methode {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .article2 .methode-step::after {
+        display: none;
+      }
+    }
+
+
      /* CYCLE STÉRILE */
     .article3 .cycle {
       margin: 3rem 0;
@@ -479,6 +500,14 @@
       color: var(--blanc);
       font-weight: 600;
     }
+
+     /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .article3 .cycle {
+        grid-template-columns: 1fr;
+      }
+    }
+
 
       /* VERROUS INSTITUTIONNELS */
     .article4 .verrous-inst {
@@ -634,4 +663,11 @@
       line-height: 1.6 !important;
       color: var(--gris-clair) !important;
       margin-bottom: 0 !important;
+    }
+
+     /* RESPONSIVE */
+     @media (max-width: 900px) {
+      .article4 .synthese-grille {
+        grid-template-columns: 1fr;
+      }
     }

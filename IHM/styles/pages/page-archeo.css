@@ -444,7 +444,17 @@
       border-bottom-color: var(--ocre-clair);
     }
 
-
+/* RESPONSIVE */
+  @media (max-width: 900px) {
+      .page-archeo .fiche-hero { padding: 3rem 2rem 4rem; min-height: 50vh; }
+      .page-archeo .hero-helix { display: none; }
+      .page-archeo .fiche-stats { grid-template-columns: repeat(2, 1fr); }
+      .page-archeo .stat-item { border-right: none; border-bottom: 1px solid rgba(181,130,42,0.15); }
+      .page-archeo .metissage-schema { grid-template-columns: 1fr; }
+      .page-archeo .schema-fleche { border: none; border-top: 1px solid rgba(181,130,42,0.15); border-bottom: 1px solid rgba(181,130,42,0.15); padding: 1.5rem; }
+      .page-archeo .heritage-grid { grid-template-columns: 1fr; }
+      .page-archeo .sources { padding: 3rem 2rem; }
+    }
 
     /* Piliers décoratifs en arrière-plan */
     .archeo2 .hero-pillars {
@@ -589,6 +599,16 @@
       line-height: 1.5 !important;
     }
 
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .archeo2 .fiche-hero { padding: 3rem 2rem 4rem; min-height: 50vh; }
+      .archeo2 .hero-pillars { display: none; }
+      .archeo2 .fiche-stats { grid-template-columns: repeat(2, 1fr); }
+      .archeo2 .stat-item { border-right: none; border-bottom: 1px solid rgba(181,130,42,0.15); }
+      .archeo2 .stat-item:nth-child(2n) { border-right: none; }
+      .archeo2 .sources { padding: 3rem 2rem; }
+    }
+
      /* Plan urbain décoratif */
     .archeo3 .hero-city {
       position: absolute;
@@ -703,6 +723,16 @@
       line-height: 1.6 !important;
       color: var(--gris-clair) !important;
       margin-bottom: 0 !important;
+    }
+
+ /* RESPONSIVE */
+  @media (max-width: 900px) {
+      .archeo3 .fiche-hero { padding: 3rem 2rem 4rem; min-height: 50vh; }
+      .archeo3 .hero-city { display: none; }
+      .archeo3 .fiche-stats { grid-template-columns: repeat(2, 1fr); }
+      .archeo3 .stat-item { border-right: none; border-bottom: 1px solid rgba(181,130,42,0.15); }
+      .archeo3 .absences { grid-template-columns: 1fr; }
+      .archeo3 .sources { padding: 3rem 2rem; }
     }
 
      /* Pyramides décoratives */
@@ -875,6 +905,19 @@
       color: var(--gris-clair);
     }
 
+    /* RESPONSIVE */
+   @media (max-width: 900px) {
+      .archeo4 .fiche-hero { padding: 3rem 2rem 4rem; min-height: 50vh; }
+      .archeo4 .hero-pyramids { display: none; }
+      .archeo4 .comparaison-band { padding: 1.5rem 2rem; gap: 1.5rem; }
+      .archeo4 .fiche-stats { grid-template-columns: repeat(2, 1fr); }
+      .archeo4 .stat-item { border-right: none; border-bottom: 1px solid rgba(181,130,42,0.15); }
+      .archeo4 .lecons { grid-template-columns: 1fr; }
+      .archeo4 .sources { padding: 3rem 2rem; }
+    }
+
+
+
     .archeo-synthèse .separator {
       display: flex;
       align-items: center;
@@ -960,6 +1003,11 @@
 
     .archeo-synthèse .fiche-liee:hover .fiche-liee-arrow {
       transform: translateX(4px);
+    }
+
+      /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .archeo-synthèse .fiches-liees-grid { grid-template-columns: 1fr; }
     }
 
 
