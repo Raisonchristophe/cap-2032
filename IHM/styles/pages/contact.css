@@ -1,33 +1,4 @@
-/* BREADCRUMB
-    .page-contact .breadcrumb{
-      padding:1.2rem 4rem;
-      border-bottom:1px solid rgba(255,255,255,.05);
-      display:flex;
-      align-items:center;
-      gap:.8rem
-    }
 
-    .page-contact .breadcrumb a,.breadcrumb span{
-      font-family:'DM Mono',monospace;
-      font-size:.62rem;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      color:var(--gris);
-      text-decoration:none;
-      transition:color .3s
-    }
-
-    .page-contact .breadcrumb a:hover{
-      color:var(--ocre-clair)
-    }
-
-    .page-contact .breadcrumb .sep{
-      color:rgba(181,130,42,.4)
-    }
-
-    .page-contact .breadcrumb span:last-child{
-      color:var(--ocre)
-    }*/
 
 /* HERO */
 .page-contact .hero{

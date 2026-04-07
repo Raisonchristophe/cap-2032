@@ -171,6 +171,11 @@ app.get("/test", (req, res) => {
   res.send("serveur OK");
 });
 
+app.get("/adhesion", (req, res) => {
+  res.render("adhesion");
+  currentPage: "adhesion";
+});
+
 // Route formulaire
 
 const transporter = nodemailer.createTransport({
