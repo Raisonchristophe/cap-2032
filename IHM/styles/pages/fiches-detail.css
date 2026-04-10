@@ -1,0 +1,66 @@
+.page-fiche-detail .fiche-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 4rem 3rem;
+}
+
+.page-fiche-detail .fiche-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 4rem 4rem;
+}
+
+.download-section {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.download-note {
+  font-size: 0.8rem;
+  color: var(--gris);
+  margin-top: 0.5rem;
+}
+
+/* HERO */
+.fiche-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 4rem 3rem;
+}
+
+.fiche-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--ocre);
+  text-transform: uppercase;
+}
+
+/* BODY */
+.fiche-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 4rem 4rem;
+  line-height: 1.7;
+}
+
+/* ENCADRÉ */
+.encadre {
+  border-left: 2px solid var(--ocre);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  background: rgba(181,130,42,0.05);
+}
+
+/* CITATION */
+.pullquote {
+  margin: 2rem 0;
+  font-style: italic;
+  border-left: 3px solid var(--ocre);
+  padding-left: 1rem;
+}
+
+/* DOWNLOAD */
+.download-section {
+  text-align: center;
+  margin: 4rem 0;
+}

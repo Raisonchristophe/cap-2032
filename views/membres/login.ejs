@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<%- include('../partial/head', { title: 'login'}) %>
+</head>
+<body class="page-login">
+  <%- include('../partial/nav', { currentPage: 'login' }) %>
+
+<%- include('../partial/breadcrumb', {
+  items: [
+    { label: "Accueil", url: "/" },
+    { label: "login" }
+  ]
+}) %>
+
+<div class="login-container">
+
+  <div class="login-box">
+
+    <h1>Accès membre</h1>
+
+    <p class="login-intro">
+      Accédez aux contenus détaillés et au projet complet CAP 2032.
+    </p>
+
+    <% if (error) { %>
+      <p class="login-error"><%= error %></p>
+    <% } %>
+
+    <form method="POST" action="/login" class="login-form">
+
+      <input type="text" name="username" placeholder="Identifiant" required>
+
+      <input type="password" name="password" placeholder="Mot de passe" required>
+
+      <button type="submit" class="btn-primary">
+        Se connecter
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      <p>Pas encore membre ?</p>
+      <a href="/adhesion" class="btn-secondary">Adhérer au projet</a>
+    </div>
+
+  </div>
+
+</div>
+
+ <%- include ('../partial/footer') %>
+</body>
+</html>

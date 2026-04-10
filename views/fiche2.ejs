@@ -109,6 +109,16 @@
     ils structurent la stabilité sociale et la dynamique globale du pays.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/2" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche1">← Fiche précédente</a>

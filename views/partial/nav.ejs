@@ -38,6 +38,17 @@
   </a>
 </li>
 
+<li>
+<% if (user) { %>
+  <a href="/espace-membre" class="<%= currentPage === 'membre' ? 'active' : '' %>">
+    Espace membre
+  </a>
+  <a href="/logout">Déconnexion</a>
+<% } else { %>
+  <a href="/login">Connexion</a>
+<% } %>
+</li>
+
     <li>
       <a href="/contact" class="<%= currentPage === 'contact' ? 'active' : '' %>">
         Contact

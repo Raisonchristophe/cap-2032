@@ -107,6 +107,16 @@
     elles garantissent la stabilité globale du système.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/11" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche10">← Fiche précédente</a>

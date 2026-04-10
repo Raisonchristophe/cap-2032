@@ -111,6 +111,16 @@
     elle est une condition fondamentale de stabilité, d’autonomie et de résilience.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/3" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche2">← Fiche précédente</a>

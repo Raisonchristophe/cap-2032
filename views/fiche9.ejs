@@ -108,6 +108,16 @@
     elle conditionne la stabilité économique et l’autonomie stratégique du pays.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/9" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche8">← Fiche précédente</a>

@@ -29,6 +29,9 @@
 @import "./pages/page-archeo.css";
 @import "./pages/articles.css";
 @import "./pages/prototypes.css";
+@import "./pages/login.css";
+@import "./pages/index-membre.css";
+@import "./pages/fiches-detail.css";
 
 /* RESPONSIVE */
 @import "./base/responsive.css";

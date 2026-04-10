@@ -1,0 +1,43 @@
+.page-membre .dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
+.dashboard h1 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+}
+
+.dashboard-intro {
+  color: var(--gris-clair);
+  margin-bottom: 3rem;
+}
+
+.dashboard-section {
+  margin-bottom: 3rem;
+}
+
+.dashboard-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.dashboard-card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid rgba(181,130,42,0.2);
+  text-decoration: none;
+  color: var(--blanc);
+  transition: 0.3s;
+}
+
+.dashboard-card:hover {
+  background: rgba(181,130,42,0.05);
+}

@@ -107,6 +107,16 @@
     il structure l’équilibre territorial et le fonctionnement global de l’économie.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/10" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche9">← Fiche précédente</a>

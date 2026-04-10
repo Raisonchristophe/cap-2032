@@ -107,6 +107,16 @@
     il est devenu une infrastructure critique de souveraineté et de fonctionnement.
   </p>
 
+    <% if (user) { %>
+    <a href="/membre/fiche/8" class="btn-primary">
+      Accéder à la fiche détaillée
+    </a>
+  <%} else { %>
+    <a href="/login" class="btn-primary">
+      Se connecter pour accéder au contenu complet
+    </a>
+  <% } %>
+
   <!-- NAVIGATION -->
   <div class="content-nav simple">
     <a href="/fiche7">← Fiche précédente</a>

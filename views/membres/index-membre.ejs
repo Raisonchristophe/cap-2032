@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <%- include('../partial/head', { title: 'Espace membre' }) %>
+</head>
+
+<body class="page-membre">
+
+  <%- include('../partial/nav', { currentPage: 'dashboard' }) %>
+
+  <section class="dashboard">
+
+    <h1>Espace membre</h1>
+
+    <p class="dashboard-intro">
+      Accès aux contenus détaillés et à la structure complète de CAP 2032.
+    </p>
+
+    <!-- PILIERS -->
+    <div class="dashboard-section">
+      <h2>Les piliers</h2>
+
+      <div class="dashboard-grid">
+        <a href="../pilier1" class="dashboard-card">Pilier I — Archéologie</a>
+        <a href="../pilier2" class="dashboard-card">Pilier II — Philosophie</a>
+        <a href="../pilier3" class="dashboard-card">Pilier III — Action</a>
+      </div>
+    </div>
+
+    <!-- FICHES -->
+    <div class="dashboard-section">
+      <h2>Fiches détaillées</h2>
+
+      <div class="dashboard-grid">
+        <% for (let i = 1; i <= 15; i++) { %>
+          <a href="/membre/fiche/<%= i %>" class="dashboard-card">
+            Fiche <%= i %>
+          </a>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- PROTOTYPES -->
+    <div class="dashboard-section">
+      <h2>Prototypes</h2>
+
+      <div class="dashboard-grid">
+        <a href="/membre/prototypes" class="dashboard-card">
+          Voir les prototypes
+        </a>
+      </div>
+    </div>
+
+    <!-- SYNTHÈSE -->
+    <div class="dashboard-section">
+      <h2>Synthèse CAP 2032</h2>
+
+      <div class="dashboard-grid">
+        <a href="/membre/synthese" class="dashboard-card">
+          Lire la synthèse
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <%- include('../partial/footer') %>
+
+</body>
+</html>

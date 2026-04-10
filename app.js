@@ -1,5 +1,6 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
+const session = require("express-session");
 const app = express();
 require("dotenv").config();
 
@@ -10,8 +11,87 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("IHM"));
 
+app.use(
+  session({
+    secret: "cap2032-secret",
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
 // Permet de lire les formulaires
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
+// Page login
+app.get("/login", (req, res) => {
+  res.render("membres/login", {
+    error: null,
+    currentPage: "login",
+  });
+});
+
+// Traitement login
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === "membre" && password === "cap2032") {
+    req.session.user = true;
+    res.redirect("/espace-membre");
+  } else {
+    res.render("membres/login", { error: "Indentifiants incorrects" });
+  }
+});
+
+// Logout
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+});
+
+function isAuth(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect("membres/login");
+  }
+}
+
+//Routes protéger
+app.get("/espace-membre", isAuth, (req, res) => {
+  res.render("membres/index-membre", {
+    currentPage: "membre",
+  });
+});
+
+// route fiches détaillées
+
+app.get("/membre/fiche/:id", isAuth, (req, res) => {
+  const id = req.params.id;
+
+  res.render("membres/fiche-detail", {
+    id,
+    currentPage: "membre",
+  });
+});
+
+app.get("/membre/synthese", isAuth, (req, res) => {
+  res.render("membres/synthes");
+});
+
+app.get("/membre/prototypes", isAuth, (req, res) => {
+  res.render("membres/prototypes");
+});
+
+// téléchargement PDF
+
+app.get("/download/cap2032", isAuth, (req, res) => {
+  res.download(__dirname + "/protected/cap2032.pdf");
+});
 
 //routes pages
 
@@ -172,8 +252,9 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/adhesion", (req, res) => {
-  res.render("adhesion");
-  currentPage: "adhesion";
+  res.render("adhesion", {
+    currentPage: "adhesion",
+  });
 });
 
 // Route formulaire

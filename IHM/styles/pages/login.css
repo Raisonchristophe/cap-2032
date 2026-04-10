@@ -1,0 +1,48 @@
+.page-login .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 2rem;
+}
+
+.login-box {
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  padding: 3rem;
+  border: 1px solid rgba(181,130,42,0.15);
+}
+
+.login-box h1 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+}
+
+.login-intro {
+  color: var(--gris-clair);
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.8rem;
+  background: rgba(181,130,42,0.05);
+  border: 1px solid rgba(181,130,42,0.2);
+  color: var(--blanc);
+}
+
+.login-error {
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+}
+
+.login-footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
