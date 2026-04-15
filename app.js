@@ -2,6 +2,7 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const session = require("express-session");
 const app = express();
+const fiches = require("./data/fiches");
 require("dotenv").config();
 
 app.set("view engine", "ejs");
@@ -72,8 +73,10 @@ app.get("/espace-membre", isAuth, (req, res) => {
 
 app.get("/membre/fiche/:id", isAuth, (req, res) => {
   const id = req.params.id;
+  const fiche = fiches[id];
 
   res.render("membres/fiche-detail", {
+    fiche,
     id,
     currentPage: "membre",
   });

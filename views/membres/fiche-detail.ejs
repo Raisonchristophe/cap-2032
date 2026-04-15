@@ -2,34 +2,34 @@
 <html lang="fr">
 
 <head>
-  <%- include('../partial/head', { title: 'Pilier 1 — Soutenabilité budgétaire' }) %>
+  <%- include('../partial/head', { title: fiche.title }) %>
 </head>
 
 <body class="page-fiche-detail">
 
   <%- include('../partial/nav', { currentPage: 'membre' }) %>
 
-<%- include('../partial/breadcrumb', {
-  items: [
-    { label: "Accueil", url: "/" },
-    { label: "Espace membre", url: "/espace-membre" },
-    { label: "Fiche " + id }
-  ]
-}) %>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="/">Accueil</a>
+    <span class="sep">·</span>
+    <a href="/espace-membre">Espace membre</a>
+    <span class="sep">·</span>
+    <span><%= fiche.title %></span>
+  </div>
 
   <!-- HERO -->
   <section class="fiche-hero">
 
-    <span class="fiche-tag">Pilier 1</span>
+    <span class="fiche-tag">Fiche <%= id %></span>
 
     <h1>
-      Soutenabilité budgétaire<br>
-      <em>Compléments analytiques et chiffrés</em>
+      <%= fiche.title %><br>
+      <em><%= fiche.subtitle %></em>
     </h1>
 
     <p class="fiche-intro">
-      La soutenabilité budgétaire est la condition de possibilité de CAP 2032.
-      Elle vise à stabiliser les finances publiques pour permettre l’investissement et restaurer la capacité d’action collective.
+      <%= fiche.intro %>
     </p>
 
   </section>
@@ -37,162 +37,72 @@
   <!-- CONTENU -->
   <section class="fiche-body">
 
-    <!-- ENCADRÉ -->
-    <div class="encadre">
-      <h3>Soutenabilité budgétaire : de quoi parle-t-on ?</h3>
-      <p>
-        La soutenabilité budgétaire ne consiste pas à réduire la dépense publique de manière aveugle.
-        Elle désigne la capacité d’un État à financer durablement ses politiques sans dépendre :
-      </p>
-      <ul>
-        <li>d’un endettement croissant,</li>
-        <li>de refinancements exceptionnels permanents,</li>
-        <li>d’ajustements brutaux imposés de l’extérieur.</li>
-      </ul>
-      <p>
-        Un budget est soutenable lorsque :
-      </p>
-      <ul>
-        <li>la croissance est ≥ au coût de la dette,</li>
-        <li>les déficits sont maîtrisés,</li>
-        <li>la dépense finance l’avenir.</li>
-      </ul>
-      <p>
-        👉 CAP 2032 défend une soutenabilité active : stabiliser pour investir.
-      </p>
-    </div>
+    <% fiche.sections.forEach(section => { %>
 
-    <!-- DIAGNOSTIC -->
-    <h2>Diagnostic de départ</h2>
+      <% if (section.type === "title") { %>
+        <h2><%= section.content %></h2>
+      <% } %>
 
-    <ul>
-      <li>Déficit public : ~4–5 % du PIB</li>
-      <li>Dette publique : ~110 % du PIB</li>
-      <li>Charge d’intérêts : 50–60 Md€</li>
-      <li>Investissement public insuffisant</li>
-      <li>Solde commercial structurellement négatif</li>
-    </ul>
+      <% if (section.type === "subtitle") { %>
+        <h3><%= section.content %></h3>
+      <% } %>
 
-    <div class="pullquote">
-      Le risque n’est pas immédiat, mais cumulatif.
-    </div>
+      <% if (section.type === "text") { %>
+        <p><%= section.content %></p>
+      <% } %>
 
-    <!-- TRAJECTOIRE -->
-    <h2>Trajectoire CAP 2032 (5 ans)</h2>
+      <% if (section.type === "list") { %>
+        <ul>
+          <% section.items.forEach(item => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+      <% } %>
 
-    <ul>
-      <li>Pas d’austérité</li>
-      <li>Pas de choc fiscal brutal</li>
-      <li>Rééquilibrage progressif</li>
-    </ul>
+      <% if (section.type === "quote") { %>
+        <div class="pullquote">
+          <%= section.content %>
+        </div>
+      <% } %>
 
-    <div class="table">
-      <p>Année 0 : déficit 4,5% / dette 110%</p>
-      <p>Année 3 : déficit 3,0% / dette 110%</p>
-      <p>Année 5 : déficit &lt; 2,5% / dette ~105%</p>
-    </div>
+      <% if (section.type === "encadre") { %>
+        <div class="encadre">
+          <h3><%= section.title %></h3>
+          <p style="white-space: pre-line;"><%= section.content %></p>
+        </div>
+      <% } %>
 
-    <p>
-      👉 La dette baisse par la croissance (PIB), pas par la contraction sociale.
-    </p>
-
-    <!-- LEVIERS -->
-    <h2>Leviers budgétaires</h2>
-
-    <h3>1. Redéploiement</h3>
-    <ul>
-      <li>10–15 Md€ : rationalisation</li>
-      <li>5–10 Md€ : dépenses inefficaces</li>
-      <li>+15 Md€ : investissement</li>
-    </ul>
-
-    <h3>2. Réforme fiscale</h3>
-    <ul>
-      <li>+0,5 à +1 point de PIB</li>
-      <li>+300 à 500k emplois</li>
-      <li>+15–25 Md€ recettes</li>
-    </ul>
-
-    <h3>3. Effet confiance</h3>
-    <p>
-      Baisse des primes de risque, amélioration du financement, investissement privé accru.
-    </p>
-
-    <!-- EUROPE -->
-    <h2>Articulation européenne</h2>
-
-    <p>
-      CAP 2032 s’inscrit dans le cadre européen :
-    </p>
-    <ul>
-      <li>marges des traités,</li>
-      <li>interprétation pro-investissement,</li>
-      <li>logique de crédibilité.</li>
-    </ul>
-
-    <div class="pullquote">
-      La souveraineté passe par la crédibilité, pas par l’isolement.
-    </div>
-
-    <!-- CE QUE CE N'EST PAS -->
-    <h2>Ce que ce pilier n’est pas</h2>
-
-    <ul>
-      <li>pas d’austérité,</li>
-      <li>pas de réduction du modèle social,</li>
-      <li>pas de démantèlement des services publics.</li>
-    </ul>
-
-    <p>
-      👉 mais une hiérarchisation et une trajectoire lisible.
-    </p>
-
-    <!-- INDICATEURS -->
-    <h2>Indicateurs de suivi</h2>
-
-    <ul>
-      <li>déficit public,</li>
-      <li>investissement public,</li>
-      <li>charge de la dette,</li>
-      <li>emploi.</li>
-    </ul>
-
-    <div class="pullquote">
-      Sans pilotage, pas de crédibilité.
-    </div>
-
-    <!-- CONCLUSION -->
-    <h2>Conclusion</h2>
-
-    <p>
-      La soutenabilité budgétaire est la condition de possibilité de CAP 2032.
-      Elle permet de reprendre la maîtrise du temps long.
-    </p>
-
-    <!-- ENCADRÉ FINAL -->
-    <div class="encadre">
-      <h3>Pourquoi l’austérité échoue</h3>
-      <p>
-        L’austérité contracte l’économie, augmente le chômage et réduit les recettes.
-      </p>
-      <p>
-        CAP 2032 propose une discipline active fondée sur :
-      </p>
-      <ul>
-        <li>l’investissement,</li>
-        <li>l’activité réelle,</li>
-        <li>la cohésion sociale.</li>
-      </ul>
-    </div>
+    <% }) %>
 
   </section>
 
   <!-- DOWNLOAD -->
   <section class="download-section">
-    <a href="/download/fiche/1" class="btn btn-primary">
+    <a href="/download/fiche/<%= id %>" class="btn btn-primary">
       📄 Télécharger la fiche (PDF)
     </a>
+
+    <p class="download-note">
+      Version complète téléchargeable pour lecture hors ligne.
+    </p>
   </section>
+
+  <!-- NAVIGATION FICHES -->
+  <div class="content-nav simple">
+
+    <% if (id > 1) { %>
+      <a href="/membre/fiche/<%= id - 1 %>">
+        ← Fiche précédente
+      </a>
+    <% } %>
+
+    <% if (id < 15) { %>
+      <a href="/membre/fiche/<%= Number(id) + 1 %>">
+        Fiche suivante →
+      </a>
+    <% } %>
+
+  </div>
 
   <%- include('../partial/footer') %>
 

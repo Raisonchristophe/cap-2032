@@ -64,3 +64,18 @@
   text-align: center;
   margin: 4rem 0;
 }
+
+/* LINKS
+.content-nav .links {
+  margin-top: 2rem;
+}
+
+.content-nav .links a {
+  color: #d4a85a;
+  text-decoration: none;
+}
+
+.content-nav .links a:hover {
+  text-decoration: underline;
+}
+
