@@ -86,8 +86,20 @@ app.get("/membre/synthese", isAuth, (req, res) => {
   res.render("membres/synthes");
 });
 
-app.get("/membre/prototypes", isAuth, (req, res) => {
-  res.render("membres/prototypes");
+app.get("/membre/prototype1", isAuth, (req, res) => {
+  res.render("membres/prototype1");
+});
+
+app.get("/membre/prototype2", isAuth, (req, res) => {
+  res.render("membres/prototype2");
+});
+
+app.get("/membre/prototype3", isAuth, (req, res) => {
+  res.render("membres/prototype3");
+});
+
+app.get("/membre/prototype4", isAuth, (req, res) => {
+  res.render("membres/prototype4");
 });
 
 // téléchargement PDF
