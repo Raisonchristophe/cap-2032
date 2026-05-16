@@ -1,8 +1,11 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const session = require("express-session");
+const puppeteer = require("puppeteer");
+const { Document, Packer, Paragraph, TextRun, HeadingLevel } = require("docx");
 const app = express();
 const fiches = require("./data/fiches");
+
 require("dotenv").config();
 
 app.set("view engine", "ejs");
@@ -25,6 +28,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
+  next();
+});
+
+// CSS pdf
+app.use((req, res, next) => {
+  res.locals.pdfMode = false;
   next();
 });
 
@@ -87,25 +96,134 @@ app.get("/membre/synthese", isAuth, (req, res) => {
 });
 
 app.get("/membre/prototype1", isAuth, (req, res) => {
-  res.render("membres/prototype1");
+  res.render("membres/prototype1", {
+    currentPage: "pilier3",
+    pdfMode: false,
+  });
 });
 
 app.get("/membre/prototype2", isAuth, (req, res) => {
-  res.render("membres/prototype2");
+  res.render("membres/prototype2", {
+    currentPage: "pilier3",
+    pdfMode: false,
+  });
 });
 
 app.get("/membre/prototype3", isAuth, (req, res) => {
-  res.render("membres/prototype3");
+  res.render("membres/prototype3", {
+    currentPage: "pilier3",
+    pdfMode: false,
+  });
 });
 
 app.get("/membre/prototype4", isAuth, (req, res) => {
-  res.render("membres/prototype4");
+  res.render("membres/prototype4", {
+    currentPage: "pilier3",
+    pdfMode: false,
+  });
 });
 
 // téléchargement PDF
 
-app.get("/download/cap2032", isAuth, (req, res) => {
-  res.download(__dirname + "/protected/cap2032.pdf");
+app.get("/download/prototype-docx/:id", async (req, res) => {
+  const id = req.params.id;
+
+  // 👉 ici tu peux adapter selon ton contenu réel
+  const doc = new Document({
+    sections: [
+      {
+        children: [
+          // TITRE
+          new Paragraph({
+            text: "Prototype 01 — Le village SCIC territorial",
+            heading: HeadingLevel.HEADING_1,
+          }),
+
+          // INTRO
+          new Paragraph({
+            children: [
+              new TextRun(
+                "Une plateforme productive coopérative ancrée dans un territoire...",
+              ),
+            ],
+          }),
+
+          // SECTION
+          new Paragraph({
+            text: "Fiche technique",
+            heading: HeadingLevel.HEADING_2,
+          }),
+
+          new Paragraph("Statut : SCIC"),
+          new Paragraph("Investissement : 3M€"),
+          new Paragraph("Lecture : 12 minutes"),
+
+          // AUTRE SECTION
+          new Paragraph({
+            text: "Finalité",
+            heading: HeadingLevel.HEADING_2,
+          }),
+
+          new Paragraph(
+            "Le village SCIC vise à structurer un écosystème productif local...",
+          ),
+
+          new Paragraph("• Réinsérer par le travail réel"),
+          new Paragraph("• Former par la pratique"),
+          new Paragraph("• Produire localement"),
+        ],
+      },
+    ],
+  });
+
+  const buffer = await Packer.toBuffer(doc);
+
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename=prototype${id}.docx`,
+  );
+  res.send(buffer);
+});
+
+app.get("/download/fiche/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const puppeteer = require("puppeteer");
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  await page.goto(`http://localhost:3001/pdf/fiche/${id}`, {
+    waitUntil: "networkidle0",
+  });
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const pdf = await page.pdf({
+    format: "A4",
+    printBackground: true,
+  });
+
+  await browser.close();
+
+  res.set({
+    "Content-Type": "application/pdf",
+    "Content-Disposition": `attachment; filename=fiche${id}.pdf`,
+  });
+
+  res.send(pdf);
+});
+
+app.get("/pdf/fiche/:id", (req, res) => {
+  const id = req.params.id;
+
+  const fiches = require("./data/fiches");
+
+  res.render("membres/fiche-detail", {
+    fiche: fiches[id],
+    id,
+    pdfMode: true,
+    currentPage: null,
+  });
 });
 
 //routes pages
@@ -251,7 +369,7 @@ app.get("/ressources", (req, res) => {
 });
 
 app.get("/notes", (req, res) => {
-  res.render("notes_stratégiques", {
+  res.render("notes", {
     currentPage: "notes",
   });
 });
@@ -278,6 +396,10 @@ const transporter = nodemailer.createTransport({
   host: "smtp.free.fr",
   port: 587,
   secure: false,
+  requireTLS: true,
+  family: 4,
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,

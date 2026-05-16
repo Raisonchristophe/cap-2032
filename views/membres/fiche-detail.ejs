@@ -5,11 +5,13 @@
   <%- include('../partial/head', { title: fiche.title }) %>
 </head>
 
-<body class="page-fiche-detail">
-
+<body class="page-fiche-detail <%= pdfMode ? 'pdf-mode' : '' %>">
+<% if (!pdfMode) { %>
   <%- include('../partial/nav', { currentPage: 'membre' }) %>
+  <% } %>
 
   <!-- BREADCRUMB -->
+   <% if (!pdfMode) { %>
   <div class="breadcrumb">
     <a href="/">Accueil</a>
     <span class="sep">·</span>
@@ -17,6 +19,7 @@
     <span class="sep">·</span>
     <span><%= fiche.title %></span>
   </div>
+  <% } %>
 
   <!-- HERO -->
   <section class="fiche-hero">
@@ -65,18 +68,38 @@
         </div>
       <% } %>
 
-      <% if (section.type === "encadre") { %>
-        <div class="encadre">
-          <h3><%= section.title %></h3>
-          <p style="white-space: pre-line;"><%= section.content %></p>
-        </div>
-      <% } %>
+<% if (section.type === "encadre") { %>
+
+  <% if (pdfMode) { %>
+
+    <!-- VERSION PDF (DÉCOUPÉE) -->
+    <section class="bloc">
+      <h2><%= section.title %></h2>
+
+      <% section.content.split('\n\n').forEach(paragraph => { %>
+        <p><%= paragraph %></p>
+      <% }) %>
+
+    </section>
+
+  <% } else { %>
+
+    <!-- VERSION SITE (ORIGINALE) -->
+    <div class="encadre">
+      <h3><%= section.title %></h3>
+      <p style="white-space: pre-line;"><%= section.content %></p>
+    </div>
+
+  <% } %>
+
+<% } %>
 
     <% }) %>
 
   </section>
 
   <!-- DOWNLOAD -->
+   <% if (!pdfMode) { %>
   <section class="download-section">
     <a href="/download/fiche/<%= id %>" class="btn btn-primary">
       📄 Télécharger la fiche (PDF)
@@ -86,8 +109,10 @@
       Version complète téléchargeable pour lecture hors ligne.
     </p>
   </section>
+  <% } %>
 
   <!-- NAVIGATION FICHES -->
+   <% if (!pdfMode) { %>
   <div class="content-nav simple">
 
     <% if (id > 1) { %>
@@ -103,8 +128,11 @@
     <% } %>
 
   </div>
+  <% } %>
 
+<% if (!pdfMode) { %>
   <%- include('../partial/footer') %>
+  <% } %>
 
 </body>
 </html>

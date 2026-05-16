@@ -9,15 +9,16 @@
   </style>
 
 </head>
-<body class="page-prototype prototype3">
+<body class="page-prototype prototype3 <%= pdfMode ? 'pdf-mode' : '' %>">
   <div class="progress-bar" id="progress"></div>
 
         <!-- NAV -->
-
+<% if (!pdfMode) { %>
 <%- include('../partial/nav', { currentPage: 'pilier3' }) %>
+<% } %>
 
 <!-- BREADCRUMB -->
-
+<% if (!pdfMode) { %>
       <%- include('../partial/breadcrumb', {
   items: [
     { label: "Accueil", url: "/" },
@@ -25,6 +26,7 @@
     { label: "Prototype 04 — Le système des trois" }
   ]
 }) %>
+<% } %>
 
   <header class="content">
     <div class="content-type">Prototype 04 · Pilier III · Architecture systémique · Synthèse</div>
@@ -401,7 +403,20 @@
     </div>
   </div>
 
+  <!-- DOWNLOAD -->
+   <% if (!pdfMode) { %>
+  <section class="download-section">
+<a href="/download/prototype-docx/4" class="btn btn-primary">
+  📄 Télécharger en Word (.docx)
+</a>
 
+    <p class="download-note">
+      Version complète téléchargeable pour lecture hors ligne.
+    </p>
+  </section>
+  <% } %>
+
+  <% if (!pdfMode) { %>
   <div class="content-nav rich">
     <a href="/prototype3" class="content-nav-link prev">
       <span class="content-nav-dir">← Prototype précédent</span>
@@ -411,8 +426,11 @@
       <span class="content-nav-dir">↑ Retour</span>
       <span class="content-nav-name">Pilier III — Vue d'ensemble</span></a>
   </div>
+  <% } %>
 
+  <% if (!pdfMode) { %>
   <%- include ('../partial/footer') %>
+  <% } %>
 
   <script>
     const progress = document.getElementById('progress');

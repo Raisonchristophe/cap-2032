@@ -140,6 +140,12 @@
       cursor: pointer;
     }
 
+    .page-index .pillar-card img {
+  width: 20%;
+  height: 20px;
+  object-fit: cover;
+}
+
     .page-index .pilier-card:last-child {
       border-right: none;
     }

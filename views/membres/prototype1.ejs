@@ -9,15 +9,178 @@
   </style>
 
 </head>
-<body class="page-prototype">
+<body class="page-prototype <%= pdfMode ? 'pdf-mode' : '' %>">
+
+<% if (pdfMode) { %>
+
+<div class="pdf-container">
+
+  <!-- HEADER -->
+  <div class="pdf-header">
+    <div class="pdf-meta">
+      PROTOTYPE 01 · PILIER III · ARCHITECTURE COOPÉRATIVE
+    </div>
+    <h1>Le village SCIC territorial</h1>
+
+    <p class="intro">
+      Une plateforme productive coopérative ancrée dans un territoire. Ni centre social,
+      ni entreprise classique isolée, ni utopie hors-sol. Une structure juridiquement propre,
+      économiquement viable, socialement utile — et conçue dès le départ pour être dupliquée ailleurs.
+    </p>
+  </div>
+
+  <!-- FICHE TECHNIQUE -->
+  <section class="bloc fiche-technique">
+    <div><strong>Statut juridique :</strong> SCIC — Société Coopérative d'Intérêt Collectif</div>
+    <div><strong>Investissement initial :</strong> 3,0 M€ — 0 emprunt bancaire</div>
+    <div><strong>Temps de lecture :</strong> ~12 minutes</div>
+  </section>
+
+  <!-- CONTEXTE -->
+  <section class="bloc">
+    <p>
+      Il existe une catégorie de besoins que les territoires ruraux et semi-ruraux ont en commun
+      sans toujours pouvoir les nommer précisément. Des travaux de maintenance que les collectivités
+      externalisent faute de prestataires locaux. De la transformation alimentaire que les agriculteurs
+      ne peuvent plus financer seuls. De la logistique courte pour la restauration collective que personne
+      n'organise. Des compétences disponibles dans le territoire — des mains, des savoir-faire, des énergies —
+      qui ne trouvent pas de cadre pour exister.
+    </p>
+
+    <p>
+      Le village SCIC territorial est une réponse à cette catégorie de besoins. Pas une réponse abstraite —
+      une structure concrète, dotée d'un statut juridique précis, d'une gouvernance explicite, d'un modèle
+      économique chiffré et d'un calendrier réaliste.
+    </p>
+
+    <p class="highlight">
+      Ce n'est pas trois projets qu'on additionne. C'est une plateforme territoriale de production —
+      où le travail crée de la dignité, où l'apprentissage est incarné dans le réel,
+      et où personne n'est laissé sur le bord de la route.
+    </p>
+  </section>
+
+  <!-- FINALITÉ -->
+  <section class="bloc">
+    <h2>Finalité — ce que le village fait réellement</h2>
+
+    <p>
+      La finalité du village SCIC n'est pas d'abord économique, même si sa viabilité économique
+      est une condition absolue. Elle est de créer un écosystème local productif et social capable
+      de faire plusieurs choses simultanément que les structures existantes font séparément.
+    </p>
+
+    <ul>
+      <li>Réinsérer par le travail réel (activité productive)</li>
+      <li>Former par la pratique (apprentissage en situation)</li>
+      <li>Produire des biens et services consommés localement</li>
+      <li>Structurer des interdépendances territoriales</li>
+    </ul>
+  </section>
+
+  <!-- GOUVERNANCE -->
+  <section class="bloc">
+    <h2>Gouvernance — trois collèges, une logique</h2>
+
+    <p>
+      La SCIC permet une gouvernance multi-parties. Trois collèges structurent le village :
+    </p>
+
+    <ul>
+      <li>Salariés et travailleurs</li>
+      <li>Collectivités territoriales</li>
+      <li>Partenaires économiques et citoyens</li>
+    </ul>
+  </section>
+
+  <!-- ACTIVITÉS -->
+  <section class="bloc">
+    <h2>Activités — adossées à une demande locale réelle</h2>
+
+    <p>
+      Les activités sont modulables selon les territoires. La méthode consiste à identifier
+      les besoins réels, les confronter aux compétences disponibles et construire une offre viable.
+    </p>
+
+    <ul>
+      <li>Maintenance et travaux locaux</li>
+      <li>Transformation alimentaire</li>
+      <li>Logistique territoriale</li>
+      <li>Services aux collectivités</li>
+      <li>Production artisanale</li>
+      <li>Formation en situation réelle</li>
+    </ul>
+  </section>
+
+  <!-- STATUTS -->
+  <section class="bloc">
+    <h2>Statuts humains — innover dans le cadre</h2>
+
+    <p>
+      Le village accueille des personnes dans des situations variées et propose des statuts adaptés.
+    </p>
+
+    <ul>
+      <li>Salariés en production</li>
+      <li>Apprenants en formation</li>
+      <li>Personnes en réinsertion</li>
+      <li>Entrepreneurs intégrés</li>
+    </ul>
+  </section>
+
+  <!-- MODÈLE ÉCO -->
+  <section class="bloc">
+    <h2>Modèle économique — vers l'autonomie progressive</h2>
+
+    <p>
+      Le modèle économique repose sur une logique simple : le chiffre d’affaires finance les charges.
+    </p>
+
+    <ul>
+      <li>Subventions uniquement au lancement</li>
+      <li>Autonomie progressive</li>
+      <li>Activité réelle comme base financière</li>
+    </ul>
+  </section>
+
+  <!-- AUTO-CONSTRUCTION -->
+  <section class="bloc">
+    <h2>Auto-construction encadrée — un levier de dignité</h2>
+
+    <p>
+      Les bâtiments sont construits, rénovés et entretenus par les futurs salariés-associés
+      et les apprenants, dans un cadre légal structuré.
+    </p>
+  </section>
+
+  <!-- FONCIER -->
+  <section class="bloc">
+    <h2>Foncier en propriété collective — sécuriser le long terme</h2>
+
+    <p>
+      Le foncier et les bâtiments sont détenus collectivement par la SCIC, garantissant stabilité
+      et vision long terme.
+    </p>
+
+    <p>
+      La propriété collective n’est pas une idéologie — c’est une architecture de durabilité.
+    </p>
+  </section>
+
+</div>
+
+<% } else { %>
+
   <div class="progress-bar" id="progress"></div>
 
-    <!-- NAV -->
 
+    <!-- NAV -->
+<% if (!pdfMode) { %>
 <%- include('../partial/nav', { currentPage: 'pilier3' }) %>
+<% } %>
 
 <!-- BREADCRUMB -->
-
+<% if (!pdfMode) { %>
       <%- include('../partial/breadcrumb', {
   items: [
     { label: "Accueil", url: "/" },
@@ -25,6 +188,7 @@
     { label: "Prototype 01 — Village SCIC" }
   ]
 }) %>
+<% } %>
 
   <header class="content">
     <div class="content-type">Prototype 01 · Pilier III · Architecture coopérative</div>
@@ -284,19 +448,35 @@
     </div>
   </div>
 
+  <!-- DOWNLOAD -->
+   <% if (!pdfMode) { %>
+  <section class="download-section">
+<a href="/download/prototype-docx/1" class="btn btn-primary">
+  📄 Télécharger en Word (.docx)
+</a>
+
+    <p class="download-note">
+      Version complète téléchargeable pour lecture hors ligne.
+    </p>
+  </section>
+  <% } %>
+
+  <% if (!pdfMode) { %>
   <div class="content-nav rich">
     <a href="/pilier3" class="content-nav-link prev">
       <span class="content-nav-dir">← Retour</span>
       <span class="content-nav-name">Pilier III — Introduction</span>
     </a>
-    <a href="/prototype2" class="content-nav-link next">
+    <a href="/membre/prototype2" class="content-nav-link next">
       <span class="content-nav-dir">Prototype suivant →</span>
       <span class="content-nav-name">L'exploitation polyculture-élevage</span>
     </a>
   </div>
+<% } %>
 
+<% if (!pdfMode) { %>
   <%- include ('../partial/footer') %>
-
+<% } %>
   <script>
     const progress = document.getElementById('progress');
     window.addEventListener('scroll', () => {
@@ -314,5 +494,6 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
     reveals.forEach(el => observer.observe(el));
   </script>
+  <% } %>
 </body>
 </html>
