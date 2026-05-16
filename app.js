@@ -393,16 +393,12 @@ app.get("/adhesion", (req, res) => {
 // Route formulaire
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.free.fr",
+  host: "smtp-replay.brevo.com",
   port: 587,
   secure: false,
-  requireTLS: true,
-  family: 4,
-  connectionTimeout: 20000,
-  greetingTimeout: 20000,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.BREVO_USER,
+    pass: process.env.BREVO_SMTP_KEY,
   },
 });
 
