@@ -521,12 +521,6 @@ ${message}
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
-  console.log("Serveur lancé sur le port " + PORT);
-});
-
-const PORT = process.env.PORT || 3001;
-
 const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.listen(PORT, () => {
