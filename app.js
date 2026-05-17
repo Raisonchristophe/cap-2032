@@ -4,7 +4,8 @@ const session = require("express-session");
 const puppeteer = require("puppeteer");
 const { Document, Packer, Paragraph, TextRun, HeadingLevel } = require("docx");
 const app = express();
-const fiches = require("./data/fiches");
+const fichesData = require("./data/fiches");
+
 //const brevo = require("@getbrevo/brevo");
 
 //const apiInstance = new brevo.TransactionalEmailsApiApi();
@@ -81,7 +82,12 @@ function isAuth(req, res, next) {
 
 //Routes protéger
 app.get("/espace-membre", isAuth, (req, res) => {
+  const fiches = Object.entries(fichesData).map(([id, fiche]) => ({
+    id,
+    ...fiche,
+  }));
   res.render("membres/index-membre", {
+    fiches,
     currentPage: "membre",
   });
 });
@@ -89,13 +95,15 @@ app.get("/espace-membre", isAuth, (req, res) => {
 // route fiches détaillées
 
 app.get("/membre/fiche/:id", isAuth, (req, res) => {
-  const id = req.params.id;
-  const fiche = fiches[id];
+  const fiche = fichesData[req.params.id];
+
+  if (!fiche) {
+    return res.status(404).send("Fiche introuvable");
+  }
 
   res.render("membres/fiche-detail", {
     fiche,
-    id,
-    currentPage: "membre",
+    id: req.params.id,
   });
 });
 

@@ -33,11 +33,17 @@
       <h2>Fiches détaillées</h2>
 
       <div class="dashboard-grid">
-        <% for (let i = 1; i <= 15; i++) { %>
-          <a href="/membre/fiche/<%= i %>" class="dashboard-card">
-            Fiche <%= i %>
-          </a>
-        <% } %>
+  <% fiches.forEach((fiche) => { %>
+  <a href="/membre/fiche/<%= fiche.id %>" class="dashboard-card">
+
+    <img src="<%= fiche.image %>" alt="<%= fiche.title %>">
+
+    <h3><%= fiche.title %></h3>
+
+    <p><%= fiche.subtitle %></p>
+
+  </a>
+<% }) %>
       </div>
     </div>
 

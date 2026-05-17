@@ -1,6 +1,7 @@
 module.exports = {
   1: {
     title: "Soutenabilité budgétaire",
+    image: "/image/pilier 1 soutenabilité budgétaire.png",
     subtitle: "Compléments analytiques et chiffrés",
 
     intro:
@@ -179,6 +180,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   2: {
     title: "Justice sociale et cohésion nationale",
+    image: "/image/pilier 2 justice sociale et cohésion nationale.png",
     subtitle:
       "Redonner une place utile à chacun pour restaurer l'unité du pays",
     intro:
@@ -306,6 +308,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   3: {
     title: "Agriculture, alimentation et souveraineté alimentaire",
+    image: "/image/pilier 3 agriculture et souveraineté alimentaire.png",
     subtitle:
       "Nourrir le pays, structurer les territoire et sécuriser l'avenir",
     intro:
@@ -458,6 +461,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   4: {
     title: "Santé et hôpital",
+    image: "/image/pilier 4 santé & hôpital.png",
     subtitle: "Sauver le système sans l'épuiser davantage",
     intro:
       "Le pilier 4 vise à restaurer la capacité du système de santé à soigner durablement, sans basculer ni dans la privatisation de fait, ni dans la gestion permanente de crise.",
@@ -604,6 +608,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   5: {
     title: "Education et recherche",
+    image: "/image/pilier 5 éducation & recherche.png",
     subtitle: "Transmettre, qualifier et projeter",
     intro:
       "Ce pilier de CAP2032 vise à restaurer la capacité du système éducatif et de la recherche à préparer l'avenir, dans un contexte de transformation des métiers, des technologie et des équilibres géopolitique",
@@ -767,6 +772,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   6: {
     title: "Réformes institutionnelles",
+    image: "/image/pilier 6 réforme institutionnelles.png",
     subtitle: "Rendre l'action publique gouvernable, lisible et responsable",
     intro:
       " Le pilier 6 vise à restaurer la capacité de décision et d'exécution de l'État, tout en renforçant la légitimité démocratique.",
@@ -936,6 +942,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   7: {
     title: "Souveraineté industrielle et économique",
+    image: "/image/pilier 7 souvraineté industrielle & économique.png",
     subtitle: "Reproduire ce que nous ne pouvons plus nus permettre d'importer",
     intro:
       "Le pilier 7 vise à restaurer la capacité à productive nationale et européenne, non pour tout produire, mais pour sécuriser les secteurs stratégiques.",
@@ -1099,6 +1106,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   8: {
     title: "Numérique et cybersécurité",
+    image: "/image/pilier 8 numérique & cybersécurité.png",
     subtitle: "Sécuriser l'infrastructure invisible de la souveraineté",
     intro:
       "Le pilier 8 vise à garantir la souveraineté numérique et la sécurité cyber de la France et de l'Europe, dans un contexte de menaces croissantes et de dépendances technologiques critiques.",
@@ -1270,6 +1278,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   9: {
     title: "Transition écologique",
+    image: "/image/pilier 9 transition écologique .png",
     subtitle: "Réconcilier écologie, production et justice sociale",
     intro:
       "Le pilier 9 vise à réussir la transition écologique sans fracture sociale ni décrochage productif.",
@@ -1423,6 +1432,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   10: {
     title: "Logement privé et urbanisme",
+    image: "/image/pilier 10 logement, urbanisme et rénovation.png",
     subtitle: "Se loger dignement,durablement et près de l'activité",
     intro:
       "Le pilier 10 vise à mieux utiliser, rénover et organiser l'existant, sans pour autant construire toujours plus.",
@@ -1576,6 +1586,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   11: {
     title: "Sécurité et défense",
+    image: "/image/pilier 11 sécurité & défense.png",
     subtitle: "Protéger la Nation dans un monde instable",
     intro:
       "Le pilier vise à garantir la sécurité extérieure et intérieur de la Nation tout en préservant la liberté de décision politique.",
@@ -1728,6 +1739,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   12: {
     title: "Justice et sécurité intérieure",
+    image: "/image/pilier 12 justice et sécurité intérieur.png",
     subtitle: "Rétablir l'autorité et la confiance civique",
     intro:
       "Le pilier 12 vise à établir un équilibre entre autorité, droit et protection sans surenchère sécuritaire, ni angélisme.",
@@ -1883,6 +1895,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   13: {
     title: "Immigration et intégration",
+    image: "/image/pilier 13 immigration & intégration.png",
     subtitle: "Clarifier, intégrer et stabiliser",
     intro:
       "Le pilier 13 vise à assumer une politique lisible et gouvernable sans ouverture sans limite ni fermeture illusoire",
@@ -2043,6 +2056,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   14: {
     title: "Création d'emploi et travail",
+    image: "/image/pilier 14 création d'emploi et travail.png",
     subtitle: "Remettre le travail au coeur du contrat sociale",
     intro:
       "Le pilier 14 vise à une organisation du travail compatible avec les mutations économiques sans flexibilisation aveugle.",
@@ -2198,6 +2212,7 @@ CAP 2032 propose une discipline active fondée sur :
 
   15: {
     title: "Politique étrangère et stratégie européenne",
+    image: "/image/pilier 15 politique étrangère & stratégie européenne.png",
     subtitle:
       "Choisir nos alliances, sécuriser nos intérêts et projeter une trajectoire",
     intro:

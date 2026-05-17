@@ -140,10 +140,17 @@
       cursor: pointer;
     }
 
-    .page-index .pillar-card img {
-  width: 20%;
-  height: 20px;
+.page-index .piliers-secondaires .pilier-card {
+  padding: 1rem;
+}
+
+.page-index .piliers-secondaires .pilier-card img {
+  width: 100%;
+  height: 140px;
   object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  margin: 1rem 0;
 }
 
     .page-index .pilier-card:last-child {
