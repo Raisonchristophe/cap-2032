@@ -519,10 +519,10 @@ ${message}
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const SERVER_PORT = process.env.PORT || 3001;
 
-const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+const baseUrl = process.env.BASE_URL || `http://localhost:${SERVER_PORT}`;
 
-app.listen(PORT, () => {
-  console.log("Serveur lancé sur le port " + PORT);
+app.listen(SERVER_PORT, () => {
+  console.log("Serveur lancé sur le port " + SERVER_PORT);
 });
