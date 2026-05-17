@@ -1,10 +1,18 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
+//const nodemailer = require("nodemailer");
 const session = require("express-session");
 const puppeteer = require("puppeteer");
 const { Document, Packer, Paragraph, TextRun, HeadingLevel } = require("docx");
 const app = express();
 const fiches = require("./data/fiches");
+//const brevo = require("@getbrevo/brevo");
+
+//const apiInstance = new brevo.TransactionalEmailsApiApi();
+
+//apiInstance.setApiKey(
+//brevo.TransactionalEmailsApiApiKeys.apiKey,
+//process.env.BREVO_API_KEY
+//);
 
 require("dotenv").config();
 
@@ -392,32 +400,83 @@ app.get("/adhesion", (req, res) => {
 
 // Route formulaire
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-replay.brevo.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.BREVO_USER,
-    pass: process.env.BREVO_SMTP_KEY,
-  },
-});
+//const transporter = nodemailer.createTransport({
+//host: "smtp-relay.brevo.com",
+//port: 587,
+//secure: false,
+//auth: {
+//  user: process.env.BREVO_USER,
+//  pass: process.env.BREVO_SMTP_KEY,
+// },
+//});
 
-app.post("/contact", (req, res) => {
+//app.post("/contact", (req, res) => {
+//const { nom, email, message } = req.body;
+
+// ✅ LOG TERMINAL
+// console.log("---- Nouveau message ----");
+// console.log("Nom :", nom);
+//console.log("Email :", email);
+//console.log("Message :", message);
+
+//console.log("BREVO_USER:", process.env.BREVO_USER);
+//console.log("CLE existe:", !!process.env.BREVO_SMTP_KEY);
+//console.log("Début clé:", process.env.BREVO_SMTP_KEY?.slice(0, 8));
+
+// ✅ EMAIL
+//const mailOptions = {
+// from: "process.env.BREVO_USER",
+//to: "cap2032.contacts@free.fr",
+//replyTo: email,
+//subject: "Nouveau message CAP2032",
+//text: `
+//Nom: ${nom}
+//Email: ${email}
+
+//Message:
+//${message}
+//  `,
+//};
+
+//transporter.sendMail(mailOptions, (err, info) => {
+//if (err) {
+//  console.log("Erreur mail :", err);
+//  res.send("Erreur lors de l'envoi ❌");
+//} else {
+//  console.log("Email envoyé :", info.response);
+
+//  res.send("Message envoyé ✅");
+// }
+//});
+//});
+
+console.log("BREVO_API_KEY existe:", !!process.env.BREVO_API_KEY);
+console.log("Longueur clé:", process.env.BREVO_API_KEY?.length);
+console.log("Début clé:", process.env.BREVO_API_KEY?.slice(0, 10));
+
+app.post("/contact", async (req, res) => {
   const { nom, email, message } = req.body;
 
-  // ✅ LOG TERMINAL
   console.log("---- Nouveau message ----");
   console.log("Nom :", nom);
   console.log("Email :", email);
   console.log("Message :", message);
 
-  // ✅ EMAIL
-  const mailOptions = {
-    from: "cap2032.contacts@free.fr",
-    to: "cap2032.contacts@free.fr",
-    replyTo: email,
+  const payload = {
+    sender: {
+      name: "CAP 2032",
+      email: "web05012000@gmail.com",
+    },
+    to: [
+      {
+        email: "cap2032.contacts@free.fr",
+      },
+    ],
+    replyTo: {
+      email: email,
+    },
     subject: "Nouveau message CAP2032",
-    text: `
+    textContent: `
 Nom: ${nom}
 Email: ${email}
 
@@ -426,16 +485,30 @@ ${message}
     `,
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log("Erreur mail :", err);
-      res.send("Erreur lors de l'envoi ❌");
-    } else {
-      console.log("Email envoyé :", info.response);
+  try {
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        "api-key": process.env.BREVO_API_KEY,
+      },
+      body: JSON.stringify(payload),
+    });
 
-      res.send("Message envoyé ✅");
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log("Erreur Brevo :", data);
+      return res.send("Erreur lors de l'envoi ❌");
     }
-  });
+
+    console.log("Email envoyé :", data);
+    res.send("Message envoyé ✅");
+  } catch (err) {
+    console.log("Erreur mail :", err);
+    res.send("Erreur lors de l'envoi ❌");
+  }
 });
 
 const PORT = process.env.PORT || 3001;

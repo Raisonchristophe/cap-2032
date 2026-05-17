@@ -7,10 +7,11 @@
   "type": "commonjs",
   "main": "capServer2032",
   "scripts": {
-   "strat": "node app.js",
-   "dev": "nodemon app.js"
+    "strat": "node app.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
+    "@getbrevo/brevo": "^5.0.4",
     "docx": "^9.6.1",
     "dotenv": "^17.3.1",
     "ejs": "^5.0.1",
