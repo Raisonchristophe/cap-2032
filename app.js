@@ -208,7 +208,7 @@ app.get("/download/fiche/:id", async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto(`http://localhost:3001/pdf/fiche/${id}`, {
+  await page.goto(`${baseUrl}/membre/fiche/${id}`, {
     waitUntil: "networkidle0",
   });
 
@@ -520,6 +520,14 @@ ${message}
 });
 
 const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log("Serveur lancé sur le port " + PORT);
+});
+
+const PORT = process.env.PORT || 3001;
+
+const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.listen(PORT, () => {
   console.log("Serveur lancé sur le port " + PORT);
