@@ -201,35 +201,78 @@ app.get("/download/prototype-docx/:id", async (req, res) => {
   res.send(buffer);
 });
 
+//app.get("/download/fiche/:id", async (req, res) => {
+//const id = req.params.id;
+
+//const puppeteer = require("puppeteer");
+// const browser = await puppeteer.launch({
+// headless: true,
+// args: ["--no-sandbox", "--disable-setuid-sandbox"],
+//});
+//const page = await browser.newPage();
+
+//await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
+// waitUntil: "networkidle0",
+//});
+
+//await new Promise((resolve) => setTimeout(resolve, 1000));
+
+//const pdf = await page.pdf({
+// format: "A4",
+// printBackground: true,
+//});
+
+//await browser.close();
+
+//res.set({
+//"Content-Type": "application/pdf",
+//"Content-Disposition": `attachment; filename=fiche${id}.pdf`,
+//});
+
+//res.send(pdf);
+//});
+
 app.get("/download/fiche/:id", async (req, res) => {
-  const id = req.params.id;
+  let browser;
 
-  const puppeteer = require("puppeteer");
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
-  const page = await browser.newPage();
+  try {
+    const id = req.params.id;
 
-  await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
-    waitUntil: "networkidle0",
-  });
+    browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+      ],
+    });
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+    const page = await browser.newPage();
 
-  const pdf = await page.pdf({
-    format: "A4",
-    printBackground: true,
-  });
+    await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
+      waitUntil: "networkidle0",
+      timeout: 60000,
+    });
 
-  await browser.close();
+    const pdf = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
 
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Disposition": `attachment; filename=fiche${id}.pdf`,
-  });
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename=fiche${id}.pdf`,
+    });
 
-  res.send(pdf);
+    res.send(pdf);
+  } catch (err) {
+    console.error("Erreur génération PDF :", err);
+    res.status(500).send("Erreur génération PDF");
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
 });
 
 app.get("/pdf/fiche/:id", (req, res) => {
