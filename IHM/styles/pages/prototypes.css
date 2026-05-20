@@ -499,6 +499,21 @@
       color:var(--blanc)!important
     }
 
+           .page-prototype .image {
+  width: 100%;
+  max-width: 1600px;
+  height: 800px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
      /* RESPONSIVE */
          @media(max-width:900px){
       .page-prototype .fiche-grille,.page-prototype .activites,.page-prototype .budget-blocs,.page-prototype .chantier-grille,.page-prototype .statut-item{

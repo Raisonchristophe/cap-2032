@@ -205,10 +205,13 @@ app.get("/download/fiche/:id", async (req, res) => {
   const id = req.params.id;
 
   const puppeteer = require("puppeteer");
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
 
-  await page.goto(`${baseUrl}/membre/fiche/${id}`, {
+  await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
     waitUntil: "networkidle0",
   });
 
