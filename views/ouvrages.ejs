@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <%- include('partial/head', { title: 'Les ouvrages — CAP2032' }) %>
+</head>
+<body class="page-ouvrages">
+  <%- include('partial/nav', { currentPage: 'ouvrages' }) %>
+  <%- include('partial/breadcrumb', { items: [ { label: 'Accueil', url: '/' }, { label: 'Les ouvrages' } ] }) %>
+
+  <main>
+    <section class="ouvrages-hero">
+      <div class="ouvrages-container ouvrages-hero-grid">
+        <div>
+          <span class="ouvrages-eyebrow">Écriture · méthode · transmission</span>
+          <h1>Deux ouvrages.<br><em>Une même démarche.</em></h1>
+          <p class="ouvrages-lead">CAP2032 est né d’un travail de terrain, de cahiers accumulés sur plus de vingt ans et d’une volonté : relier les constats, identifier les verrous puis construire des trajectoires applicables.</p>
+          <div class="ouvrages-actions">
+            <a href="#ouvrages" class="btn-primary">Découvrir les ouvrages</a>
+            <% if (user) { %>
+              <a href="/espace-membre#publications" class="btn-secondary">Accéder à l’espace membre</a>
+            <% } else { %>
+              <a href="/login" class="btn-secondary">Connexion membre</a>
+            <% } %>
+          </div>
+        </div>
+        <div class="ouvrages-hero-note">
+          <span class="ouvrages-note-label">La démarche d’écriture</span>
+          <p>Partir du réel, confronter les expériences et les sources, distinguer l’objectif du verrou, ajuster le cadre puis seulement proposer l’action.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ouvrages-genese">
+      <div class="ouvrages-container ouvrages-genese-grid">
+        <div>
+          <span class="ouvrages-eyebrow">Genèse</span>
+          <h2>Du parcours à la méthode</h2>
+        </div>
+        <div class="ouvrages-prose">
+          <p>La rédaction ne part pas d’une doctrine déjà constituée. Elle s’est construite par couches successives : expérience technique, logistique humanitaire, agriculture, vie associative, lectures et observation des politiques publiques.</p>
+          <p>Le premier travail a consisté à reprendre des cahiers anciens, à classer les intuitions, puis à vérifier si elles formaient un système cohérent. De cette mise en ordre est née la grille CAP2032 : <strong>objectif, verrou, cadre, action</strong>.</p>
+          <p>Les deux ouvrages répondent à deux besoins différents. Le livre expose l’architecture stratégique et les quinze domaines d’action. L’essai philosophique interroge les cadres intellectuels qui rendent cette architecture nécessaire.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ouvrages-method">
+      <div class="ouvrages-container">
+        <span class="ouvrages-eyebrow">Méthode commune</span>
+        <h2>Écrire pour rendre l’action gouvernable</h2>
+        <div class="ouvrages-method-grid">
+          <article><span>01</span><h3>Partir du réel</h3><p>Décrire les contraintes avant de formuler les promesses.</p></article>
+          <article><span>02</span><h3>Identifier les verrous</h3><p>Comprendre pourquoi les objectifs affichés n’ont pas été atteints.</p></article>
+          <article><span>03</span><h3>Ajuster les cadres</h3><p>Modifier les règles, les institutions et les séquences qui empêchent l’action.</p></article>
+          <article><span>04</span><h3>Relier les échelles</h3><p>Articuler stratégie nationale, applications territoriales et prototypes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ouvrages-list" id="ouvrages">
+      <div class="ouvrages-container">
+        <span class="ouvrages-eyebrow">Les publications</span>
+        <h2>Choisir son entrée dans CAP2032</h2>
+        <div class="ouvrages-grid">
+          <article class="ouvrage-card">
+            <div class="ouvrage-card-top"><span>Livre stratégique</span><strong>01</strong></div>
+            <h3>CAP2032 — Sauvons la France</h3>
+            <p class="ouvrage-subtitle">Cadre de redressement et de gouvernabilité.</p>
+            <p>Un ouvrage structuré autour du constat systémique, des quinze piliers d’action et d’une trajectoire macroéconomique inscrite dans le temps long.</p>
+            <ul><li>Diagnostic et méthode</li><li>15 piliers stratégiques</li><li>Trajectoire nationale et territoriale</li></ul>
+            <div class="ouvrage-actions">
+              <a href="/documents/resume-cap2032.pdf" class="btn-secondary" download>Télécharger le résumé PDF</a>
+              <% if (user) { %><a href="/membre/livre" class="btn-primary">Page membre</a><% } else { %><a href="/login" class="btn-primary">Accès membre</a><% } %>
+            </div>
+            <% if (livrePurchaseUrl) { %><a class="ouvrage-buy" href="<%= livrePurchaseUrl %>" target="_blank" rel="noopener">Acquérir l’ouvrage complet →</a><% } else { %><span class="ouvrage-buy disabled">Lien d’acquisition bientôt disponible</span><% } %>
+          </article>
+
+          <article class="ouvrage-card">
+            <div class="ouvrage-card-top"><span>Essai</span><strong>02</strong></div>
+            <h3>Essais philosophiques</h3>
+            <p class="ouvrage-subtitle">Gouverner dans un monde accéléré et systémique.</p>
+            <p>Une réflexion sur le temps long, l’intérêt général, les libertés, les verrous institutionnels et les conditions intellectuelles d’une action collective responsable.</p>
+            <ul><li>Temps long et accélération</li><li>Intérêt général et libertés</li><li>Méthode CAP2032</li></ul>
+            <div class="ouvrage-actions">
+              <a href="/documents/resume-essais-philosophiques.pdf" class="btn-secondary" download>Télécharger le résumé PDF</a>
+              <% if (user) { %><a href="/membre/essais" class="btn-primary">Page membre</a><% } else { %><a href="/login" class="btn-primary">Accès membre</a><% } %>
+            </div>
+            <% if (essaisPurchaseUrl) { %><a class="ouvrage-buy" href="<%= essaisPurchaseUrl %>" target="_blank" rel="noopener">Acquérir l’ouvrage complet →</a><% } else { %><span class="ouvrage-buy disabled">Lien d’acquisition bientôt disponible</span><% } %>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ouvrages-member-cta">
+      <div class="ouvrages-container ouvrages-cta-inner">
+        <div><span class="ouvrages-eyebrow">Espace membre</span><h2>Approfondir la lecture</h2><p>Les membres accèdent aux pages détaillées des deux ouvrages, aux fiches stratégiques complètes et aux prototypes territoriaux.</p></div>
+        <% if (user) { %><a href="/espace-membre" class="btn-primary">Ouvrir l’espace membre</a><% } else { %><a href="/login" class="btn-primary">Se connecter</a><% } %>
+      </div>
+    </section>
+  </main>
+  <%- include('partial/footer') %>
+</body>
+</html>

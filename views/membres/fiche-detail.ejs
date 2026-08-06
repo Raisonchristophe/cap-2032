@@ -2,138 +2,378 @@
 <html lang="fr">
 
 <head>
-  <%- include('../partial/head', { title: fiche.title }) %>
+  <%- include("../partial/head", {
+    title: `Fiche détaillée ${id} — ${fiche.title} — CAP2032`
+  }) %>
 </head>
 
 <body class="page-fiche-detail <%= pdfMode ? 'pdf-mode' : '' %>">
-<% if (!pdfMode) { %>
-  <%- include('../partial/nav', { currentPage: 'membre' }) %>
+
+  <% if (!pdfMode) { %>
+    <div class="progress-bar" id="progress"></div>
+
+    <%- include("../partial/nav", {
+      currentPage: "membre"
+    }) %>
+
+    <%- include("../partial/breadcrumb", {
+      items: [
+        {
+          label: "Accueil",
+          url: "/"
+        },
+        {
+          label: "Espace membre",
+          url: "/espace-membre"
+        },
+        {
+          label: `Fiche ${id} / 15 — ${fiche.title}`
+        }
+      ]
+    }) %>
   <% } %>
 
-  <!-- BREADCRUMB -->
-   <% if (!pdfMode) { %>
-  <div class="breadcrumb">
-    <a href="/">Accueil</a>
-    <span class="sep">·</span>
-    <a href="/espace-membre">Espace membre</a>
-    <span class="sep">·</span>
-    <span><%= fiche.title %></span>
-  </div>
-  <% } %>
+  <main class="fiche-detail-main">
 
-  <!-- HERO -->
-  <section class="fiche-hero">
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <header class="fiche-hero fiche-detail-hero">
+      <div class="fiche-hero-content">
 
-    <span class="fiche-tag">Fiche <%= id %></span>
+        <div class="fiche-hero-topline">
+          <span class="fiche-tag">
+            Fiche détaillée <%= id %> / 15
+          </span>
 
-    <img class="fiche-image" src="<%= fiche.image %>"alt="<%= fiche.title %>">
+          <% if (!pdfMode) { %>
+            <span class="fiche-member-badge">
+              Espace membre
+            </span>
+          <% } %>
+        </div>
 
-    <h1>
-      <%= fiche.title %><br>
-      <em><%= fiche.subtitle %></em>
-    </h1>
+        <div class="fiche-hero-grid">
 
-    <p class="fiche-intro">
-      <%= fiche.intro %>
-    </p>
+          <div class="fiche-hero-text">
 
-  </section>
+            <h1><%= fiche.title %></h1>
 
-  <!-- CONTENU -->
-  <section class="fiche-body">
+            <% if (fiche.subtitle) { %>
+              <p class="fiche-subtitle">
+                <%= fiche.subtitle %>
+              </p>
+            <% } %>
 
-    <% fiche.sections.forEach(section => { %>
+            <% if (fiche.intro) { %>
+              <div class="fiche-intro">
+                <% fiche.intro
+                  .trim()
+                  .split(/\n\s*\n/)
+                  .filter(Boolean)
+                  .forEach(paragraph => { %>
+                    <p><%= paragraph.trim() %></p>
+                <% }) %>
+              </div>
+            <% } %>
 
-      <% if (section.type === "title") { %>
-        <h2><%= section.content %></h2>
-      <% } %>
+            <% if (!pdfMode) { %>
+              <a
+                href="/membre/download/fiche/<%= id %>"
+                class="download-pdf"
+              >
+                Télécharger la fiche détaillée en PDF
+              </a>
+            <% } %>
 
-      <% if (section.type === "subtitle") { %>
-        <h3><%= section.content %></h3>
-      <% } %>
+          </div>
 
-      <% if (section.type === "text") { %>
-        <p><%= section.content %></p>
-      <% } %>
+          <% if (fiche.image) { %>
+            <figure class="fiche-hero-image">
+              <img
+                src="<%= fiche.image %>"
+                alt="Illustration du pilier « <%= fiche.title %> »"
+                loading="eager"
+              >
+            </figure>
+          <% } %>
 
-      <% if (section.type === "list") { %>
-        <ul>
-          <% section.items.forEach(item => { %>
-            <li><%= item %></li>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- =====================================================
+         SOMMAIRE AUTOMATIQUE
+         ===================================================== -->
+    <%
+      const ficheTitles = (fiche.sections || [])
+        .filter(section => section.type === "title");
+    %>
+
+    <% if (ficheTitles.length) { %>
+      <nav class="fiche-structure" aria-label="Sommaire de la fiche détaillée">
+        <p class="fiche-structure-title">
+          Dans cette fiche
+        </p>
+
+        <ol class="structure">
+          <% ficheTitles.forEach((section, index) => { %>
+            <li>
+              <a href="#section-<%= index + 1 %>">
+                <%= section.content %>
+              </a>
+            </li>
           <% }) %>
-        </ul>
+        </ol>
+      </nav>
+    <% } %>
+
+    <!-- =====================================================
+         CONTENU
+         ===================================================== -->
+    <article class="fiche-body fiche-detail-body">
+
+      <% let sectionIndex = 0; %>
+
+      <% (fiche.sections || []).forEach(section => { %>
+
+        <!-- TITRE -->
+        <% if (section.type === "title") { %>
+          <% sectionIndex += 1; %>
+
+          <h2 id="section-<%= sectionIndex %>">
+            <%= section.content %>
+          </h2>
+        <% } %>
+
+        <!-- SOUS-TITRE -->
+        <% if (section.type === "subtitle") { %>
+          <h3>
+            <%= section.content %>
+          </h3>
+        <% } %>
+
+        <!-- TEXTE -->
+        <% if (section.type === "text") { %>
+          <div class="fiche-text">
+            <% String(section.content || "")
+              .trim()
+              .split(/\n\s*\n/)
+              .filter(Boolean)
+              .forEach(paragraph => { %>
+                <p><%= paragraph.trim() %></p>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <!-- LISTE -->
+        <% if (section.type === "list") { %>
+          <ul class="fiche-list">
+            <% (section.items || []).forEach(item => { %>
+              <li><%= item %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+
+        <!-- CITATION -->
+        <% if (section.type === "quote") { %>
+          <blockquote class="pullquote">
+            <p><%= section.content %></p>
+          </blockquote>
+        <% } %>
+
+        <!-- ENCADRÉ -->
+        <% if (section.type === "encadre") { %>
+          <aside class="encadre fiche-detail-encadre">
+
+            <% if (section.title) { %>
+              <h3><%= section.title %></h3>
+            <% } %>
+
+            <div class="encadre-content">
+              <% String(section.content || "")
+                .trim()
+                .split(/\n\s*\n/)
+                .filter(Boolean)
+                .forEach(paragraph => { %>
+                  <p><%= paragraph.trim() %></p>
+              <% }) %>
+            </div>
+
+          </aside>
+        <% } %>
+
+      <% }) %>
+
+      <!-- ===================================================
+           RESSOURCES COMPLÉMENTAIRES ÉVENTUELLES
+           =================================================== -->
+      <% if (fiche.links?.length) { %>
+        <aside class="fiche-links">
+
+          <span class="fiche-section-label">
+            Documentation
+          </span>
+
+          <h2>Ressources complémentaires</h2>
+
+          <ul>
+            <% fiche.links.forEach(link => { %>
+              <li>
+                <% if (pdfMode) { %>
+                  <span><%= link.label %></span>
+                <% } else { %>
+                  <a
+                    href="<%= link.url %>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <%= link.label %>
+                  </a>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
+
+        </aside>
       <% } %>
 
-      <% if (section.type === "quote") { %>
-        <div class="pullquote">
-          <%= section.content %>
+      <!-- ===================================================
+           CONCLUSION ÉVENTUELLE
+           =================================================== -->
+      <% if (fiche.conclusion) { %>
+        <div class="fiche-conclusion">
+          <p><%= fiche.conclusion %></p>
         </div>
       <% } %>
 
-<% if (section.type === "encadre") { %>
+    </article>
 
-  <% if (pdfMode) { %>
+    <!-- =====================================================
+         TÉLÉCHARGEMENT
+         ===================================================== -->
+    <% if (!pdfMode) { %>
+      <section class="fiche-download-section">
 
-    <!-- VERSION PDF (DÉCOUPÉE) -->
-    <section class="bloc">
-      <h2><%= section.title %></h2>
+        <div class="fiche-download-content">
 
-      <% section.content.split('\n\n').forEach(paragraph => { %>
-        <p><%= paragraph %></p>
-      <% }) %>
+          <span class="fiche-access-label">
+            Lecture hors ligne
+          </span>
 
-    </section>
+          <h2>Conserver cette fiche détaillée</h2>
 
-  <% } else { %>
+          <p>
+            Télécharge la version complète pour la consulter,
+            l’annoter ou la partager hors ligne.
+          </p>
 
-    <!-- VERSION SITE (ORIGINALE) -->
-    <div class="encadre">
-      <h3><%= section.title %></h3>
-      <p style="white-space: pre-line;"><%= section.content %></p>
-    </div>
+          <a
+            href="/membre/download/fiche/<%= id %>"
+            class="btn btn-primary download-pdf"
+          >
+            Télécharger le PDF
+          </a>
 
-  <% } %>
+        </div>
 
-<% } %>
-
-    <% }) %>
-
-  </section>
-
-  <!-- DOWNLOAD -->
-   <% if (!pdfMode) { %>
-  <section class="download-section">
-    <a href="/download/fiche/<%= id %>" class="btn btn-primary">
-      📄 Télécharger la fiche (PDF)
-    </a>
-
-    <p class="download-note">
-      Version complète téléchargeable pour lecture hors ligne.
-    </p>
-  </section>
-  <% } %>
-
-  <!-- NAVIGATION FICHES -->
-   <% if (!pdfMode) { %>
-  <div class="content-nav simple">
-
-    <% if (id > 1) { %>
-      <a href="/membre/fiche/<%= id - 1 %>">
-        ← Fiche précédente
-      </a>
+      </section>
     <% } %>
 
-    <% if (id < 15) { %>
-      <a href="/membre/fiche/<%= Number(id) + 1 %>">
-        Fiche suivante →
-      </a>
+    <!-- =====================================================
+         NAVIGATION ENTRE LES FICHES
+         ===================================================== -->
+    <% if (!pdfMode) { %>
+      <nav
+        class="content-nav rich fiche-detail-navigation"
+        aria-label="Navigation entre les fiches détaillées"
+      >
+
+        <div class="content-nav-prev">
+          <% if (Number(id) > 1) { %>
+            <a
+              href="/membre/fiche/<%= Number(id) - 1 %>"
+              class="content-nav-link prev"
+            >
+              <span class="content-nav-dir">
+                ← Fiche précédente
+              </span>
+
+              <span class="content-nav-name">
+                Fiche <%= Number(id) - 1 %>
+              </span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-list">
+          <a
+            href="/espace-membre"
+            class="content-nav-link list"
+          >
+            <span class="content-nav-dir">
+              ↑ Retour
+            </span>
+
+            <span class="content-nav-name">
+              Espace membre
+            </span>
+          </a>
+        </div>
+
+        <div class="content-nav-next">
+          <% if (Number(id) < 15) { %>
+            <a
+              href="/membre/fiche/<%= Number(id) + 1 %>"
+              class="content-nav-link next"
+            >
+              <span class="content-nav-dir">
+                Fiche suivante →
+              </span>
+
+              <span class="content-nav-name">
+                Fiche <%= Number(id) + 1 %>
+              </span>
+            </a>
+          <% } %>
+        </div>
+
+      </nav>
     <% } %>
 
-  </div>
-  <% } %>
+  </main>
 
-<% if (!pdfMode) { %>
-  <%- include('../partial/footer') %>
+  <% if (!pdfMode) { %>
+    <%- include("../partial/footer") %>
+
+    <script>
+      const progress = document.getElementById("progress");
+
+      if (progress) {
+        const updateProgress = () => {
+          const scrollableHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+          const percentage =
+            scrollableHeight > 0
+              ? (window.scrollY / scrollableHeight) * 100
+              : 0;
+
+          progress.style.width =
+            `${Math.min(100, percentage)}%`;
+        };
+
+        window.addEventListener(
+          "scroll",
+          updateProgress,
+          { passive: true },
+        );
+
+        updateProgress();
+      }
+    </script>
   <% } %>
 
 </body>

@@ -1,30 +1,45 @@
- /* BREADCRUMB */
-     .breadcrumb {
-      padding: 1.2rem 4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
+/* =========================================================
+   FIL D’ARIANE
+   ========================================================= */
 
-    .breadcrumb a, .breadcrumb span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
 
-    .breadcrumb a:hover {
-      color: var(--ocre-clair);
-    }
+  width: min(calc(100% - (2 * var(--space-page))), var(--container-large));
+  margin: 0 auto;
+  padding: 1rem 0;
 
-    .breadcrumb .sep {
-      color: rgba(181,130,42,0.4);
-    }
+  border-bottom: 1px solid var(--bordure);
+}
 
-    .breadcrumb span:last-child {
-      color: var(--ocre);
-    }
+.breadcrumb a,
+.breadcrumb span {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  color: var(--texte-doux);
+
+  transition: color var(--transition-courte);
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus-visible {
+  color: var(--vert);
+}
+
+.breadcrumb .sep {
+  color: var(--ocre);
+  opacity: 0.55;
+}
+
+.breadcrumb span:last-child {
+  color: var(--ocre);
+}

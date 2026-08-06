@@ -12,17 +12,9 @@
 <body class="page-index">
 
   <!-- NAV -->
-  <nav>
-    <span class="nav-logo">CAP 2032</span>
-    <ul class="nav-links">
-      <li><a href="#piliers">Les trois angles</a></li>
-      <li><a href="#demarche">La démarche</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="/notes">Notes stratégiques</a></li>
-      <li><a href="/adhesion">Adhésion</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+  <%- include("partial/nav", {
+  currentPage: "home"
+}) %>
 
 
 
@@ -30,25 +22,28 @@
   <section class="hero">
 
     <div class="hero-content">
-      <p class="hero-eyebrow">Archéologie · Philosophie · Application contemporaine</p>
+      <p class="hero-eyebrow">Comprendre le passé · Analyser le présent · Construire l'avenir</p>
 
       <h1 class="hero-title">
         Gouverner dans un monde<br>
         <em>devenu systémique</em> ?
       </h1>
 
-<img class="image" src="/logo/accueil.png" alt="">
+<img class="image" src="/logo/accueil.png" alt="CAP2032 — Une nouvelle lecture du monde">
 
       <p class="hero-subtitle">
           Nos sociétés disposent de davantage d’informations, d’expertises et d’outils que jamais.<br>
           Pourtant, l’action publique paraît fragmentée, instable, souvent impuissante.<br><br>
-          Ce travail propose une hypothèse simple : <strong>la crise n’est pas morale. Elle est structurelle.</strong><br>
-          Et elle peut être pensée autrement.
+          CAP2032 part d'une hypothèse simple : <strong>la crise n’est pas seulement morale ou politique. Elle est structurelle.</strong><br>
+          Pour agir autrement, il faut d’abord apprendre à penser les interactions.
 
       </p>
 
       <div class="hero-cta">
-        <a href="#piliers" class="btn-primary">Explorer la thèse</a>
+        <a href="#piliers" class="btn-primary">Découvrir CAP2032</a>
+          <a href="#nouvelles-publications" class="btn-secondary">
+    dernières publications
+  </a>
         <a href="#demarche" class="btn-secondary">Comprendre la démarche</a>
       </div>
     </div>
@@ -66,10 +61,11 @@
     <div class="constat-inner">
       <p class="piliers-eyebrow">Constat</p>
       <ul class="constat-list">
-        <li>Dette publique française : environ 3 200 milliards d’euros</li>
-        <li>Désindustrialisation continue depuis les années 1980</li>
-        <li>Fragmentation institutionnelle croissante</li>
-        <li>Baisse durable de la confiance dans les institutions</li>
+        <li>Une dette publique qui réduit progressivement la capacité d’action collective</li>
+        <li>Une désindustrialisation engagée depuis plusieurs décennies</li>
+        <li>Une organisation institutionnelle devenue complexe et fragmentée</li>
+        <li>Une baisse durable de la confiance dans les institutions</li>
+        <li>Des défis climatiques, économiques et géopolitiques désormais interdépendants</li>
         </ul>
     </div>
   </section>
@@ -87,23 +83,26 @@
 
       <div class="step">
         <span>1</span>
-        <h3>Comprendre</h3>
-        <p>Explorer les fondements avec les piliers I et II.</p>
-        <a href="/pilier1">Commencer →</a>
+        <h3>Prendre du recul</h3>
+        <p> Explorer l’histoire, l’archéologie et les travaux scientifiques
+          qui interrogent notre lecture des sociétés humaines. </p>
+          <a href="/pilier1"> Comprendre le passé → </a>
       </div>
 
       <div class="step">
         <span>2</span>
-        <h3>Structurer</h3>
-        <p>Découvrir les 15 piliers du système.</p>
-        <a href="#piliers-secondaires">Voir les piliers →</a>
+       <h3>Analyser le présent</h3>
+       <p> Découvrir les articles consacrés à l’intérêt général,
+        aux institutions, à la dette et à la pensée systémique. </p>
+        <a href="/pilier2"> Lire les réflexions → </a>
       </div>
 
       <div class="step">
         <span>3</span>
-        <h3>Agir</h3>
-        <p>Passer à l’action avec les prototypes.</p>
-        <a href="/pilier3">Voir les prototypes →</a>
+        <h3>Construire l’avenir</h3>
+        <p> Parcourir les quinze fiches stratégiques et les quatre
+          prototypes territoriaux de CAP2032. </p>
+          <a href="/pilier3"> Découvrir les propositions → </a>
       </div>
 
     </div>
@@ -116,34 +115,43 @@
   <section class="intro">
     <div class="intro-label">Pourquoi ce travail</div>
     <div class="intro-text">
-      <p>Il y a un paradoxe au cœur de notre époque. <strong>Jamais nous n'avons eu autant de données, d'expertises, d'outils d'analyse.</strong> Et jamais l'action publique n'a semblé aussi hésitante, aussi fragmentée, aussi incapable de tenir une trajectoire.</p>
+      <p>Il existe un paradoxe au cœur de notre époque. <strong>Jamais nous n'avons disposé d'autant de données, d'expertises, d'outils d'analyse.</strong>
+        Pourtant l'action publique paraît de plus en plus hésitante, fragmentée et incapable de tenir une trajectoire dans le temps.</p>
 
-      <p>Les diagnostics s'accumulent. Les réformes s'annulent. Les alternances ne changent rien à la structure. Et pendant ce temps, <em>les problèmes, eux, deviennent systémiques</em> — énergétiques, agricoles, sociaux, institutionnels — et refusent d'être traités en silos.</p>
+      <p>Les diagnostics s’accumulent. Les réformes se succèdent ou s’annulent.
+        Les alternances modifient les priorités sans toujours transformer les structures.
+        Pendant ce temps, les problèmes deviennent systémiques :
+        finances publiques, énergie, agriculture, industrie, cohésion sociale, institutions et géopolitique sont désormais profondément interdépendantes.</p>
 
       <div class="intro-pullquote">
-        <p>Ce qui manque n’est peut-être pas une réforme de plus, mais un cadre permettant de penser les interactions avant d’agir.</p>
+        <p>Ce qui manque n’est peut-être pas une réforme suplémentaire, mais un cadre permettant de Comprendre les interactions avant d’agir.</p>
       </div>
 
-      <p>Ce travail ne prétend pas apporter des réponses définitives. Il propose un cadre : trois angles d'entrée dans une même question — <strong>comment les sociétés humaines ont-elles réussi à coopérer à grande échelle, et que faudrait-il pour que nous y parvenions à nouveau ?</strong></p>
+      <p>CAP2032 propose une démarche en trois temps :
+        <strong> comprendre le passé, analyser le présent et construire l’avenir. </strong>
+        L’histoire et l’archéologie élargissent le champ des organisations humaines possibles.
+        Les articles interrogent nos cadres de pensée actuels.
+        Les fiches stratégiques et les prototypes traduisent cette réflexion en propositions concrètes.</p>
 
-      <p>C'est un travail né d'un parcours atypique — terrain, technique, humanitaire, agriculture — et d'une conviction : <strong>que le recul n'est pas une faiblesse. C'est une condition de la vision.</strong></p>
+      <p>Ce travail est né d’un parcours atypique mêlant terrain, technique, humanitaire et agriculture, ainsi que d’une conviction :
+         <strong> prendre du recul n’est pas renoncer à agir. C’est une condition pour agir avec cohérence. </strong></p>
     </div>
   </section>
 
   <!-- TROIS PILIERS -->
   <section class="piliers" id="piliers">
     <div class="piliers-header reveal">
-      <p class="piliers-eyebrow">Architecture de la thèse</p>
-      <h2 class="piliers-title">Trois angles.<br>Une même conviction.</h2>
+      <p class="piliers-eyebrow">Architecture de CAP2032</p>
+      <h2 class="piliers-title">Comprendre le passé.<br>Analyser le présent.<br>Construire l'avenir</h2>
     </div>
 
     <div class="piliers-grid">
 
       <a class="pilier-card reveal" href="/pilier1">
         <span class="pilier-num">I</span>
-        <span class="pilier-tag">Archéologie · Anthropologie · Paléogénétique</span>
-        <h3 class="pilier-name">Ce que l'histoire longue nous apprend</h3>
-        <p class="pilier-desc">Göbekli Tepe, la civilisation de l'Indus, Caral, les travaux de paléogénétique : des éléments qui invitent à reconsidérer la place de la coopération dans l’histoire humaine.</p>
+        <span class="pilier-tag">Histoire . Archéologie · Anthropologie · Paléogénétique</span>
+        <h3 class="pilier-name">Comprendre le passé</h3>
+        <p class="pilier-desc">Göbekli Tepe, la civilisation de l'Indus, Caral et les travaux de paléogénétique : des éléments qui invitent à reconsidérer la place de la coopération dans l’histoire humaine.</p>
         <div class="pilier-themes">
           <span class="pilier-theme">Göbekli Tepe</span>
           <span class="pilier-theme">Civilisation de l'Indus</span>
@@ -155,10 +163,9 @@
 
       <a class="pilier-card reveal" href="/pilier2" style="transition-delay: 0.15s">
         <span class="pilier-num">II</span>
-        <span class="pilier-tag">Philosophie · Institutions · Gouvernance</span>
-        <h3 class="pilier-name">Repenser les cadres collectif</h3>
-        <p class="pilier-desc">Intérêt général et libertés individuelles ne s’opposent pas nécessairement.
-          La pensée systémique et le temps long comme conditions d’une gouvernance durable.
+        <span class="pilier-tag">Réflexions . Philosophie · Institutions · Gouvernance</span>
+        <h3 class="pilier-name">Analyser le présent</h3>
+        <p class="pilier-desc">Des articles de réflexion pour interroger l’intérêt général, les libertés individuelles, la dette, les institutions, la pensée systémique et le temps long.
         </p>
         <div class="pilier-themes">
           <span class="pilier-theme">Intérêt général</span>
@@ -171,17 +178,16 @@
 
       <a class="pilier-card reveal" href="/pilier3" style="transition-delay: 0.3s">
         <span class="pilier-num">III</span>
-        <span class="pilier-tag">Économie · Territoire · Action concrète</span>
-        <h3 class="pilier-name">Transposer dans le réel</h3>
-        <p class="pilier-desc">CAP 2032 propose une méthode structurée : objectif, verrou, cadre, action.
-          Des pistes concrètes, articulées au droit existant, expérimentables à l’échelle territoriale.
+        <span class="pilier-tag">Économie · Territoires · Propositions . Expérimentations</span>
+        <h3 class="pilier-name">Construire l'avenir</h3>
+        <p class="pilier-desc">Quinze fiches stratégiques et quatre prototypes territoriaux traduisent la réflexion en propositions concrètes, articulées au droit existant et expérimentables à différentes échelles.
         </p>
         <div class="pilier-themes">
-          <span class="pilier-theme">CAP 2032</span>
-          <span class="pilier-theme">Polyculture élevage</span>
-          <span class="pilier-theme">SCOP territoriale</span>
-          <span class="pilier-theme">Souveraineté alimentaire</span>
-          <span class="pilier-theme">écoles multi-niveaux</span>
+          <span class="pilier-theme">15 fiches stratégiques</span>
+          <span class="pilier-theme">Atelier technique territorial</span>
+          <span class="pilier-theme">Polyculture-élevage</span>
+          <span class="pilier-theme">Ecole multi-niveaux</span>
+          <span class="pilier-theme">Village SCIC</span>
         </div>
         <span class="pilier-arrow">→</span>
       </a>
@@ -189,183 +195,314 @@
     </div>
   </section>
 
+
+
   <!-- CHIFFRES -->
   <section class="chiffres">
     <p class="piliers-eyebrow reveal">Quelques repères</p>
     <div class="chiffres-grid">
       <div class="chiffre-item reveal">
         <div class="chiffre-num">40 000</div>
-        <div class="chiffre-label">ans de preuves archéologiques de coopération humaine à grande échelle</div>
+        <div class="chiffre-label">ans d'enseignements tirés de l'histoire et de l'archéologie</div>
       </div>
       <div class="chiffre-item reveal" style="transition-delay:0.1s">
         <div class="chiffre-num">15</div>
-        <div class="chiffre-label">piliers structurels pour un redressement gouvernable de la France à horizon 2032</div>
+        <div class="chiffre-label">fiches stratégiques pour construire une vision systémique</div>
       </div>
       <div class="chiffre-item reveal" style="transition-delay:0.2s">
-        <div class="chiffre-num">3</div>
-        <div class="chiffre-label">prototypes territoriaux articulés — SCOP, agriculture intégrée, école multi-niveaux</div>
+        <div class="chiffre-num">4</div>
+        <div class="chiffre-label">prototypes territoriaux expérimentables</div>
       </div>
       <div class="chiffre-item reveal" style="transition-delay:0.3s">
         <div class="chiffre-num">1</div>
-        <div class="chiffre-label">1 méthode structurée : objectif, verrou, cadre, action.</div>
+        <div class="chiffre-label">méthode : comprendre le passé, analyser le présent et construire l'avenir</div>
       </div>
     </div>
   </section>
 
-  <!-- Piliers-secondaires-->
+  <!-- NOUVELLES PUBLICATIONS -->
 
-  <section class="piliers-secondaires" id="piliers-secondaires">
-  <div class="piliers-header reveal">
-    <p class="piliers-eyebrow">Architecture complète</p>
-    <h2 class="piliers-title">15 piliers pour structurer l’action</h2>
-  </div>
+<section class="home-publications" id="nouvelles-publications">
 
-  <div class="piliers-grid">
+  <div class="home-publications-inner">
 
-  <a class="pilier-card" href="/fiche1">
-    <span class="pilier-num">01</span>
-    <h3 class="pilier-name">Finances publiques</h3>
-    <img src="/vignette/pilier 1.png" alt="Finances publiques">
-    <p class="pilier-desc">Dette, déficit et trajectoire budgétaire.</p>
-  </a>
+```
+<div class="home-publications-header reveal">
 
-  <a class="pilier-card" href="/fiche2">
-    <span class="pilier-num">02</span>
-    <h3 class="pilier-name">Travail & revenus</h3>
-    <img src="/vignette/pilier 2.png" alt="Travail & revenus">
-    <p class="pilier-desc">Emploi, dignité et cohésion sociale.</p>
-  </a>
+  <p class="piliers-eyebrow">
+    CAP2032 évolue
+  </p>
 
-  <a class="pilier-card" href="/fiche3">
-    <span class="pilier-num">03</span>
-    <h3 class="pilier-name">Agriculture & alimentation</h3>
-    <img src="/vignette/pilier 3.png" alt="Agricuture & alimentation">
-    <p class="pilier-desc">Souveraineté alimentaire et production locale.</p>
-  </a>
+  <h2 class="home-publications-title">
+    Nouvelles publications
+  </h2>
 
-  <a class="pilier-card" href="/fiche4">
-    <span class="pilier-num">04</span>
-    <h3 class="pilier-name">Santé & système de soins</h3>
-    <img src="/vignette/pilier 4.png" alt="Santé & système de soins">
-    <p class="pilier-desc">Organisation et résilience du système sanitaire.</p>
-  </a>
+  <p class="home-publications-intro">
+    Découvrez le dernier article de réflexion, la dernière publication
+    consacrée à l’histoire et à l’archéologie, ainsi que le dernier
+    prototype territorial de CAP2032.
+  </p>
 
-  <a class="pilier-card" href="/fiche5">
-    <span class="pilier-num">05</span>
-    <h3 class="pilier-name">Éducation & recherche</h3>
-    <img src="/vignette/pilier 5.png" alt="Éducation & recherche">
-    <p class="pilier-desc">Transmission, formation et adaptation.</p>
-  </a>
+</div>
 
-  <a class="pilier-card" href="/fiche6">
-    <span class="pilier-num">06</span>
-    <h3 class="pilier-name">Institutions & gouvernance</h3>
-    <img src="/vignette/pilier 6.png" alt="Institutions & gouvernance">
-    <p class="pilier-desc">Capacité à décider et gouverner dans le temps long.</p>
-  </a>
 
-  <a class="pilier-card" href="/fiche7">
-    <span class="pilier-num">07</span>
-    <h3 class="pilier-name">Industrie</h3>
-    <img src="/vignette/pilier 7.png" alt="Industrie">
-    <p class="pilier-desc">Relocalisation et production stratégique.</p>
-  </a>
+<div class="home-publications-grid">
 
-  <a class="pilier-card" href="/fiche8">
-    <span class="pilier-num">08</span>
-    <h3 class="pilier-name">Numérique</h3>
-    <img src="/vignette/pilier 8.png" alt="Numérique">
-    <p class="pilier-desc">Souveraineté technologique et infrastructures.</p>
-  </a>
+  <!-- DERNIER ARTICLE -->
+  <% if (dernierArticle) { %>
 
-  <a class="pilier-card" href="/fiche9">
-    <span class="pilier-num">09</span>
-    <h3 class="pilier-name">Transition écologiques et énergétiques</h3>
-    <img src="/vignette/pilier 9.png" alt="Transition écologiques et énergétiques">
-    <p class="pilier-desc">Investissements structurants et acceptabilité sociale.</p>
-  </a>
+    <article class="home-publication-card reveal">
 
-  <a class="pilier-card" href="/fiche10">
-    <span class="pilier-num">10</span>
-    <h3 class="pilier-name">Logement</h3>
-    <img src="/vignette/pilier 10.png" alt="Logement">
-    <p class="pilier-desc">Accès, rénovation et filières locales.</p>
-  </a>
+      <% if (dernierArticle.image) { %>
 
-  <a class="pilier-card" href="/fiche11">
-    <span class="pilier-num">11</span>
-    <h3 class="pilier-name">Sécurité & défense</h3>
-    <img src="/vignette/pilier 11.png" alt="Sécurité & défense">
-    <p class="pilier-desc">Menaces hybride et industrie de défense.</p>
-  </a>
+        <a
+          href="/publication/<%= dernierArticle.slug %>"
+          class="home-publication-image"
+          aria-label="Lire <%= dernierArticle.title %>"
+        >
+          <img
+            src="<%= dernierArticle.image %>"
+            alt="<%= dernierArticle.title %>"
+            loading="lazy"
+          >
+        </a>
 
-  <a class="pilier-card" href="/fiche12">
-    <span class="pilier-num">12</span>
-    <h3 class="pilier-name">Justice & sécurité intérieur</h3>
-    <img src="/vignette/pilier 12.png" alt="Justice & sécurité intérieur">
-    <p class="pilier-desc">Intégration, travail et responsabilité collective.</p>
-  </a>
+      <% } %>
 
-  <a class="pilier-card" href="/fiche13">
-    <span class="pilier-num">13</span>
-    <h3 class="pilier-name">Immigration et intégration</h3>
-    <img src="/vignette/pilier 13.png" alt="Immigration et intégration">
-    <p class="pilier-desc">Accueil digne et responsabilité collective.</p>
-  </a>
+      <div class="home-publication-content">
 
-  <a class="pilier-card" href="/fiche14">
-    <span class="pilier-num">14</span>
-    <h3 class="pilier-name">Emploi productif</h3>
-    <img src="/vignette/pilier 14.png" alt="Emploi productif">
-    <p class="pilier-desc">travail utile et non délocalisable.</p>
-  </a>
+        <div class="home-publication-meta">
+          <span class="home-publication-type">
+            Article de réflexion
+          </span>
+        </div>
 
-  <a class="pilier-card" href="/fiche15">
-    <span class="pilier-num">15</span>
-    <h3 class="pilier-name">Souveraineté internationale</h3>
-    <img src="/vignette/pilier 15.png" alt="Souveraineté internationale">
-    <p class="pilier-desc">Autonomie stratégique, diplomatie économique et énergétique.</p>
+        <h3>
+          <a href="/publication/<%= dernierArticle.slug %>">
+            <%= dernierArticle.title %>
+          </a>
+        </h3>
+
+        <% if (dernierArticle.excerpt) { %>
+
+          <p>
+            <%= dernierArticle.excerpt %>
+          </p>
+
+        <% } else if (dernierArticle.subtitle) { %>
+
+          <p>
+            <%= dernierArticle.subtitle %>
+          </p>
+
+        <% } %>
+
+        <a
+          href="/publication/<%= dernierArticle.slug %>"
+          class="home-publication-link"
+        >
+          Lire l’article
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </article>
+
+  <% } %>
+
+
+  <!-- DERNIÈRE PUBLICATION ARCHÉOLOGIQUE -->
+  <% if (derniereArcheologie) { %>
+
+    <article
+      class="home-publication-card reveal"
+      style="transition-delay: 0.12s"
+    >
+
+      <% if (derniereArcheologie.image) { %>
+
+        <a
+          href="/publication/<%= derniereArcheologie.slug %>"
+          class="home-publication-image"
+          aria-label="Lire <%= derniereArcheologie.title %>"
+        >
+          <img
+            src="<%= derniereArcheologie.image %>"
+            alt="<%= derniereArcheologie.title %>"
+            loading="lazy"
+          >
+        </a>
+
+      <% } %>
+
+      <div class="home-publication-content">
+
+        <div class="home-publication-meta">
+          <span class="home-publication-type">
+            Histoire &amp; Archéologie
+          </span>
+        </div>
+
+        <h3>
+          <a href="/publication/<%= derniereArcheologie.slug %>">
+            <%= derniereArcheologie.title %>
+          </a>
+        </h3>
+
+        <% if (derniereArcheologie.excerpt) { %>
+
+          <p>
+            <%= derniereArcheologie.excerpt %>
+          </p>
+
+        <% } else if (derniereArcheologie.subtitle) { %>
+
+          <p>
+            <%= derniereArcheologie.subtitle %>
+          </p>
+
+        <% } %>
+
+        <a
+          href="/publication/<%= derniereArcheologie.slug %>"
+          class="home-publication-link"
+        >
+          Lire la publication
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </article>
+
+  <% } %>
+
+
+  <!-- DERNIER PROTOTYPE -->
+  <% if (dernierPrototype) { %>
+
+    <article
+      class="home-publication-card reveal"
+      style="transition-delay: 0.24s"
+    >
+
+      <% if (dernierPrototype.image) { %>
+
+        <a
+          href="/prototype/<%= dernierPrototype.id %>"
+          class="home-publication-image"
+          aria-label="Découvrir <%= dernierPrototype.title %>"
+        >
+          <img
+            src="<%= dernierPrototype.image %>"
+            alt="<%= dernierPrototype.title %>"
+            loading="lazy"
+          >
+        </a>
+
+      <% } %>
+
+      <div class="home-publication-content">
+
+        <div class="home-publication-meta">
+          <span class="home-publication-type">
+            Prototype territorial
+          </span>
+        </div>
+
+        <h3>
+          <a href="/prototype/<%= dernierPrototype.id %>">
+            <%= dernierPrototype.title %>
+          </a>
+        </h3>
+
+        <% if (dernierPrototype.subtitle) { %>
+
+          <p>
+            <%= dernierPrototype.subtitle %>
+          </p>
+
+        <% } else if (dernierPrototype.intro) { %>
+
+          <p>
+            <%= dernierPrototype.intro %>
+          </p>
+
+        <% } %>
+
+        <a
+          href="/prototype/<%= dernierPrototype.id %>"
+          class="home-publication-link"
+        >
+          Découvrir le prototype
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </article>
+
+  <% } %>
+
+</div>
+
+
+<% if (
+  !dernierArticle &&
+  !derniereArcheologie &&
+  !dernierPrototype
+) { %>
+
+  <p class="home-publications-empty">
+    Les prochaines publications apparaîtront ici.
+  </p>
+
+<% } %>
+
+
+<div class="home-publications-action reveal">
+
+  <a href="/ressources" class="btn-primary">
+    Découvrir les archives
   </a>
 
 </div>
+```
+
+  </div>
+
 </section>
+
+
 
   <!-- DÉMARCHE -->
   <section class="demarche" id="demarche">
     <div class="demarche-inner">
       <div class="demarche-text reveal">
-        <h2>Un travail né du terrain,<br>construit dans le recul</h2>
-        <p>Ce projet n'est pas sorti d'une grande école ni d'un cabinet de conseil. Il est né d'un parcours qui a traversé l'électrotechnique industrielle, la logistique humanitaire en camp de réfugiés, l'élevage caprin et le maraîchage, le milieu associatif — et quinze ans de lectures, d'interviews, de confrontation patiente entre ce que les experts disent et ce que la réalité montre.</p>
-        <p><strong>Le recul n'est pas un luxe intellectuel. C'est une condition de la responsabilité politique.</strong> Les décideurs qui ne savent plus s'extraire du flux de l'actualité ne gouvernent plus — ils réagissent.</p>
-        <p>Ce site est une synthèse ouverte. Elle sera enrichie, corrigée, débattue. Elle ne prétend pas à l'exhaustivité — elle prétend à la cohérence.</p>
-      </div>
+        <h2>Ce site est une synthèse ouverte.</h2>
+        <p>CAP2032 est une plateforme de réflexion et de propositions.
+          Elle s'enrichit progressivement d'articles, de travaux historiques,
+          de prototypes territoriaux et de nouvelles analyses.
+          Elle ne prétend pas apporter des réponses définitives,
+          mais proposer un cadre cohérent pour nourrir le débat et expérimenter des solutions.</p>
+
       <div class="demarche-aside reveal" style="transition-delay:0.2s">
-        <span class="demarche-aside-label">Ce que vous trouverez ici</span>
+        <span class="demarche-aside-label">Vous trouverez ici</span>
         <ul class="demarche-list">
-          <li>Des articles de fond sur chaque angle de la thèse</li>
-          <li>Les sources académiques et institutionnelles mobilisées</li>
-          <li>CAP 2032 en version complète et synthétique</li>
-          <li>Des prototypes territoriaux</li>
-          <li>Les interviews et documentaires sources</li>
-          <li>Une section de ressources organisées par thème</li>
+          <li>• Les publications (livre, essais, articles)</li>
+          <li>• Les fiches Histoire & Archéologie</li>
+          <li>• Les 15 fiches stratégiques</li>
+          <li>• Les 4 prototypes territoriaux</li>
+          <li>• Les ressources documentaires</li>
+          <li>• Les futures plateformes collaboratives</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">CAP 2032</span>
-    <ul class="footer-links">
-      <li><a href="/pilier1">Pilier I — Archéologie</a></li>
-      <li><a href="/pilier2">Pilier II — Philosophie</a></li>
-      <li><a href="/pilier3">Pilier III — Action</a></li>
-      <li><a href="/notes">Notes stratégiques</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="/contact">Contact</a></li><br>
-    </ul>
-    <span class="footer-credit">Christophe Louverture — 2025</span>
-  </footer>
+ <!-- FOOTER -->
+<%- include("partial/footer") %>
 
   <script>
     // Scroll reveal

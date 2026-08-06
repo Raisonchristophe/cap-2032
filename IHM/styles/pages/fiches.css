@@ -1,75 +1,790 @@
+/* =========================================================
+   CAP2032 — FICHES PUBLIQUES ET MEMBRES
+   Fichier commun : pages/fiches.css
+   Compatible avec :
+   - views/fiche-public.ejs
+   - views/membres/fiche-detail.ejs
+   ========================================================= */
 
+/* =========================================================
+   BASE ET VARIABLES LOCALES
+   ========================================================= */
 
-  /* CONTAINER */
-    .page-fiche .container {
-      max-width:900px;
-      margin:auto;
-      padding:4rem 2rem;
-    }
+.page-fiche-public,
+.page-fiche-detail {
+  --fiche-max: var(--container-large, 1120px);
+  --fiche-reading: var(--container-text, 820px);
+  --fiche-surface: var(--fond-secondaire, #ffffff);
+  --fiche-soft: var(--fond-doux, #e9eee6);
+  --fiche-dark: var(--fond-sombre, #18352d);
+  --fiche-text: var(--texte, #26332f);
+  --fiche-muted: var(--texte-doux, #5f6d67);
+  --fiche-green: var(--vert, #315c4c);
+  --fiche-green-dark: var(--vert-fonce, #234f3f);
+  --fiche-ochre: var(--ocre, #b17632);
+  --fiche-ochre-light: var(--ocre-clair, #d09a55);
+  --fiche-border: var(--bordure, #d8d5ca);
+  --fiche-border-accent: var(--bordure-accent, rgba(177, 118, 50, 0.35));
+  --fiche-shadow: var(--ombre-legere, 0 12px 32px rgba(38, 51, 47, 0.08));
 
-    .page-fiche h1 {
-      font-family:'Playfair Display';
-      font-size:3rem;
-      margin-bottom:2rem;
-    }
-
-    .page-fiche h2 {
-      font-family:'DM Mono';
-      font-size:.7rem;
-      letter-spacing:.2em;
-      color:#b5822a;
-      margin-top:3rem;
-      margin-bottom:1rem;
-      text-transform:uppercase;
-    }
-
-    .page-fiche p {
-      line-height:1.8;
-      color:#c8c0b0;
-      margin-bottom:1.5rem;
-    }
-
-
-
-/* STRUCTURE */
-.page-fiche .structure {
-  list-style: none;
-  padding: 0;
-  margin: 2rem 0;
-  font-family: 'DM Mono';
-  font-size: .65rem;
-  letter-spacing: .15em;
-  color: #6b6459;
+  color: var(--fiche-text);
+  background: var(--fond-principal, #f4f1e8);
 }
 
-.page-fiche .structure li {
-  margin-bottom: .5rem;
+.page-fiche-public *,
+.page-fiche-public *::before,
+.page-fiche-public *::after,
+.page-fiche-detail *,
+.page-fiche-detail *::before,
+.page-fiche-detail *::after {
+  box-sizing: border-box;
 }
 
-/* LINKS */
-.page-fiche .links {
-  margin-top: 2rem;
+.page-fiche-public main,
+.page-fiche-detail main {
+  display: block;
+  overflow: clip;
 }
 
-.page-fiche .links a {
-  color: #d4a85a;
-  text-decoration: none;
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-fiche-public .fiche-hero,
+.page-fiche-detail .fiche-hero {
+  width: min(calc(100% - 3rem), var(--fiche-max));
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem);
 }
 
-.page-fiche .links a:hover {
-  text-decoration: underline;
+.page-fiche-public .fiche-hero-grid,
+.page-fiche-detail .fiche-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
 
-/* CONCLUSION */
-.page-fiche .conclusion {
-  margin-top: 2rem;
+.page-fiche-public .fiche-hero-text,
+.page-fiche-detail .fiche-hero-text {
+  min-width: 0;
+}
+
+.page-fiche-detail .fiche-hero-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-fiche-public .fiche-tag,
+.page-fiche-detail .fiche-tag,
+.page-fiche-detail .fiche-member-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.page-fiche-public .fiche-tag,
+.page-fiche-detail .fiche-tag {
+  margin-bottom: 1.25rem;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-detail .fiche-hero-topline .fiche-tag {
+  margin-bottom: 0;
+}
+
+.page-fiche-detail .fiche-member-badge {
+  padding: 0.38rem 0.65rem;
+  color: var(--texte-clair, #f8f6ef);
+  background: var(--fiche-green);
+  border: 1px solid var(--fiche-green);
+  border-radius: var(--radius-pill, 999px);
+}
+
+.page-fiche-public .fiche-hero h1,
+.page-fiche-detail .fiche-hero h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--fiche-text);
+}
+
+.page-fiche-public .fiche-subtitle,
+.page-fiche-detail .fiche-subtitle {
+  max-width: 760px;
+  margin: 1.25rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
   font-style: italic;
-  color: #f5f2eb;
+  line-height: 1.45;
+  color: var(--fiche-green);
 }
 
-    .page-fiche .bloc {
-      border-left:2px solid rgba(181,130,42,.3);
-      padding-left:1.5rem;
-      margin-bottom:2rem;
-    }
+.page-fiche-public .fiche-intro,
+.page-fiche-detail .fiche-intro {
+  max-width: 780px;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+  line-height: 1.75;
+  color: var(--fiche-muted);
+}
 
+.page-fiche-detail .fiche-intro p {
+  margin: 0 0 1rem;
+  font: inherit;
+  color: inherit;
+}
+
+.page-fiche-detail .fiche-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.page-fiche-public .fiche-hero-image,
+.page-fiche-detail .fiche-hero-image {
+  margin: 0;
+}
+
+.page-fiche-public .fiche-hero-image img,
+.page-fiche-detail .fiche-hero-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--fiche-border-accent);
+  border-radius: var(--radius-large, 18px);
+  box-shadow: var(--fiche-shadow);
+}
+
+/* =========================================================
+   BOUTON PDF
+   ========================================================= */
+
+.page-fiche-public .download-pdf,
+.page-fiche-detail .download-pdf,
+.page-fiche-public .download-pdf:visited,
+.page-fiche-detail .download-pdf:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1.75rem;
+  padding: 0.8rem 1.15rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texte-clair, #f8f6ef);
+  text-decoration: none;
+  background: var(--fiche-green);
+  border: 1px solid var(--fiche-green);
+  border-radius: var(--radius-medium, 10px);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.page-fiche-public .download-pdf:hover,
+.page-fiche-public .download-pdf:focus-visible,
+.page-fiche-detail .download-pdf:hover,
+.page-fiche-detail .download-pdf:focus-visible {
+  transform: translateY(-2px);
+  background: var(--fiche-green-dark);
+  border-color: var(--fiche-green-dark);
+  outline: none;
+}
+
+/* =========================================================
+   SOMMAIRE
+   ========================================================= */
+
+.page-fiche-public .fiche-structure,
+.page-fiche-detail .fiche-structure {
+  width: min(calc(100% - 3rem), var(--fiche-max));
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--fiche-border);
+  border-bottom: 1px solid var(--fiche-border);
+}
+
+.page-fiche-detail .fiche-structure-title {
+  margin: 0 0 1rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .structure,
+.page-fiche-detail .structure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-fiche-public .structure a,
+.page-fiche-detail .structure a,
+.page-fiche-public .structure a:visited,
+.page-fiche-detail .structure a:visited {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.58rem 0.9rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fiche-green);
+  background: var(--fiche-surface);
+  border: 1px solid var(--fiche-border);
+  border-radius: var(--radius-pill, 999px);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.page-fiche-public .structure a:hover,
+.page-fiche-public .structure a:focus-visible,
+.page-fiche-detail .structure a:hover,
+.page-fiche-detail .structure a:focus-visible {
+  color: var(--fiche-green-dark);
+  background: var(--fiche-soft);
+  border-color: var(--fiche-green);
+  outline: none;
+}
+
+/* =========================================================
+   CORPS DE LECTURE
+   ========================================================= */
+
+.page-fiche-public .fiche-body,
+.page-fiche-detail .fiche-body {
+  width: min(calc(100% - 3rem), var(--fiche-reading));
+  margin: 0 auto;
+  padding: 0 0 clamp(3rem, 7vw, 6rem);
+  line-height: 1.75;
+}
+
+.page-fiche-public .fiche-body h2,
+.page-fiche-detail .fiche-body h2 {
+  scroll-margin-top: 6rem;
+  margin: clamp(3rem, 6vw, 4.5rem) 0 1.15rem;
+  font-family: "DM Mono", monospace;
+  font-size: clamp(0.84rem, 1.2vw, 0.98rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-body h3,
+.page-fiche-detail .fiche-body h3 {
+  margin: 2.2rem 0 0.9rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--fiche-green);
+}
+
+.page-fiche-public .fiche-body p,
+.page-fiche-detail .fiche-body p,
+.page-fiche-detail .fiche-text p {
+  margin: 0 0 1.35rem;
+  font-size: clamp(1.02rem, 1.5vw, 1.15rem);
+  line-height: 1.82;
+  color: var(--fiche-text);
+}
+
+.page-fiche-detail .fiche-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   LISTES
+   ========================================================= */
+
+.page-fiche-public .fiche-list,
+.page-fiche-detail .fiche-list,
+.page-fiche-detail .fiche-links ul {
+  margin: 1.2rem 0 2rem;
+  padding-left: 1.4rem;
+}
+
+.page-fiche-public .fiche-list li,
+.page-fiche-detail .fiche-list li,
+.page-fiche-detail .fiche-links li {
+  margin-bottom: 0.75rem;
+  padding-left: 0.35rem;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.7;
+  color: var(--fiche-text);
+}
+
+.page-fiche-public .fiche-list li::marker,
+.page-fiche-detail .fiche-list li::marker,
+.page-fiche-detail .fiche-links li::marker {
+  color: var(--fiche-ochre);
+}
+
+/* =========================================================
+   ENCADRÉS ET CITATIONS
+   ========================================================= */
+
+.page-fiche-public .encadre,
+.page-fiche-detail .encadre {
+  margin: 2.2rem 0;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  background: var(--fiche-surface);
+  border: 1px solid var(--fiche-border);
+  border-left: 4px solid var(--fiche-ochre);
+  border-radius: 0 var(--radius-medium, 12px) var(--radius-medium, 12px) 0;
+  box-shadow: var(--fiche-shadow);
+}
+
+.page-fiche-public .encadre h3,
+.page-fiche-detail .encadre h3 {
+  margin-top: 0;
+}
+
+.page-fiche-public .encadre p:last-child,
+.page-fiche-detail .encadre p:last-child,
+.page-fiche-detail .encadre-content p:last-child {
+  margin-bottom: 0;
+}
+
+.page-fiche-public .pullquote,
+.page-fiche-detail .pullquote {
+  margin: 2.8rem 0;
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--fiche-green);
+  border-left: 3px solid var(--fiche-ochre);
+}
+
+.page-fiche-public .pullquote p,
+.page-fiche-detail .pullquote p {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* =========================================================
+   ACTIONS — FICHE PUBLIQUE
+   ========================================================= */
+
+.page-fiche-public .fiche-action {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+  padding: 1.4rem;
+  background: var(--fiche-surface);
+  border: 1px solid var(--fiche-border);
+  border-radius: var(--radius-medium, 12px);
+  box-shadow: var(--fiche-shadow);
+}
+
+.page-fiche-public .fiche-action-num {
+  font-family: "DM Mono", monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-action-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.page-fiche-public .fiche-action-content p {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   RESSOURCES ET CONCLUSION
+   ========================================================= */
+
+.page-fiche-public .fiche-links,
+.page-fiche-detail .fiche-links {
+  margin-top: 3.5rem;
+  padding: 1.75rem;
+  background: var(--fiche-soft);
+  border: 1px solid var(--fiche-border);
+  border-radius: var(--radius-large, 14px);
+}
+
+.page-fiche-public .fiche-links h2,
+.page-fiche-detail .fiche-links h2 {
+  margin-top: 0;
+}
+
+.page-fiche-detail .fiche-section-label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-links a,
+.page-fiche-detail .fiche-links a,
+.page-fiche-public .fiche-links a:visited,
+.page-fiche-detail .fiche-links a:visited {
+  color: var(--fiche-green);
+  text-underline-offset: 0.2em;
+}
+
+.page-fiche-public .fiche-links a:hover,
+.page-fiche-detail .fiche-links a:hover {
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-conclusion,
+.page-fiche-detail .fiche-conclusion {
+  margin-top: 3rem;
+  padding: 2rem 0 0 1.5rem;
+  border-top: 1px solid var(--fiche-border);
+  border-left: 3px solid var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-conclusion p,
+.page-fiche-detail .fiche-conclusion p {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--fiche-green);
+}
+
+/* =========================================================
+   ACCÈS MEMBRE ET TÉLÉCHARGEMENT
+   ========================================================= */
+
+.page-fiche-public .fiche-access,
+.page-fiche-detail .fiche-download-section {
+  padding: clamp(3rem, 7vw, 5rem) 1.5rem;
+  background: var(--fiche-soft);
+  border-top: 1px solid var(--fiche-border-accent);
+  border-bottom: 1px solid var(--fiche-border-accent);
+}
+
+.page-fiche-public .fiche-access-content,
+.page-fiche-detail .fiche-download-content {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-fiche-public .fiche-access-label,
+.page-fiche-detail .fiche-access-label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .fiche-access h2,
+.page-fiche-detail .fiche-download-section h2 {
+  margin: 0.8rem 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--fiche-green);
+}
+
+.page-fiche-public .fiche-access p,
+.page-fiche-detail .fiche-download-section p {
+  max-width: 650px;
+  margin: 0 auto 1.8rem;
+  line-height: 1.7;
+  color: var(--fiche-muted);
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.page-fiche-public .content-nav,
+.page-fiche-detail .content-nav {
+  width: min(calc(100% - 3rem), var(--fiche-max));
+  max-width: none;
+  margin: 0 auto clamp(4rem, 8vw, 7rem);
+}
+
+.page-fiche-public .content-nav.simple,
+.page-fiche-detail .content-nav.rich {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.page-fiche-public .content-nav-prev,
+.page-fiche-public .content-nav-center,
+.page-fiche-public .content-nav-next,
+.page-fiche-detail .content-nav-prev,
+.page-fiche-detail .content-nav-list,
+.page-fiche-detail .content-nav-next {
+  min-width: 0;
+}
+
+.page-fiche-public .content-nav a,
+.page-fiche-detail .content-nav-link,
+.page-fiche-public .content-nav a:visited,
+.page-fiche-detail .content-nav-link:visited {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 112px;
+  padding: 1.15rem 1.3rem;
+  color: var(--fiche-green);
+  text-decoration: none;
+  background: var(--fiche-surface);
+  border: 1px solid rgba(49, 92, 76, 0.22);
+  border-radius: var(--radius-large, 16px);
+  box-shadow: var(--fiche-shadow);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.page-fiche-public .content-nav a::before,
+.page-fiche-detail .content-nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--fiche-ochre);
+}
+
+.page-fiche-public .content-nav a:hover,
+.page-fiche-public .content-nav a:focus-visible,
+.page-fiche-detail .content-nav-link:hover,
+.page-fiche-detail .content-nav-link:focus-visible {
+  transform: translateY(-3px);
+  background: var(--fiche-soft);
+  border-color: var(--fiche-green);
+  outline: none;
+}
+
+.page-fiche-public .content-nav-dir,
+.page-fiche-detail .content-nav-dir {
+  margin-bottom: 0.65rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fiche-ochre);
+}
+
+.page-fiche-public .content-nav-name,
+.page-fiche-detail .content-nav-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--fiche-green);
+}
+
+.page-fiche-public .content-nav-center,
+.page-fiche-detail .content-nav-list {
+  text-align: center;
+}
+
+.page-fiche-public .content-nav-next,
+.page-fiche-detail .content-nav-next {
+  text-align: right;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 860px) {
+  .page-fiche-public .fiche-hero-grid,
+  .page-fiche-detail .fiche-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-fiche-public .fiche-hero-image,
+  .page-fiche-detail .fiche-hero-image {
+    max-width: 640px;
+  }
+
+  .page-fiche-public .fiche-action {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .page-fiche-public .content-nav.simple,
+  .page-fiche-detail .content-nav.rich {
+    grid-template-columns: 1fr;
+  }
+
+  .page-fiche-public .content-nav-prev,
+  .page-fiche-public .content-nav-center,
+  .page-fiche-public .content-nav-next,
+  .page-fiche-detail .content-nav-prev,
+  .page-fiche-detail .content-nav-list,
+  .page-fiche-detail .content-nav-next {
+    text-align: left;
+  }
+
+  .page-fiche-public .content-nav a,
+  .page-fiche-detail .content-nav-link {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .page-fiche-public .fiche-hero,
+  .page-fiche-detail .fiche-hero,
+  .page-fiche-public .fiche-structure,
+  .page-fiche-detail .fiche-structure,
+  .page-fiche-public .fiche-body,
+  .page-fiche-detail .fiche-body,
+  .page-fiche-public .content-nav,
+  .page-fiche-detail .content-nav {
+    width: min(calc(100% - 2rem), var(--fiche-max));
+  }
+
+  .page-fiche-public .fiche-hero,
+  .page-fiche-detail .fiche-hero {
+    padding-top: 2.5rem;
+  }
+
+  .page-fiche-public .fiche-action {
+    grid-template-columns: 1fr;
+  }
+
+  .page-fiche-public .fiche-action-num {
+    font-size: 0.8rem;
+  }
+
+  .page-fiche-detail .fiche-hero-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-fiche-public .structure a,
+  .page-fiche-detail .structure a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   MODE PDF
+   ========================================================= */
+
+.page-fiche-public.pdf-mode,
+.page-fiche-detail.pdf-mode {
+  background: #ffffff;
+  color: #1e2723;
+}
+
+.page-fiche-public.pdf-mode .fiche-hero,
+.page-fiche-detail.pdf-mode .fiche-hero {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.page-fiche-public.pdf-mode .fiche-hero h1,
+.page-fiche-detail.pdf-mode .fiche-hero h1,
+.page-fiche-public.pdf-mode .fiche-body h3,
+.page-fiche-detail.pdf-mode .fiche-body h3,
+.page-fiche-public.pdf-mode .pullquote,
+.page-fiche-detail.pdf-mode .pullquote,
+.page-fiche-public.pdf-mode .fiche-conclusion p,
+.page-fiche-detail.pdf-mode .fiche-conclusion p {
+  color: #17231f;
+}
+
+.page-fiche-public.pdf-mode .fiche-subtitle,
+.page-fiche-detail.pdf-mode .fiche-subtitle,
+.page-fiche-public.pdf-mode .fiche-tag,
+.page-fiche-detail.pdf-mode .fiche-tag,
+.page-fiche-public.pdf-mode .fiche-body h2,
+.page-fiche-detail.pdf-mode .fiche-body h2 {
+  color: #8b5c25;
+}
+
+.page-fiche-public.pdf-mode .fiche-intro,
+.page-fiche-detail.pdf-mode .fiche-intro p,
+.page-fiche-public.pdf-mode .fiche-body p,
+.page-fiche-detail.pdf-mode .fiche-body p,
+.page-fiche-public.pdf-mode .fiche-list li,
+.page-fiche-detail.pdf-mode .fiche-list li {
+  color: #34423c;
+}
+
+.page-fiche-public.pdf-mode .fiche-hero-image img,
+.page-fiche-detail.pdf-mode .fiche-hero-image img {
+  box-shadow: none;
+}
+
+.page-fiche-public.pdf-mode .encadre,
+.page-fiche-detail.pdf-mode .encadre,
+.page-fiche-public.pdf-mode .fiche-action,
+.page-fiche-detail.pdf-mode .fiche-links {
+  color: #24312c;
+  background: #f5f2ea;
+  border-color: #d6c4a7;
+  box-shadow: none;
+}
+
+.page-fiche-public.pdf-mode .pdf-disabled-link,
+.page-fiche-detail.pdf-mode .pdf-disabled-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+
+/* =========================================================
+   IMPRESSION
+   ========================================================= */
+
+@media print {
+  .page-fiche-public,
+  .page-fiche-detail {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .page-fiche-public .fiche-access,
+  .page-fiche-detail .fiche-download-section,
+  .page-fiche-public .content-nav,
+  .page-fiche-detail .content-nav,
+  .page-fiche-public .download-pdf,
+  .page-fiche-detail .download-pdf {
+    display: none !important;
+  }
+
+  .page-fiche-public .fiche-action,
+  .page-fiche-public .encadre,
+  .page-fiche-detail .encadre,
+  .page-fiche-detail .fiche-links,
+  .page-fiche-public .fiche-conclusion,
+  .page-fiche-detail .fiche-conclusion {
+    break-inside: avoid;
+  }
+}

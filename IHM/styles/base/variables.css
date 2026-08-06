@@ -1,12 +1,62 @@
-/* VARIABLES */
+/* =========================================================
+   IDENTITÉ VISUELLE CAP2032
+   ========================================================= */
+
 :root {
-      --noir: #0d0d0d;
-      --blanc: #f5f2eb;
-      --ocre: #b5822a;
-      --ocre-clair: #d4a85a;
-      --gris: #6b6459;
-      --gris-clair: #c8c0b0;
-      /* nouvelles couleur */
-       --terre: #3d2b1a;
-       --ardoise: #1a1f2e;
-    }
+  /* Largeurs */
+  --container-large: 1440px;
+  --container-page: 1200px;
+  --container-text: 780px;
+
+  /* Espacements */
+  --space-page: clamp(1.25rem, 4vw, 3rem);
+  --space-section: clamp(4.5rem, 8vw, 7rem);
+  --space-block: clamp(2rem, 4vw, 3.5rem);
+  --space-card: 1.5rem;
+
+  /* Rayons */
+  --radius-small: 8px;
+  --radius-medium: 14px;
+  --radius-large: 18px;
+  --radius-pill: 999px;
+
+  /* Fonds */
+  --fond-principal: #f4f1e8;
+  --fond-secondaire: #ffffff;
+  --fond-doux: #e9eee6;
+  --fond-sombre: #18352d;
+
+  /* Textes */
+  --texte: #26332f;
+  --texte-doux: #5f6d67;
+  --texte-clair: #f8f6ef;
+  --texte-clair-doux: rgba(248, 246, 239, 0.82);
+
+  /* Couleurs de marque */
+  --vert: #315c4c;
+  --vert-clair: #5f806f;
+  --vert-fonce: #234f3f;
+  --ocre: #b17632;
+  --ocre-clair: #d09a55;
+
+  /* Bordures */
+  --bordure: #d8d5ca;
+  --bordure-accent: rgba(177, 118, 50, 0.35);
+
+  /* Ombres */
+  --ombre-legere: 0 12px 32px rgba(38, 51, 47, 0.08);
+  --ombre-carte: 0 18px 40px rgba(38, 51, 47, 0.12);
+
+  /* Transitions */
+  --transition-courte: 180ms ease;
+  --transition-standard: 280ms ease;
+
+  /* Compatibilité avec les anciens fichiers */
+  --noir: var(--texte);
+  --blanc: var(--fond-principal);
+  --gris: var(--texte-doux);
+  --gris-clair: var(--texte-doux);
+  --terre: #6b4b2e;
+  --ardoise: var(--fond-sombre);
+  --rouge: #9e443c;
+}

@@ -1,52 +1,81 @@
+/* =========================================================
+   CONTACT
+   ========================================================= */
 
-
-/* HERO */
-.page-contact .hero{
-  min-height: 30vh;
-  padding:6rem 4rem;
-  text-align:center
+.page-contact .hero {
+  min-height: auto;
+  width: min(calc(100% - (2 * var(--space-page))), var(--container-text));
+  margin-inline: auto;
+  padding: var(--space-section) 0 var(--space-block);
+  text-align: center;
 }
 
-.page-contact .hero h1{
-  font-family:'Playfair Display';
-  font-size:3rem;
-  margin-bottom:1rem
+.page-contact .hero h1 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  line-height: 1.05;
+  color: var(--texte);
 }
 
-.page-contact .hero p{
-  color:var(--gris-clair);
-  max-width:600px;
-  margin:auto
+.page-contact .hero p {
+  max-width: 38rem;
+  margin: 0 auto;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--texte-doux);
 }
 
-.page-contact .contact{
-  padding:4rem;
-  max-width:600px;
-  margin:auto
+.page-contact .contact {
+  width: min(calc(100% - (2 * var(--space-page))), 640px);
+  margin-inline: auto;
+  padding: 0 0 var(--space-section);
 }
 
-/* FORMULAIRE */
-.page-contact form{
-  display:flex;
-  flex-direction:column;
-  gap:1rem
+.page-contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.35rem, 4vw, 2.25rem);
+  background: var(--fond-secondaire);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-large);
+  box-shadow: var(--ombre-legere);
 }
 
-.page-contact input, textarea{
-  padding:12px;
-  background:#111;
-  border:1px solid rgba(181,130,42,.3);
-  color:white;
+.page-contact label {
+  font-weight: 700;
+  color: var(--texte);
 }
 
-.page-contact button{
-  background:var(--ocre);
-  border:none;
-  padding:12px;
-  cursor:pointer;
-  font-family:'DM Mono';
+.page-contact input,
+.page-contact textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  color: var(--texte);
+  background: var(--fond-principal);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-small);
+  transition: border-color var(--transition-courte), box-shadow var(--transition-courte);
 }
 
-.page-contact button:hover{
-  background:var(--ocre-clair);
+.page-contact textarea {
+  min-height: 11rem;
+  resize: vertical;
+}
+
+.page-contact input:focus,
+.page-contact textarea:focus {
+  border-color: var(--vert);
+  box-shadow: 0 0 0 4px rgba(49, 92, 76, 0.1);
+}
+
+.page-contact button {
+  align-self: flex-start;
+}
+
+@media (max-width: 620px) {
+  .page-contact button {
+    width: 100%;
+  }
 }

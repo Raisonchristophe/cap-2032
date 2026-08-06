@@ -1,0 +1,234 @@
+/* =========================================================
+   CAP2032 — ESSAIS PHILOSOPHIQUES, ESPACE MEMBRE
+========================================================= */
+
+.page-essais-membre {
+  background: var(--fond-principal);
+  color: var(--texte);
+}
+
+.page-essais-membre .longue-page {
+  width: min(calc(100% - (2 * var(--space-page))), var(--container-page));
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+}
+
+.page-essais-membre .longue-hero {
+  position: relative;
+  padding: clamp(2.5rem, 6vw, 5rem);
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, #f4efe4, var(--fond-doux));
+  border: 1px solid var(--bordure-accent);
+  border-radius: var(--radius-large);
+  box-shadow: var(--ombre-carte);
+}
+
+.page-essais-membre .longue-hero::before {
+  content: "“";
+  position: absolute;
+  right: 2rem;
+  top: -3.5rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 16rem;
+  line-height: 1;
+  color: rgba(181, 130, 42, 0.1);
+}
+
+.page-essais-membre .longue-eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+.page-essais-membre .longue-hero h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1.03;
+  color: var(--texte);
+}
+
+.page-essais-membre .longue-hero h1 em {
+  color: var(--vert);
+  font-style: italic;
+}
+
+.page-essais-membre .longue-hero > p {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 1.8rem 0 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.8;
+  color: var(--texte-doux);
+}
+
+.page-essais-membre .longue-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.page-essais-membre .longue-section {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  border-top: 1px solid var(--bordure);
+}
+
+.page-essais-membre .longue-section:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.page-essais-membre .longue-section h2 {
+  max-width: 780px;
+  margin: 0 0 1.6rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.12;
+  color: var(--texte);
+}
+
+.page-essais-membre .longue-section > p {
+  max-width: var(--container-text);
+  margin: 0 0 1.4rem;
+  font-size: 1.07rem;
+  line-height: 1.85;
+  color: var(--texte-doux);
+}
+
+.page-essais-membre .longue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-card);
+  margin-top: 2.5rem;
+}
+
+.page-essais-membre .longue-grid article {
+  position: relative;
+  min-width: 0;
+  padding: 2rem;
+  background: var(--fond-secondaire);
+  border: 1px solid var(--bordure);
+  border-left: 4px solid var(--ocre);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--ombre-legere);
+}
+
+.page-essais-membre .longue-grid article > span {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: rgba(49, 92, 76, 0.18);
+}
+
+.page-essais-membre .longue-grid h3 {
+  margin: 0 0 0.8rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--vert);
+}
+
+.page-essais-membre .longue-grid p {
+  margin: 0;
+  line-height: 1.72;
+  color: var(--texte-doux);
+}
+
+.page-essais-membre .longue-section:last-of-type {
+  padding: 2.5rem;
+  margin: 2rem 0 4rem;
+  background: var(--fond-doux);
+  border: 1px solid var(--bordure-accent);
+  border-radius: var(--radius-large);
+}
+
+.page-essais-membre .longue-section:last-of-type h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+}
+
+.page-essais-membre .longue-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--bordure);
+}
+
+.page-essais-membre .longue-nav a {
+  padding: 1.2rem 1.4rem;
+  text-decoration: none;
+  color: var(--vert);
+  background: var(--fond-secondaire);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-medium);
+  transition: transform var(--transition-courte), border-color var(--transition-courte);
+}
+
+.page-essais-membre .longue-nav a:last-child {
+  text-align: right;
+}
+
+.page-essais-membre .longue-nav a:hover,
+.page-essais-membre .longue-nav a:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--ocre);
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .page-essais-membre .longue-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-essais-membre .longue-page {
+    width: min(calc(100% - 2rem), var(--container-page));
+    padding-top: 2.5rem;
+  }
+
+  .page-essais-membre .longue-hero {
+    padding: 2rem 1.35rem;
+  }
+
+  .page-essais-membre .longue-hero::before {
+    right: -1rem;
+    font-size: 10rem;
+  }
+
+  .page-essais-membre .longue-actions {
+    flex-direction: column;
+  }
+
+  .page-essais-membre .longue-actions a {
+    width: 100%;
+  }
+
+  .page-essais-membre .longue-section:last-of-type {
+    padding: 1.5rem;
+  }
+
+  .page-essais-membre .longue-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .page-essais-membre .longue-nav a:last-child {
+    text-align: left;
+  }
+}

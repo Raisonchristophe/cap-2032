@@ -1,80 +1,64 @@
-/* RESPONSIVE */
-    @media (max-width: 900px) {
+/* =========================================================
+   RESPONSIVE GLOBAL
+   Les composants gèrent eux-mêmes leur mise en page détaillée.
+   Ce fichier ne contient aucun sélecteur global nav/footer.
+   ========================================================= */
 
-  /* ========================
-     LAYOUT GLOBAL
-  ======================== */
+@media (max-width: 900px) {
+  .content {
+    padding: 4rem 2rem 3rem;
+  }
 
-      nav {
-        padding: 1.5rem 2rem;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .breadcrumb {
-        padding: 1.5rem 2rem;
-      }
-
-      footer{
-        flex-direction:column;
-        gap:1rem;
-        padding:2rem
-      }
-
-  /* ========================
-     content
-  ======================== */
-
-      .content {
-        padding: 4rem 2rem 3rem;
-      }
-
-
-
-  /* ========================
-     HERO GLOBAL
-  ======================== */
-
-         .hero-content {
+  .hero-content {
     padding: 3rem 2rem;
   }
 
-      .hero-footer {
-        padding: 1.5rem 2rem;
-      }
-
-  /* ========================
-     MAIN
-  ======================== */
-
-  .main-content {
-    padding: 0 2rem 4rem;
+  .hero-footer {
+    padding: 1.5rem 2rem;
   }
 
-  .main-body {
-    padding: 4rem 2rem;
+  .main-content {
+    padding-right: 2rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
   }
 
   .main-body {
     padding: 0 2rem 5rem;
   }
 
+  .content-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 2rem;
+  }
 
-  /* ========================
-     CONTENT-NAV
-  ======================== */
+  .content-nav.rich .content-nav-link.next {
+    text-align: left;
+  }
+}
 
-        .content-nav{
-          padding:2rem;
-          flex-direction:column;
-          gap:2rem
-        }
+@media (max-width: 560px) {
+  .content {
+    padding: 3rem 1.25rem 2.5rem;
+  }
 
-        .content-nav-lien.next{
-          text-align:left
-        }
+  .hero-content {
+    padding: 2.5rem 1.25rem;
+  }
 
-    }
+  .hero-footer {
+    padding: 1.25rem;
+  }
 
+  .main-content,
+  .main-body {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .content-nav {
+    padding: 1.5rem 1.25rem;
+  }
+}

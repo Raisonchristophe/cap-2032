@@ -1,48 +1,69 @@
+/* =========================================================
+   CONNEXION MEMBRE
+   ========================================================= */
+
 .page-login .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   min-height: 70vh;
-  padding: 2rem;
+  padding: var(--space-section) var(--space-page);
 }
 
-.login-box {
-  max-width: 420px;
-  width: 100%;
-  background: rgba(255,255,255,0.02);
-  padding: 3rem;
-  border: 1px solid rgba(181,130,42,0.15);
+.page-login .login-box {
+  width: min(100%, 440px);
+  padding: clamp(1.5rem, 5vw, 2.75rem);
+  background: var(--fond-secondaire);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-large);
+  box-shadow: var(--ombre-carte);
 }
 
-.login-box h1 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 1rem;
+.page-login .login-box h1 {
+  margin: 0 0 0.8rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.1;
+  color: var(--texte);
 }
 
-.login-intro {
-  color: var(--gris-clair);
-  margin-bottom: 2rem;
+.page-login .login-intro {
+  margin: 0 0 2rem;
+  line-height: 1.7;
+  color: var(--texte-doux);
 }
 
-.login-form {
+.page-login .login-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.login-form input {
-  padding: 0.8rem;
-  background: rgba(181,130,42,0.05);
-  border: 1px solid rgba(181,130,42,0.2);
-  color: var(--blanc);
+.page-login .login-form label {
+  font-weight: 700;
+  color: var(--texte);
 }
 
-.login-error {
-  color: #ff6b6b;
-  margin-bottom: 1rem;
+.page-login .login-form input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  color: var(--texte);
+  background: var(--fond-principal);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-small);
 }
 
-.login-footer {
-  margin-top: 2rem;
-  font-size: 0.85rem;
+.page-login .login-error {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  color: #7f2f29;
+  background: #fff0ed;
+  border: 1px solid #e6b4ad;
+  border-radius: var(--radius-small);
+}
+
+.page-login .login-footer {
+  margin-top: 1.75rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--texte-doux);
 }

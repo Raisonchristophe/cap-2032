@@ -1,53 +1,96 @@
- .btn-primary {
-      background: var(--ocre);
-      color: var(--noir);
-      padding: 1rem 2.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 400;
-      transition: background 0.3s, transform 0.2s;
-      display: inline-block;
-    }
+/* =========================================================
+   BOUTONS COMMUNS
+   ========================================================= */
 
-    .btn-primary:hover {
-      background: var(--ocre-clair);
-      transform: translateY(-2px);
-    }
+.btn-primary,
+.btn-secondary,
+.btn-read {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
 
-    .btn-secondary {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gris-clair);
-      text-decoration: none;
-      border-bottom: 1px solid var(--gris);
-      padding-bottom: 2px;
-      transition: color 0.3s, border-color 0.3s;
-    }
+  min-height: 46px;
+  padding: 0.9rem 1.55rem;
 
-    .btn-secondary:hover {
-      color: var(--blanc);
-      border-color: var(--blanc);
-    }
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
 
-     .btn-read {
-      display: inline-block;
-      background: var(--ocre);
-      color: var(--noir);
-      padding: 0.9rem 2rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-    }
+  border-radius: var(--radius-pill);
+  cursor: pointer;
 
-    .btn-read:hover {
-      background: var(--ocre-clair);
-      transform: translateY(-2px);
-    }
+  transition:
+    color var(--transition-courte),
+    background-color var(--transition-courte),
+    border-color var(--transition-courte),
+    box-shadow var(--transition-courte),
+    transform var(--transition-courte);
+}
+
+.btn-primary,
+.btn-read {
+  color: var(--texte-clair);
+  background: var(--vert);
+  border: 1px solid var(--vert);
+}
+
+.btn-primary:visited,
+.btn-read:visited {
+  color: var(--texte-clair);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.btn-read:hover,
+.btn-read:focus-visible {
+  color: var(--texte-clair);
+  background: var(--vert-fonce);
+  border-color: var(--vert-fonce);
+  box-shadow: 0 8px 22px rgba(49, 92, 76, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  color: var(--vert);
+  background: transparent;
+  border: 1px solid rgba(49, 92, 76, 0.38);
+}
+
+.btn-secondary:visited {
+  color: var(--vert);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  color: var(--texte-clair);
+  background: var(--vert);
+  border-color: var(--vert);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.btn-read:active {
+  transform: translateY(0);
+}
+
+button.btn-primary,
+button.btn-secondary,
+button.btn-read {
+  appearance: none;
+}
+
+@media (max-width: 560px) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-read {
+    width: 100%;
+    padding-inline: 1.2rem;
+  }
+}

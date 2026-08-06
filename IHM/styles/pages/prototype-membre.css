@@ -1,0 +1,668 @@
+/* =========================================================
+   CAP2032 — PROTOTYPES MEMBRES
+   Compléments propres à la version détaillée.
+   La base commune se trouve dans prototype-common.css.
+   ========================================================= */
+
+/* =========================================================
+   VERSION MEMBRE — ÉLÉMENTS SPÉCIFIQUES
+   ========================================================= */
+
+.page-prototype-membre {
+  --m-blue: #365d75;
+  --m-blue-soft: rgba(54, 93, 117, 0.10);
+  --m-red: #8b3f35;
+  --m-red-soft: rgba(139, 63, 53, 0.10);
+  --m-orange: #a4621e;
+  --m-orange-soft: rgba(164, 98, 30, 0.11);
+  --m-success: #35684e;
+  --m-success-soft: rgba(53, 104, 78, 0.10);
+}
+
+/* Bandeau version membre */
+.page-prototype-membre .prototype-member-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0 0 1rem;
+  padding: .58rem .85rem;
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--p-light);
+  background: var(--p-green-dark);
+  border-radius: 999px;
+}
+
+.page-prototype-membre .prototype-member-badge::before {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--p-ochre-light);
+}
+
+/* Blocs longs : largeur de lecture confortable */
+.page-prototype-membre .prototype-block-paragraphs,
+.page-prototype-membre .prototype-block-list,
+.page-prototype-membre .prototype-block-quote,
+.page-prototype-membre .prototype-block-notice,
+.page-prototype-membre .prototype-block-conclusion {
+  max-width: var(--prototype-reading);
+}
+
+/* =========================================================
+   TABLEAUX GÉNÉRAUX
+   ========================================================= */
+
+.page-prototype-membre .prototype-table-wrap,
+.page-prototype-membre .matrix-wrap,
+.page-prototype-membre .indicators-wrap,
+.page-prototype-membre .budget-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0 2rem;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 18px;
+  box-shadow: var(--p-shadow);
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-prototype-membre table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  color: var(--p-text);
+  background: var(--p-surface);
+}
+
+.page-prototype-membre th,
+.page-prototype-membre td {
+  padding: 1rem 1.1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--p-border);
+}
+
+.page-prototype-membre th {
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--p-light);
+  background: var(--p-green-dark);
+}
+
+.page-prototype-membre td {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.page-prototype-membre tbody tr:nth-child(even) td {
+  background: rgba(235, 228, 214, .34);
+}
+
+.page-prototype-membre tbody tr:hover td {
+  background: rgba(214, 170, 99, .12);
+}
+
+.page-prototype-membre tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   SCÉNARIOS : BESOINS ET CHIFFRAGES
+   ========================================================= */
+
+.page-prototype-membre .scenario-needs-grid,
+.page-prototype-membre .scenario-budget-grid,
+.page-prototype-membre .jobs-scenarios,
+.page-prototype-membre .scenario-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.page-prototype-membre .scenario-needs-card,
+.page-prototype-membre .scenario-budget-card,
+.page-prototype-membre .jobs-scenario,
+.page-prototype-membre .scenario-card {
+  min-width: 0;
+  padding: 1.45rem;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-top: 5px solid var(--p-ochre);
+  border-radius: 18px;
+  box-shadow: var(--p-shadow);
+}
+
+.page-prototype-membre .scenario-needs-card:nth-child(2),
+.page-prototype-membre .scenario-budget-card:nth-child(2),
+.page-prototype-membre .jobs-scenario:nth-child(2),
+.page-prototype-membre .scenario-card:nth-child(2) {
+  border-top-color: var(--p-green);
+}
+
+.page-prototype-membre .scenario-needs-card:nth-child(3),
+.page-prototype-membre .scenario-budget-card:nth-child(3),
+.page-prototype-membre .jobs-scenario:nth-child(3),
+.page-prototype-membre .scenario-card:nth-child(3) {
+  border-top-color: var(--m-blue);
+}
+
+.page-prototype-membre .scenario-needs-card h4,
+.page-prototype-membre .scenario-budget-card h4,
+.page-prototype-membre .jobs-scenario h4,
+.page-prototype-membre .scenario-card h4 {
+  margin: 0 0 .55rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--p-green-dark);
+}
+
+.page-prototype-membre .scenario-context,
+.page-prototype-membre .scenario-population,
+.page-prototype-membre .scenario-note {
+  margin: 0 0 1rem;
+  color: var(--p-muted);
+  font-size: .96rem;
+  line-height: 1.55;
+}
+
+.page-prototype-membre .scenario-subtitle {
+  margin: 1.15rem 0 .6rem;
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--p-ochre);
+}
+
+.page-prototype-membre .scenario-data-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-prototype-membre .scenario-data-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .85rem;
+  padding: .7rem 0;
+  border-bottom: 1px dashed var(--p-border);
+}
+
+.page-prototype-membre .scenario-data-list li:last-child {
+  border-bottom: 0;
+}
+
+.page-prototype-membre .scenario-data-list strong {
+  color: var(--p-green-dark);
+}
+
+/* Totaux budgétaires */
+.page-prototype-membre .budget-total,
+.page-prototype-membre .budget-summary {
+  margin-top: 1.15rem;
+  padding: 1rem;
+  color: var(--p-light);
+  background: var(--p-green-dark);
+  border-radius: 12px;
+}
+
+.page-prototype-membre .budget-total strong,
+.page-prototype-membre .budget-summary strong {
+  color: var(--p-ochre-light);
+}
+
+.page-prototype-membre .budget-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+  margin-top: 1rem;
+}
+
+.page-prototype-membre .budget-metric {
+  padding: .85rem;
+  background: var(--p-soft);
+  border: 1px solid var(--p-border);
+  border-radius: 12px;
+}
+
+.page-prototype-membre .budget-metric-label {
+  display: block;
+  margin-bottom: .3rem;
+  font-family: "DM Mono", monospace;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--p-muted);
+}
+
+.page-prototype-membre .budget-metric-value {
+  display: block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--p-green-dark);
+}
+
+/* =========================================================
+   EMPLOIS / ORGANISATION HUMAINE
+   ========================================================= */
+
+.page-prototype-membre .jobs-list {
+  display: grid;
+  gap: .75rem;
+  margin: 1rem 0 0;
+}
+
+.page-prototype-membre .job-item {
+  padding: 1rem;
+  background: rgba(235, 228, 214, .46);
+  border-left: 4px solid var(--p-green);
+  border-radius: 0 12px 12px 0;
+}
+
+.page-prototype-membre .job-role {
+  margin: 0 0 .3rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--p-green-dark);
+}
+
+.page-prototype-membre .job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin-bottom: .55rem;
+}
+
+.page-prototype-membre .job-meta span {
+  padding: .3rem .55rem;
+  font-family: "DM Mono", monospace;
+  font-size: .64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--p-green-dark);
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 999px;
+}
+
+.page-prototype-membre .job-mission {
+  margin: 0;
+  color: var(--p-muted);
+}
+
+/* =========================================================
+   RISQUES
+   ========================================================= */
+
+.page-prototype-membre .risks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.page-prototype-membre .risk-card {
+  padding: 1.25rem;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(23, 62, 51, .06);
+}
+
+.page-prototype-membre .risk-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .7rem;
+}
+
+.page-prototype-membre .risk-name {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.12rem;
+  color: var(--p-green-dark);
+}
+
+.page-prototype-membre .risk-level {
+  flex: 0 0 auto;
+  padding: .32rem .58rem;
+  font-family: "DM Mono", monospace;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.page-prototype-membre .risk-level.low,
+.page-prototype-membre .risk-level.faible {
+  color: var(--m-success);
+  background: var(--m-success-soft);
+}
+
+.page-prototype-membre .risk-level.medium,
+.page-prototype-membre .risk-level.moyen {
+  color: var(--m-orange);
+  background: var(--m-orange-soft);
+}
+
+.page-prototype-membre .risk-level.high,
+.page-prototype-membre .risk-level.eleve,
+.page-prototype-membre .risk-level.élevé {
+  color: var(--m-red);
+  background: var(--m-red-soft);
+}
+
+.page-prototype-membre .risk-response {
+  margin: 0;
+  color: var(--p-muted);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   INDICATEURS
+   ========================================================= */
+
+.page-prototype-membre .indicators-table th:nth-child(2),
+.page-prototype-membre .indicators-table th:nth-child(3),
+.page-prototype-membre .indicators-table td:nth-child(2),
+.page-prototype-membre .indicators-table td:nth-child(3) {
+  width: 24%;
+}
+
+.page-prototype-membre .indicator-name {
+  font-weight: 700;
+  color: var(--p-green-dark);
+}
+
+.page-prototype-membre .indicator-frequency {
+  display: inline-flex;
+  padding: .35rem .6rem;
+  font-family: "DM Mono", monospace;
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--m-blue);
+  background: var(--m-blue-soft);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   GOUVERNANCE, FLUX ET FINANCEMENT
+   ========================================================= */
+
+.page-prototype-membre .governance-grid,
+.page-prototype-membre .funding-grid,
+.page-prototype-membre .flows-grid,
+.page-prototype-membre .deployment-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.page-prototype-membre .governance-card,
+.page-prototype-membre .funding-card,
+.page-prototype-membre .flow-card,
+.page-prototype-membre .deployment-mode-card {
+  padding: 1.35rem;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 16px;
+  box-shadow: var(--p-shadow);
+}
+
+.page-prototype-membre .governance-card h4,
+.page-prototype-membre .funding-card h4,
+.page-prototype-membre .flow-card h4,
+.page-prototype-membre .deployment-mode-card h4 {
+  margin: 0 0 .7rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.22rem;
+  color: var(--p-green-dark);
+}
+
+.page-prototype-membre .voting-share,
+.page-prototype-membre .funding-share,
+.page-prototype-membre .flow-direction {
+  display: inline-flex;
+  margin-bottom: .75rem;
+  padding: .35rem .62rem;
+  font-family: "DM Mono", monospace;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--p-light);
+  background: var(--p-ochre);
+  border-radius: 999px;
+}
+
+.page-prototype-membre .flow-direction {
+  background: var(--m-blue);
+}
+
+.page-prototype-membre .governance-card ul,
+.page-prototype-membre .funding-card ul,
+.page-prototype-membre .flow-card ul,
+.page-prototype-membre .deployment-mode-card ul {
+  margin: .75rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.page-prototype-membre .governance-card li,
+.page-prototype-membre .funding-card li,
+.page-prototype-membre .flow-card li,
+.page-prototype-membre .deployment-mode-card li {
+  margin-bottom: .45rem;
+}
+
+/* =========================================================
+   COMPARAISON DES MODES DE DÉPLOIEMENT
+   ========================================================= */
+
+.page-prototype-membre .deployment-cost-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.page-prototype-membre .deployment-cost-card {
+  padding: 1.35rem;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 16px;
+}
+
+.page-prototype-membre .investment-impact {
+  display: inline-flex;
+  margin: .2rem 0 .75rem;
+  padding: .35rem .65rem;
+  font-family: "DM Mono", monospace;
+  font-size: .64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--p-green-dark);
+  background: var(--p-soft);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   TÉLÉCHARGEMENTS ET DOCUMENTS LIÉS
+   ========================================================= */
+
+.page-prototype-membre .prototype-downloads {
+  width: min(calc(100% - 3rem), var(--prototype-max));
+  margin: 0 auto clamp(3rem, 7vw, 6rem);
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+  text-align: center;
+  color: var(--p-light);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(214, 170, 99, .22), transparent 18rem),
+    var(--p-green-dark);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(23, 62, 51, .18);
+}
+
+.page-prototype-membre .prototype-downloads h2 {
+  margin: 0 0 .7rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--p-light);
+}
+
+.page-prototype-membre .prototype-download-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .8rem;
+  margin: 1.3rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-prototype-membre .prototype-download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: .8rem 1.15rem;
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--p-green-dark);
+  background: var(--p-light);
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 999px;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.page-prototype-membre .prototype-download-link:hover,
+.page-prototype-membre .prototype-download-link:focus-visible {
+  transform: translateY(-2px);
+  background: var(--p-ochre-light);
+  outline: none;
+}/* =========================================================
+   RESPONSIVE MEMBRE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .page-prototype-membre .scenario-needs-grid,
+  .page-prototype-membre .scenario-budget-grid,
+  .page-prototype-membre .jobs-scenarios,
+  .page-prototype-membre .scenario-cards-grid,
+  .page-prototype-membre .governance-grid,
+  .page-prototype-membre .funding-grid,
+  .page-prototype-membre .flows-grid,
+  .page-prototype-membre .deployment-modes-grid,
+  .page-prototype-membre .deployment-cost-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .page-prototype-membre .scenario-needs-grid,
+  .page-prototype-membre .scenario-budget-grid,
+  .page-prototype-membre .jobs-scenarios,
+  .page-prototype-membre .scenario-cards-grid,
+  .page-prototype-membre .risks-grid,
+  .page-prototype-membre .governance-grid,
+  .page-prototype-membre .funding-grid,
+  .page-prototype-membre .flows-grid,
+  .page-prototype-membre .deployment-modes-grid,
+  .page-prototype-membre .deployment-cost-grid,
+  .page-prototype-membre .budget-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .page-prototype-membre .scenario-data-list li {
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+
+  .page-prototype-membre .prototype-table-wrap,
+  .page-prototype-membre .matrix-wrap,
+  .page-prototype-membre .indicators-wrap,
+  .page-prototype-membre .budget-table-wrap {
+    margin-inline: -1rem;
+    width: calc(100% + 2rem);
+    border-radius: 0;
+  }
+
+  .page-prototype-membre th,
+  .page-prototype-membre td {
+    padding: .85rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-prototype-membre .content-nav.rich {
+    grid-template-columns: 1fr;
+  }
+
+  .page-prototype-membre .content-nav-prev,
+  .page-prototype-membre .content-nav-list,
+  .page-prototype-membre .content-nav-next {
+    text-align: left;
+  }
+
+  .page-prototype-membre .content-nav-link {
+    min-height: auto;
+  }
+}
+
+/* =========================================================
+   MODE PDF MEMBRE
+   ========================================================= */
+
+.page-prototype-membre.pdf-mode .prototype-member-badge {
+  color: var(--p-green-dark);
+  background: transparent;
+  border: 1px solid var(--p-border);
+}
+
+.page-prototype-membre.pdf-mode .scenario-needs-card,
+.page-prototype-membre.pdf-mode .scenario-budget-card,
+.page-prototype-membre.pdf-mode .jobs-scenario,
+.page-prototype-membre.pdf-mode .risk-card,
+.page-prototype-membre.pdf-mode .governance-card,
+.page-prototype-membre.pdf-mode .funding-card,
+.page-prototype-membre.pdf-mode .flow-card,
+.page-prototype-membre.pdf-mode .deployment-mode-card {
+  box-shadow: none;
+  break-inside: avoid;
+}
+
+.page-prototype-membre.pdf-mode .prototype-downloads {
+  display: none;
+}
+
+.page-prototype-membre.pdf-mode table {
+  min-width: 0;
+  font-size: .86rem;
+}
+
+.pdf-mode .pdf-disabled-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+

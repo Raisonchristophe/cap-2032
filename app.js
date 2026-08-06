@@ -1,19 +1,21 @@
 const express = require("express");
-//const nodemailer = require("nodemailer");
 const session = require("express-session");
 const puppeteer = require("puppeteer");
-const { Document, Packer, Paragraph, TextRun, HeadingLevel } = require("docx");
 const app = express();
+/*
+========================================================
+CONFIGURATION
+========================================================
+*/
+
+const PORT = process.env.PORT || 3001;
+
+const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
 const fichesData = require("./data/fiches");
-
-//const brevo = require("@getbrevo/brevo");
-
-//const apiInstance = new brevo.TransactionalEmailsApiApi();
-
-//apiInstance.setApiKey(
-//brevo.TransactionalEmailsApiApiKeys.apiKey,
-//process.env.BREVO_API_KEY
-//);
+const fichesPublic = require("./data/fiches public");
+const prototypesPublic = require("./data/prototypes-public");
+const prototypesMembres = require("./data/prototypes-membres");
+const publications = require("./data/publications");
 
 require("dotenv").config();
 
@@ -95,15 +97,18 @@ app.get("/espace-membre", isAuth, (req, res) => {
 // route fiches détaillées
 
 app.get("/membre/fiche/:id", isAuth, (req, res) => {
-  const fiche = fichesData[req.params.id];
+  const id = Number(req.params.id);
+  const fiche = fichesData[id];
 
-  if (!fiche) {
+  if (!Number.isInteger(id) || !fiche) {
     return res.status(404).send("Fiche introuvable");
   }
 
   res.render("membres/fiche-detail", {
     fiche,
-    id: req.params.id,
+    id,
+    user: req.session.user,
+    pdfMode: false,
   });
 });
 
@@ -111,322 +116,666 @@ app.get("/membre/synthese", isAuth, (req, res) => {
   res.render("membres/synthes");
 });
 
-app.get("/membre/prototype1", isAuth, (req, res) => {
-  res.render("membres/prototype1", {
-    currentPage: "pilier3",
+app.get("/membres/prototype/:id", isAuth, (req, res) => {
+  const id = Number(req.params.id);
+  const prototype = prototypesMembres[id];
+
+  if (!prototype) {
+    return res.status(404).send("Prototype introuvable");
+  }
+
+  res.render("membres/prototype-membre", {
+    id,
+    prototype,
+    user: req.session.user,
     pdfMode: false,
   });
 });
 
-app.get("/membre/prototype2", isAuth, (req, res) => {
-  res.render("membres/prototype2", {
-    currentPage: "pilier3",
-    pdfMode: false,
+/*
+========================================================
+OUTILS PDF
+========================================================
+*/
+
+function sanitizeFilename(value = "document") {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9-_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
+function renderView(view, data) {
+  return new Promise((resolve, reject) => {
+    app.render(view, data, (err, html) => {
+      if (err) return reject(err);
+      resolve(html);
+    });
   });
-});
+}
 
-app.get("/membre/prototype3", isAuth, (req, res) => {
-  res.render("membres/prototype3", {
-    currentPage: "pilier3",
-    pdfMode: false,
-  });
-});
+function makeAssetsAbsolute(html) {
+  return html
+    .replaceAll('href="/', `href="${baseUrl}/`)
+    .replaceAll('src="/', `src="${baseUrl}/`)
+    .replaceAll("href='/", `href='${baseUrl}/`)
+    .replaceAll("src='/", `src='${baseUrl}/`);
+}
 
-app.get("/membre/prototype4", isAuth, (req, res) => {
-  res.render("membres/prototype4", {
-    currentPage: "pilier3",
-    pdfMode: false,
-  });
-});
-
-// téléchargement PDF
-
-app.get("/download/prototype-docx/:id", async (req, res) => {
-  const id = req.params.id;
-
-  // 👉 ici tu peux adapter selon ton contenu réel
-  const doc = new Document({
-    sections: [
-      {
-        children: [
-          // TITRE
-          new Paragraph({
-            text: "Prototype 01 — Le village SCIC territorial",
-            heading: HeadingLevel.HEADING_1,
-          }),
-
-          // INTRO
-          new Paragraph({
-            children: [
-              new TextRun(
-                "Une plateforme productive coopérative ancrée dans un territoire...",
-              ),
-            ],
-          }),
-
-          // SECTION
-          new Paragraph({
-            text: "Fiche technique",
-            heading: HeadingLevel.HEADING_2,
-          }),
-
-          new Paragraph("Statut : SCIC"),
-          new Paragraph("Investissement : 3M€"),
-          new Paragraph("Lecture : 12 minutes"),
-
-          // AUTRE SECTION
-          new Paragraph({
-            text: "Finalité",
-            heading: HeadingLevel.HEADING_2,
-          }),
-
-          new Paragraph(
-            "Le village SCIC vise à structurer un écosystème productif local...",
-          ),
-
-          new Paragraph("• Réinsérer par le travail réel"),
-          new Paragraph("• Former par la pratique"),
-          new Paragraph("• Produire localement"),
-        ],
-      },
-    ],
-  });
-
-  const buffer = await Packer.toBuffer(doc);
-
-  res.setHeader(
-    "Content-Disposition",
-    `attachment; filename=prototype${id}.docx`,
-  );
-  res.send(buffer);
-});
-
-//app.get("/download/fiche/:id", async (req, res) => {
-//const id = req.params.id;
-
-//const puppeteer = require("puppeteer");
-// const browser = await puppeteer.launch({
-// headless: true,
-// args: ["--no-sandbox", "--disable-setuid-sandbox"],
-//});
-//const page = await browser.newPage();
-
-//await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
-// waitUntil: "networkidle0",
-//});
-
-//await new Promise((resolve) => setTimeout(resolve, 1000));
-
-//const pdf = await page.pdf({
-// format: "A4",
-// printBackground: true,
-//});
-
-//await browser.close();
-
-//res.set({
-//"Content-Type": "application/pdf",
-//"Content-Disposition": `attachment; filename=fiche${id}.pdf`,
-//});
-
-//res.send(pdf);
-//});
-
-app.get("/download/fiche/:id", async (req, res) => {
+async function sendPdfFromView({ res, view, data, filename }) {
   let browser;
 
   try {
-    const id = req.params.id;
+    const html = makeAssetsAbsolute(
+      await renderView(view, {
+        ...data,
+        pdfMode: true,
+      }),
+    );
 
     browser = await puppeteer.launch({
       headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-      ],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
     const page = await browser.newPage();
 
-    await page.goto(`${baseUrl}/pdf/fiche/${id}`, {
-      waitUntil: "networkidle0",
-      timeout: 60000,
+    await page.setViewport({
+      width: 1400,
+      height: 1000,
     });
+
+    await page.setContent(html, {
+      waitUntil: "networkidle0",
+    });
+
+    /*
+========================================================
+SUPPRESSION DES LIENS DANS LE PDF
+========================================================
+*/
+
+    await page.evaluate(() => {
+      document.querySelectorAll("a").forEach((link) => {
+        const span = document.createElement("span");
+
+        // Conserve le contenu du lien :
+        // texte, icônes, images et balises internes.
+        while (link.firstChild) {
+          span.appendChild(link.firstChild);
+        }
+
+        // Conserve les classes pour garder la mise en forme.
+        span.className = link.className;
+
+        // Ajoute une classe spécifique au mode PDF.
+        span.classList.add("pdf-disabled-link");
+
+        // Conserve certains attributs utiles à l’affichage.
+        if (link.id) {
+          span.id = link.id;
+        }
+
+        link.replaceWith(span);
+      });
+    });
+
+    await page.emulateMediaType("print");
 
     const pdf = await page.pdf({
       format: "A4",
+
       printBackground: true,
+
+      displayHeaderFooter: true,
+
+      headerTemplate: `
+      <div style="
+      width:100%;
+      padding:0 15mm;
+      text-align:right;
+      font-size:8px;
+      color:#666;
+      ">
+      CAP2032
+      </div>
+      `,
+
+      footerTemplate: `
+      <div style="
+      width:100%;
+      padding:0 15mm;
+      display:flex;
+      justify-content:space-between;
+      font-size:8px;
+      color:#666;
+      ">
+      <span>CAP2032</span>
+      <span>
+      Page
+      <span class="pageNumber"></span>
+      /
+      <span class="totalPages"></span>
+      </span>
+      </div>
+      `,
+
+      margin: {
+        top: "18mm",
+        bottom: "20mm",
+        left: "14mm",
+        right: "14mm",
+      },
     });
 
     res.set({
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename=fiche${id}.pdf`,
+
+      "Content-Disposition": `attachment; filename="${sanitizeFilename(filename)}.pdf"`,
+
+      "Content-Length": pdf.length,
     });
 
-    res.send(pdf);
+    return res.send(pdf);
   } catch (err) {
-    console.error("Erreur génération PDF :", err);
-    res.status(500).send("Erreur génération PDF");
+    console.error(err);
+
+    return res.status(500).send("Erreur lors de la génération du PDF.");
   } finally {
     if (browser) {
       await browser.close();
     }
   }
+}
+
+/*
+========================================================
+PDF - FICHES PUBLIQUES
+========================================================
+*/
+
+app.get("/download/fiche-public/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const fiche = fichesPublic[id];
+
+  if (!fiche) {
+    return res.status(404).send("Fiche introuvable");
+  }
+
+  return sendPdfFromView({
+    res,
+
+    view: "fiche-public",
+
+    data: {
+      id,
+      fiche,
+      user: req.session.user || null,
+    },
+
+    filename: `CAP2032-fiche-${id}-${fiche.title}`,
+  });
 });
 
-app.get("/pdf/fiche/:id", (req, res) => {
-  const id = req.params.id;
+/*
+========================================================
+PDF - FICHES MEMBRES
+========================================================
+*/
 
-  const fiches = require("./data/fiches");
+app.get("/membre/download/fiche/:id", isAuth, async (req, res) => {
+  const id = Number(req.params.id);
+  const fiche = fichesData[id];
 
-  res.render("membres/fiche-detail", {
-    fiche: fiches[id],
-    id,
-    pdfMode: true,
-    currentPage: null,
+  if (!Number.isInteger(id) || !fiche) {
+    return res.status(404).send("Fiche membre introuvable");
+  }
+
+  return sendPdfFromView({
+    res,
+    view: "membres/fiche-detail",
+
+    data: {
+      id,
+      fiche,
+      user: req.session.user,
+    },
+
+    filename: `CAP2032-fiche-detaillee-${id}-${fiche.title}`,
   });
+});
+
+/*
+========================================================
+PDF - PROTOTYPES PUBLICS
+========================================================
+*/
+
+app.get("/download/prototype-public/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const prototype = prototypesPublic[id];
+
+  if (!Number.isInteger(id) || !prototype) {
+    return res.status(404).send("Prototype public introuvable");
+  }
+
+  return sendPdfFromView({
+    res,
+
+    view: "prototype-public",
+
+    data: {
+      id,
+      prototype,
+      user: req.session.user || null,
+    },
+
+    filename: `CAP2032-prototype-public-${id}-${prototype.title}`,
+  });
+});
+
+/*
+========================================================
+PDF — PROTOTYPES MEMBRES
+========================================================
+*/
+
+app.get("/membre/download/prototype/:id", isAuth, async (req, res) => {
+  const id = Number(req.params.id);
+  const prototype = prototypesMembres[id];
+
+  if (!Number.isInteger(id) || !prototype) {
+    return res.status(404).send("Prototype membre introuvable");
+  }
+
+  return sendPdfFromView({
+    res,
+
+    view: "membres/prototype-membre",
+
+    data: {
+      id,
+      prototype,
+      user: req.session.user,
+    },
+
+    filename: `CAP2032-prototype-detaille-${id}-${prototype.title}`,
+  });
+});
+/*
+========================================================
+PDF — ARTICLES ET ARCHÉOLOGIE
+========================================================
+*/
+
+app.get("/publication/:slug/pdf", async (req, res) => {
+  const publication = publications.find(
+    (item) => item.slug === req.params.slug && item.status === "published",
+  );
+
+  if (!publication || !publication.pdf?.enabled) {
+    return res.status(404).send("Publication PDF introuvable");
+  }
+
+  let view;
+  let prefix;
+
+  if (publication.type === "article") {
+    view = "articles";
+    prefix = "article";
+  } else if (publication.type === "archeologie") {
+    view = "archeologie";
+    prefix = "archeologie";
+  } else {
+    return res.status(404).send("Type de publication inconnu");
+  }
+
+  return sendPdfFromView({
+    res,
+
+    view,
+
+    data: {
+      publication,
+      currentPage: "publications",
+      user: null,
+    },
+
+    filename: `CAP2032-${prefix}-${publication.slug}`,
+  });
+});
+
+/*
+========================================================
+TÉLÉCHARGEMENT — RÉSUMÉ DU LIVRE
+========================================================
+*/
+
+app.get("/download/resume-cap2032", (req, res) => {
+  const pdfPath = path.join(
+    __dirname,
+    "IHM",
+    "documents",
+    "resume-cap2032.pdf",
+  );
+
+  return res.download(pdfPath, "CAP2032-resume-du-livre.pdf", (error) => {
+    if (error && !res.headersSent) {
+      console.error("Erreur téléchargement résumé CAP2032 :", error);
+
+      return res.status(404).send("Le résumé du livre est introuvable.");
+    }
+  });
+});
+
+/*
+========================================================
+TÉLÉCHARGEMENT — RÉSUMÉ DES ESSAIS
+========================================================
+*/
+
+app.get("/download/resume-essais-philosophiques", (req, res) => {
+  const pdfPath = path.join(
+    __dirname,
+    "IHM",
+    "documents",
+    "resume-essais-philosophiques.pdf",
+  );
+
+  return res.download(
+    pdfPath,
+    "CAP2032-resume-des-essais-philosophiques.pdf",
+    (error) => {
+      if (error && !res.headersSent) {
+        console.error("Erreur téléchargement résumé essais :", error);
+
+        return res.status(404).send("Le résumé des essais est introuvable.");
+      }
+    },
+  );
 });
 
 //routes pages
 
 app.get("/", (req, res) => {
-  res.render("index");
+  /*
+  ========================================================
+  TRANSFORMATION DES PUBLICATIONS EN TABLEAU
+  ========================================================
+  */
+
+  const listePublications = Array.isArray(publications)
+    ? publications
+    : Object.values(publications);
+
+  /*
+  ========================================================
+  PUBLICATIONS RÉELLEMENT PUBLIÉES
+  ========================================================
+  */
+
+  const publicationsPubliees = listePublications.filter((publication) => {
+    return publication && publication.status !== "draft";
+  });
+
+  /*
+  ========================================================
+  DERNIER ARTICLE
+  On prend le dernier déclaré dans publications.js
+  ========================================================
+  */
+
+  const articles = publicationsPubliees.filter((publication) => {
+    return publication.type === "article";
+  });
+
+  const dernierArticle =
+    articles.length > 0 ? articles[articles.length - 1] : null;
+
+  /*
+  ========================================================
+  DERNIÈRE PUBLICATION ARCHÉOLOGIQUE
+  Accepte plusieurs écritures possibles du type
+  ========================================================
+  */
+
+  const publicationsArcheologie = publicationsPubliees.filter((publication) => {
+    return (
+      publication.type === "archeologie" ||
+      publication.type === "archeo" ||
+      publication.type === "archéologie"
+    );
+  });
+
+  const derniereArcheologie =
+    publicationsArcheologie.length > 0
+      ? publicationsArcheologie[publicationsArcheologie.length - 1]
+      : null;
+
+  /*
+  ========================================================
+  DERNIER PROTOTYPE PUBLIC
+  On prend celui ayant l’identifiant numérique le plus élevé
+  ========================================================
+  */
+
+  const listePrototypes = Object.entries(prototypesPublic)
+    .filter(([, prototype]) => {
+      return prototype && prototype.status !== "draft";
+    })
+    .sort(([idA], [idB]) => {
+      return Number(idA) - Number(idB);
+    });
+
+  const dernierPrototypeEntry =
+    listePrototypes.length > 0
+      ? listePrototypes[listePrototypes.length - 1]
+      : null;
+
+  const dernierPrototype = dernierPrototypeEntry
+    ? {
+        id: dernierPrototypeEntry[0],
+        ...dernierPrototypeEntry[1],
+      }
+    : null;
+
+  /*
+  ========================================================
+  AFFICHAGE DE L’ACCUEIL
+  ========================================================
+  */
+
+  return res.render("index", {
+    currentPage: "home",
+    user: req.session.user || null,
+
+    dernierArticle,
+    derniereArcheologie,
+    dernierPrototype,
+  });
 });
 
 app.get("/pilier1", (req, res) => {
+  const listePublications = Array.isArray(publications)
+    ? publications
+    : Object.values(publications);
+
+  const publicationsPilier = listePublications.filter((publication) => {
+    return (
+      publication &&
+      publication.status === "published" &&
+      publication.type === "archeologie"
+    );
+  });
+
   res.render("pilier1_intro", {
     currentPage: "pilier1",
+    user: req.session.user || null,
+    publicationsPilier,
   });
 });
 
 app.get("/pilier2", (req, res) => {
+  const listePublications = Array.isArray(publications)
+    ? publications
+    : Object.values(publications);
+
+  const publicationsPilier = listePublications.filter((publication) => {
+    return (
+      publication &&
+      publication.status === "published" &&
+      publication.type === "article"
+    );
+  });
+
   res.render("pilier2_intro", {
     currentPage: "pilier2",
+    user: req.session.user || null,
+    publicationsPilier,
   });
 });
 
 app.get("/pilier3", (req, res) => {
+  const prototypesPilier = Object.entries(prototypesPublic)
+    .filter(([, prototype]) => {
+      return prototype && prototype.status !== "draft";
+    })
+    .map(([id, prototype]) => {
+      return {
+        id: Number(id),
+        ...prototype,
+      };
+    })
+    .sort((a, b) => a.id - b.id);
+
   res.render("pilier3_intro", {
     currentPage: "pilier3",
+    user: req.session.user || null,
+    prototypesPilier,
   });
 });
 
-app.get("/paabo", (req, res) => {
-  res.render("fiche_paabo");
+/*
+========================================================
+ROUTE COMMUNE DES PUBLICATIONS
+========================================================
+*/
+
+app.get("/publication/:slug", (req, res) => {
+  const publication = publications.find(
+    (item) => item.slug === req.params.slug && item.status === "published",
+  );
+
+  if (!publication) {
+    return res.status(404).send("Publication introuvable");
+  }
+
+  let view;
+
+  if (publication.type === "article") {
+    view = "articles";
+  } else if (publication.type === "archeologie") {
+    view = "archeologie";
+  } else {
+    return res.status(404).send("Type de publication inconnu");
+  }
+
+  res.render(view, {
+    publication,
+    currentPage: "publications",
+    user: req.session.user || null,
+    pdfMode: false,
+  });
 });
 
-app.get("/gobekli_tepe", (req, res) => {
-  res.render("fiche_gobekli_tepe");
+app.get("/prototype/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const prototype = prototypesPublic[id];
+
+  if (!prototype) {
+    return res.status(404).send("Prototype introuvable");
+  }
+
+  res.render("prototype-public", {
+    id,
+    prototype,
+    user: req.session.user || null,
+    pdfMode: false,
+  });
 });
 
-app.get("/indus", (req, res) => {
-  res.render("fiche_indus");
-});
+app.get("/fiche:id", (req, res) => {
+  const id = Number(req.params.id);
+  const fiche = fichesPublic[id];
 
-app.get("/caral", (req, res) => {
-  res.render("fiche_caral");
-});
+  if (!Number.isInteger(id) || id < 1 || id > 15 || !fiche) {
+    return res.status(404).send("Fiche introuvable");
+  }
 
-app.get("/article_synthese_pilier1", (req, res) => {
-  res.render("article_synthese_pilier1");
-});
-
-app.get("/article_interet_general", (req, res) => {
-  res.render("article_interet_general");
-});
-
-app.get("/article_pensee_systhemique", (req, res) => {
-  res.render("article_pensee_systhemique");
-});
-
-app.get("/article_dette", (req, res) => {
-  res.render("article_dette");
-});
-
-app.get("/article_institutions", (req, res) => {
-  res.render("article_institutions");
-});
-
-app.get("/prototype1", (req, res) => {
-  res.render("prototype_scic");
-});
-
-app.get("/prototype2", (req, res) => {
-  res.render("prototype_agricole");
-});
-
-app.get("/prototype3", (req, res) => {
-  res.render("prototype_ecole");
-});
-
-app.get("/prototype4", (req, res) => {
-  res.render("prototype_systeme");
-});
-
-app.get("/fiche1", (req, res) => {
-  res.render("fiche1");
-});
-
-app.get("/fiche2", (req, res) => {
-  res.render("fiche2");
-});
-
-app.get("/fiche3", (req, res) => {
-  res.render("fiche3");
-});
-
-app.get("/fiche4", (req, res) => {
-  res.render("fiche4");
-});
-
-app.get("/fiche5", (req, res) => {
-  res.render("fiche5");
-});
-
-app.get("/fiche6", (req, res) => {
-  res.render("fiche6");
-});
-
-app.get("/fiche7", (req, res) => {
-  res.render("fiche7");
-});
-
-app.get("/fiche8", (req, res) => {
-  res.render("fiche8");
-});
-
-app.get("/fiche9", (req, res) => {
-  res.render("fiche9");
-});
-
-app.get("/fiche10", (req, res) => {
-  res.render("fiche10");
-});
-
-app.get("/fiche11", (req, res) => {
-  res.render("fiche11");
-});
-
-app.get("/fiche12", (req, res) => {
-  res.render("fiche12");
-});
-
-app.get("/fiche13", (req, res) => {
-  res.render("fiche13");
-});
-
-app.get("/fiche14", (req, res) => {
-  res.render("fiche14");
-});
-
-app.get("/fiche15", (req, res) => {
-  res.render("fiche15");
+  res.render("fiche-public", {
+    fiche,
+    id,
+    pdfMode: false,
+    user: req.session?.user || null,
+  });
 });
 
 app.get("/ressources", (req, res) => {
-  res.render("ressources", {
+  const listePublications = Array.isArray(publications)
+    ? publications
+    : Object.values(publications);
+
+  const publicationsArchives = listePublications
+    .filter((publication) => {
+      return (
+        publication &&
+        publication.status === "published" &&
+        (publication.type === "article" || publication.type === "archeologie")
+      );
+    })
+    .sort((a, b) => {
+      const dateA = a.publishedAt || `${a.publicationYear || 0}-01-01`;
+
+      const dateB = b.publishedAt || `${b.publicationYear || 0}-01-01`;
+
+      return new Date(dateB) - new Date(dateA);
+    });
+
+  return res.render("ressources", {
     currentPage: "ressources",
+    user: req.session.user || null,
+    publicationsArchives,
+  });
+});
+
+const livrePurchaseUrl = process.env.LIVRE_PURCHASE_URL || "";
+const essaisPurchaseUrl = process.env.ESSAIS_PURCHASE_URL || "";
+
+app.get("/ouvrages", (req, res) => {
+  return res.render("ouvrages", {
+    currentPage: "ouvrages",
+    user: req.session.user || null,
+    livrePurchaseUrl,
+    essaisPurchaseUrl,
+  });
+});
+
+app.get("/membre/livre", isAuth, (req, res) => {
+  return res.render("membres/livre", {
+    currentPage: "dashboard",
+    user: req.session.user,
+    livrePurchaseUrl,
+  });
+});
+
+app.get("/membre/essais", isAuth, (req, res) => {
+  return res.render("membres/essais", {
+    currentPage: "dashboard",
+    user: req.session.user,
+    essaisPurchaseUrl,
   });
 });
 
@@ -451,62 +800,6 @@ app.get("/adhesion", (req, res) => {
     currentPage: "adhesion",
   });
 });
-
-// Route formulaire
-
-//const transporter = nodemailer.createTransport({
-//host: "smtp-relay.brevo.com",
-//port: 587,
-//secure: false,
-//auth: {
-//  user: process.env.BREVO_USER,
-//  pass: process.env.BREVO_SMTP_KEY,
-// },
-//});
-
-//app.post("/contact", (req, res) => {
-//const { nom, email, message } = req.body;
-
-// ✅ LOG TERMINAL
-// console.log("---- Nouveau message ----");
-// console.log("Nom :", nom);
-//console.log("Email :", email);
-//console.log("Message :", message);
-
-//console.log("BREVO_USER:", process.env.BREVO_USER);
-//console.log("CLE existe:", !!process.env.BREVO_SMTP_KEY);
-//console.log("Début clé:", process.env.BREVO_SMTP_KEY?.slice(0, 8));
-
-// ✅ EMAIL
-//const mailOptions = {
-// from: "process.env.BREVO_USER",
-//to: "cap2032.contacts@free.fr",
-//replyTo: email,
-//subject: "Nouveau message CAP2032",
-//text: `
-//Nom: ${nom}
-//Email: ${email}
-
-//Message:
-//${message}
-//  `,
-//};
-
-//transporter.sendMail(mailOptions, (err, info) => {
-//if (err) {
-//  console.log("Erreur mail :", err);
-//  res.send("Erreur lors de l'envoi ❌");
-//} else {
-//  console.log("Email envoyé :", info.response);
-
-//  res.send("Message envoyé ✅");
-// }
-//});
-//});
-
-console.log("BREVO_API_KEY existe:", !!process.env.BREVO_API_KEY);
-console.log("Longueur clé:", process.env.BREVO_API_KEY?.length);
-console.log("Début clé:", process.env.BREVO_API_KEY?.slice(0, 10));
 
 app.post("/contact", async (req, res) => {
   const { nom, email, message } = req.body;
@@ -567,8 +860,6 @@ ${message}
 
 const SERVER_PORT = process.env.PORT || 3001;
 
-const baseUrl = process.env.BASE_URL || `http://localhost:${SERVER_PORT}`;
-
 app.listen(SERVER_PORT, () => {
-  console.log("Serveur lancé sur le port " + SERVER_PORT);
+  console.log(`Serveur lancé sur ${baseUrl}`);
 });

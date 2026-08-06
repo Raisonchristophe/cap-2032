@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <%- include("partial/head", {
+    title: `${prototype.title} — CAP 2032`
+  }) %>
+</head>
+
+<body class="page-prototype-public <%= pdfMode ? 'pdf-mode' : '' %>">
+
+  <% if (!pdfMode) { %>
+    <div class="progress-bar" id="progress"></div>
+
+    <%- include("partial/nav", {
+      currentPage: "prototypes"
+    }) %>
+
+    <%- include("partial/breadcrumb", {
+      items: [
+        { label: "Accueil", url: "/" },
+        { label: "Les prototypes", url: "/#prototypes" },
+        { label: `Module ${id} — ${prototype.title}` }
+      ]
+    }) %>
+  <% } %>
+
+  <main class="prototype-public-main">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <header class="prototype-hero">
+      <div class="prototype-hero-content">
+
+        <span class="prototype-tag">
+          Module <%= id %> / 4
+        </span>
+
+        <div class="prototype-hero-grid">
+          <div class="prototype-hero-text">
+
+            <h1><%= prototype.title %></h1>
+
+            <% if (prototype.subtitle) { %>
+              <p class="prototype-subtitle"><%= prototype.subtitle %></p>
+            <% } %>
+
+            <% if (prototype.intro) { %>
+              <div class="prototype-intro">
+                <% prototype.intro
+                  .trim()
+                  .split(/\n\s*\n/)
+                  .filter(Boolean)
+                  .forEach(paragraph => { %>
+                    <p><%= paragraph.trim() %></p>
+                <% }) %>
+              </div>
+            <% } %>
+
+          </div>
+
+          <% if (prototype.image) { %>
+            <figure class="prototype-hero-image">
+              <img
+                src="<%= prototype.image %>"
+                alt="Illustration du module <%= prototype.title %>"
+                loading="eager"
+              >
+            </figure>
+          <% } %>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- =====================================================
+         SOMMAIRE
+         ===================================================== -->
+    <% if (prototype.structure && prototype.structure.length) { %>
+      <nav class="prototype-structure" aria-label="Structure du module">
+        <ul class="structure">
+          <% prototype.structure.forEach((item, index) => { %>
+            <li>
+              <a href="#section-<%= index + 1 %>"><%= item %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </nav>
+    <% } %>
+
+    <!-- =====================================================
+         CONTENU
+         ===================================================== -->
+    <article class="prototype-body">
+
+      <% prototype.sections.forEach((section, sectionIndex) => { %>
+        <section
+          class="prototype-section"
+          id="section-<%= sectionIndex + 1 %>"
+        >
+
+          <% if (section.title) { %>
+            <h2><%= section.title %></h2>
+          <% } %>
+
+          <% if (section.blocks && section.blocks.length) { %>
+            <% section.blocks.forEach(block => { %>
+
+              <!-- PARAGRAPHES -->
+              <% if (block.type === "paragraphs") { %>
+                <div class="prototype-paragraphs">
+                  <% (block.content || []).forEach(paragraph => { %>
+                    <p><%= paragraph %></p>
+                  <% }) %>
+                </div>
+              <% } %>
+
+              <!-- LISTE -->
+              <% if (block.type === "list") { %>
+                <div class="prototype-list-block">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <ul class="prototype-list">
+                    <% (block.items || []).forEach(item => { %>
+                      <li><%= item %></li>
+                    <% }) %>
+                  </ul>
+                </div>
+              <% } %>
+
+              <!-- CITATION -->
+              <% if (block.type === "quote") { %>
+                <blockquote class="prototype-quote">
+                  <p><%= block.content %></p>
+                </blockquote>
+              <% } %>
+
+              <!-- ENCADRÉ À SOUS-PARTIES -->
+              <% if (block.type === "encadre") { %>
+                <aside class="prototype-encadre">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <% (block.content || []).forEach(part => { %>
+                    <div class="prototype-encadre-part">
+
+                      <% if (part.subtitle) { %>
+                        <h4><%= part.subtitle %></h4>
+                      <% } %>
+
+                      <% if (part.text) { %>
+                        <% part.text
+                          .trim()
+                          .split(/\n\s*\n/)
+                          .filter(Boolean)
+                          .forEach(paragraph => { %>
+                            <p><%= paragraph.trim() %></p>
+                        <% }) %>
+                      <% } %>
+
+                      <% if (part.paragraphs && part.paragraphs.length) { %>
+                        <% part.paragraphs.forEach(paragraph => { %>
+                          <p><%= paragraph %></p>
+                        <% }) %>
+                      <% } %>
+
+                      <% if (part.items && part.items.length) { %>
+                        <ul>
+                          <% part.items.forEach(item => { %>
+                            <li><%= item %></li>
+                          <% }) %>
+                        </ul>
+                      <% } %>
+
+                    </div>
+                  <% }) %>
+                </aside>
+              <% } %>
+
+              <!-- RÉSUMÉ -->
+              <% if (block.type === "resume") { %>
+                <aside class="prototype-resume">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <ul>
+                    <% (block.items || []).forEach(item => { %>
+                      <li><%= item %></li>
+                    <% }) %>
+                  </ul>
+                </aside>
+              <% } %>
+
+              <!-- ACTIVITÉS -->
+              <% if (block.type === "activities") { %>
+                <div class="prototype-activities">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-activity-card">
+
+                      <% if (item.category) { %>
+                        <span class="prototype-card-label"><%= item.category %></span>
+                      <% } %>
+
+                      <% if (item.title) { %>
+                        <h3><%= item.title %></h3>
+                      <% } %>
+
+                      <% if (item.content) { %>
+                        <p><%= item.content %></p>
+                      <% } %>
+
+                      <% if (item.paragraphs && item.paragraphs.length) { %>
+                        <% item.paragraphs.forEach(paragraph => { %>
+                          <p><%= paragraph %></p>
+                        <% }) %>
+                      <% } %>
+
+                      <% if (item.items && item.items.length) { %>
+                        <ul>
+                          <% item.items.forEach(listItem => { %>
+                            <li><%= listItem %></li>
+                          <% }) %>
+                        </ul>
+                      <% } %>
+
+                    </article>
+                  <% }) %>
+                </div>
+              <% } %>
+
+              <!-- EXEMPLES -->
+              <% if (block.type === "examples") { %>
+                <div class="prototype-examples">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <div class="prototype-examples-grid">
+                    <% (block.items || []).forEach(item => { %>
+                      <article class="prototype-example-card">
+                        <h4><%= item.title %></h4>
+                        <p><%= item.content %></p>
+                      </article>
+                    <% }) %>
+                  </div>
+                </div>
+              <% } %>
+
+              <!-- CARTES -->
+              <% if (block.type === "cards") { %>
+                <div class="prototype-cards-block">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <div class="prototype-cards">
+                    <% (block.items || []).forEach(item => { %>
+                      <article class="prototype-card">
+                        <h4><%= item.title %></h4>
+                        <p><%= item.content %></p>
+                      </article>
+                    <% }) %>
+                  </div>
+                </div>
+              <% } %>
+
+              <!-- CHIFFRES CLÉS -->
+              <% if (block.type === "stats") { %>
+                <div class="prototype-stats-block">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <div class="prototype-stats">
+                    <% (block.items || []).forEach(item => { %>
+                      <article class="prototype-stat">
+                        <strong><%= item.value %></strong>
+                        <span><%= item.label %></span>
+                      </article>
+                    <% }) %>
+                  </div>
+
+                  <% if (block.note) { %>
+                    <p class="prototype-note"><%= block.note %></p>
+                  <% } %>
+                </div>
+              <% } %>
+
+              <!-- AVERTISSEMENT / NOTE -->
+              <% if (block.type === "notice") { %>
+                <aside class="prototype-notice">
+                  <p><%= block.content %></p>
+                </aside>
+              <% } %>
+
+              <!-- LIENS VERS LES AUTRES MODULES -->
+              <% if (block.type === "links") { %>
+                <div class="prototype-links-block">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <div class="prototype-links">
+                    <% (block.items || []).forEach(item => { %>
+                      <a class="prototype-link-card" href="<%= item.url %>">
+                        <strong><%= item.label %></strong>
+                        <span><%= item.content %></span>
+                      </a>
+                    <% }) %>
+                  </div>
+                </div>
+              <% } %>
+
+              <!-- SCÉNARIOS TERRITORIAUX -->
+              <% if (block.type === "scenarioCards") { %>
+                <div class="prototype-scenarios-block">
+                  <% if (block.title) { %>
+                    <h3><%= block.title %></h3>
+                  <% } %>
+
+                  <div class="prototype-scenarios">
+                    <% (block.scenarios || []).forEach(scenario => { %>
+                      <article class="prototype-scenario-card">
+                        <span class="prototype-card-label"><%= scenario.population %></span>
+                        <h4><%= scenario.title %></h4>
+                        <p><%= scenario.description %></p>
+
+                        <% if (scenario.activities && scenario.activities.length) { %>
+                          <ul>
+                            <% scenario.activities.forEach(activity => { %>
+                              <li><%= activity %></li>
+                            <% }) %>
+                          </ul>
+                        <% } %>
+                      </article>
+                    <% }) %>
+                  </div>
+                </div>
+              <% } %>
+
+              <!-- CONCLUSION -->
+              <% if (block.type === "conclusion") { %>
+                <div class="prototype-conclusion">
+                  <p><%= block.content %></p>
+                </div>
+              <% } %>
+
+            <% }) %>
+          <% } %>
+
+        </section>
+      <% }) %>
+
+    </article>
+
+    <!-- =====================================================
+         ACCÈS MEMBRE
+         ===================================================== -->
+    <% if (!pdfMode && prototype.memberAccess) { %>
+      <section class="prototype-access">
+        <div class="prototype-access-content">
+
+          <span class="prototype-access-label">Aller plus loin</span>
+
+          <h2><%= prototype.memberAccess.label %></h2>
+
+          <% if (prototype.memberAccess.description) { %>
+            <p><%= prototype.memberAccess.description %></p>
+          <% } %>
+
+          <% if (typeof user !== "undefined" && user) { %>
+            <a href="<%= prototype.memberAccess.url %>" class="btn btn-primary">
+              Consulter la version détaillée
+            </a>
+          <% } else { %>
+            <a href="/login" class="btn btn-primary">
+              Se connecter pour accéder au contenu complet
+            </a>
+          <% } %>
+
+             <% if (!pdfMode) { %>
+  <a
+    href="/download/prototype-public/<%= id %>"
+    class="btn btn-secondary"
+  >
+    Télécharger la présentation en PDF
+  </a>
+<% } %>
+        </div>
+      </section>
+    <% } %>
+
+
+
+    <!-- =====================================================
+         NAVIGATION ENTRE MODULES
+         ===================================================== -->
+    <% if (!pdfMode && prototype.navigation) { %>
+      <nav class="content-nav rich" aria-label="Navigation entre les modules">
+
+        <div class="content-nav-prev">
+          <% if (prototype.navigation.previous) { %>
+            <a href="<%= prototype.navigation.previous.url %>" class="content-nav-link prev">
+              <span class="content-nav-dir">← Module précédent</span>
+              <span class="content-nav-name"><%= prototype.navigation.previous.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-list">
+          <% if (prototype.navigation.list) { %>
+            <a href="<%= prototype.navigation.list.url %>" class="content-nav-link list">
+              <span class="content-nav-dir">↑ Retour</span>
+              <span class="content-nav-name"><%= prototype.navigation.list.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-next">
+          <% if (prototype.navigation.next) { %>
+            <a href="<%= prototype.navigation.next.url %>" class="content-nav-link next">
+              <span class="content-nav-dir">Module suivant →</span>
+              <span class="content-nav-name"><%= prototype.navigation.next.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+      </nav>
+    <% } %>
+
+  </main>
+
+  <% if (!pdfMode) { %>
+    <%- include("partial/footer") %>
+
+    <script>
+      const progress = document.getElementById("progress");
+
+      if (progress) {
+        const updateProgress = () => {
+          const scrollableHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+          const percentage = scrollableHeight > 0
+            ? (window.scrollY / scrollableHeight) * 100
+            : 0;
+
+          progress.style.width = `${Math.min(100, percentage)}%`;
+        };
+
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+      }
+    </script>
+  <% } %>
+
+</body>
+</html>

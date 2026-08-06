@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <%- include("partial/head", { title: `${publication.title} — Histoire et archéologie — CAP 2032` }) %>
+</head>
+<body class="page-archeologie <%= pdfMode ? 'pdf-mode' : '' %>">
+
+<% if (!pdfMode) { %>
+  <div class="progress-bar" id="progress"></div>
+  <%- include("partial/nav", { currentPage: "publications" }) %>
+  <%- include("partial/breadcrumb", {
+    items: [
+      { label: "Accueil", url: "/" },
+      { label: "Histoire et archéologie", url: "/pilier1" },
+      { label: "Publications", url: "/publications?type=archeologie" },
+      { label: publication.title }
+    ]
+  }) %>
+<% } %>
+
+<main class="archeologie-main">
+  <header class="archeologie-hero">
+    <div class="archeologie-hero-inner">
+      <div class="archeologie-hero-text">
+        <div class="archeologie-type-line">
+          <span class="archeologie-type"><%= publication.category === "Synthèse historique" ? "Synthèse" : "Archéologie" %></span>
+          <% if (publication.category) { %><span aria-hidden="true">·</span><span><%= publication.category %></span><% } %>
+          <% if (publication.collection) { %><span aria-hidden="true">·</span><span><%= publication.collection %></span><% } %>
+        </div>
+
+        <h1><%= publication.title %></h1>
+        <% if (publication.subtitle) { %><p class="archeologie-subtitle"><%= publication.subtitle %></p><% } %>
+        <% if (publication.excerpt) { %><p class="archeologie-standfirst"><%= publication.excerpt %></p><% } %>
+
+        <dl class="archeologie-meta">
+          <% if (publication.civilisation) { %><div class="archeologie-meta-item"><dt>Civilisation</dt><dd><%= publication.civilisation %></dd></div><% } %>
+          <% if (publication.geographicArea) { %><div class="archeologie-meta-item"><dt>Zone</dt><dd><%= publication.geographicArea %></dd></div><% } %>
+          <% if (publication.period) { %><div class="archeologie-meta-item"><dt>Période</dt><dd><%= publication.period %></dd></div><% } %>
+          <% if (publication.author) { %><div class="archeologie-meta-item"><dt>Auteur</dt><dd><%= publication.author %></dd></div><% } %>
+          <% if (publication.readingTime) { %><div class="archeologie-meta-item"><dt>Lecture</dt><dd><%= publication.readingTime %></dd></div><% } %>
+        </dl>
+
+        <% if (!pdfMode && publication.pdf?.enabled) { %>
+          <a class="archeologie-pdf-link" href="/publication/<%= publication.slug %>/pdf">
+            <span><%= publication.pdf.label || "Télécharger en PDF" %></span><strong>PDF</strong>
+          </a>
+        <% } %>
+      </div>
+
+      <% if (publication.image) { %>
+        <figure class="archeologie-hero-image">
+          <img src="<%= publication.image %>" alt="Illustration de « <%= publication.title %> »" loading="eager">
+        </figure>
+      <% } %>
+    </div>
+  </header>
+
+  <% if (publication.content?.intro) { %>
+    <section class="archeologie-introduction">
+      <% publication.content.intro.trim().split(/\n\s*\n/).filter(Boolean).forEach(paragraph => { %>
+        <p><%= paragraph.trim() %></p>
+      <% }) %>
+    </section>
+  <% } %>
+
+  <% if (publication.content?.keyFacts?.length) { %>
+    <section class="archeologie-keyfacts">
+      <span class="archeologie-section-eyebrow">Repères</span>
+      <h2>Faits clés</h2>
+      <dl class="archeologie-keyfacts-grid">
+        <% publication.content.keyFacts.forEach(item => { %>
+          <div class="archeologie-keyfact"><dt><%= item.label %></dt><dd><%= item.value %></dd></div>
+        <% }) %>
+      </dl>
+    </section>
+  <% } %>
+
+  <% if (publication.content?.stats?.length) { %>
+    <section class="archeologie-stats">
+      <% publication.content.stats.forEach(item => { %>
+        <article class="archeologie-stat"><strong><%= item.value %></strong><span><%= item.label %></span></article>
+      <% }) %>
+    </section>
+  <% } %>
+
+  <% if (publication.content?.structure?.length) { %>
+    <nav class="archeologie-toc" aria-label="Sommaire de la publication">
+      <p class="archeologie-toc-title">Dans cette publication</p>
+      <ol>
+        <% publication.content.structure.forEach((item, index) => { const targetSection = (publication.content.sections || []).filter(section => section.title)[index]; %>
+          <li><a href="#<%= targetSection?.id || `section-${index + 1}` %>"><%= item %></a></li>
+        <% }) %>
+      </ol>
+    </nav>
+  <% } %>
+
+  <article class="archeologie-body">
+    <% (publication.content?.sections || []).forEach((section, sectionIndex) => { %>
+      <section class="archeologie-section" id="<%= section.id || `section-${sectionIndex + 1}` %>">
+        <% if (section.title) { %><h2><%= section.title %></h2><% } %>
+
+        <% (section.blocks || []).forEach(block => { %>
+          <% if (block.type === "paragraphs") { %><div class="archeologie-paragraphs"><% (block.content || []).forEach(p => { %><p><%= p %></p><% }) %></div><% } %>
+          <% if (block.type === "quote") { %><blockquote class="archeologie-quote"><p><%= block.content %></p></blockquote><% } %>
+          <% if (block.type === "list") { %><div class="archeologie-list-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %><ul><% (block.items || []).forEach(item => { %><li><%= item %></li><% }) %></ul></div><% } %>
+
+          <% if (block.type === "comparison") { %>
+            <div class="archeologie-comparison-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %>
+              <div class="archeologie-comparison"><% (block.items || []).forEach((item,index) => { %>
+                <article class="archeologie-comparison-card comparison-<%= index + 1 %>"><% if (item.label) { %><span class="archeologie-card-label"><%= item.label %></span><% } %><% if (item.title) { %><h4><%= item.title %></h4><% } %><% if (item.content) { %><p><%= item.content %></p><% } %></article>
+              <% }) %></div>
+            </div>
+          <% } %>
+
+          <% if (block.type === "encadre") { %>
+            <aside class="archeologie-encadre"><% if (block.title) { %><h3><%= block.title %></h3><% } %>
+              <% (block.content || []).forEach(part => { %><div class="archeologie-encadre-part"><% if (part.subtitle) { %><h4><%= part.subtitle %></h4><% } %><% (part.paragraphs || []).forEach(p => { %><p><%= p %></p><% }) %><% if (part.items?.length) { %><ul><% part.items.forEach(item => { %><li><%= item %></li><% }) %></ul><% } %></div><% }) %>
+            </aside>
+          <% } %>
+
+          <% if (block.type === "absences") { %><div class="archeologie-absence-grid"><% (block.items || []).forEach(item => { %><article class="archeologie-absence-card"><% if (item.icon) { %><span class="archeologie-symbol"><%= item.icon %></span><% } %><h3><%= item.title %></h3><p><%= item.content %></p></article><% }) %></div><% } %>
+
+          <% if (block.type === "presences") { %><div class="archeologie-presences"><% (block.items || []).forEach((item,index) => { %><article class="archeologie-presence"><span class="archeologie-presence-number"><%= item.number || String(index + 1).padStart(2,"0") %></span><div><h3><%= item.title %></h3><p><%= item.content %></p></div></article><% }) %></div><% } %>
+
+          <% if (block.type === "facts") { %><div class="archeologie-facts"><% (block.items || []).forEach(item => { %><article class="archeologie-fact-card"><h3><%= item.title %></h3><p><%= item.content %></p></article><% }) %></div><% } %>
+
+          <% if (block.type === "researchNote") { %><aside class="archeologie-research-note"><span><%= block.label || "État de la recherche" %></span><% (block.paragraphs || []).forEach(p => { %><p><%= p %></p><% }) %></aside><% } %>
+
+          <% if (block.type === "localisation") { %><div class="archeologie-localisation"><% if (block.title) { %><h3><%= block.title %></h3><% } %><dl><% (block.items || []).forEach(item => { %><div><dt><%= item.label %></dt><dd><%= item.value %></dd></div><% }) %></dl></div><% } %>
+
+          <% if (block.type === "process") { %><div class="archeologie-process-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %><ol class="archeologie-process"><% (block.items || []).forEach((item,index) => { %><li><span><%= item.number || String(index + 1).padStart(2,"0") %></span><div><h4><%= item.title %></h4><p><%= item.content %></p></div></li><% }) %></ol></div><% } %>
+
+          <% if (block.type === "timeline") { %><div class="archeologie-timeline-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %><ol class="archeologie-timeline"><% (block.items || []).forEach(item => { %><li><strong><%= item.date || item.phase %></strong><p><%= item.content %></p></li><% }) %></ol></div><% } %>
+
+          <% if (block.type === "flows") { %><div class="archeologie-flows-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %><div class="archeologie-flows"><% (block.items || []).forEach(item => { %><article class="archeologie-flow-card"><div class="archeologie-flow-heading"><strong><%= item.from %></strong><span aria-hidden="true">→</span><strong><%= item.to %></strong></div><% if (item.exchanges?.length) { %><ul><% item.exchanges.forEach(exchange => { %><li><%= exchange %></li><% }) %></ul><% } %></article><% }) %></div></div><% } %>
+
+          <% if (block.type === "lessons") { %><div class="archeologie-lessons"><% (block.items || []).forEach((item,index) => { %><article class="archeologie-lesson"><span class="archeologie-lesson-number"><%= item.number || String(index + 1).padStart(2,"0") %></span><div><h3><%= item.title %></h3><p><%= item.content %></p></div></article><% }) %></div><% } %>
+
+          <% if (block.type === "conditions") { %><div class="archeologie-conditions-block"><% if (block.title) { %><h3><%= block.title %></h3><% } %><div class="archeologie-conditions"><% (block.items || []).forEach(item => { %><article class="archeologie-condition-card"><h4><%= item.title %></h4><p><%= item.content %></p></article><% }) %></div></div><% } %>
+
+          <% if (block.type === "cap2032") { %><aside class="archeologie-cap2032"><% if (block.label) { %><span class="archeologie-cap2032-label"><%= block.label %></span><% } %><% if (block.title) { %><h3><%= block.title %></h3><% } %><% (block.paragraphs || []).forEach(p => { %><p><%= p %></p><% }) %></aside><% } %>
+
+          <% if (block.type === "conclusion") { %><div class="archeologie-conclusion"><p><%= block.content %></p></div><% } %>
+          <% if (block.type === "authorNote") { %><aside class="archeologie-author-note"><span><%= block.label || "Note de l’auteur" %></span><p><%= block.content %></p></aside><% } %>
+
+          <% if (block.type === "image" || block.type === "figure") { %><figure class="archeologie-figure"><img src="<%= block.src || block.image %>" alt="<%= block.alt || block.caption || '' %>" loading="lazy"><% if (block.caption) { %><figcaption><%= block.caption %></figcaption><% } %></figure><% } %>
+
+          <% if (block.type === "sources") { %><div class="archeologie-inline-sources"><% if (block.title) { %><h3><%= block.title %></h3><% } %><ul><% (block.items || []).forEach(item => { %><li><% if (item.url) { %><a href="<%= item.url %>" target="_blank" rel="noopener noreferrer"><%= item.label || item.title %></a><% } else { %><%= item.label || item.title %><% } %></li><% }) %></ul></div><% } %>
+        <% }) %>
+      </section>
+    <% }) %>
+  </article>
+
+  <% if (publication.tags?.length) { %><section class="archeologie-tags" aria-label="Mots-clés"><h2>Mots-clés</h2><ul><% publication.tags.forEach(tag => { if (tag) { %><li><%= tag %></li><% } }) %></ul></section><% } %>
+
+  <% const references = publication.references || {}; const hasReferences = (references.books || []).length || (references.reports || []).length || (references.articles || []).length || (references.videos || []).length || (references.websites || []).length; %>
+  <% if (hasReferences) { %>
+    <section class="archeologie-references">
+      <span class="archeologie-section-eyebrow">Documentation</span><h2>Références et ressources</h2>
+      <% if (references.books?.length) { %><div class="archeologie-reference-group"><h3>Livres</h3><ul><% references.books.forEach(item => { %><li><% if (item.author) { %><strong><%= item.author %></strong>, <% } %><cite><%= item.title %></cite><% if (item.publisher) { %>, <%= item.publisher %><% } %><% if (item.year) { %>, <%= item.year %><% } %>.</li><% }) %></ul></div><% } %>
+      <% if (references.reports?.length) { %><div class="archeologie-reference-group"><h3>Rapports</h3><ul><% references.reports.forEach(item => { %><li><% if (item.organization) { %><strong><%= item.organization %></strong>, <% } %><% if (item.url) { %><a href="<%= item.url %>" target="_blank" rel="noopener noreferrer"><%= item.title %></a><% } else { %><cite><%= item.title %></cite><% } %><% if (item.year) { %>, <%= item.year %><% } %>.</li><% }) %></ul></div><% } %>
+      <% if (references.articles?.length) { %><div class="archeologie-reference-group"><h3>Articles</h3><ul><% references.articles.forEach(item => { %><li><% if (item.author) { %><strong><%= item.author %></strong>, <% } %><% if (item.url) { %><a href="<%= item.url %>" target="_blank" rel="noopener noreferrer"><%= item.title %></a><% } else { %><cite><%= item.title %></cite><% } %><% if (item.publication) { %>, <%= item.publication %><% } %><% if (item.year) { %>, <%= item.year %><% } %>.</li><% }) %></ul></div><% } %>
+      <% if (references.videos?.length) { %><div class="archeologie-reference-group"><h3>Vidéos</h3><ul><% references.videos.forEach(item => { %><li><a href="<%= item.url %>" target="_blank" rel="noopener noreferrer"><%= item.title %></a><% if (item.channel) { %> — <%= item.channel %><% } %></li><% }) %></ul></div><% } %>
+      <% if (references.websites?.length) { %><div class="archeologie-reference-group"><h3>Sites</h3><ul><% references.websites.forEach(item => { %><li><a href="<%= item.url %>" target="_blank" rel="noopener noreferrer"><%= item.label || item.title || item.url %></a></li><% }) %></ul></div><% } %>
+    </section>
+  <% } %>
+
+  <% if (!pdfMode && publication.navigation) { %>
+    <nav class="content-nav rich archeologie-navigation" aria-label="Navigation entre les publications historiques">
+      <div class="content-nav-prev"><% if (publication.navigation.previous) { %><a href="/publication/<%= publication.navigation.previous.slug %>" class="content-nav-link prev"><span class="content-nav-dir">← Publication précédente</span><span class="content-nav-name"><%= publication.navigation.previous.label %></span></a><% } %></div>
+      <div class="content-nav-list"><% if (publication.navigation.list) { %><a href="<%= publication.navigation.list.url %>" class="content-nav-link list"><span class="content-nav-dir">↑ Retour</span><span class="content-nav-name"><%= publication.navigation.list.label %></span></a><% } %></div>
+      <div class="content-nav-next"><% if (publication.navigation.next) { %><a href="/publication/<%= publication.navigation.next.slug %>" class="content-nav-link next"><span class="content-nav-dir">Publication suivante →</span><span class="content-nav-name"><%= publication.navigation.next.label %></span></a><% } %></div>
+    </nav>
+  <% } %>
+</main>
+
+<% if (!pdfMode) { %>
+  <%- include("partial/footer") %>
+  <script>
+    const progress = document.getElementById("progress");
+    if (progress) {
+      const updateProgress = () => {
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percentage = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+        progress.style.width = `${Math.min(100, percentage)}%`;
+      };
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+    }
+  </script>
+<% } %>
+
+</body>
+</html>

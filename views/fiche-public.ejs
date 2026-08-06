@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <%- include("partial/head", {
+    title: `Fiche ${id} — ${fiche.title} — CAP 2032`
+  }) %>
+</head>
+
+<body class="page-fiche-public <%= pdfMode ? 'pdf-mode' : '' %>">
+
+  <% if (!pdfMode) { %>
+    <%- include("partial/nav", {
+      currentPage: "piliers"
+    }) %>
+
+    <%- include("partial/breadcrumb", {
+      items: [
+        {
+          label: "Accueil",
+          url: "/"
+        },
+        {
+          label: "Les 15 piliers",
+          url: "/#piliers-secondaires"
+        },
+        {
+          label: `Fiche ${id} / 15 — ${fiche.title}`
+        }
+      ]
+    }) %>
+  <% } %>
+
+  <main class="fiche-public-main">
+
+    <header class="fiche-hero">
+      <div class="fiche-hero-content">
+
+        <span class="fiche-tag">
+          Fiche <%= id %> / 15
+        </span>
+
+        <div class="fiche-hero-grid">
+          <div class="fiche-hero-text">
+
+            <h1><%= fiche.title %></h1>
+
+            <% if (fiche.subtitle) { %>
+              <p class="fiche-subtitle"><%= fiche.subtitle %></p>
+            <% } %>
+
+            <% if (fiche.intro) { %>
+              <p class="fiche-intro"><%= fiche.intro %></p>
+            <% } %>
+
+          </div>
+
+          <% if (fiche.image) { %>
+            <figure class="fiche-hero-image">
+              <img
+                src="<%= fiche.image %>"
+                alt="Illustration du pilier <%= fiche.title %>"
+                loading="eager"
+              >
+            </figure>
+          <% } %>
+        </div>
+
+      </div>
+    </header>
+
+    <% if (fiche.structure?.length) { %>
+      <nav class="fiche-structure" aria-label="Structure de la fiche">
+        <ul class="structure">
+          <% fiche.structure.forEach((item, index) => { %>
+            <li>
+              <a href="#section-<%= index + 1 %>"><%= item %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </nav>
+    <% } %>
+
+    <article class="fiche-body">
+
+      <% let sectionIndex = 0; %>
+
+      <% fiche.sections.forEach(section => { %>
+
+        <% if (section.type === "title") { %>
+          <% sectionIndex += 1; %>
+          <h2 id="section-<%= sectionIndex %>"><%= section.content %></h2>
+        <% } %>
+
+        <% if (section.type === "subtitle") { %>
+          <h3><%= section.content %></h3>
+        <% } %>
+
+        <% if (section.type === "text") { %>
+          <p><%= section.content %></p>
+        <% } %>
+
+        <% if (section.type === "list") { %>
+          <ul class="fiche-list">
+            <% section.items.forEach(item => { %>
+              <li><%= item %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+
+        <% if (section.type === "quote") { %>
+          <blockquote class="pullquote">
+            <p><%= section.content %></p>
+          </blockquote>
+        <% } %>
+
+        <% if (section.type === "encadre") { %>
+          <aside class="encadre">
+            <% if (section.title) { %>
+              <h3><%= section.title %></h3>
+            <% } %>
+            <p><%= section.content %></p>
+          </aside>
+        <% } %>
+
+        <% if (section.type === "action") { %>
+          <section class="fiche-action">
+            <span class="fiche-action-num" aria-hidden="true">
+              <%= section.number %>
+            </span>
+
+            <div class="fiche-action-content">
+              <h3><%= section.title %></h3>
+              <p><%= section.content %></p>
+            </div>
+          </section>
+        <% } %>
+
+      <% }) %>
+
+      <% if (fiche.links?.length) { %>
+        <aside class="fiche-links">
+          <h2>Ressources complémentaires</h2>
+
+          <ul>
+            <% fiche.links.forEach(link => { %>
+              <li>
+                <a href="<%= link.url %>"><%= link.label %></a>
+              </li>
+            <% }) %>
+          </ul>
+        </aside>
+      <% } %>
+
+      <% if (fiche.conclusion) { %>
+        <div class="fiche-conclusion">
+          <p><%= fiche.conclusion %></p>
+        </div>
+      <% } %>
+
+    </article>
+
+    <% if (!pdfMode) { %>
+      <section class="fiche-access">
+        <div class="fiche-access-content">
+
+          <span class="fiche-access-label">Aller plus loin</span>
+
+          <h2>Accéder à la fiche détaillée</h2>
+
+          <p>
+            La version membre développe les propositions, les données,
+            les mécanismes de mise en œuvre et les liens avec les autres
+            composantes de CAP 2032.
+          </p>
+
+          <% if (typeof user !== "undefined" && user) { %>
+            <a href="/membre/fiche/<%= id %>" class="btn btn-primary">
+              Consulter la fiche complète
+            </a>
+          <% } else { %>
+            <a href="/login" class="btn btn-primary">
+              Se connecter pour accéder au contenu complet
+            </a>
+          <% } %>
+
+        </div>
+      </section>
+    <% } %>
+
+    <% if (!pdfMode) { %>
+  <a
+    href="/download/fiche-public/<%= id %>"
+    class="btn btn-primary"
+  >
+    Télécharger cette fiche en PDF
+  </a>
+<% } %>
+
+    <% if (!pdfMode) { %>
+      <nav class="content-nav simple" aria-label="Navigation entre les fiches">
+
+        <div class="content-nav-prev">
+          <% if (Number(id) > 1) { %>
+            <a href="/fiche<%= Number(id) - 1 %>">
+              <span aria-hidden="true">←</span>
+              Fiche précédente
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-center">
+          <a href="/#piliers-secondaires">Voir les 15 piliers</a>
+        </div>
+
+        <div class="content-nav-next">
+          <% if (Number(id) < 15) { %>
+            <a href="/fiche<%= Number(id) + 1 %>">
+              Fiche suivante
+              <span aria-hidden="true">→</span>
+            </a>
+          <% } %>
+        </div>
+
+      </nav>
+    <% } %>
+
+  </main>
+
+  <% if (!pdfMode) { %>
+    <%- include("partial/footer") %>
+  <% } %>
+
+</body>
+</html>

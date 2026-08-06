@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <%- include("partial/head", {
+    title: `${publication.title} — CAP 2032`
+  }) %>
+</head>
+
+<body class="page-article <%= pdfMode ? 'pdf-mode' : '' %>">
+
+  <% if (!pdfMode) { %>
+    <div class="progress-bar" id="progress"></div>
+
+    <%- include("partial/nav", {
+      currentPage: "publications"
+    }) %>
+
+    <%- include("partial/breadcrumb", {
+      items: [
+        { label: "Accueil", url: "/" },
+        { label: "Analyses et réflexions", url: "/pilier2" },
+        { label: "Publications", url: "/publications?type=article" },
+        { label: publication.title }
+      ]
+    }) %>
+  <% } %>
+
+  <main class="article-main">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <header class="article-hero">
+      <div class="article-hero-inner">
+
+        <div class="article-hero-text">
+
+          <div class="article-type-line">
+            <span class="article-type">Analyse</span>
+
+            <% if (publication.category) { %>
+              <span aria-hidden="true">·</span>
+              <span><%= publication.category %></span>
+            <% } %>
+
+            <% if (publication.collection) { %>
+              <span aria-hidden="true">·</span>
+              <span><%= publication.collection %></span>
+            <% } %>
+          </div>
+
+          <h1><%= publication.title %></h1>
+
+          <% if (publication.subtitle) { %>
+            <p class="article-subtitle"><%= publication.subtitle %></p>
+          <% } %>
+
+          <% if (publication.excerpt) { %>
+            <p class="article-standfirst"><%= publication.excerpt %></p>
+          <% } %>
+
+          <dl class="article-meta">
+            <% if (publication.author) { %>
+              <div class="article-meta-item">
+                <dt>Auteur</dt>
+                <dd><%= publication.author %></dd>
+              </div>
+            <% } %>
+
+            <% if (publication.publishedAt) { %>
+              <div class="article-meta-item">
+                <dt>Publié le</dt>
+                <dd>
+                  <%= new Intl.DateTimeFormat("fr-FR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                  }).format(new Date(`${publication.publishedAt}T12:00:00`)) %>
+                </dd>
+              </div>
+            <% } else if (publication.publicationYear) { %>
+              <div class="article-meta-item">
+                <dt>Publication</dt>
+                <dd><%= publication.publicationYear %></dd>
+              </div>
+            <% } %>
+
+            <% if (publication.updatedAt) { %>
+              <div class="article-meta-item">
+                <dt>Mis à jour le</dt>
+                <dd>
+                  <%= new Intl.DateTimeFormat("fr-FR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                  }).format(new Date(`${publication.updatedAt}T12:00:00`)) %>
+                </dd>
+              </div>
+            <% } %>
+
+            <% if (publication.readingTime) { %>
+              <div class="article-meta-item">
+                <dt>Lecture</dt>
+                <dd><%= publication.readingTime %></dd>
+              </div>
+            <% } %>
+          </dl>
+
+          <% if (!pdfMode && publication.pdf?.enabled) { %>
+            <a
+              class="article-pdf-link"
+              href="/publication/<%= publication.slug %>/pdf"
+            >
+              <span><%= publication.pdf.label || "Télécharger en PDF" %></span>
+              <strong>PDF</strong>
+            </a>
+          <% } %>
+
+        </div>
+
+        <% if (publication.image) { %>
+          <figure class="article-hero-image">
+            <img
+              src="<%= publication.image %>"
+              alt="Illustration de l’article « <%= publication.title %> »"
+              loading="eager"
+            >
+          </figure>
+        <% } %>
+
+      </div>
+    </header>
+
+    <!-- =====================================================
+         INTRODUCTION
+         ===================================================== -->
+    <% if (publication.content?.intro) { %>
+      <section class="article-introduction">
+        <% publication.content.intro
+          .trim()
+          .split(/\n\s*\n/)
+          .filter(Boolean)
+          .forEach(paragraph => { %>
+            <p><%= paragraph.trim() %></p>
+        <% }) %>
+      </section>
+    <% } %>
+
+    <!-- =====================================================
+         SOMMAIRE
+         ===================================================== -->
+    <% if (publication.content?.structure?.length) { %>
+      <nav class="article-toc" aria-label="Sommaire de l’article">
+        <p class="article-toc-title">Dans cet article</p>
+
+        <ol>
+          <% publication.content.structure.forEach((item, index) => { %>
+            <% const targetSection = (publication.content.sections || [])
+              .filter(section => section.title)[index]; %>
+
+            <li>
+              <a href="#<%= targetSection?.id || `section-${index + 1}` %>">
+                <%= item %>
+              </a>
+            </li>
+          <% }) %>
+        </ol>
+      </nav>
+    <% } %>
+
+    <!-- =====================================================
+         CORPS DE L’ARTICLE
+         ===================================================== -->
+    <article class="article-body">
+
+      <% (publication.content?.sections || []).forEach((section, sectionIndex) => { %>
+        <section
+          class="article-section"
+          id="<%= section.id || `section-${sectionIndex + 1}` %>"
+        >
+
+          <% if (section.title) { %>
+            <h2><%= section.title %></h2>
+          <% } %>
+
+          <% (section.blocks || []).forEach(block => { %>
+
+            <!-- PARAGRAPHES -->
+            <% if (block.type === "paragraphs") { %>
+              <div class="article-paragraphs">
+                <% (block.content || []).forEach(paragraph => { %>
+                  <p><%= paragraph %></p>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- CITATION -->
+            <% if (block.type === "quote") { %>
+              <blockquote class="article-quote">
+                <p><%= block.content %></p>
+              </blockquote>
+            <% } %>
+
+            <!-- LISTE -->
+            <% if (block.type === "list") { %>
+              <div class="article-list-block">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <ul>
+                  <% (block.items || []).forEach(item => { %>
+                    <li><%= item %></li>
+                  <% }) %>
+                </ul>
+              </div>
+            <% } %>
+
+            <!-- COMPARAISON -->
+            <% if (block.type === "comparison") { %>
+              <div class="article-comparison-block">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <div class="article-comparison">
+                  <% (block.items || []).forEach((item, index) => { %>
+                    <article class="article-comparison-card comparison-<%= index + 1 %>">
+                      <% if (item.label) { %>
+                        <span class="article-card-label"><%= item.label %></span>
+                      <% } %>
+
+                      <% if (item.title) { %>
+                        <h4><%= item.title %></h4>
+                      <% } %>
+
+                      <% if (item.content) { %>
+                        <p><%= item.content %></p>
+                      <% } %>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- EXEMPLES -->
+            <% if (block.type === "examples") { %>
+              <div class="article-examples">
+                <% (block.items || []).forEach(item => { %>
+                  <article class="article-example-card">
+                    <% if (item.title) { %>
+                      <h3><%= item.title %></h3>
+                    <% } %>
+
+                    <% if (item.formal) { %>
+                      <div class="article-example-part">
+                        <span>Situation formelle</span>
+                        <p><%= item.formal %></p>
+                      </div>
+                    <% } %>
+
+                    <% if (item.real) { %>
+                      <div class="article-example-arrow" aria-hidden="true">↓</div>
+
+                      <div class="article-example-part real">
+                        <span>Situation réelle</span>
+                        <p><%= item.real %></p>
+                      </div>
+                    <% } %>
+                  </article>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- ENCADRÉ -->
+            <% if (block.type === "encadre") { %>
+              <aside class="article-encadre">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <% (block.content || []).forEach(part => { %>
+                  <div class="article-encadre-part">
+                    <% if (part.subtitle) { %>
+                      <h4><%= part.subtitle %></h4>
+                    <% } %>
+
+                    <% (part.paragraphs || []).forEach(paragraph => { %>
+                      <p><%= paragraph %></p>
+                    <% }) %>
+
+                    <% if (part.items?.length) { %>
+                      <ul>
+                        <% part.items.forEach(item => { %>
+                          <li><%= item %></li>
+                        <% }) %>
+                      </ul>
+                    <% } %>
+                  </div>
+                <% }) %>
+              </aside>
+            <% } %>
+
+            <!-- LEÇONS NUMÉROTÉES -->
+            <% if (block.type === "lessons") { %>
+              <div class="article-lessons">
+                <% (block.items || []).forEach((item, index) => { %>
+                  <article class="article-lesson">
+                    <span class="article-lesson-number">
+                      <%= item.number || String(index + 1).padStart(2, "0") %>
+                    </span>
+
+                    <div>
+                      <h3><%= item.title %></h3>
+                      <p><%= item.content %></p>
+                    </div>
+                  </article>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- CONDITIONS -->
+            <% if (block.type === "conditions") { %>
+              <div class="article-conditions-block">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <div class="article-conditions">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="article-condition-card">
+                      <h4><%= item.title %></h4>
+                      <p><%= item.content %></p>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- FLUX -->
+            <% if (block.type === "flows") { %>
+              <div class="article-flows-block">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <div class="article-flows">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="article-flow-card">
+                      <div class="article-flow-heading">
+                        <strong><%= item.from %></strong>
+                        <span aria-hidden="true">→</span>
+                        <strong><%= item.to %></strong>
+                      </div>
+
+                      <% if (item.exchanges?.length) { %>
+                        <ul>
+                          <% item.exchanges.forEach(exchange => { %>
+                            <li><%= exchange %></li>
+                          <% }) %>
+                        </ul>
+                      <% } %>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- BLOC CAP2032 -->
+            <% if (block.type === "cap2032") { %>
+              <aside class="article-cap2032">
+                <% if (block.label) { %>
+                  <span class="article-cap2032-label"><%= block.label %></span>
+                <% } %>
+
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <% (block.paragraphs || []).forEach(paragraph => { %>
+                  <p><%= paragraph %></p>
+                <% }) %>
+              </aside>
+            <% } %>
+
+            <!-- CONCLUSION -->
+            <% if (block.type === "conclusion") { %>
+              <div class="article-conclusion">
+                <p><%= block.content %></p>
+              </div>
+            <% } %>
+
+            <!-- NOTE DE L’AUTEUR -->
+            <% if (block.type === "authorNote") { %>
+              <aside class="article-author-note">
+                <span><%= block.label || "Note de l’auteur" %></span>
+                <p><%= block.content %></p>
+              </aside>
+            <% } %>
+
+            <!-- IMAGE -->
+            <% if (block.type === "image" || block.type === "figure") { %>
+              <figure class="article-figure">
+                <img
+                  src="<%= block.src || block.image %>"
+                  alt="<%= block.alt || block.caption || "" %>"
+                  loading="lazy"
+                >
+
+                <% if (block.caption) { %>
+                  <figcaption><%= block.caption %></figcaption>
+                <% } %>
+              </figure>
+            <% } %>
+
+            <!-- LIENS -->
+            <% if (block.type === "links") { %>
+              <div class="article-links-block">
+                <% if (block.title) { %>
+                  <h3><%= block.title %></h3>
+                <% } %>
+
+                <div class="article-links">
+                  <% (block.items || []).forEach(item => { %>
+                    <a href="<%= item.url %>" class="article-link-card">
+                      <strong><%= item.label || item.title %></strong>
+
+                      <% if (item.content) { %>
+                        <span><%= item.content %></span>
+                      <% } %>
+                    </a>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+          <% }) %>
+
+        </section>
+      <% }) %>
+
+    </article>
+
+    <!-- =====================================================
+         MOTS-CLÉS
+         ===================================================== -->
+    <% if (publication.tags?.length) { %>
+      <section class="article-tags" aria-label="Mots-clés">
+        <h2>Mots-clés</h2>
+
+        <ul>
+          <% publication.tags.forEach(tag => { %>
+            <% if (tag) { %>
+              <li><%= tag %></li>
+            <% } %>
+          <% }) %>
+        </ul>
+      </section>
+    <% } %>
+
+    <!-- =====================================================
+         RÉFÉRENCES
+         ===================================================== -->
+    <%
+      const references = publication.references || {};
+      const hasReferences =
+        (references.books || []).length ||
+        (references.reports || []).length ||
+        (references.articles || []).length ||
+        (references.videos || []).length ||
+        (references.websites || []).length;
+    %>
+
+    <% if (hasReferences) { %>
+      <section class="article-references">
+        <span class="article-section-eyebrow">Documentation</span>
+        <h2>Références et ressources</h2>
+
+        <% if (references.books?.length) { %>
+          <div class="article-reference-group">
+            <h3>Livres</h3>
+            <ul>
+              <% references.books.forEach(item => { %>
+                <li>
+                  <% if (item.author) { %><strong><%= item.author %></strong>, <% } %>
+                  <cite><%= item.title %></cite>
+                  <% if (item.publisher) { %>, <%= item.publisher %><% } %>
+                  <% if (item.year) { %>, <%= item.year %><% } %>.
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (references.reports?.length) { %>
+          <div class="article-reference-group">
+            <h3>Rapports</h3>
+            <ul>
+              <% references.reports.forEach(item => { %>
+                <li>
+                  <% if (item.organization) { %><strong><%= item.organization %></strong>, <% } %>
+                  <% if (item.url) { %>
+                    <a href="<%= item.url %>" target="_blank" rel="noopener noreferrer">
+                      <%= item.title %>
+                    </a>
+                  <% } else { %>
+                    <cite><%= item.title %></cite>
+                  <% } %>
+                  <% if (item.year) { %>, <%= item.year %><% } %>.
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (references.articles?.length) { %>
+          <div class="article-reference-group">
+            <h3>Articles</h3>
+            <ul>
+              <% references.articles.forEach(item => { %>
+                <li>
+                  <% if (item.author) { %><strong><%= item.author %></strong>, <% } %>
+
+                  <% if (item.url) { %>
+                    <a href="<%= item.url %>" target="_blank" rel="noopener noreferrer">
+                      <%= item.title %>
+                    </a>
+                  <% } else { %>
+                    <cite><%= item.title %></cite>
+                  <% } %>
+
+                  <% if (item.publication) { %>, <%= item.publication %><% } %>
+                  <% if (item.year) { %>, <%= item.year %><% } %>.
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (references.videos?.length) { %>
+          <div class="article-reference-group">
+            <h3>Vidéos</h3>
+            <ul>
+              <% references.videos.forEach(item => { %>
+                <li>
+                  <a href="<%= item.url %>" target="_blank" rel="noopener noreferrer">
+                    <%= item.title %>
+                  </a>
+                  <% if (item.channel) { %> — <%= item.channel %><% } %>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (references.websites?.length) { %>
+          <div class="article-reference-group">
+            <h3>Sites</h3>
+            <ul>
+              <% references.websites.forEach(item => { %>
+                <li>
+                  <a href="<%= item.url %>" target="_blank" rel="noopener noreferrer">
+                    <%= item.label || item.title || item.url %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+      </section>
+    <% } %>
+
+    <!-- =====================================================
+         NAVIGATION ENTRE LES ARTICLES
+         ===================================================== -->
+    <% if (!pdfMode && publication.navigation) { %>
+      <nav class="content-nav rich article-navigation" aria-label="Navigation entre les articles">
+
+        <div class="content-nav-prev">
+          <% if (publication.navigation.previous) { %>
+            <a
+              href="/publication/<%= publication.navigation.previous.slug %>"
+              class="content-nav-link prev"
+            >
+              <span class="content-nav-dir">← Article précédent</span>
+              <span class="content-nav-name">
+                <%= publication.navigation.previous.label %>
+              </span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-list">
+          <% if (publication.navigation.list) { %>
+            <a
+              href="<%= publication.navigation.list.url %>"
+              class="content-nav-link list"
+            >
+              <span class="content-nav-dir">↑ Retour</span>
+              <span class="content-nav-name">
+                <%= publication.navigation.list.label %>
+              </span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-next">
+          <% if (publication.navigation.next) { %>
+            <a
+              href="/publication/<%= publication.navigation.next.slug %>"
+              class="content-nav-link next"
+            >
+              <span class="content-nav-dir">Article suivant →</span>
+              <span class="content-nav-name">
+                <%= publication.navigation.next.label %>
+              </span>
+            </a>
+          <% } %>
+        </div>
+
+      </nav>
+    <% } %>
+
+  </main>
+
+  <% if (!pdfMode) { %>
+    <%- include("partial/footer") %>
+
+    <script>
+      const progress = document.getElementById("progress");
+
+      if (progress) {
+        const updateProgress = () => {
+          const scrollableHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+          const percentage = scrollableHeight > 0
+            ? (window.scrollY / scrollableHeight) * 100
+            : 0;
+
+          progress.style.width = `${Math.min(100, percentage)}%`;
+        };
+
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+      }
+    </script>
+  <% } %>
+
+</body>
+</html>

@@ -1,78 +1,504 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
-  <%- include('../partial/head', { title: 'Espace membre' }) %>
+  <%- include("../partial/head", {
+    title: "Espace membre — CAP2032"
+  }) %>
 </head>
 
 <body class="page-membre">
 
-  <%- include('../partial/nav', { currentPage: 'dashboard' }) %>
+<%- include("../partial/nav", {
+currentPage: "dashboard"
+}) %>
 
-  <section class="dashboard">
+  <main class="dashboard">
 
-    <h1>Espace membre</h1>
+```
+<!-- INTRODUCTION -->
+<header class="dashboard-header">
 
-    <p class="dashboard-intro">
-      Accès aux contenus détaillés et à la structure complète de CAP 2032.
+  <span class="dashboard-eyebrow">
+    Espace réservé
+  </span>
+
+  <h1>
+    Espace membre
+  </h1>
+
+  <p class="dashboard-intro">
+    Retrouvez les contenus détaillés de CAP2032 : les quinze fiches
+    stratégiques, les quatre prototypes territoriaux, le livre et les
+    essais philosophiques qui fondent la démarche du projet.
+  </p>
+
+</header>
+
+
+<!-- PARCOURS -->
+<section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <span class="dashboard-section-eyebrow">
+      Comprendre la démarche
+    </span>
+
+    <h2>
+      Les trois piliers
+    </h2>
+
+    <p>
+      Explorer les trois angles complémentaires de CAP2032 :
+      comprendre le passé, analyser le présent et construire l’avenir.
     </p>
 
-    <!-- PILIERS -->
-    <div class="dashboard-section">
-      <h2>Les piliers</h2>
+  </div>
 
-      <div class="dashboard-grid">
-        <a href="../pilier1" class="dashboard-card"><img src="/archéologie/archéo.png" alt="Archéologie">Archéologie</a>
-        <a href="../pilier2" class="dashboard-card"><img src="/philosophie/philosophie.png" alt="Philosophie">Philosophie</a>
-        <a href="../pilier3" class="dashboard-card"><img src="/action/action.png" alt="Action">Action</a>
+  <div class="dashboard-grid dashboard-grid-three">
+
+    <a href="/pilier1" class="dashboard-card">
+
+      <img
+        src="/archéologie/archéo.png"
+        alt="Histoire et archéologie"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Pilier I
+        </span>
+
+        <h3>
+          Comprendre le passé
+        </h3>
+
+        <p>
+          Histoire, archéologie, anthropologie et paléogénétique.
+        </p>
+
+        <span class="dashboard-card-link">
+          Explorer le pilier →
+        </span>
+
       </div>
-    </div>
 
-    <!-- FICHES -->
-    <div class="dashboard-section">
-      <h2>Fiches détaillées</h2>
+    </a>
 
-      <div class="dashboard-grid">
-  <% fiches.forEach((fiche) => { %>
-  <a href="/membre/fiche/<%= fiche.id %>" class="dashboard-card">
 
-    <img src="<%= fiche.image %>" alt="<%= fiche.title %>">
+    <a href="/pilier2" class="dashboard-card">
 
-    <h3><%= fiche.title %></h3>
+      <img
+        src="/philosophie/philosophie.png"
+        alt="Réflexions et gouvernance"
+      >
 
-    <p><%= fiche.subtitle %></p>
+      <div class="dashboard-card-content">
 
-  </a>
-<% }) %>
+        <span class="dashboard-card-number">
+          Pilier II
+        </span>
+
+        <h3>
+          Analyser le présent
+        </h3>
+
+        <p>
+          Intérêt général, institutions, gouvernance et pensée systémique.
+        </p>
+
+        <span class="dashboard-card-link">
+          Explorer le pilier →
+        </span>
+
       </div>
-    </div>
 
-    <!-- PROTOTYPES -->
-    <div class="dashboard-section">
-      <h2>Prototypes</h2>
+    </a>
 
-      <div class="dashboard-grid">
-        <a href="/membre/prototype1" class="dashboard-card"><img src="/action/village SCIC.png" alt="Village SCIC">Village SCIC</a>
-        <a href="/membre/prototype2" class="dashboard-card"><img src="/action/polyculture élevage.png" alt="Polyculture élevage">Polyculture élevage</a>
-        <a href="/membre/prototype3" class="dashboard-card"><img src="/action/école multiniveaux.png" alt="Ecole multiniveaux">Ecole multiniveaux</a>
-        <a href="/membre/prototype4" class="dashboard-card"><img src="/action/synthèse.png" alt="Synthèse">Synthèse</a>
+
+    <a href="/pilier3" class="dashboard-card">
+
+      <img
+        src="/action/action.png"
+        alt="Propositions et expérimentations"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Pilier III
+        </span>
+
+        <h3>
+          Construire l’avenir
+        </h3>
+
+        <p>
+          Fiches stratégiques, prototypes et expérimentations territoriales.
+        </p>
+
+        <span class="dashboard-card-link">
+          Explorer le pilier →
+        </span>
+
       </div>
-    </div>
 
-    <!-- SYNTHÈSE -->
-    <div class="dashboard-section">
-      <h2>Synthèse CAP 2032</h2>
+    </a>
 
-      <div class="dashboard-grid">
-        <a href="/membre/synthese" class="dashboard-card">
-          Lire la synthèse
+  </div>
+
+</section>
+
+
+<!-- PUBLICATIONS -->
+<section class="dashboard-section dashboard-publications">
+
+  <div class="dashboard-section-header">
+
+    <span class="dashboard-section-eyebrow">
+      Publications
+    </span>
+
+    <h2>
+      Le livre et les essais
+    </h2>
+
+    <p>
+      Découvrir les publications longues qui présentent la vision
+      d’ensemble de CAP2032 et les réflexions philosophiques qui
+      accompagnent sa construction.
+    </p>
+
+  </div>
+
+  <div class="dashboard-grid dashboard-grid-two">
+
+    <!-- LIVRE CAP2032 -->
+    <a
+      href="/membre/livre"
+      class="dashboard-card dashboard-publication-card"
+    >
+
+      <img
+        src="/logo/accueil.png"
+        alt="Le livre CAP2032"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Livre
+        </span>
+
+        <h3>
+          CAP2032 — Sauvons la France
+        </h3>
+
+        <p>
+          Une vision systémique du redressement national, articulant
+          les quinze fiches stratégiques et leur déclinaison territoriale.
+        </p>
+
+        <span class="dashboard-card-link">
+          Accéder au livre →
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <!-- ESSAIS PHILOSOPHIQUES -->
+    <a
+      href="/membre/essais"
+      class="dashboard-card dashboard-publication-card"
+    >
+
+      <img
+        src="/philosophie/vignette philosophie.png"
+        alt="Essais philosophiques de CAP2032"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Essais
+        </span>
+
+        <h3>
+          Essais philosophiques
+        </h3>
+
+        <p>
+          Des réflexions sur l’intérêt général, les libertés,
+          la coopération, les institutions et les conditions
+          d’une société réellement gouvernable.
+        </p>
+
+        <span class="dashboard-card-link">
+          Lire les essais →
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- FICHES DÉTAILLÉES -->
+<section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <span class="dashboard-section-eyebrow">
+      Trajectoire nationale
+    </span>
+
+    <h2>
+      Les quinze fiches détaillées
+    </h2>
+
+    <p>
+      Chaque fiche approfondit un domaine stratégique et présente
+      le constat, les objectifs, les verrous, le cadre et les actions
+      proposées.
+    </p>
+
+  </div>
+
+  <% if (
+    typeof fiches !== "undefined" &&
+    fiches.length > 0
+  ) { %>
+
+    <div class="dashboard-grid">
+
+      <% fiches.forEach((fiche) => { %>
+
+        <a
+          href="/membre/fiche/<%= fiche.id %>"
+          class="dashboard-card"
+        >
+
+          <% if (fiche.image) { %>
+
+            <img
+              src="<%= fiche.image %>"
+              alt="<%= fiche.title %>"
+              loading="lazy"
+            >
+
+          <% } %>
+
+          <div class="dashboard-card-content">
+
+            <span class="dashboard-card-number">
+              Fiche <%= String(fiche.id).padStart(2, "0") %>
+            </span>
+
+            <h3>
+              <%= fiche.title %>
+            </h3>
+
+            <% if (fiche.subtitle) { %>
+
+              <p>
+                <%= fiche.subtitle %>
+              </p>
+
+            <% } %>
+
+            <span class="dashboard-card-link">
+              Consulter la fiche →
+            </span>
+
+          </div>
+
         </a>
-      </div>
+
+      <% }) %>
+
     </div>
 
-  </section>
+  <% } else { %>
 
-  <%- include('../partial/footer') %>
+    <p class="dashboard-empty">
+      Aucune fiche détaillée n’est encore disponible.
+    </p>
+
+  <% } %>
+
+</section>
+
+
+<!-- PROTOTYPES -->
+<section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <span class="dashboard-section-eyebrow">
+      Expérimentation territoriale
+    </span>
+
+    <h2>
+      Les quatre prototypes détaillés
+    </h2>
+
+    <p>
+      Quatre modules complémentaires pour relier production,
+      formation, maintenance, coopération et gouvernance territoriale.
+    </p>
+
+  </div>
+
+  <div class="dashboard-grid dashboard-grid-two">
+
+    <a
+      href="/membres/prototype/1"
+      class="dashboard-card"
+    >
+
+      <img
+        src="/action/module1.png"
+        alt="Atelier technique territorial"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Prototype 01
+        </span>
+
+        <h3>
+          Atelier technique territorial
+        </h3>
+
+        <p>
+          Réparer, reconditionner, produire et maintenir localement.
+        </p>
+
+        <span class="dashboard-card-link">
+          Consulter le prototype →
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      href="/membres/prototype/2"
+      class="dashboard-card"
+    >
+
+      <img
+        src="/action/module2.png"
+        alt="Exploitation polyculture-élevage"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Prototype 02
+        </span>
+
+        <h3>
+          Exploitation polyculture-élevage
+        </h3>
+
+        <p>
+          Produire, transformer et sécuriser l’alimentation du territoire.
+        </p>
+
+        <span class="dashboard-card-link">
+          Consulter le prototype →
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      href="/membres/prototype/3"
+      class="dashboard-card"
+    >
+
+      <img
+        src="/action/module3.png"
+        alt="École multi-niveaux"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Prototype 03
+        </span>
+
+        <h3>
+          École multi-niveaux
+        </h3>
+
+        <p>
+          Relier savoirs fondamentaux, projets concrets et transmission.
+        </p>
+
+        <span class="dashboard-card-link">
+          Consulter le prototype →
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      href="/membres/prototype/4"
+      class="dashboard-card"
+    >
+
+      <img
+        src="/action/module4.png"
+        alt="Village SCIC"
+      >
+
+      <div class="dashboard-card-content">
+
+        <span class="dashboard-card-number">
+          Prototype 04
+        </span>
+
+        <h3>
+          Village SCIC
+        </h3>
+
+        <p>
+          Relier les acteurs et les modules dans une gouvernance commune.
+        </p>
+
+        <span class="dashboard-card-link">
+          Consulter le prototype →
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+```
+
+  </main>
+
+<%- include("../partial/footer") %>
 
 </body>
+
 </html>

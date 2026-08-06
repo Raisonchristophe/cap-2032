@@ -1,0 +1,311 @@
+/* =========================================================
+   CAP2032 — CORRECTIONS MOBILES GLOBALES
+   Chargé en dernier dans main.css
+   ========================================================= */
+
+@media (max-width: 700px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-wrap: break-word;
+  }
+
+  img,
+  video,
+  iframe,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre,
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Largeur commune des contenus */
+  .hero-content,
+  .hero-footer,
+  .content,
+  .main-body,
+  .main-content,
+  .breadcrumb,
+  .content-nav,
+  .pilier-publications-inner,
+  .footer-intro,
+  footer.footer .footer-grid,
+  footer.footer .footer-bottom {
+    width: min(calc(100% - 2rem), 100%);
+  }
+
+  /* Titres */
+  .hero-title,
+  .content h1,
+  .content-hero h1 {
+    font-size: clamp(2.25rem, 11vw, 3.35rem);
+    line-height: 1.06;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .piliers-title,
+  .section-h2,
+  .home-publications-title,
+  .pilier-publications-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.1;
+  }
+
+  h3,
+  .pilier-publication-content h3,
+  .pilier-name {
+    overflow-wrap: break-word;
+  }
+
+  /* Texte courant */
+  .hero-subtitle,
+  .content-intro-text,
+  .content-standfirst,
+  .main-body p,
+  .main-content p,
+  .section-intro,
+  .pilier-publications-intro {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  /* Images de tête */
+  .hero .image,
+  .content > .image,
+  .content-hero > .image,
+  .page-pilier .image {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    margin: 1.5rem 0 2rem;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  /* Boutons */
+  .hero-cta,
+  .pilier-internal-action,
+  .pilier-internal-actions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary,
+  .pilier-internal-action .btn-primary,
+  .pilier-internal-action .btn-secondary,
+  .pilier-internal-actions .btn-primary,
+  .pilier-internal-actions .btn-secondary {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Sections anciennes avec paddings fixes */
+  .page-index .constat,
+  .page-index .parcours,
+  .page-index .intro,
+  .page-index .piliers,
+  .page-index .chiffres,
+  .page-index .demarche,
+  .page-index .home-publications,
+  .page-pilier .timeline-band,
+  .page-pilier .cas-section,
+  .page-pilier .article-central,
+  .page-pilier .ressources,
+  .page-pilier .pont,
+  .page-pilier2 .textes,
+  .page-pilier3 .exigences,
+  .page-pilier3 .prototypes,
+  .page-pilier3 .territoire,
+  .pilier-publications {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Accueil */
+  .page-index .parcours-steps,
+  .page-index .piliers-grid,
+  .page-index .chiffres-grid,
+  .page-index .home-publications-grid,
+  .page-index .demarche-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .page-index .intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .page-index .pilier-card,
+  .page-index .home-publication-card {
+    min-width: 0;
+  }
+
+  .page-index .pilier-card {
+    padding: 1.5rem;
+  }
+
+  .page-index .pilier-themes {
+    gap: 0.45rem;
+  }
+
+  .page-index .pilier-theme {
+    font-size: 0.62rem;
+  }
+
+  .page-index .chiffre-num {
+    font-size: clamp(2.4rem, 12vw, 3.6rem);
+  }
+
+  /* Piliers */
+  .page-pilier .main-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .page-pilier .pont {
+    margin: 2rem 0;
+  }
+
+  .page-pilier .pont-inner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .page-pilier .pont-fleche {
+    display: none;
+  }
+
+  .page-pilier .timeline-band {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-pilier .timeline {
+    min-width: 620px;
+  }
+
+  .page-pilier3 .piliers-secondaires {
+    width: min(calc(100% - 2rem), 1200px);
+  }
+
+  .page-pilier3 .piliers-grid,
+  .pilier-publications-grid,
+  .page-pilier3 .territoire-grid,
+  .page-pilier3 .exigences-grid-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .page-pilier3 .exigence-card-v2 {
+    grid-template-rows: auto auto auto;
+  }
+
+  .page-pilier3 .territoire-criteres {
+    gap: 0.75rem;
+  }
+
+  .page-pilier3 .critere-item {
+    padding: 1.1rem;
+  }
+
+  /* Cartes de publication */
+  .pilier-publication-content,
+  .home-publication-content {
+    padding: 1.25rem;
+  }
+
+  .pilier-publication-image,
+  .home-publication-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .pilier-publication-location,
+  .pilier-publication-description,
+  .home-publication-content p {
+    font-size: 0.96rem;
+  }
+
+  /* Citations et séparateurs */
+  .pullquote {
+    margin: 2rem 0;
+    padding: 1rem 0 1rem 1rem;
+  }
+
+  .pullquote p {
+    font-size: 1.2rem !important;
+  }
+
+  .section-break {
+    margin: 2.5rem 0;
+  }
+
+  /* Navigation entre contenus */
+  .content-nav {
+    padding-bottom: 3rem;
+  }
+
+  .content-nav.rich .content-nav-link {
+    padding: 1rem;
+  }
+
+  /* Footer */
+  footer.footer {
+    padding: 3rem 1rem 1.75rem;
+  }
+
+  footer.footer .footer-intro {
+    margin-bottom: 2rem;
+  }
+
+  footer.footer .footer-grid {
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-title,
+  .content h1,
+  .content-hero h1 {
+    font-size: 2.15rem;
+  }
+
+  .hero-content,
+  .hero-footer,
+  .content,
+  .main-body,
+  .main-content,
+  .breadcrumb,
+  .content-nav,
+  .pilier-publications-inner {
+    width: min(calc(100% - 1.5rem), 100%);
+  }
+
+  .page-index .constat,
+  .page-index .parcours,
+  .page-index .intro,
+  .page-index .piliers,
+  .page-index .chiffres,
+  .page-index .demarche,
+  .page-index .home-publications,
+  .page-pilier3 .exigences,
+  .page-pilier3 .prototypes,
+  .page-pilier3 .territoire,
+  .pilier-publications {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}

@@ -1,0 +1,9 @@
+/* =========================================================
+   CAP2032 — PROTOTYPES PUBLICS
+   Compléments propres à la version publique.
+   La base commune se trouve dans prototype-common.css.
+   ========================================================= */
+
+.page-prototype-public .prototype-access {
+  display: block;
+}

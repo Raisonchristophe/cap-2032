@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <%- include("../partial/head", {
+    title: `${prototype.title} — Version membre — CAP 2032`
+  }) %>
+</head>
+
+<body class="page-prototype-membre <%= pdfMode ? 'pdf-mode' : '' %>">
+
+  <% if (!pdfMode) { %>
+    <div class="progress-bar" id="progress"></div>
+
+    <%- include("../partial/nav", {
+      currentPage: "membre"
+    }) %>
+
+    <%- include("../partial/breadcrumb", {
+      items: [
+        { label: "Accueil", url: "/" },
+        { label: "Espace membre", url: "/espace-membre" },
+        { label: "Les prototypes", url: "/espace-membre#prototypes" },
+        { label: `Module ${id} — ${prototype.title}` }
+      ]
+    }) %>
+  <% } %>
+
+  <main class="prototype-membre-main">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <header class="prototype-hero">
+      <div class="prototype-hero-content">
+
+        <span class="prototype-tag">
+          Version membre · Module <%= id %> / 4
+        </span>
+
+        <div class="prototype-hero-grid">
+          <div class="prototype-hero-text">
+
+            <h1><%= prototype.title %></h1>
+
+            <% if (prototype.subtitle) { %>
+              <p class="prototype-subtitle"><%= prototype.subtitle %></p>
+            <% } %>
+
+            <% if (prototype.intro) { %>
+              <div class="prototype-intro">
+                <% prototype.intro
+                  .trim()
+                  .split(/\n\s*\n/)
+                  .filter(Boolean)
+                  .forEach(paragraph => { %>
+                    <p><%= paragraph.trim() %></p>
+                <% }) %>
+              </div>
+            <% } %>
+
+          </div>
+
+          <% if (prototype.image) { %>
+            <figure class="prototype-hero-image">
+              <img
+                src="<%= prototype.image %>"
+                alt="Illustration du module <%= prototype.title %>"
+                loading="eager"
+              >
+            </figure>
+          <% } %>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- =====================================================
+         SOMMAIRE
+         ===================================================== -->
+    <% if (prototype.structure?.length) { %>
+      <nav class="prototype-structure" aria-label="Structure du module détaillé">
+        <ul class="structure">
+          <% prototype.structure.forEach((item, index) => { %>
+            <li>
+              <a href="#section-<%= index + 1 %>"><%= item %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </nav>
+    <% } %>
+
+    <!-- =====================================================
+         CONTENU
+         ===================================================== -->
+    <article class="prototype-body">
+
+      <% (prototype.sections || []).forEach((section, sectionIndex) => { %>
+        <section class="prototype-section" id="section-<%= sectionIndex + 1 %>">
+
+          <% if (section.title) { %>
+            <h2><%= section.title %></h2>
+          <% } %>
+
+          <% (section.blocks || []).forEach(block => { %>
+
+            <!-- PARAGRAPHES -->
+            <% if (block.type === "paragraphs") { %>
+              <div class="prototype-paragraphs">
+                <% (block.content || []).forEach(paragraph => { %>
+                  <p><%= paragraph %></p>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- LISTE -->
+            <% if (block.type === "list") { %>
+              <div class="prototype-list-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <ul class="prototype-list">
+                  <% (block.items || []).forEach(item => { %>
+                    <li><%= item %></li>
+                  <% }) %>
+                </ul>
+              </div>
+            <% } %>
+
+            <!-- CITATION -->
+            <% if (block.type === "quote") { %>
+              <blockquote class="prototype-quote">
+                <p><%= block.content %></p>
+              </blockquote>
+            <% } %>
+
+            <!-- ENCADRÉ -->
+            <% if (block.type === "encadre") { %>
+              <aside class="prototype-encadre">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <% (block.content || []).forEach(part => { %>
+                  <div class="prototype-encadre-part">
+                    <% if (part.subtitle) { %><h4><%= part.subtitle %></h4><% } %>
+
+                    <% if (part.text) { %>
+                      <% part.text.trim().split(/\n\s*\n/).filter(Boolean).forEach(paragraph => { %>
+                        <p><%= paragraph.trim() %></p>
+                      <% }) %>
+                    <% } %>
+
+                    <% (part.paragraphs || []).forEach(paragraph => { %>
+                      <p><%= paragraph %></p>
+                    <% }) %>
+
+                    <% if (part.items?.length) { %>
+                      <ul>
+                        <% part.items.forEach(item => { %><li><%= item %></li><% }) %>
+                      </ul>
+                    <% } %>
+                  </div>
+                <% }) %>
+              </aside>
+            <% } %>
+
+            <!-- RÉSUMÉ -->
+            <% if (block.type === "resume") { %>
+              <aside class="prototype-resume">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <ul>
+                  <% (block.items || []).forEach(item => { %><li><%= item %></li><% }) %>
+                </ul>
+              </aside>
+            <% } %>
+
+            <!-- CARTES -->
+            <% if (block.type === "cards") { %>
+              <div class="prototype-cards-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <div class="prototype-cards">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-card">
+                      <h4><%= item.title %></h4>
+                      <p><%= item.content %></p>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- ACTIVITÉS -->
+            <% if (block.type === "activities") { %>
+              <div class="prototype-activities">
+                <% (block.items || []).forEach(item => { %>
+                  <article class="prototype-activity-card">
+                    <% if (item.category) { %>
+                      <span class="prototype-card-label"><%= item.category %></span>
+                    <% } %>
+                    <% if (item.title) { %><h3><%= item.title %></h3><% } %>
+                    <% if (item.content) { %><p><%= item.content %></p><% } %>
+                    <% (item.paragraphs || []).forEach(paragraph => { %><p><%= paragraph %></p><% }) %>
+                    <% if (item.items?.length) { %>
+                      <ul>
+                        <% item.items.forEach(listItem => { %><li><%= listItem %></li><% }) %>
+                      </ul>
+                    <% } %>
+                  </article>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- CHIFFRES CLÉS -->
+            <% if (block.type === "stats") { %>
+              <div class="prototype-stats-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <div class="prototype-stats">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-stat">
+                      <strong><%= item.value %></strong>
+                      <span><%= item.label %></span>
+                    </article>
+                  <% }) %>
+                </div>
+                <% if (block.note) { %><p class="prototype-note"><%= block.note %></p><% } %>
+              </div>
+            <% } %>
+
+            <!-- NOTE -->
+            <% if (block.type === "notice") { %>
+              <aside class="prototype-notice">
+                <p><%= block.content %></p>
+              </aside>
+            <% } %>
+
+            <!-- SCÉNARIOS TERRITORIAUX -->
+            <% if (block.type === "scenarioCards") { %>
+              <div class="prototype-scenarios-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <div class="prototype-scenarios">
+                  <% (block.scenarios || []).forEach(scenario => { %>
+                    <article class="prototype-scenario-card">
+                      <% if (scenario.population) { %>
+                        <span class="prototype-card-label"><%= scenario.population %></span>
+                      <% } %>
+                      <h4><%= scenario.title %></h4>
+                      <% if (scenario.description) { %><p><%= scenario.description %></p><% } %>
+                      <% if (scenario.activities?.length) { %>
+                        <ul>
+                          <% scenario.activities.forEach(activity => { %><li><%= activity %></li><% }) %>
+                        </ul>
+                      <% } %>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- ORGANISATION HUMAINE -->
+            <% if (block.type === "jobs") { %>
+              <div class="prototype-jobs-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <% (block.scenarios || []).forEach(scenario => { %>
+                  <section class="prototype-member-scenario">
+                    <h4><%= scenario.title %></h4>
+
+                    <div class="prototype-table-wrap">
+                      <table class="prototype-table">
+                        <thead>
+                          <tr>
+                            <th>Fonction</th>
+                            <th>Nombre</th>
+                            <th>Statut</th>
+                            <th>Mission</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% (scenario.items || []).forEach(item => { %>
+                            <tr>
+                              <td><strong><%= item.role %></strong></td>
+                              <td><%= item.number %></td>
+                              <td><%= item.status %></td>
+                              <td><%= item.mission %></td>
+                            </tr>
+                          <% }) %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <!-- BESOINS IMMOBILIERS ET MATÉRIELS -->
+            <% if (block.type === "scenarioNeeds") { %>
+              <div class="prototype-needs-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <% (block.scenarios || []).forEach(scenario => { %>
+                  <section class="prototype-member-scenario">
+                    <h4><%= scenario.title %></h4>
+                    <% if (scenario.context) { %><p class="prototype-scenario-context"><%= scenario.context %></p><% } %>
+
+                    <div class="prototype-needs-grid">
+                      <div class="prototype-need-panel">
+                        <h5>Immobilier et foncier</h5>
+                        <ul>
+                          <% (scenario.realEstate || []).forEach(item => { %>
+                            <li><strong><%= item.item %> :</strong> <%= item.need %></li>
+                          <% }) %>
+                        </ul>
+                      </div>
+
+                      <div class="prototype-need-panel">
+                        <h5>Matériels et équipements</h5>
+                        <ul>
+                          <% (scenario.equipment || []).forEach(item => { %>
+                            <li><strong><%= item.item %> :</strong> <%= item.need %></li>
+                          <% }) %>
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                <% }) %>
+
+                <% if (block.note) { %><p class="prototype-note"><%= block.note %></p><% } %>
+              </div>
+            <% } %>
+
+            <!-- CHIFFRAGE PAR SCÉNARIO -->
+            <% if (block.type === "scenarioBudget") { %>
+              <div class="prototype-budget-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <% (block.scenarios || []).forEach(scenario => { %>
+                  <section class="prototype-member-scenario prototype-budget-scenario">
+                    <h4><%= scenario.title %></h4>
+
+                    <% if (scenario.assumptions?.length) { %>
+                      <div class="prototype-assumptions">
+                        <h5>Hypothèses</h5>
+                        <ul>
+                          <% scenario.assumptions.forEach(item => { %><li><%= item %></li><% }) %>
+                        </ul>
+                      </div>
+                    <% } %>
+
+                    <% if (scenario.investment?.length) { %>
+                      <div class="prototype-table-wrap">
+                        <table class="prototype-table prototype-budget-table">
+                          <thead>
+                            <tr>
+                              <th>Poste d’investissement</th>
+                              <th>Hypothèse basse</th>
+                              <th>Hypothèse haute</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% scenario.investment.forEach(item => { %>
+                              <tr>
+                                <td><%= item.item %></td>
+                                <td><%= item.low %></td>
+                                <td><%= item.high %></td>
+                              </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    <% } %>
+
+                    <div class="prototype-budget-summary">
+                      <% if (scenario.totalInvestment) { %>
+                        <div>
+                          <span>Investissement total</span>
+                          <strong><%= scenario.totalInvestment.low %> à <%= scenario.totalInvestment.high %></strong>
+                        </div>
+                      <% } %>
+
+                      <% if (scenario.annualOperatingCosts) { %>
+                        <div>
+                          <span>Charges annuelles</span>
+                          <strong><%= scenario.annualOperatingCosts.low %> à <%= scenario.annualOperatingCosts.high %></strong>
+                        </div>
+                      <% } %>
+
+                      <% if (scenario.annualRevenueTarget) { %>
+                        <div>
+                          <span>Recettes annuelles cibles</span>
+                          <strong><%= scenario.annualRevenueTarget.low %> à <%= scenario.annualRevenueTarget.high %></strong>
+                        </div>
+                      <% } %>
+
+                      <% if (scenario.jobs) { %>
+                        <div>
+                          <span>Emplois</span>
+                          <strong><%= scenario.jobs.low %> à <%= scenario.jobs.high %></strong>
+                        </div>
+                      <% } %>
+
+                      <% if (scenario.learners) { %>
+                        <div>
+                          <span>Élèves ou apprenants</span>
+                          <strong><%= scenario.learners.low %> à <%= scenario.learners.high %></strong>
+                        </div>
+                      <% } %>
+                    </div>
+
+                    <% if (scenario.breakEven) { %>
+                      <p class="prototype-break-even">
+                        <strong>Point d’équilibre :</strong> <%= scenario.breakEven %>
+                      </p>
+                    <% } %>
+
+                    <% if (scenario.note) { %>
+                      <p class="prototype-note"><%= scenario.note %></p>
+                    <% } %>
+                  </section>
+                <% }) %>
+
+                <% if (block.note) { %><p class="prototype-note"><%= block.note %></p><% } %>
+              </div>
+            <% } %>
+
+            <!-- CALENDRIER -->
+            <% if (block.type === "timeline") { %>
+              <div class="prototype-timeline-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <ol class="prototype-timeline">
+                  <% (block.items || []).forEach(item => { %>
+                    <li class="prototype-timeline-item">
+                      <div class="prototype-timeline-meta">
+                        <span><%= item.phase %></span>
+                        <% if (item.duration) { %><strong><%= item.duration %></strong><% } %>
+                      </div>
+                      <div class="prototype-timeline-content">
+                        <h4><%= item.title %></h4>
+                        <p><%= item.content %></p>
+                      </div>
+                    </li>
+                  <% }) %>
+                </ol>
+              </div>
+            <% } %>
+
+            <!-- RISQUES -->
+            <% if (block.type === "risks") { %>
+              <div class="prototype-risks-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-table-wrap">
+                  <table class="prototype-table prototype-risks-table">
+                    <thead>
+                      <tr>
+                        <th>Risque</th>
+                        <th>Niveau</th>
+                        <th>Réponse proposée</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% (block.items || []).forEach(item => { %>
+                        <tr>
+                          <td><strong><%= item.risk %></strong></td>
+                          <td>
+                            <span class="risk-level risk-<%= String(item.level || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') %>">
+                              <%= item.level %>
+                            </span>
+                          </td>
+                          <td><%= item.response %></td>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- INDICATEURS -->
+            <% if (block.type === "indicators") { %>
+              <div class="prototype-indicators-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-table-wrap">
+                  <table class="prototype-table prototype-indicators-table">
+                    <thead>
+                      <tr>
+                        <th>Indicateur</th>
+                        <th>Objectif</th>
+                        <th>Fréquence</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% (block.items || []).forEach(item => { %>
+                        <tr>
+                          <td><strong><%= item.indicator %></strong></td>
+                          <td><%= item.target %></td>
+                          <td><%= item.frequency %></td>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- MODES DE DÉPLOIEMENT -->
+            <% if (block.type === "deploymentModes") { %>
+              <div class="prototype-deployment-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-deployment-modes">
+                  <% (block.modes || []).forEach(mode => { %>
+                    <article class="prototype-deployment-card">
+                      <h4><%= mode.title %></h4>
+                      <p><%= mode.description %></p>
+
+                      <% if (mode.suitableWhen?.length) { %>
+                        <h5>Adapté lorsque</h5>
+                        <ul><% mode.suitableWhen.forEach(item => { %><li><%= item %></li><% }) %></ul>
+                      <% } %>
+
+                      <% if (mode.components?.length) { %>
+                        <h5>Composantes</h5>
+                        <ul><% mode.components.forEach(item => { %><li><%= item %></li><% }) %></ul>
+                      <% } %>
+
+                      <div class="prototype-strength-risk-grid">
+                        <div>
+                          <h5>Atouts</h5>
+                          <ul><% (mode.strengths || []).forEach(item => { %><li><%= item %></li><% }) %></ul>
+                        </div>
+                        <div>
+                          <h5>Risques</h5>
+                          <ul><% (mode.risks || []).forEach(item => { %><li><%= item %></li><% }) %></ul>
+                        </div>
+                      </div>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- MATRICE -->
+            <% if (block.type === "matrix") { %>
+              <div class="prototype-matrix-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <div class="prototype-table-wrap">
+                  <table class="prototype-table prototype-matrix">
+                    <thead>
+                      <tr>
+                        <% (block.headers || []).forEach(header => { %><th><%= header %></th><% }) %>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <% (block.rows || []).forEach(row => { %>
+
+  <%
+    const cells = Array.isArray(row)
+      ? row
+      : [
+          row.label || "",
+          ...(Array.isArray(row.values) ? row.values : [])
+        ];
+  %>
+
+  <tr>
+
+    <% cells.forEach((cell, index) => { %>
+
+      <% if (index === 0) { %>
+        <th><%= cell %></th>
+      <% } else { %>
+        <td><%= cell %></td>
+      <% } %>
+
+    <% }) %>
+
+  </tr>
+
+<% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- GOUVERNANCE -->
+            <% if (block.type === "governance") { %>
+              <div class="prototype-governance-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-governance-grid">
+                  <% (block.colleges || []).forEach(college => { %>
+                    <article class="prototype-governance-card">
+                      <div class="prototype-governance-heading">
+                        <h4><%= college.title %></h4>
+                        <% if (college.votingShare) { %><strong><%= college.votingShare %></strong><% } %>
+                      </div>
+                      <% if (college.role) { %><p><%= college.role %></p><% } %>
+                      <% if (college.members?.length) { %>
+                        <ul><% college.members.forEach(item => { %><li><%= item %></li><% }) %></ul>
+                      <% } %>
+                    </article>
+                  <% }) %>
+                </div>
+
+                <% if (block.note) { %><p class="prototype-note"><%= block.note %></p><% } %>
+              </div>
+            <% } %>
+
+            <!-- FLUX -->
+            <% if (block.type === "flows") { %>
+              <div class="prototype-flows-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-flows">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-flow-card">
+                      <div class="prototype-flow-heading">
+                        <strong><%= item.from %></strong>
+                        <span aria-hidden="true">→</span>
+                        <strong><%= item.to %></strong>
+                      </div>
+                      <ul>
+                        <% (item.exchanges || []).forEach(exchange => { %><li><%= exchange %></li><% }) %>
+                      </ul>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- COMPARAISON DES COÛTS DE DÉPLOIEMENT -->
+            <% if (block.type === "deploymentCostComparison") { %>
+              <div class="prototype-cost-comparison-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-cards">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-card">
+                      <span class="prototype-card-label"><%= item.investmentImpact %></span>
+                      <h4><%= item.mode %></h4>
+                      <p><%= item.explanation %></p>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- MIX DE FINANCEMENT -->
+            <% if (block.type === "fundingMix") { %>
+              <div class="prototype-funding-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+
+                <div class="prototype-funding-grid">
+                  <% (block.items || []).forEach(item => { %>
+                    <article class="prototype-funding-card">
+                      <div class="prototype-funding-heading">
+                        <h4><%= item.source %></h4>
+                        <strong><%= item.share %></strong>
+                      </div>
+                      <% if (item.uses?.length) { %>
+                        <ul><% item.uses.forEach(use => { %><li><%= use %></li><% }) %></ul>
+                      <% } %>
+                    </article>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- LIENS -->
+            <% if (block.type === "links") { %>
+              <div class="prototype-links-block">
+                <% if (block.title) { %><h3><%= block.title %></h3><% } %>
+                <div class="prototype-links">
+                  <% (block.items || []).forEach(item => { %>
+                    <a class="prototype-link-card" href="<%= item.url %>">
+                      <strong><%= item.label %></strong>
+                      <span><%= item.content %></span>
+                    </a>
+                  <% }) %>
+                </div>
+              </div>
+            <% } %>
+
+            <!-- CONCLUSION -->
+            <% if (block.type === "conclusion") { %>
+              <div class="prototype-conclusion">
+                <p><%= block.content %></p>
+              </div>
+            <% } %>
+
+          <% }) %>
+        </section>
+      <% }) %>
+
+    </article>
+
+    <!-- =====================================================
+         TÉLÉCHARGEMENTS
+         ===================================================== -->
+  <% if (!pdfMode) { %>
+  <section class="prototype-downloads">
+    <div class="prototype-downloads-content">
+
+      <span class="prototype-access-label">
+        Document
+      </span>
+
+      <h2>Télécharger la version détaillée</h2>
+
+      <div class="prototype-download-list">
+        <a
+          href="/membre/download/prototype/<%= id %>"
+          class="prototype-download-link"
+        >
+          <span>Version détaillée complète</span>
+          <strong>PDF</strong>
+        </a>
+      </div>
+
+    </div>
+  </section>
+<% } %>
+
+
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+    <% if (!pdfMode && prototype.navigation) { %>
+      <nav class="content-nav rich" aria-label="Navigation entre les modules">
+
+        <div class="content-nav-prev">
+          <% if (prototype.navigation.previous) { %>
+            <a href="<%= prototype.navigation.previous.url %>" class="content-nav-link prev">
+              <span class="content-nav-dir">← Module précédent</span>
+              <span class="content-nav-name"><%= prototype.navigation.previous.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-list">
+          <% if (prototype.navigation.list) { %>
+            <a href="<%= prototype.navigation.list.url %>" class="content-nav-link list">
+              <span class="content-nav-dir">↑ Retour</span>
+              <span class="content-nav-name"><%= prototype.navigation.list.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+        <div class="content-nav-next">
+          <% if (prototype.navigation.next) { %>
+            <a href="<%= prototype.navigation.next.url %>" class="content-nav-link next">
+              <span class="content-nav-dir">Module suivant →</span>
+              <span class="content-nav-name"><%= prototype.navigation.next.label %></span>
+            </a>
+          <% } %>
+        </div>
+
+      </nav>
+    <% } %>
+
+  </main>
+
+  <% if (!pdfMode) { %>
+    <%- include("../partial/footer") %>
+
+    <script>
+      const progress = document.getElementById("progress");
+
+      if (progress) {
+        const updateProgress = () => {
+          const scrollableHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+          const percentage = scrollableHeight > 0
+            ? (window.scrollY / scrollableHeight) * 100
+            : 0;
+
+          progress.style.width = `${Math.min(100, percentage)}%`;
+        };
+
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+      }
+    </script>
+  <% } %>
+
+</body>
+</html>

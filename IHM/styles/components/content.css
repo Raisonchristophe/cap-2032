@@ -1,161 +1,189 @@
-/*========================*/
-/* BASES (COMMUNE A TOUTES LES PAGES)
-/*========================*/
+/* =========================================================
+   EN-TÊTE DES PAGES DE CONTENU
+   ========================================================= */
 
-/* CONTAINER */
-    .content {
-      padding: 7rem 1.5rem 5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-    }
+.content {
+  position: relative;
 
-    .content-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--ocre);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.1s;
-    }
+  width: min(calc(100% - (2 * var(--space-page))), var(--container-page));
+  margin: 0 auto;
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+}
 
-    .content-tag::before {
-      content: 'I';
-      display: inline-flex;
-      width: 2rem;
-      height: 2rem;
-      border: 1px solid var(--ocre);
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
+.content-tag,
+.content-type {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
 
-        .content-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.25s;
-    }
+  margin: 0 0 1.5rem;
 
-    .content-hero h1 em {
-      font-style: italic;
-      color: var(--ocre-clair);
-    }
+  font-family: "DM Mono", monospace;
+  font-size: clamp(0.62rem, 1vw, 0.7rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  text-transform: uppercase;
 
-    .content-intro-text {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.8;
-      color: var(--gris-clair);
-      max-width: 780px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.4s;
-    }
+  color: var(--ocre);
 
-    .content-intro-text strong {
-      color: var(--blanc);
-      font-weight: 600;
-    }
+  opacity: 0;
+  animation: fadeUp 650ms ease forwards 80ms;
+}
 
-        .content-intro-text em {
-      color: var(--ocre-clair);
-      font-style: italic;
-    }
+.content-tag::before,
+.content-type::before {
+  content: "";
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 1px;
+  background: var(--ocre);
+}
 
-       .content-type {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      color: var(--ocre);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.1s;
-    }
+.content h1,
+.content-hero h1 {
+  max-width: 1000px;
+  margin: 0 0 2rem;
 
-    .content-type::before {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--ocre);
-    }
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 
-    .content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.25s;
-    }
+  color: var(--texte);
 
-    .content h1 em {
-      font-style: italic;
-      color: var(--ocre-clair);
-    }
+  opacity: 0;
+  animation: fadeUp 650ms ease forwards 200ms;
+}
 
-    .content-standfirst {
-      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-      line-height: 1.7;
-      color: var(--gris-clair);
-      font-style: italic;
-      max-width: 720px;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.4s;
-      border-left: 3px solid rgba(181,130,42,0.4);
-      padding-left: 2rem;
-    }
+.content h1 em,
+.content-hero h1 em {
+  color: var(--vert);
+  font-style: italic;
+}
 
-    .content-meta {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(181,130,42,0.2);
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.55s;
-    }
+.content > .image,
+.content-hero > .image {
+  display: block;
+  width: min(100%, 1000px);
+  height: clamp(240px, 38vw, 420px);
+  margin: 0 0 2.5rem;
 
-    .content-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
+  object-fit: cover;
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-large);
+  box-shadow: var(--ombre-legere);
 
-     .meta-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--gris);
-      text-transform: uppercase;
-    }
+  opacity: 0;
+  animation: fadeUp 650ms ease forwards 280ms;
+}
 
-     .meta-value {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--gris-clair);
-    }
+.content-intro-text,
+.content-standfirst {
+  max-width: var(--container-text);
+  margin: 0;
 
-     .meta-sep {
-      width: 1px;
-      height: 2rem;
-      background: rgba(181,130,42,0.2);
-    }
+  font-size: clamp(1.05rem, 1.65vw, 1.22rem);
+  line-height: 1.8;
 
+  color: var(--texte-doux);
+
+  opacity: 0;
+  animation: fadeUp 650ms ease forwards 360ms;
+}
+
+.content-intro-text strong,
+.content-standfirst strong {
+  color: var(--texte);
+  font-weight: 700;
+}
+
+.content-intro-text em,
+.content-standfirst em {
+  color: var(--vert);
+  font-style: italic;
+}
+
+.content-standfirst {
+  padding-left: 1.5rem;
+  font-style: italic;
+  border-left: 3px solid var(--ocre);
+}
+
+.content-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+
+  margin-top: 2.5rem;
+  padding: 1.5rem 0;
+
+  border-top: 1px solid var(--bordure);
+  border-bottom: 1px solid var(--bordure);
+
+  opacity: 0;
+  animation: fadeUp 650ms ease forwards 480ms;
+}
+
+.content-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.meta-label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+.meta-value {
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--texte-doux);
+}
+
+.meta-sep {
+  width: 1px;
+  height: 2rem;
+  background: var(--bordure);
+}
+
+.pilier-internal-action,
+.pilier-internal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 620px) {
+  .content {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .content h1,
+  .content-hero h1 {
+    font-size: clamp(2.4rem, 12vw, 3.5rem);
+  }
+
+  .content-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .meta-sep {
+    display: none;
+  }
+
+  .pilier-internal-action,
+  .pilier-internal-actions {
+    flex-direction: column;
+  }
+}

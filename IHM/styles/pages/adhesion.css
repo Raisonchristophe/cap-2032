@@ -1,4 +1,24 @@
-.page-adhesion .bnt-primary{
-  margin-bottom: 2rem;
+/* =========================================================
+   ADHÉSION
+   ========================================================= */
+
+.page-adhesion .content {
+  padding-bottom: var(--space-block);
 }
 
+.page-adhesion .main-body {
+  width: min(calc(100% - (2 * var(--space-page))), var(--container-text));
+  margin-inline: auto;
+  padding-bottom: var(--space-section);
+}
+
+.page-adhesion .main-body p {
+  margin: 0 0 1.25rem;
+  line-height: 1.75;
+  color: var(--texte-doux);
+}
+
+.page-adhesion .main-body .btn-primary {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}

@@ -1,58 +1,125 @@
-<nav>
-  <a href="/" class="nav-logo">CAP 2032</a>
+<nav class="site-nav" aria-label="Navigation principale">
 
-  <ul class="nav-links">
-    <li>
-      <a href="/pilier1" class="<%= currentPage === 'pilier1' ? 'active' : '' %>">
-        Archéologie
-      </a>
-    </li>
+  <div class="site-nav-inner">
 
-    <li>
-      <a href="/pilier2" class="<%= currentPage === 'pilier2' ? 'active' : '' %>">
-        Philosophie
-      </a>
-    </li>
+   <a href="/" class="nav-logo" aria-label="Accueil CAP2032">
+  <img
+    src="/logo/logo.png"
+    alt="CAP2032"
+    class="nav-logo-img"
+  >
+</a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav-menu"
+      aria-label="Ouvrir le menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <li>
-      <a href="/pilier3" class="<%= currentPage === 'pilier3' ? 'active' : '' %>">
-        Action
-      </a>
-    </li>
+    <div class="nav-menu" id="site-nav-menu">
 
-    <li>
-      <a href="/ressources" class="<%= currentPage === 'ressources' ? 'active' : '' %>">
-        Ressources
-      </a>
-    </li>
+      <ul class="nav-links">
 
-    <li>
-      <a href="/notes" class="<%= currentPage === 'notes' ? 'active' : '' %>">
-        Notes sur commande
-      </a>
-    </li>
+        <li>
+          <a
+            href="/pilier1"
+            class="<%= currentPage === 'pilier1' ? 'active' : '' %>"
+          >
+            Histoire & Archéologie
+          </a>
+        </li>
 
-    <li>
-  <a href="/adhesion" class="<%= currentPage === 'adhesion' ? 'active' : '' %>">
-    Adhésion
-  </a>
-</li>
+        <li>
+          <a
+            href="/pilier2"
+            class="<%= currentPage === 'pilier2' ? 'active' : '' %>"
+          >
+            Réflexions
+          </a>
+        </li>
 
-<li>
-<% if (user) { %>
-  <a href="/espace-membre" class="<%= currentPage === 'membre' ? 'active' : '' %>">
-    Espace membre
-  </a>
-  <a href="/logout">Déconnexion</a>
-<% } else { %>
-  <a href="/login">Connexion</a>
-<% } %>
-</li>
+        <li>
+          <a
+            href="/pilier3"
+            class="<%= currentPage === 'pilier3' ? 'active' : '' %>"
+          >
+            Action
+          </a>
+        </li>
 
-    <li>
-      <a href="/contact" class="<%= currentPage === 'contact' ? 'active' : '' %>">
-        Contact
-      </a>
-    </li>
-  </ul>
+
+
+        <li>
+          <a
+            href="/ressources"
+            class="<%= currentPage === 'ressources' ? 'active' : '' %>"
+          >
+            Archives
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/contact"
+            class="<%= currentPage === 'contact' ? 'active' : '' %>"
+          >
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="nav-account">
+
+        <% if (user) { %>
+
+          <a
+            href="/espace-membre"
+            class="nav-member <%= currentPage === 'membre' ? 'active' : '' %>"
+          >
+            Espace membre
+          </a>
+
+          <a href="/logout" class="nav-logout">
+            Déconnexion
+          </a>
+
+        <% } else { %>
+
+          <a href="/login" class="nav-member">
+            Connexion
+          </a>
+
+        <% } %>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </nav>
+
+<script>
+  const navToggle = document.querySelector(".nav-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      const isOpen =
+        navToggle.getAttribute("aria-expanded") === "true";
+
+      navToggle.setAttribute(
+        "aria-expanded",
+        String(!isOpen),
+      );
+
+      navMenu.classList.toggle("is-open");
+    });
+  }
+</script>

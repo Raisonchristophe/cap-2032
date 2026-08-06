@@ -1,0 +1,78 @@
+/* =========================================================
+   SYSTÈME VISUEL PARTAGÉ — CAP2032
+   ========================================================= */
+
+:where(.page-section) {
+  padding: var(--space-section) var(--space-page);
+}
+
+:where(.page-container) {
+  width: min(100%, var(--container-page));
+  margin-inline: auto;
+}
+
+:where(.text-container) {
+  width: min(100%, var(--container-text));
+  margin-inline: auto;
+}
+
+:where(.section-eyebrow, .eyebrow) {
+  display: block;
+  margin: 0 0 0.75rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+:where(.section-heading) {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 1.1;
+  color: var(--texte);
+}
+
+:where(.section-introduction) {
+  max-width: 46rem;
+  margin: 0;
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  line-height: 1.75;
+  color: var(--texte-doux);
+}
+
+:where(.surface-card) {
+  background: var(--fond-secondaire);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-large);
+  box-shadow: var(--ombre-legere);
+  transition:
+    transform var(--transition-courte),
+    border-color var(--transition-courte),
+    box-shadow var(--transition-courte);
+}
+
+:where(.surface-card:hover) {
+  transform: translateY(-4px);
+  border-color: var(--bordure-accent);
+  box-shadow: var(--ombre-carte);
+}
+
+:where(input, textarea, select) {
+  max-width: 100%;
+  font: inherit;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid rgba(177, 118, 50, 0.32);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  :where(.page-section) {
+    padding-block: clamp(3.5rem, 12vw, 5rem);
+  }
+}
