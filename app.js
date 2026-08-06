@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const puppeteer = require("puppeteer");
+require("dotenv").config();
 const app = express();
 /*
 ========================================================
@@ -16,8 +17,6 @@ const fichesPublic = require("./data/fiches public");
 const prototypesPublic = require("./data/prototypes-public");
 const prototypesMembres = require("./data/prototypes-membres");
 const publications = require("./data/publications");
-
-require("dotenv").config();
 
 app.set("view engine", "ejs");
 const path = require("path");
@@ -178,18 +177,107 @@ async function sendPdfFromView({ res, view, data, filename }) {
 
     browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+      ],
     });
 
     const page = await browser.newPage();
+
+    /*
+========================================================
+DÉLAIS ADAPTÉS À RENDER
+========================================================
+*/
+
+    page.setDefaultNavigationTimeout(120000);
+    page.setDefaultTimeout(120000);
 
     await page.setViewport({
       width: 1400,
       height: 1000,
     });
 
+    /*
+========================================================
+JOURNAL DES RESSOURCES QUI ÉCHOUENT
+========================================================
+*/
+
+    page.on("requestfailed", (request) => {
+      console.warn(
+        "Ressource PDF non chargée :",
+        request.url(),
+        request.failure()?.errorText,
+      );
+    });
+
+    /*
+========================================================
+CHARGEMENT DU HTML
+========================================================
+*/
+
     await page.setContent(html, {
-      waitUntil: "networkidle0",
+      waitUntil: "domcontentloaded",
+      timeout: 120000,
+    });
+
+    /*
+========================================================
+ATTENTE LIMITÉE DES POLICES
+========================================================
+*/
+
+    await page.evaluate(async () => {
+      if (!document.fonts?.ready) {
+        return;
+      }
+
+      await Promise.race([
+        document.fonts.ready,
+
+        new Promise((resolve) => {
+          setTimeout(resolve, 10000);
+        }),
+      ]);
+    });
+
+    /*
+========================================================
+ATTENTE LIMITÉE DES IMAGES
+========================================================
+*/
+
+    await page.evaluate(async () => {
+      const images = Array.from(document.images);
+
+      await Promise.race([
+        Promise.all(
+          images.map((image) => {
+            if (image.complete) {
+              return Promise.resolve();
+            }
+
+            return new Promise((resolve) => {
+              image.addEventListener("load", resolve, {
+                once: true,
+              });
+
+              image.addEventListener("error", resolve, {
+                once: true,
+              });
+            });
+          }),
+        ),
+
+        new Promise((resolve) => {
+          setTimeout(resolve, 15000);
+        }),
+      ]);
     });
 
     /*
